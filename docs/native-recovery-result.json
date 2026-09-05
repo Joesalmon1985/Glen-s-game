@@ -1,0 +1,10 @@
+{
+  "actual_ollama_client": true,
+  "busy": false,
+  "arrived": false,
+  "turn": 0,
+  "spirit": 100,
+  "save_exists": false,
+  "retry_available": true,
+  "status": "Cannot get a valid reply from Ollama. Check Ollama is running and the chosen AI is installed. Your turn was not spent."
+}

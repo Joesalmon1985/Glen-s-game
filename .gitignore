@@ -1,0 +1,28 @@
+# Local Python runtime and downloaded AI software/models
+.venv/
+.runtime/
+
+# Build products and PyInstaller working files
+dist/
+dist-qhd/
+build/
+*.spec.bak
+
+# Player state, logs and generated verification output
+docs/verification/
+logs/
+*.log
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Windows shortcuts and local originals
+*.lnk
+original/
+my_version_of_kawa.exe
+
+# Editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

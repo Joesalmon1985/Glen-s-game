@@ -1,0 +1,11 @@
+# Puca non-Torch runtime dependencies.
+# Torch is installed separately from the official CUDA 12.8 index by install.bat.
+requests==2.32.3
+Pillow==11.3.0
+pywin32==311
+
+# Pinned image/narration stack used with torch 2.7.1+cu128.
+diffusers==0.35.2
+transformers==4.57.3
+peft==0.18.0
+accelerate==1.12.0
