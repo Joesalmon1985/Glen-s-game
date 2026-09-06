@@ -335,7 +335,7 @@ class PucaApp:
             daemon=True)
         self.worker.start()
 
-    def _need_image_reasons(self, snapshot, location, scene):
+    def _need_image_reasons(self, snapshot, location, scene, prompt=None):
         reasons = []
         if not snapshot.image_key:
             reasons.append('no_cached_image_key')
@@ -345,6 +345,15 @@ class PucaApp:
             reasons.append('visual_changed')
         if snapshot.image_key and not ImageGenerator.valid_image(self.cache_dir / (snapshot.image_key + '.png')):
             reasons.append('cached_image_missing_or_invalid')
+        # Regenerate when the illustration payload would hash differently (new
+        # image_prompt, location, or adapter), even if the LLM left visual_changed false.
+        if prompt is not None and snapshot.image_key:
+            try:
+                new_key = self.images.key(location, prompt)
+            except Exception:
+                new_key = ''
+            if new_key and new_key != snapshot.image_key:
+                reasons.append('illustration_content_changed')
         return reasons
 
     def _work(self, snapshot, action, image_enabled, use_lora, cancel, image_only, action_source='typed', options_at_submit=None):
@@ -382,7 +391,13 @@ class PucaApp:
                     return
                 committed = True
                 location, prompt = scene.location, scene.image_prompt
-                reasons = self._need_image_reasons(snapshot, location, scene)
+                if self.images.use_lora != use_lora:
+                    self.images.release_gpu()
+                    self.images.pipe = None
+                    self.images.adapter_loaded = False
+                    self.images._adapter_hash = None
+                    self.images.use_lora = use_lora
+                reasons = self._need_image_reasons(snapshot, location, scene, prompt)
                 need_image = bool(reasons)
             cache_key = ''
             cache_hit = False

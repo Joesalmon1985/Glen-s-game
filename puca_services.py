@@ -31,8 +31,11 @@ Separately classify the completed event in the JSON spirit field: positive after
 negative after actual harm, neutral after observation or conversation without a meaningful consequence.
 Never put that classification in narration. Do not punish an unusual but harmless action.
 location is a short STABLE place identifier, unchanged during conversation at the same place.
-visual_changed is true ONLY for a major visible reveal, transformation, or new important character, not ordinary dialogue.
-image_prompt is a concise visual description, never instructions or text to draw. Keep appearance consistent.
+visual_changed is true when the next illustration should clearly differ: a reveal, transformation, new important
+character, opened/changed object, or other major visible update. It is false for pure dialogue or minor mood
+shifts with the same visible scene.
+image_prompt is a concise visual description of what is visible NOW, never instructions or text to draw.
+When the visible scene changes, update image_prompt to match; keep character/place appearance consistent otherwise.
 choices contains up to three plausible short actions; player can always choose their own.
 facts contains ONLY up to four NEW durable facts earned this turn, including promises and important possessions.
 Do not repeat previous facts. Old facts are historical; explicitly mention when a promise or possession changes.

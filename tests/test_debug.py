@@ -60,5 +60,44 @@ class DebugTraceTests(unittest.TestCase):
             self.assertEqual(loaded['options_available_at_submit'], ['Wait', 'Leave'])
 
 
+class IllustrationRefreshTests(unittest.TestCase):
+    def test_prompt_change_requests_new_image_without_visual_flag(self):
+        """Same location + visual_changed=False must still refresh when image_prompt changes."""
+        from puca_images import ImageGenerator
+
+        with tempfile.TemporaryDirectory() as temp:
+            cache = Path(temp)
+            gen = ImageGenerator(cache, cache / 'lora', use_lora=False)
+            old_prompt = 'a quiet gate at dusk'
+            new_prompt = 'the same gate, now open, lantern light spilling out'
+            old_key = gen.key('gate', old_prompt)
+            new_key = gen.key('gate', new_prompt)
+            self.assertNotEqual(old_key, new_key)
+
+            class App:
+                cache_dir = cache
+                images = gen
+
+                def _need_image_reasons(self, snapshot, location, scene, prompt=None):
+                    import my_version_of_kawa as kawa
+                    return kawa.PucaApp._need_image_reasons(self, snapshot, location, scene, prompt)
+
+            app = App()
+            snapshot = StoryState(name='Glen', origin='Home', arrived=True, location='gate', image_key=old_key)
+            (cache / (old_key + '.png')).write_bytes(b'')  # presence only; validity checked separately
+            from PIL import Image
+            Image.new('RGB', (512, 512), 'navy').save(cache / (old_key + '.png'))
+            scene = Scene('The gate opens.', 'open', 'neutral', new_prompt, 'gate',
+                          visual_changed=False)
+            reasons = app._need_image_reasons(snapshot, 'gate', scene, new_prompt)
+            self.assertIn('illustration_content_changed', reasons)
+            self.assertTrue(reasons)
+
+            same = Scene('You wait.', 'wait', 'neutral', old_prompt, 'gate', visual_changed=False)
+            unchanged = app._need_image_reasons(snapshot, 'gate', same, old_prompt)
+            self.assertNotIn('illustration_content_changed', unchanged)
+            self.assertEqual(unchanged, [])
+
+
 if __name__ == '__main__':
     unittest.main()
