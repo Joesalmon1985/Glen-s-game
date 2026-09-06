@@ -20,9 +20,17 @@ class FixedNarrator:
     def __init__(self):
         self.error = None
         self.calls = []
+        self.last_request = None
         self.scene = Scene('You keep your promise and return the lantern.', 'promise', 'positive', 'a gate at dawn', 'gate', ('Wait',), ('The lantern has been returned.',))
     def ask(self, state, action):
         self.calls.append((state, action))
+        self.last_request = {
+            'url': 'http://127.0.0.1:11434/api/generate',
+            'model': 'fixed',
+            'prompt_context': {'player_action': action, 'player': state.name},
+            'system_sha256': 'test',
+            'system_chars': 0,
+        }
         if self.error: raise self.error
         return self.scene
 
@@ -34,6 +42,8 @@ class ControlledImages:
         self.gate = threading.Event()
         self.error = None
     def release_gpu(self): pass
+    def key(self, location, prompt):
+        return 'a' * 64
     def generate(self, *args, **kwargs):
         self.calls += 1
         self.started.set()
@@ -98,6 +108,33 @@ class IntegrationTests(unittest.TestCase):
         self.spin(lambda: not self.app.busy)
         self.assertEqual(len(self.app.state.history), 1)
         self.assertTrue(self.app.state.arrived)
+
+    def test_debug_records_command_options_engine_and_image_payload(self):
+        self.app.images_var.set(False)
+        self.app.debug_var.set(True)
+        self.app._toggle_debug()
+        self.app.action_source = 'opening'
+        self.app._launch('(The adventure begins)')
+        self.spin(lambda: not self.app.busy)
+        data = json.loads(self.app.debug_path.read_text(encoding='utf-8'))
+        self.assertEqual(data['player_command'], '(The adventure begins)')
+        self.assertEqual(data['action_source'], 'opening')
+        self.assertEqual(data['sent_to_narrator']['prompt_context']['player_action'], '(The adventure begins)')
+        self.assertEqual(data['interpretation']['spirit'], 'positive')
+        self.assertEqual(data['sent_to_game_engine']['spirit_delta'], 0)
+        self.assertEqual(data['sent_to_image_generation']['status'], 'skipped_illustrations_off')
+        self.assertIn('pixel art', data['sent_to_image_generation']['full_prompt'])
+        panel = self.app.debug_text.get('1.0', 'end')
+        self.assertIn('sent_to_narrator', panel)
+        self.app.choose('Wait')
+        self.spin(lambda: not self.app.busy)
+        data = json.loads(self.app.debug_path.read_text(encoding='utf-8'))
+        self.assertEqual(data['player_command'], 'Wait')
+        self.assertEqual(data['action_source'], 'choice_button')
+        self.assertIn('Wait', data['options_available_at_submit'])
+        self.assertEqual(data['sent_to_game_engine']['spirit_classification'], 'positive')
+        self.assertEqual(data['sent_to_game_engine']['turn_after'], 1)
+        self.assertEqual(data['interpretation']['choices'], ['Wait'])
 
     def test_image_failure_keeps_story_and_image_retry_does_not_repeat_turn(self):
         self.images.error = RuntimeError('TEST CUDA failure')

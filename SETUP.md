@@ -143,3 +143,34 @@ Important distinctions:
 
 The diagnostics module imports only Python standard-library modules, so it can
 report a missing Torch stack instead of crashing with `ModuleNotFoundError`.
+
+## Linux text-only (no GPU)
+
+On Linux without an NVIDIA GPU, use the text-only path:
+
+1. Run `./install_linux.sh` from this folder. It creates `.venv`, installs
+   `requests` and `Pillow` (skips Windows-only `pywin32` and the CUDA Torch
+   stack), downloads a user-local Ollama into `.runtime/ollama`, and pulls
+   `mistral` into `.runtime/models`.
+2. Launch with illustrations off and the turn debug panel on:
+
+   ```bash
+   ./launch_linux.sh
+   ```
+
+   Or manually:
+
+   ```bash
+   source .venv/bin/activate
+   export OLLAMA_HOST=127.0.0.1:11434
+   export OLLAMA_MODELS="$PWD/.runtime/models"
+   python my_version_of_kawa.py --text-only --debug
+   ```
+
+On CPU-only machines, the first Mistral reply can take several minutes; later turns
+are still slow. Narrator requests wait up to 10 minutes before failing.
+
+After each command, the Debug panel (and `debug-last-turn.json` under the Puca
+data directory) shows the narrator request, interpreted scene, options that were
+available, engine apply results, and the image-generation payload that would be
+sent when illustrations are enabled.

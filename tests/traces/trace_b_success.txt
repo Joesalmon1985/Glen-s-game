@@ -1,0 +1,867 @@
+# Trace: trace_b_success
+seed=91
+
+OPENING
+You enter Deathtrap Dungeon after the other contestants. Baron Sukumvit's servant pressed a single iron key into your hand. After roughly five minutes of cautious travel, the passage widens around a stone table. Six locked boxes rest upon it. One bears your name.
+
+> inspect the boxes carefully
+Your careful search finds a needle-fine poison dart mechanism set into each locked box.
+
+========================================================================
+RAW INPUT: 'inspect the boxes carefully'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "inspect the boxes carefully",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "SEARCH",
+  "target": "boxes",
+  "method": "careful",
+  "intended_effect": "discover_trap"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "SEARCH",
+  "target": "boxes",
+  "tool": null,
+  "method": "careful",
+  "intended_effect": "discover_trap",
+  "manner": null,
+  "destination": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "SEARCH",
+    "target": "boxes",
+    "method": "careful",
+    "intended_effect": "discover_trap"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {
+    "target": "boxes",
+    "target_ref": "boxes"
+  },
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "Your careful search finds a needle-fine poison dart mechanism set into each locked box."
+  ],
+  "checks": [
+    {
+      "label": "Search traps",
+      "roll": 3,
+      "bonus": 25,
+      "total": 28,
+      "dc": 25,
+      "success": true
+    }
+  ],
+  "damage_events": [],
+  "state_transitions": [
+    "box_player.trap_discovered=true",
+    "box_a.trap_discovered=true",
+    "box_b.trap_discovered=true",
+    "box_c.trap_discovered=true",
+    "box_d.trap_discovered=true",
+    "box_e.trap_discovered=true"
+  ],
+  "rejection_reason": "",
+  "affordances_used": [
+    "search_traps"
+  ],
+  "interacted": true,
+  "meaningful_effort": true,
+  "addressed_threat": false,
+  "situation_changed": true,
+  "combat_round": false,
+  "image_dirty": false
+}
+
+--- G. STATE DIFF ---
+boxes.box_a.trap_discovered: False -> True
+boxes.box_b.trap_discovered: False -> True
+boxes.box_c.trap_discovered: False -> True
+boxes.box_d.trap_discovered: False -> True
+boxes.box_e.trap_discovered: False -> True
+boxes.box_player.trap_discovered: False -> True
+last_image_prompt: '' -> "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box"
+turn_index: 0 -> 1
+world_time_seconds: 0 -> 45
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 45,
+  "stall_delta": 0,
+  "pursuer_before": "absent",
+  "pursuer_after": "absent",
+  "events": [],
+  "productive": true
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "inspect the boxes carefully",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "Your careful search finds a needle-fine poison dart mechanism set into each locked box."
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+Your careful search finds a needle-fine poison dart mechanism set into each locked box.
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> use my key on the box with my name
+Your key turns smoothly in Glen's box. Inside you find 2 gold pieces and a folded note. Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'
+
+========================================================================
+RAW INPUT: 'use my key on the box with my name'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "use my key on the box with my name",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "USE",
+  "target": "named_box",
+  "tool": "supplied_key",
+  "method": "unlock",
+  "intended_effect": "open"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "USE",
+  "target": "named_box",
+  "tool": "supplied_key",
+  "method": "unlock",
+  "intended_effect": "open",
+  "manner": null,
+  "destination": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "USE",
+    "target": "named_box",
+    "tool": "supplied_key",
+    "method": "unlock",
+    "intended_effect": "open"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {
+    "target": "box_player",
+    "target_ref": "named_box",
+    "tool": "trial_key_player"
+  },
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "Your key turns smoothly in Glen's box. Inside you find 2 gold pieces and a folded note.",
+    "Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'"
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [
+    "box_player.open=true",
+    "player.gold+=2",
+    "clue_get_no_mess=true"
+  ],
+  "rejection_reason": "",
+  "affordances_used": [
+    "use_key"
+  ],
+  "interacted": true,
+  "meaningful_effort": true,
+  "addressed_threat": false,
+  "situation_changed": true,
+  "combat_round": false,
+  "image_dirty": true
+}
+
+--- G. STATE DIFF ---
+boxes.box_player.locked: True -> False
+boxes.box_player.open: False -> True
+clue_get_no_mess: False -> True
+last_image_prompt: "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box" -> "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, open boxes: Glen's box"
+player.gold: 0 -> 2
+player.knowledge: [] -> ['sukumvit_clue']
+turn_index: 1 -> 2
+world_time_seconds: 45 -> 60
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 15,
+  "stall_delta": 0,
+  "pursuer_before": "absent",
+  "pursuer_after": "absent",
+  "events": [],
+  "productive": true
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "use my key on the box with my name",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "Your key turns smoothly in Glen's box. Inside you find 2 gold pieces and a folded note.",
+    "Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'"
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+Your key turns smoothly in Glen's box. Inside you find 2 gold pieces and a folded note. Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, open boxes: Glen's box
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> read the note
+Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'
+
+========================================================================
+RAW INPUT: 'read the note'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "read the note",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": [
+        "sukumvit_clue"
+      ]
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": true,
+        "locked": false,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "INSPECT",
+  "target": "clue_note",
+  "intended_effect": "read"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "INSPECT",
+  "target": "clue_note",
+  "tool": null,
+  "method": null,
+  "intended_effect": "read",
+  "manner": null,
+  "destination": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "INSPECT",
+    "target": "clue_note",
+    "intended_effect": "read"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {
+    "target": "clue_note"
+  },
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'"
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": true,
+  "meaningful_effort": true,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false
+}
+
+--- G. STATE DIFF ---
+turn_index: 2 -> 3
+world_time_seconds: 60 -> 80
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 20,
+  "stall_delta": 0,
+  "pursuer_before": "absent",
+  "pursuer_after": "absent",
+  "events": [],
+  "productive": true
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "read the note",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'"
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, open boxes: Glen's box
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> keep walking down the tunnel
+You leave the stone table behind and continue down the passage. You reach a junction. A white arrow painted on the wall points west. Closer inspection of the dusty floor could reveal tracks.
+
+========================================================================
+RAW INPUT: 'keep walking down the tunnel'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "keep walking down the tunnel",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": [
+        "sukumvit_clue"
+      ]
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": true,
+        "locked": false,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false,
+        "trap_visible": true,
+        "trap_disabled": false,
+        "trap_fired": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "MOVE",
+  "destination": "passage_ahead",
+  "intended_effect": "leave_area",
+  "manner": "onward"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "MOVE",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": "leave_area",
+  "manner": "onward",
+  "destination": "passage_ahead",
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "MOVE",
+    "destination": "passage_ahead",
+    "intended_effect": "leave_area",
+    "manner": "onward"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {
+    "destination": "passage_ahead"
+  },
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You leave the stone table behind and continue down the passage.",
+    "You reach a junction. A white arrow painted on the wall points west.",
+    "Closer inspection of the dusty floor could reveal tracks."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [
+    "encounter=junction"
+  ],
+  "rejection_reason": "",
+  "affordances_used": [
+    "movement"
+  ],
+  "interacted": true,
+  "meaningful_effort": true,
+  "addressed_threat": false,
+  "situation_changed": true,
+  "combat_round": false,
+  "image_dirty": true
+}
+
+--- G. STATE DIFF ---
+encounter: 'walk_boxes' -> 'junction'
+last_image_prompt: "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, open boxes: Glen's box" -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, dungeon junction, white painted arrow pointing west, dusty tracks on stone floor'
+player.location: 'walk_boxes' -> 'junction'
+turn_index: 3 -> 4
+visible_entities: ['stone_table', 'six_locked_boxes', 'passage_ahead', 'passage_behind', 'box_player', 'box_a', 'box_b', 'box_c', 'box_d', 'box_e', 'trial_key_player'] -> ['junction', 'white_arrow_west', 'passage_west', 'passage_right', 'floor_tracks']
+world_time_seconds: 80 -> 110
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 30,
+  "stall_delta": 0,
+  "pursuer_before": "absent",
+  "pursuer_after": "absent",
+  "events": [],
+  "productive": false
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "keep walking down the tunnel",
+  "encounter": "junction",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "You leave the stone table behind and continue down the passage.",
+    "You reach a junction. A white arrow painted on the wall points west.",
+    "Closer inspection of the dusty floor could reveal tracks."
+  ],
+  "success": true,
+  "location": "junction"
+}
+
+--- J. NARRATOR OUTPUT ---
+You leave the stone table behind and continue down the passage. You reach a junction. A white arrow painted on the wall points west. Closer inspection of the dusty floor could reveal tracks.
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, dungeon junction, white painted arrow pointing west, dusty tracks on stone floor
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+visual_backend_calls_total=0

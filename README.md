@@ -1,6 +1,19 @@
 # Puca: repaired local adventure
 
-## Play on this machine
+## Deathtrap Dungeon POC (typing-first)
+
+On branch `wip/typing-first-dungeon`, play Encounter 1 in debug mode (no image generation):
+
+```bash
+./launch_dungeon_debug.sh
+# or: python -m puca_dungeon --debug --seed 91
+```
+
+Windows: **Play Puca Dungeon Debug.bat**
+
+See [docs/DEATHTRAP_POC.md](docs/DEATHTRAP_POC.md) for source vs POC additions. Automated tests: `python -m unittest tests.test_dungeon_encounter1`. Traces: `tests/traces/`.
+
+## Play on this machine (legacy Spirit adventure)
 
 Double-click **Puca - Play** on your desktop, or **START PUCA** in this folder. Both use **Play Puca.bat**, which checks the local narrator, starts the project's Ollama runtime if needed, and launches the verified build. No account or paid API is needed.
 

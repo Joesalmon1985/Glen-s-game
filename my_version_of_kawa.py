@@ -17,6 +17,7 @@ from tkinter import ttk, scrolledtext, messagebox
 from puca_core import StoryState, MAX_TURNS, save_state, load_state
 from puca_services import Narrator
 from puca_images import ImageGenerator
+from puca_debug import TurnDebug, scene_as_dict, image_payload, write_last_turn
 
 BG = '#171c22'
 PANEL = '#222a33'
@@ -93,11 +94,12 @@ class Voice:
 
 
 class PucaApp:
-    def __init__(self, master, data_dir=None, text_only=False, narrator=None, images=None):
+    def __init__(self, master, data_dir=None, text_only=False, narrator=None, images=None, debug=False):
         self.master = master
         self.data_dir = Path(data_dir or os.environ.get('PUCA_DATA_DIR') or (Path(os.environ.get('LOCALAPPDATA', Path.home())) / 'Puca'))
         self.cache_dir = self.data_dir / 'images'
         self.save_path = self.data_dir / 'adventure.json'
+        self.debug_path = self.data_dir / 'debug-last-turn.json'
         self.narrator = narrator or Narrator(model=os.environ.get('PUCA_MODEL', 'mistral'))
         self.images = images or ImageGenerator(self.cache_dir, resource_path('pixel_style_lora_style_only'))
         self.state = StoryState()
@@ -108,6 +110,7 @@ class PucaApp:
         self.worker = None
         self.cancel_image = threading.Event()
         self.last_action = ''
+        self.action_source = 'typed'
         self.failed_action = None
         self.image_failed = False
         self.pending_scene = None
@@ -118,6 +121,7 @@ class PucaApp:
         self.font_size = 18
         self._pixel_image = None
         self._shown_image_signature = None
+        self._start_debug = debug
         self._build(text_only)
         self.master.protocol('WM_DELETE_WINDOW', self.close)
         self.poll_id = self.master.after(40, self._poll)
@@ -137,8 +141,10 @@ class PucaApp:
         style.configure('TEntry', font=('Segoe UI', 12))
         outer = ttk.Frame(self.master, padding=28)
         outer.pack(fill='both', expand=True)
+        self._outer = outer
         outer.columnconfigure(0, weight=1)
-        outer.rowconfigure(3, weight=1)
+        outer.rowconfigure(3, weight=3)
+        outer.rowconfigure(8, weight=1)
         header = ttk.Frame(outer)
         header.grid(row=0, column=0, sticky='ew')
         ttk.Label(header, text='PUCA', font=('Georgia', 36, 'bold'), foreground=ACCENT).pack(side='left')
@@ -166,11 +172,13 @@ class PucaApp:
         self.images_var = tk.BooleanVar(value=not text_only)
         self.lora_var = tk.BooleanVar(value=True)
         self.voice_var = tk.BooleanVar(value=False)
+        self.debug_var = tk.BooleanVar(value=self._start_debug)
         self.image_toggle = ttk.Checkbutton(tools, text='Illustrations', variable=self.images_var)
         self.image_toggle.pack(side='left')
         self.lora_toggle = ttk.Checkbutton(tools, text='Pixel adapter', variable=self.lora_var)
         self.lora_toggle.pack(side='left', padx=10)
         ttk.Checkbutton(tools, text='Read aloud', variable=self.voice_var, command=self.toggle_voice).pack(side='left', padx=10)
+        ttk.Checkbutton(tools, text='Debug', variable=self.debug_var, command=self._toggle_debug).pack(side='left', padx=10)
         ttk.Button(tools, text='A-', width=3, command=lambda: self.font(-1)).pack(side='right')
         ttk.Button(tools, text='A+', width=3, command=lambda: self.font(1)).pack(side='right', padx=5)
         self.new_button = ttk.Button(tools, text='New adventure', command=self.new_adventure)
@@ -213,8 +221,16 @@ class PucaApp:
         self.skip_button.pack(side='right', padx=5)
         self.progress = ttk.Progressbar(outer, mode='indeterminate')
         self.progress.grid(row=7, column=0, sticky='ew', pady=(8, 0))
+        self.debug_frame = ttk.Frame(outer)
+        ttk.Label(self.debug_frame, text='Turn debug', foreground=ACCENT).pack(anchor='w')
+        self.debug_text = scrolledtext.ScrolledText(self.debug_frame, wrap='word', height=12,
+                    font=('Consolas', 11), bg='#12161b', fg=FG, insertbackground=FG,
+                    relief='flat', padx=12, pady=10, state='disabled')
+        self.debug_text.pack(fill='both', expand=True, pady=(4, 0))
+        self._set_debug_text('Debug mode is on. After each command this panel shows narrator input, interpretation, options, engine apply, and image payload.')
         self.master.bind('<Configure>', self._resize_layout, add='+')
         self.art_panel.bind('<Configure>', self._paint_image, add='+')
+        self._toggle_debug()
         self._controls()
 
     def _resize_layout(self, event):
@@ -269,6 +285,7 @@ class PucaApp:
         if self.save_path.exists() and not messagebox.askyesno('Begin a new adventure?', 'This will replace your saved adventure after the opening succeeds. Resume instead to keep playing it.', parent=self.master):
             return
         self.state = StoryState(name=name, origin=origin)
+        self.action_source = 'opening'
         self._launch('(The adventure begins)')
 
     def submit(self, event=None):
@@ -278,11 +295,14 @@ class PucaApp:
         if not action or len(action) > 800:
             self.status_var.set('Choose an action, up to 800 characters.')
             return 'break'
+        if self.action_source != 'choice_button':
+            self.action_source = 'typed'
         self._launch(action)
         return 'break'
 
     def choose(self, action):
         if not self.busy:
+            self.action_source = 'choice_button'
             self.action_var.set(action)
             self.submit()
 
@@ -297,6 +317,9 @@ class PucaApp:
         self.image_failed = False
         self.status_warning = ''
         self.last_action = action
+        action_source = self.action_source
+        self.action_source = 'typed'
+        options_at_submit = [button.cget('text') for button in self.choice_buttons]
         self.cancel_image = threading.Event()
         self.progress.configure(mode='indeterminate')
         self.progress.start(12)
@@ -306,12 +329,29 @@ class PucaApp:
         image_enabled = self.images_var.get()
         use_lora = self.lora_var.get()
         cancel = self.cancel_image
-        self.worker = threading.Thread(target=self._work, args=(snapshot, action, image_enabled, use_lora, cancel, image_only), daemon=True)
+        self.worker = threading.Thread(
+            target=self._work,
+            args=(snapshot, action, image_enabled, use_lora, cancel, image_only, action_source, options_at_submit),
+            daemon=True)
         self.worker.start()
 
-    def _work(self, snapshot, action, image_enabled, use_lora, cancel, image_only):
+    def _need_image_reasons(self, snapshot, location, scene):
+        reasons = []
+        if not snapshot.image_key:
+            reasons.append('no_cached_image_key')
+        elif location.casefold() != snapshot.location.casefold():
+            reasons.append('location_changed')
+        if scene is not None and scene.visual_changed:
+            reasons.append('visual_changed')
+        if snapshot.image_key and not ImageGenerator.valid_image(self.cache_dir / (snapshot.image_key + '.png')):
+            reasons.append('cached_image_missing_or_invalid')
+        return reasons
+
+    def _work(self, snapshot, action, image_enabled, use_lora, cancel, image_only, action_source='typed', options_at_submit=None):
         start = time.monotonic()
         committed = False
+        turn = TurnDebug(player_command=action, action_source=action_source,
+                         options_available_at_submit=list(options_at_submit or []))
         try:
             # The previous illustration has released its live CUDA tensors before the next Ollama request.
             try:
@@ -321,15 +361,19 @@ class PucaApp:
                 self.images.pipe = None
                 image_enabled = False
                 self.messages.put(('notice', 'Image cleanup failed. Continuing with text; restart before enabling illustrations again.'))
+            scene = None
             if image_only:
                 last = snapshot.history[-1]
                 location, prompt = last['location'], last['image_prompt']
                 need_image = True
+                reasons = ['image_only_retry']
             else:
                 scene = self.narrator.ask(snapshot, action)
+                turn.sent_to_narrator = getattr(self.narrator, 'last_request', None) or {}
+                turn.interpretation = scene_as_dict(scene)
                 if self.closed:
                     return
-                receipt = {'ready': threading.Event(), 'accepted': False}
+                receipt = {'ready': threading.Event(), 'accepted': False, 'turn_debug': turn}
                 self.messages.put(('scene', action, scene, not snapshot.arrived, receipt))
                 while not receipt['ready'].wait(0.05):
                     if self.closed:
@@ -338,8 +382,21 @@ class PucaApp:
                     return
                 committed = True
                 location, prompt = scene.location, scene.image_prompt
-                need_image = (not snapshot.image_key or location.casefold() != snapshot.location.casefold() or scene.visual_changed
-                              or not ImageGenerator.valid_image(self.cache_dir / (snapshot.image_key + '.png')))
+                reasons = self._need_image_reasons(snapshot, location, scene)
+                need_image = bool(reasons)
+            cache_key = ''
+            cache_hit = False
+            generated = False
+            try:
+                cache_key = self.images.key(location, prompt)
+                cache_hit = ImageGenerator.valid_image(self.cache_dir / (cache_key + '.png'))
+            except Exception:
+                cache_key = ''
+            turn.sent_to_image_generation = image_payload(
+                location, prompt, use_lora=use_lora, need_image=need_image, reasons=reasons,
+                images_enabled=image_enabled, cancelled=cancel.is_set(), cache_key=cache_key,
+                cache_hit=cache_hit and need_image)
+            self.messages.put(('debug', turn))
             if image_enabled and need_image and not cancel.is_set():
                 self.messages.put(('status', 'The story is ready to read. Painting its illustration...'))
                 if self.images.use_lora != use_lora:
@@ -350,6 +407,11 @@ class PucaApp:
                     self.images.use_lora = use_lora
                 key, path = self.images.generate(location, prompt, cancel=cancel,
                     progress=lambda step, total: self.messages.put(('progress', step, total)))
+                generated = True
+                turn.sent_to_image_generation = image_payload(
+                    location, prompt, use_lora=use_lora, need_image=need_image, reasons=reasons,
+                    images_enabled=True, cache_key=key, cache_hit=False, generated=generated)
+                self.messages.put(('debug', turn))
                 if not self.closed:
                     self.messages.put(('image', key, str(path)))
         except Exception as exc:
@@ -382,6 +444,7 @@ class PucaApp:
             receipt = event[4] if len(event) > 4 else None
             candidate = copy.deepcopy(self.state)
             self.pending_scene = (action, scene, opening)
+            facts_before = list(candidate.facts)
             try:
                 delta = candidate.apply(action, scene, opening=opening)
                 save_state(self.save_path, candidate)
@@ -396,6 +459,22 @@ class PucaApp:
             self.pending_scene = None
             self.save_dirty = False
             if receipt:
+                turn = receipt.get('turn_debug')
+                if turn is not None:
+                    turn.sent_to_game_engine = {
+                        'action': action,
+                        'opening': opening,
+                        'spirit_classification': scene.spirit,
+                        'spirit_delta': delta,
+                        'spirit_before': candidate.spirit - delta,
+                        'spirit_after': candidate.spirit,
+                        'turn_after': candidate.turn,
+                        'location_after': candidate.location,
+                        'facts_added': [f for f in candidate.facts if f not in facts_before],
+                        'finished': candidate.finished,
+                        'history_entries': len(candidate.history),
+                    }
+                    self._publish_debug(turn)
                 receipt['accepted'] = True
                 receipt['ready'].set()
             # Persistence is complete before any rendering operation can fail.
@@ -414,6 +493,8 @@ class PucaApp:
             self.voice.speak(scene.narration)
             self.render_failed = False
             self._controls()
+        elif kind == 'debug':
+            self._publish_debug(event[1])
         elif kind == 'image':
             self.state.image_key = event[1]
             self._show_image(Path(event[2]))
@@ -444,6 +525,27 @@ class PucaApp:
             self._controls()
             if self.state.arrived and not self.state.finished:
                 self.action_entry.focus_set()
+
+    def _toggle_debug(self):
+        if self.debug_var.get():
+            self.debug_frame.grid(row=8, column=0, sticky='nsew', pady=(8, 0))
+        else:
+            self.debug_frame.grid_remove()
+
+    def _set_debug_text(self, text):
+        self.debug_text.configure(state='normal')
+        self.debug_text.delete('1.0', 'end')
+        self.debug_text.insert('1.0', text)
+        self.debug_text.configure(state='disabled')
+        self.debug_text.see('1.0')
+
+    def _publish_debug(self, turn):
+        try:
+            write_last_turn(self.debug_path, turn)
+        except OSError:
+            logging.exception('Could not write debug-last-turn.json')
+        if self.debug_var.get():
+            self._set_debug_text(turn.format_text())
 
     def _choices(self, choices):
         for button in self.choice_buttons:
@@ -595,6 +697,7 @@ class PucaApp:
 def main():
     parser = argparse.ArgumentParser(description='Puca local fantasy adventure')
     parser.add_argument('--text-only', action='store_true', help='Start with illustrations disabled; Ollama is still required')
+    parser.add_argument('--debug', action='store_true', help='Show turn debug panel (narrator, options, engine, image payload)')
     parser.add_argument('--verify-startup', action='store_true', help='Run a real AI, illustration and save/resume check in an isolated save folder, then close')
     args = parser.parse_args()
     data_dir = Path(os.environ.get('PUCA_DATA_DIR') or (Path(os.environ.get('LOCALAPPDATA', Path.home())) / 'Puca'))
@@ -608,7 +711,7 @@ def main():
         logging.basicConfig(level=logging.INFO)
     enable_native_pixels()
     root = tk.Tk()
-    app = PucaApp(root, data_dir=data_dir, text_only=args.text_only and not args.verify_startup)
+    app = PucaApp(root, data_dir=data_dir, text_only=args.text_only and not args.verify_startup, debug=args.debug)
     if args.verify_startup:
         from puca_smoke import run
         run(app)

@@ -84,8 +84,9 @@ class Narrator:
         self.model = model
         self.transport = transport
         self.url = 'http://127.0.0.1:11434/api/generate'
+        self.last_request = None
 
-    def ask(self, state, action):
+    def build_request(self, state, action):
         if len(action) > 800:
             raise GenerationError('Please keep your action under 800 characters.')
         opening = not state.arrived
@@ -119,8 +120,14 @@ class Narrator:
         body = {'model': self.model, 'system': RULES, 'prompt': encode(),
                 'format': SCHEMA, 'stream': False, 'keep_alive': 0,
                 'options': {'temperature': 0.7, 'num_predict': 900, 'num_ctx': 8192}}
+        return body
+
+    def ask(self, state, action):
+        from puca_debug import narrator_request_meta
+        body = self.build_request(state, action)
+        self.last_request = narrator_request_meta(self.url, body)
         for attempt in range(2):
-            response = self.transport(self.url, body, timeout=180)
+            response = self.transport(self.url, body, timeout=600)
             try:
                 if not isinstance(response, dict) or response.get('error'):
                     raise ValueError('Server error')

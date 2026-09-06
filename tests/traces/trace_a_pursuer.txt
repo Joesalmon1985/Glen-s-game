@@ -1,0 +1,1356 @@
+# Trace: trace_a_pursuer
+seed=91
+
+OPENING
+You enter Deathtrap Dungeon after the other contestants. Baron Sukumvit's servant pressed a single iron key into your hand. After roughly five minutes of cautious travel, the passage widens around a stone table. Six locked boxes rest upon it. One bears your name.
+
+> wait
+You wait. The stone table and its boxes remain silent.
+
+========================================================================
+RAW INPUT: 'wait'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "wait",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "WAIT",
+  "intended_effect": "pass_time"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "WAIT",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": "pass_time",
+  "manner": null,
+  "destination": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "WAIT",
+    "intended_effect": "pass_time"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You wait. The stone table and its boxes remain silent."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: '' -> "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box"
+stall_time_seconds: 0 -> 60
+turn_index: 0 -> 1
+world_time_seconds: 0 -> 60
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 60,
+  "stall_delta": 60,
+  "pursuer_before": "absent",
+  "pursuer_after": "absent",
+  "events": [],
+  "productive": false
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "wait",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "You wait. The stone table and its boxes remain silent."
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+You wait. The stone table and its boxes remain silent.
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> wait
+You wait. The stone table and its boxes remain silent. Far behind you, faint footsteps echo in the entrance tunnel.
+
+========================================================================
+RAW INPUT: 'wait'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "wait",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "WAIT",
+  "intended_effect": "pass_time"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "WAIT",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": "pass_time",
+  "manner": null,
+  "destination": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "WAIT",
+    "intended_effect": "pass_time"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You wait. The stone table and its boxes remain silent.",
+    "Far behind you, faint footsteps echo in the entrance tunnel."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box" -> "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, empty passage behind, sense of distant approach"
+pursuer.state: 'absent' -> 'approaching'
+stall_time_seconds: 60 -> 120
+turn_index: 1 -> 2
+world_time_seconds: 60 -> 120
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 60,
+  "stall_delta": 60,
+  "pursuer_before": "absent",
+  "pursuer_after": "approaching",
+  "events": [
+    "distant_footsteps",
+    "pursuer_state:absent->approaching"
+  ],
+  "productive": false
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "wait",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "You wait. The stone table and its boxes remain silent.",
+    "Far behind you, faint footsteps echo in the entrance tunnel."
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+You wait. The stone table and its boxes remain silent. Far behind you, faint footsteps echo in the entrance tunnel.
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, empty passage behind, sense of distant approach
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> say abracadabra at the boxes
+You speak mystic nonsense at the boxes. Nothing happens.
+
+========================================================================
+RAW INPUT: 'say abracadabra at the boxes'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "say abracadabra at the boxes",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ],
+    "heard": [
+      "distant_footsteps_behind"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "SPEAK",
+  "utterance": "say abracadabra at the boxes",
+  "target": "boxes",
+  "intended_effect": "magical_effect",
+  "manner": "incantation"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "SPEAK",
+  "target": "boxes",
+  "tool": null,
+  "method": null,
+  "intended_effect": "magical_effect",
+  "manner": "incantation",
+  "destination": null,
+  "utterance": "say abracadabra at the boxes",
+  "sequence": [],
+  "raw": {
+    "action_class": "SPEAK",
+    "utterance": "say abracadabra at the boxes",
+    "target": "boxes",
+    "intended_effect": "magical_effect",
+    "manner": "incantation"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {
+    "target": "boxes",
+    "target_ref": "boxes"
+  },
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You speak mystic nonsense at the boxes. Nothing happens."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false
+}
+
+--- G. STATE DIFF ---
+stall_time_seconds: 120 -> 125
+turn_index: 2 -> 3
+world_time_seconds: 120 -> 125
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 5,
+  "stall_delta": 5,
+  "pursuer_before": "approaching",
+  "pursuer_after": "approaching",
+  "events": [],
+  "productive": false
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "say abracadabra at the boxes",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "You speak mystic nonsense at the boxes. Nothing happens."
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+You speak mystic nonsense at the boxes. Nothing happens.
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, empty passage behind, sense of distant approach
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> wait
+You wait. The stone table and its boxes remain silent. The footsteps are closer now — leather, iron, heavy breath.
+
+========================================================================
+RAW INPUT: 'wait'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "wait",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ],
+    "heard": [
+      "distant_footsteps_behind"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "WAIT",
+  "intended_effect": "pass_time"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "WAIT",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": "pass_time",
+  "manner": null,
+  "destination": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "WAIT",
+    "intended_effect": "pass_time"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You wait. The stone table and its boxes remain silent.",
+    "The footsteps are closer now — leather, iron, heavy breath."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, empty passage behind, sense of distant approach" -> "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box"
+pursuer.state: 'approaching' -> 'close'
+stall_time_seconds: 125 -> 185
+turn_index: 3 -> 4
+world_time_seconds: 125 -> 185
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 60,
+  "stall_delta": 60,
+  "pursuer_before": "approaching",
+  "pursuer_after": "close",
+  "events": [
+    "footsteps_close",
+    "pursuer_state:approaching->close"
+  ],
+  "productive": false
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "wait",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "You wait. The stone table and its boxes remain silent.",
+    "The footsteps are closer now — leather, iron, heavy breath."
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+You wait. The stone table and its boxes remain silent. The footsteps are closer now — leather, iron, heavy breath.
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> wait
+You wait. The stone table and its boxes remain silent. A scarred barbarian, Grimnak, strides into the chamber — one of the contestants who entered before you. He levels a notched axe. "That table's mine if you dawdle."
+
+========================================================================
+RAW INPUT: 'wait'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "wait",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player"
+    ],
+    "heard": [
+      "close_footsteps_behind"
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "WAIT",
+  "intended_effect": "pass_time"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "WAIT",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": "pass_time",
+  "manner": null,
+  "destination": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "WAIT",
+    "intended_effect": "pass_time"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You wait. The stone table and its boxes remain silent.",
+    "A scarred barbarian, Grimnak, strides into the chamber — one of the contestants who entered before you. He levels a notched axe. \"That table's mine if you dawdle.\""
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": true,
+  "combat_round": false,
+  "image_dirty": true
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box" -> "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, barbarian challenger Grimnak present"
+pursuer.disposition: 'neutral' -> 'aggressive'
+pursuer.location: None -> 'walk_boxes'
+pursuer.state: 'close' -> 'present'
+stall_time_seconds: 185 -> 245
+turn_index: 4 -> 5
+visible_entities: ['stone_table', 'six_locked_boxes', 'passage_ahead', 'passage_behind', 'box_player', 'box_a', 'box_b', 'box_c', 'box_d', 'box_e', 'trial_key_player'] -> ['stone_table', 'six_locked_boxes', 'passage_ahead', 'passage_behind', 'box_player', 'box_a', 'box_b', 'box_c', 'box_d', 'box_e', 'trial_key_player', 'challenger']
+world_time_seconds: 185 -> 245
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 60,
+  "stall_delta": 60,
+  "pursuer_before": "close",
+  "pursuer_after": "present",
+  "events": [
+    "challenger_arrives",
+    "pursuer_state:close->present"
+  ],
+  "productive": false
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "wait",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "You wait. The stone table and its boxes remain silent.",
+    "A scarred barbarian, Grimnak, strides into the chamber — one of the contestants who entered before you. He levels a notched axe. \"That table's mine if you dawdle.\""
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+You wait. The stone table and its boxes remain silent. A scarred barbarian, Grimnak, strides into the chamber — one of the contestants who entered before you. He levels a notched axe. "That table's mine if you dawdle."
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, barbarian challenger Grimnak present
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> draw my sword
+You draw your sword. Steel glints in the torchlight.
+
+========================================================================
+RAW INPUT: 'draw my sword'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "draw my sword",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player",
+      "challenger"
+    ],
+    "present_npcs": [
+      {
+        "id": "challenger",
+        "name": "Grimnak",
+        "kind": "barbarian",
+        "disposition": "aggressive",
+        "visible": true
+      }
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "MANIPULATE",
+  "target": "sword",
+  "method": "draw",
+  "intended_effect": "ready_weapon"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "MANIPULATE",
+  "target": "sword",
+  "tool": null,
+  "method": "draw",
+  "intended_effect": "ready_weapon",
+  "manner": null,
+  "destination": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "action_class": "MANIPULATE",
+    "target": "sword",
+    "method": "draw",
+    "intended_effect": "ready_weapon"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {
+    "target": "sword"
+  },
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You draw your sword. Steel glints in the torchlight."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": true,
+  "meaningful_effort": false,
+  "addressed_threat": true,
+  "situation_changed": true,
+  "combat_round": false,
+  "image_dirty": true
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, barbarian challenger Grimnak present" -> "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, barbarian challenger Grimnak present, drawn sword"
+turn_index: 5 -> 6
+world_time_seconds: 245 -> 265
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 20,
+  "stall_delta": 0,
+  "pursuer_before": "present",
+  "pursuer_after": "present",
+  "events": [],
+  "productive": true
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "draw my sword",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "You draw your sword. Steel glints in the torchlight."
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+You draw your sword. Steel glints in the torchlight.
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, barbarian challenger Grimnak present, drawn sword
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+> warn the challenger the boxes are trapped
+You warn Grimnak that the boxes are trapped. He hesitates, glancing at the table.
+
+========================================================================
+RAW INPUT: 'warn the challenger the boxes are trapped'
+
+--- B. INTERPRETER INPUT (perception only) ---
+{
+  "player_text": "warn the challenger the boxes are trapped",
+  "perception": {
+    "encounter": "walk_boxes",
+    "location_description": "A stone table holds six locked boxes. One bears your name. A passage continues deeper into the dungeon behind the table; the entrance tunnel lies the way you came.",
+    "player": {
+      "name": "Glen",
+      "hp": null,
+      "alive": true,
+      "inventory_visible": [
+        "trial_key_player",
+        "sword"
+      ],
+      "known": []
+    },
+    "boxes": [
+      {
+        "id": "box_player",
+        "label": "Glen's box",
+        "is_named_for_player": true,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_a",
+        "label": "Ashen's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_b",
+        "label": "Bram's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_c",
+        "label": "Cora's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_d",
+        "label": "Drek's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      },
+      {
+        "id": "box_e",
+        "label": "Elira's box",
+        "is_named_for_player": false,
+        "open": false,
+        "locked": true,
+        "destroyed": false
+      }
+    ],
+    "visible_entities": [
+      "stone_table",
+      "six_locked_boxes",
+      "passage_ahead",
+      "passage_behind",
+      "box_player",
+      "box_a",
+      "box_b",
+      "box_c",
+      "box_d",
+      "box_e",
+      "trial_key_player",
+      "challenger"
+    ],
+    "present_npcs": [
+      {
+        "id": "challenger",
+        "name": "Grimnak",
+        "kind": "barbarian",
+        "disposition": "aggressive",
+        "visible": true
+      }
+    ]
+  }
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "action_class": "WARN",
+  "target": "challenger",
+  "utterance": "warn the challenger the boxes are trapped",
+  "intended_effect": "share_danger"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "WARN",
+  "target": "challenger",
+  "tool": null,
+  "method": null,
+  "intended_effect": "share_danger",
+  "manner": null,
+  "destination": null,
+  "utterance": "warn the challenger the boxes are trapped",
+  "sequence": [],
+  "raw": {
+    "action_class": "WARN",
+    "target": "challenger",
+    "utterance": "warn the challenger the boxes are trapped",
+    "intended_effect": "share_danger"
+  },
+  "understood": true,
+  "notes": ""
+}
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {
+    "target": "challenger"
+  },
+  "ambiguous": [],
+  "failed": [],
+  "notes": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You warn Grimnak that the boxes are trapped. He hesitates, glancing at the table."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": true,
+  "meaningful_effort": true,
+  "addressed_threat": true,
+  "situation_changed": true,
+  "combat_round": false,
+  "image_dirty": false
+}
+
+--- G. STATE DIFF ---
+pursuer.disposition: 'aggressive' -> 'wary'
+turn_index: 6 -> 7
+world_time_seconds: 265 -> 275
+
+--- H. FICTIONAL TIME / PRESSURE ---
+{
+  "world_time_delta": 10,
+  "stall_delta": 0,
+  "pursuer_before": "present",
+  "pursuer_after": "present",
+  "events": [],
+  "productive": true
+}
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text": "warn the challenger the boxes are trapped",
+  "encounter": "walk_boxes",
+  "player_alive": true,
+  "player_hp": 20,
+  "facts": [
+    "You warn Grimnak that the boxes are trapped. He hesitates, glancing at the table."
+  ],
+  "success": true,
+  "location": "walk_boxes"
+}
+
+--- J. NARRATOR OUTPUT ---
+You warn Grimnak that the boxes are trapped. He hesitates, glancing at the table.
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, barbarian challenger Grimnak present, drawn sword
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+visual_backend_calls_total=0
