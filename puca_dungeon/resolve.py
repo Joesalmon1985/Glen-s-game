@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Optional
 
 from puca_dungeon.encounters import encounter2
 from puca_dungeon.ground import Grounding
@@ -16,9 +16,9 @@ from puca_dungeon.rng import GameRNG
 @dataclass
 class Resolution:
     intent_understood: bool = True
-    grounded: bool = True
-    feasible: bool = True
-    success: bool = False
+    grounded: Optional[bool] = None
+    feasible: Optional[bool] = None
+    success: Optional[bool] = None
     facts: list = field(default_factory=list)
     checks: list = field(default_factory=list)
     damage_events: list = field(default_factory=list)
@@ -31,6 +31,11 @@ class Resolution:
     situation_changed: bool = False
     combat_round: bool = False
     image_dirty: bool = False
+    needs_clarification: bool = False
+    clarification_prompt: str = ''
+    advance_time: bool = True         # False for interpret failure / pure clarification
+    guidance_delta: int = 0           # suggested guidance change (+/-)
+    productive_for_guidance: bool = False
 
     def to_dict(self) -> dict:
         return {
@@ -50,26 +55,60 @@ class Resolution:
             'situation_changed': self.situation_changed,
             'combat_round': self.combat_round,
             'image_dirty': self.image_dirty,
+            'needs_clarification': self.needs_clarification,
+            'clarification_prompt': self.clarification_prompt,
+            'advance_time': self.advance_time,
+            'guidance_delta': self.guidance_delta,
+            'productive_for_guidance': self.productive_for_guidance,
         }
 
 
 def resolve(world: WorldState, intent: Intent, grounding: Grounding, rng: GameRNG) -> Resolution:
-    res = Resolution(intent_understood=intent.understood)
-    if not intent.understood:
-        res.feasible = False
+    res = Resolution(intent_understood=intent.understood, grounded=grounding.grounded)
+    if not intent.understood or intent.classification == 'UNINTERPRETABLE':
+        res.intent_understood = False
+        res.grounded = False
+        res.feasible = None
+        res.success = None
+        res.advance_time = False
+        res.guidance_delta = 1
         res.rejection_reason = 'intent_not_understood'
-        res.facts.append('You act, but the world finds no clear purchase on what you meant.')
+        res.facts.append('Your words do not resolve into any clear action the world can meet.')
+        return res
+
+    # Clarification before outcomes
+    if grounding.ambiguous or (intent.needs_clarification and grounding.grounded is False and not grounding.bindings.get('target')):
+        res.grounded = False
+        res.feasible = None
+        res.success = None
+        res.needs_clarification = True
+        res.advance_time = False
+        prompt = 'Which box?'
+        for item in grounding.ambiguous:
+            if isinstance(item, dict) and item.get('prompt'):
+                prompt = item['prompt']
+                break
+        res.clarification_prompt = prompt
+        res.facts.append(prompt)
         return res
 
     cls = intent.action_class.upper()
-    target = grounding.bindings.get('target')
-    tool = grounding.bindings.get('tool')
+    classification = (intent.classification or '').upper()
 
     if world.encounter == EncounterId.DEAD.value or not world.player.alive:
         res.feasible = False
+        res.success = False
         res.rejection_reason = 'player_dead'
         res.facts.append('You are dead. The dungeon does not answer.')
         return res
+
+    # Perception / meta / silly / impossible classifications
+    if classification == 'PERCEPTION_QUERY' or cls in ('PERCEIVE', 'QUERY'):
+        return _perception_query(world, intent, grounding, rng, res)
+    if classification == 'META_REQUEST' or cls == 'META':
+        return _meta_request(world, intent, grounding, rng, res)
+    if classification == 'SILLY_BUT_VALID' or cls in ('BODILY', 'CARTWHEEL'):
+        return _silly_bodily(world, intent, grounding, rng, res)
 
     # Junction encounter
     if world.encounter == EncounterId.JUNCTION.value:
@@ -97,12 +136,29 @@ def resolve(world: WorldState, intent: Intent, grounding: Grounding, rng: GameRN
         'SPEAK': _speak,
         'SHOUT': _shout,
         'LICK': _lick,
+        'SHAKE': _shake,
+        'TURN': _turn,
         'MANIPULATE': _manipulate,
         'ATTACK': _resolve_pursuer_action,
-        'OTHER': _other,
+        'IMPOSSIBLE': _impossible,
+        'OTHER': _freeform_attempt,
+        'GENERAL_WORLD_ACTION': _freeform_attempt,
     }
-    handler = handlers.get(cls, _other)
-    return handler(world, intent, grounding, rng, res)
+    handler = handlers.get(cls, _freeform_attempt)
+    result = handler(world, intent, grounding, rng, res)
+    if result.grounded is None:
+        result.grounded = grounding.grounded if grounding.grounded is not None else True
+    if result.feasible is None and result.success is not None:
+        result.feasible = True
+    # Meaningful coherent world/authored engagement resets guidance pressure
+    if classification == 'MATCH_AUTHORED_ACTION' or (
+            result.meaningful_effort and classification not in ('SILLY_BUT_VALID', 'META_REQUEST')):
+        result.productive_for_guidance = True
+        result.guidance_delta = -999  # session treats as reset
+    elif classification == 'SILLY_BUT_VALID':
+        result.guidance_delta = max(result.guidance_delta, 1)
+        result.productive_for_guidance = False
+    return result
 
 
 def _skill_check(rng: GameRNG, bonus: int, dc: int, label: str, res: Resolution) -> bool:
@@ -133,19 +189,25 @@ def _fire_trap(world: WorldState, box, rng: GameRNG, res: Resolution, reason: st
 
 
 def _wait(world, intent, grounding, rng, res):
+    res.feasible = True
     res.success = True
+    res.grounded = True
     res.facts.append('You wait. The stone table and its boxes remain silent.')
     return res
 
 
 def _sit(world, intent, grounding, rng, res):
+    res.feasible = True
     res.success = True
+    res.grounded = True
     res.facts.append('You sit near the stone table. Time stretches in the damp air.')
     return res
 
 
 def _look(world, intent, grounding, rng, res):
+    res.feasible = True
     res.success = True
+    res.grounded = True
     res.meaningful_effort = True
     res.interacted = True
     res.facts.append(
@@ -179,6 +241,7 @@ def _search(world, intent, grounding, rng, res):
     res.affordances_used.append('search_traps')
     res.interacted = True
     res.meaningful_effort = True
+    res.feasible = True
     ok = _skill_check(rng, world.player.search_bonus, SEARCH_DC, 'Search traps', res)
     if ok:
         for box in world.boxes.values():
@@ -199,6 +262,7 @@ def _use_key(world, intent, grounding, rng, res):
     res.affordances_used.append('use_key')
     res.interacted = True
     res.meaningful_effort = True
+    res.feasible = True
     tool = grounding.bindings.get('tool')
     target = grounding.bindings.get('target')
     if tool != 'trial_key_player':
@@ -206,11 +270,17 @@ def _use_key(world, intent, grounding, rng, res):
         res.rejection_reason = 'no_key'
         res.facts.append('You have no suitable key ready.')
         return res
-    if target == 'boxes':
-        target = 'box_player'
+    if target in (None, 'boxes', 'box'):
+        res.grounded = False
+        res.feasible = None
+        res.success = None
+        res.needs_clarification = True
+        res.clarification_prompt = 'Which box?'
+        res.advance_time = False
+        res.facts.append('Which box do you try the key on?')
+        return res
     box = world.boxes.get(target or '')
     if not box:
-        # ambiguous / failed grounding: try other_box semantics if ref says so
         res.feasible = False
         res.grounded = False
         res.rejection_reason = 'ungrounded_box'
@@ -252,10 +322,18 @@ def _pick_lock(world, intent, grounding, rng, res):
     res.affordances_used.append('open_lock')
     res.interacted = True
     res.meaningful_effort = True
+    res.feasible = True
     target = grounding.bindings.get('target')
-    if target in (None, 'boxes'):
-        target = next((b for b in world.boxes if not world.boxes[b].is_player_box), None)
-        grounding.bindings['target'] = target
+    if target in (None, 'boxes', 'box'):
+        # Only auto-pick "another" when intent already said so via other_box binding
+        res.grounded = False
+        res.feasible = None
+        res.success = None
+        res.needs_clarification = True
+        res.clarification_prompt = 'Which box?'
+        res.advance_time = False
+        res.facts.append('Which lock do you pick?')
+        return res
     box = world.boxes.get(target or '')
     if not box:
         res.grounded = False
@@ -321,9 +399,17 @@ def _break_box(world, intent, grounding, rng, res):
     res.affordances_used.append('hardness_hp')
     res.interacted = True
     res.meaningful_effort = True
+    res.feasible = True
     target = grounding.bindings.get('target')
     if target in (None, 'boxes', 'box'):
-        target = 'box_player'
+        res.grounded = False
+        res.feasible = None
+        res.success = None
+        res.needs_clarification = True
+        res.clarification_prompt = 'Which box?'
+        res.advance_time = False
+        res.facts.append('Which box?')
+        return res
     box = world.boxes.get(target or '')
     if not box:
         res.grounded = False
@@ -334,12 +420,6 @@ def _break_box(world, intent, grounding, rng, res):
         res.success = False
         res.facts.append(f'{box.label} is already open or smashed.')
         return res
-    # Damage vs hardness 10: each serious blow deals 1d8, reduced by hardness
-    roll = rng.randint(1, 8)
-    dealt = max(0, roll - box.hardness)
-    # Allow gradual progress: use raw roll against hp when using dedicated smash, but honor hardness
-    # Source: Hardness 10, 10 hp — need damage exceeding hardness. Boost with sword pommel: still hard.
-    # For POC playability with hardness 10, accumulate "effort chips" OR deal damage as max(1, roll-5) for weapons
     tool = grounding.bindings.get('tool')
     base = rng.randint(1, 8)
     if tool == 'sword' or (intent.tool and 'pommel' in str(intent.tool).lower()):
@@ -350,17 +430,19 @@ def _break_box(world, intent, grounding, rng, res):
         dealt = 1 if base >= 6 else 0
     box.hp -= dealt
     res.checks.append({'label': 'Smash', 'damage_roll': base, 'hardness': box.hardness, 'dealt': dealt, 'hp_left': box.hp})
-    res.situation_changed = True
-    res.image_dirty = True
+    res.situation_changed = dealt > 0 or box.hp < 10
+    # Visible damage only dirties image
+    if dealt > 0:
+        res.image_dirty = True
     if box.hp <= 0:
         box.destroyed = True
         box.open = True
         box.locked = False
         res.success = True
+        res.image_dirty = True
         res.facts.append(f'You smash {box.label} apart.')
         res.state_transitions.append(f'{box.id}.destroyed=true')
         if box.is_player_box and not box.contents_taken:
-            # Contents may be damaged; still grant clue/gold but messier
             world.player.gold += 2
             box.contents_taken = True
             world.clue_get_no_mess = False
@@ -372,7 +454,12 @@ def _break_box(world, intent, grounding, rng, res):
             _fire_trap(world, box, rng, res, reason='smash_triggers')
     else:
         res.success = False
-        res.facts.append(f'You batter {box.label} (hardness {box.hardness}). It holds; {box.hp} integrity remains.')
+        if dealt <= 0:
+            res.facts.append(
+                f'You strike {box.label}, but leave no visible mark on the iron-bound wood.')
+        else:
+            res.facts.append(
+                f'You batter {box.label} (hardness {box.hardness}). It holds; {box.hp} integrity remains.')
     return res
 
 
@@ -380,9 +467,11 @@ def _strike(world, intent, grounding, rng, res):
     target = grounding.bindings.get('target')
     res.interacted = True
     res.meaningful_effort = True
+    res.grounded = True
     if target == 'stone_wall':
         res.feasible = True
         res.success = False
+        res.image_dirty = False  # no visible change
         res.facts.append(
             'You strike the stone wall. It does not break. Your hand and pride ache; the passage is unchanged.')
         res.rejection_reason = 'insufficient_force'
@@ -445,33 +534,266 @@ def _shout(world, intent, grounding, rng, res):
 
 def _lick(world, intent, grounding, rng, res):
     res.interacted = True
+    res.feasible = True
     res.success = True
+    res.grounded = True
     res.facts.append(
         'You lick a cold iron-bound box. It tastes of dust, metal, and poor decisions. Nothing else happens.')
     return res
 
 
+def _shake(world, intent, grounding, rng, res):
+    res.interacted = True
+    res.feasible = True
+    res.grounded = True
+    target = grounding.bindings.get('target')
+    box = world.boxes.get(target or '')
+    if box:
+        res.success = True
+        res.facts.append(
+            f'You grab {box.label} and shake it. Something small shifts inside, muffled by wood and iron. '
+            'The lock holds.')
+    else:
+        res.success = True
+        res.facts.append(
+            'You seize one of the iron-bound boxes and shake it hard. Something shifts faintly within; the lock does not yield.')
+    return res
+
+
+def _turn(world, intent, grounding, rng, res):
+    res.feasible = True
+    res.success = True
+    res.grounded = True
+    res.interacted = True
+    dest = grounding.bindings.get('destination') or intent.destination
+    if dest == 'passage_behind' or (intent.method or '').lower() in ('turn_back', 'around', 'back'):
+        res.facts.append(
+            'You turn back toward the entrance tunnel. The contest gate remains sealed behind you; '
+            'there is no retreat that way. Six locked boxes still wait on the stone table.')
+        return res
+    res.facts.append('You turn in place, taking in the chamber again. The table and its six boxes remain.')
+    return res
+
+
+def _silly_bodily(world, intent, grounding, rng, res):
+    res.feasible = True
+    res.success = True
+    res.grounded = True
+    res.interacted = True
+    res.guidance_delta = 1
+    method = (intent.method or intent.action_class or '').lower()
+    effect = (intent.intended_effect or '').lower()
+    utterance = (intent.utterance or '').lower()
+    if 'cartwheel' in method or 'cartwheel' in effect or 'cartwheel' in utterance:
+        res.facts.append(
+            'You plant your hands and throw a cartwheel across the damp flagstones. '
+            'You land upright, slightly dizzy. The boxes are unimpressed.')
+    elif 'dance' in method or 'sing' in method:
+        res.facts.append(
+            f'You {(intent.method or "perform")} in the torchlight. Echoes answer; the dungeon does not.')
+    else:
+        res.facts.append(
+            f'You follow through on the bodily impulse ({intent.method or intent.action_class}). '
+            'It happens. The situation at the table does not improve.')
+    return res
+
+
+def _perception_query(world, intent, grounding, rng, res):
+    res.feasible = True
+    res.success = True
+    res.grounded = True
+    res.interacted = True
+    res.meaningful_effort = True
+    res.productive_for_guidance = True
+    res.guidance_delta = -999
+    focus = (intent.query_focus or intent.intended_effect or intent.target or '').lower()
+    text_blob = ' '.join(filter(None, [intent.utterance, intent.target, intent.method, focus])).lower()
+
+    if any(x in text_blob or x in focus for x in ('count', 'how many', 'box_count', 'number')):
+        n = sum(1 for b in world.boxes.values() if not b.destroyed)
+        res.facts.append(f'There are {n} boxes on the stone table.')
+        return res
+    if any(x in text_blob or x in focus for x in ('name', 'named', 'my name', 'which')):
+        label = world.boxes['box_player'].label
+        res.facts.append(f'The box bearing your name is clearly marked: {label}.')
+        return res
+    if any(x in text_blob or x in focus for x in ('carry', 'carrying', 'inventory', 'possessions', 'holding')):
+        inv = ', '.join(_inventory_labels(world)) or 'nothing of note'
+        res.facts.append(f'You are carrying: {inv}.')
+        return res
+    if any(x in text_blob or x in focus for x in ('see', 'visible', 'look', 'around')):
+        res.facts.append(
+            'You see a stone table with six locked boxes, one bearing your name. '
+            'A passage continues deeper; the entrance tunnel lies the way you came.')
+        return res
+    if any(x in text_blob or x in focus for x in ('passage', 'where', 'ahead', 'go')):
+        res.facts.append(
+            'The passage ahead deepens into the dungeon. Behind you, the sealed contest gate bars retreat.')
+        return res
+    if any(x in text_blob or x in focus for x in ('hear', 'foot', 'sound')):
+        if world.pursuer.state == 'approaching':
+            res.facts.append('Yes — faint footsteps echo from the entrance tunnel behind you.')
+        elif world.pursuer.state == 'close':
+            res.facts.append('Yes — heavy footsteps and breath are close behind in the tunnel.')
+        elif world.pursuer.state in ('present', 'hostile'):
+            res.facts.append(f'{world.pursuer.name} is here in the chamber with you.')
+        else:
+            res.facts.append('You hear only dripstone and your own breathing.')
+        return res
+    n = len(world.boxes)
+    inv = ', '.join(_inventory_labels(world))
+    res.facts.append(
+        f'You take stock: {n} locked boxes on the table, one marked for you; '
+        f'passages ahead and behind; you carry {inv}.')
+    return res
+
+
+def _inventory_labels(world: WorldState) -> list:
+    labels = []
+    for item in world.player.inventory:
+        if item == 'trial_key_player':
+            labels.append('the iron key')
+        elif item == 'sword':
+            labels.append('your sword')
+        else:
+            labels.append(item.replace('_', ' '))
+    return labels
+
+
+def _meta_request(world, intent, grounding, rng, res):
+    res.feasible = True
+    res.grounded = True
+    res.guidance_delta = 1
+    focus = (intent.query_focus or intent.method or intent.intended_effect or '').lower()
+    utterance = (intent.utterance or intent.target or '').lower()
+    blob = f'{focus} {utterance} {(intent.action_class or "").lower()}'
+
+    if any(x in blob for x in ('inventory', 'possessions', 'items', 'gear', 'what am i carrying')):
+        inv = ', '.join(_inventory_labels(world)) or 'nothing useful'
+        res.success = True
+        res.facts.append(
+            'For a moment you imagine your possessions arranging themselves into a helpful floating menu. '
+            f'They decline. You are carrying {inv}.')
+        res.productive_for_guidance = True
+        res.guidance_delta = 0
+        return res
+    if any(x in blob for x in ('press', 'button', 'menu', 'pause', 'click', 'press x')):
+        res.success = False
+        res.rejection_reason = 'non_diegetic'
+        res.facts.append(
+            'You briefly wonder what that control is supposed to be. The thought passes. '
+            'Six locked boxes remain on the table, one bearing your name.')
+        return res
+    res.success = False
+    res.rejection_reason = 'non_diegetic'
+    res.facts.append(
+        'That request belongs to some other kind of game. Here, the stone table and its boxes stay stubbornly real.')
+    return res
+
+
+def _impossible(world, intent, grounding, rng, res):
+    res.grounded = True
+    res.feasible = False
+    res.success = False
+    res.rejection_reason = 'impossible'
+    res.guidance_delta = 1
+    effect = intent.intended_effect or intent.method or 'that'
+    res.facts.append(
+        f'You entertain the idea of {effect}. Reality in this stone chamber proves less cooperative.')
+    return res
+
+
 def _manipulate(world, intent, grounding, rng, res):
     res.interacted = True
-    if (intent.method or '').lower() == 'draw' or grounding.bindings.get('target') == 'sword':
+    res.feasible = True
+    method = (intent.method or '').lower()
+    if method == 'draw' or grounding.bindings.get('target') == 'sword':
         if 'sword_drawn' not in world.flags:
             world.flags['sword_drawn'] = True
             res.situation_changed = True
             res.image_dirty = True
         res.success = True
+        res.grounded = True
         res.facts.append('You draw your sword. Steel glints in the torchlight.')
         if world.pursuer.state in ('present', 'hostile'):
             res.addressed_threat = True
         return res
+    if method in ('shake', 'rattle'):
+        return _shake(world, intent, grounding, rng, res)
+    if method in ('cartwheel', 'somersault', 'dance'):
+        intent.method = method
+        return _silly_bodily(world, intent, grounding, rng, res)
+    if method in ('turn', 'turn_around', 'turn_back'):
+        return _turn(world, intent, grounding, rng, res)
+    if 'helicopter' in method or 'summon' in method or (intent.intended_effect or '').lower() in (
+            'summon', 'impossible', 'fly'):
+        return _impossible(world, intent, grounding, rng, res)
     res.success = True
-    res.facts.append('You fiddle with your gear. The dungeon waits.')
+    res.grounded = True
+    target = intent.target or grounding.bindings.get('target_ref') or 'your surroundings'
+    res.facts.append(
+        f'You attempt to {method or "manipulate"} {target}. '
+        'The action completes without useful change to the locks or passage.')
     return res
 
 
-def _other(world, intent, grounding, rng, res):
+def _freeform_attempt(world, intent, grounding, rng, res):
+    """Understood non-authored action: describe the actual attempt; never a generic dungeon shrug."""
+    res.feasible = True
+    res.grounded = True if grounding.grounded is not False else False
+    method = (intent.method or '').lower()
+    effect = (intent.intended_effect or '').lower()
+    cls = intent.action_class.upper()
+    target = intent.target or grounding.bindings.get('target_ref') or ''
+    utterance = (intent.utterance or '').lower()
+
+    if cls in ('LICK',) or method == 'lick':
+        return _lick(world, intent, grounding, rng, res)
+    if method in ('shake', 'rattle') or 'shake' in effect:
+        if grounding.ambiguous:
+            res.grounded = False
+            res.needs_clarification = True
+            res.clarification_prompt = 'Which box?'
+            res.advance_time = False
+            res.feasible = None
+            res.success = None
+            res.facts.append('Which box?')
+            return res
+        return _shake(world, intent, grounding, rng, res)
+    if method in ('cartwheel',) or 'cartwheel' in effect or cls == 'CARTWHEEL':
+        return _silly_bodily(world, intent, grounding, rng, res)
+    if method in ('turn', 'turn_around', 'turn_back') or 'turn' in method:
+        return _turn(world, intent, grounding, rng, res)
+    if any(x in method or x in effect or x in utterance for x in (
+            'helicopter', 'summon', 'teleport', 'fly away')):
+        return _impossible(world, intent, grounding, rng, res)
+    if method in ('sing', 'song') or 'sing' in effect:
+        res.success = True
+        res.interacted = True
+        res.guidance_delta = 1
+        res.facts.append(
+            f'You sing toward {target or "the boxes"}. Your voice thins in the stone air. Nothing answers.')
+        return res
+    if cls == 'OTHER' or not method:
+        said = (intent.utterance or '').strip()
+        res.success = True
+        res.interacted = True
+        if said:
+            res.facts.append(
+                f'You attempt what you meant by “{said[:120]}”. '
+                'It plays out in the chamber without changing the locks, boxes, or passage.')
+        else:
+            res.facts.append(
+                f'You attempt to {cls.lower().replace("_", " ")}'
+                + (f' {target}' if target else '')
+                + '. The attempt happens; the dungeon does not grant useful change.')
+        return res
+
     res.success = True
+    res.interacted = True
     res.facts.append(
-        'You follow through on the impulse. The dungeon accepts the attempt without useful change.')
+        f'You {method} {target or "as intended"}. '
+        'The attempt is real; it leaves the immediate puzzle unaltered.')
     return res
 
 

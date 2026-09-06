@@ -7,11 +7,13 @@ import unittest
 from pathlib import Path
 
 from puca_dungeon.encounters.encounter1 import public_perception
+from puca_dungeon.interpret import HeuristicInterpreter
 from puca_dungeon.session import GameSession
 
 
 class Encounter1Tests(unittest.TestCase):
     def session(self, seed=91, name='Glen', **kwargs):
+        kwargs.setdefault('interpreter', HeuristicInterpreter())
         return GameSession(player_name=name, seed=seed, debug=True, **kwargs)
 
     def test_use_key_on_named_box(self):
@@ -152,7 +154,7 @@ class Encounter1Tests(unittest.TestCase):
         self.assertIn('perception', tr.interpreter_input)
 
     def test_normal_mode_hides_debug_dump_fields_in_prose(self):
-        s = GameSession(player_name='Glen', seed=91, debug=False)
+        s = GameSession(player_name='Glen', seed=91, debug=False, interpreter=HeuristicInterpreter())
         tr = s.submit('Search the boxes for traps')
         # Player-facing prose should not include DC numbers
         self.assertNotIn('dc', tr.narrator_output.lower())

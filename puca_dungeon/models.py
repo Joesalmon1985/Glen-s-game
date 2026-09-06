@@ -34,6 +34,17 @@ class BoxId(str, Enum):
     E = 'box_e'
 
 
+CLASSIFICATIONS = (
+    'MATCH_AUTHORED_ACTION',
+    'GENERAL_WORLD_ACTION',
+    'PERCEPTION_QUERY',
+    'META_REQUEST',
+    'SILLY_BUT_VALID',
+    'UNINTERPRETABLE',
+    'NEEDS_CLARIFICATION',
+)
+
+
 @dataclass
 class Intent:
     """Validated semantic intent. Not a narrow verb enum — free action_class string."""
@@ -49,6 +60,12 @@ class Intent:
     raw: dict = field(default_factory=dict)
     understood: bool = True
     notes: str = ''
+    classification: str = 'GENERAL_WORLD_ACTION'
+    matched_action_id: Optional[str] = None
+    confidence: Optional[float] = None
+    ambiguities: list = field(default_factory=list)
+    needs_clarification: bool = False
+    query_focus: Optional[str] = None  # for PERCEPTION_QUERY / META_REQUEST
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -136,6 +153,7 @@ class WorldState:
     visible_entities: list = field(default_factory=list)
     flags: dict = field(default_factory=dict)
     turn_index: int = 0
+    guidance_level: int = 0  # 0–4; hidden from normal play; separate from world pressure
 
     def to_dict(self) -> dict:
         return {
@@ -157,6 +175,7 @@ class WorldState:
             'visible_entities': list(self.visible_entities),
             'flags': dict(self.flags),
             'turn_index': self.turn_index,
+            'guidance_level': self.guidance_level,
         }
 
     def clone(self) -> 'WorldState':
@@ -190,6 +209,7 @@ def world_from_dict(data: dict) -> WorldState:
         visible_entities=list(data.get('visible_entities') or []),
         flags=dict(data.get('flags') or {}),
         turn_index=data.get('turn_index', 0),
+        guidance_level=int(data.get('guidance_level', 0) or 0),
     )
 
 

@@ -9,7 +9,7 @@ def enter_junction(world: WorldState) -> list[str]:
     world.encounter = EncounterId.JUNCTION.value
     world.player.location = EncounterId.JUNCTION.value
     world.visible_entities = [
-        'junction', 'white_arrow_west', 'passage_west', 'passage_right', 'floor_tracks',
+        'junction', 'white_arrow_west', 'passage_west', 'passage_right', 'dusty_floor',
     ]
     # Pursuer does not auto-follow for this stub unless already present/hostile
     if world.pursuer.state in ('present', 'hostile', 'allied') and world.pursuer.location == EncounterId.WALK_BOXES.value:
@@ -24,6 +24,12 @@ def enter_junction(world: WorldState) -> list[str]:
 
 def inspect_junction(world: WorldState) -> list[str]:
     world.junction_inspected = True
+    if 'dusty_floor' in world.visible_entities:
+        world.visible_entities = [
+            e if e != 'dusty_floor' else 'floor_tracks' for e in world.visible_entities
+        ]
+    if 'floor_tracks' not in world.visible_entities:
+        world.visible_entities.append('floor_tracks')
     if 'tracks_west_three_right_one' not in world.player.knowledge:
         world.player.knowledge.append('tracks_west_three_right_one')
     return [

@@ -1,5 +1,6 @@
 # Trace: trace_b_success
 seed=91
+interpreter=HeuristicInterpreter
 
 OPENING
 You enter Deathtrap Dungeon after the other contestants. Baron Sukumvit's servant pressed a single iron key into your hand. After roughly five minutes of cautious travel, the passage widens around a stone table. Six locked boxes rest upon it. One bears your name.
@@ -10,7 +11,7 @@ Your careful search finds a needle-fine poison dart mechanism set into each lock
 ========================================================================
 RAW INPUT: 'inspect the boxes carefully'
 
---- B. INTERPRETER INPUT (perception only) ---
+--- B. INTERPRETER INPUT (perception + authored actions) ---
 {
   "player_text": "inspect the boxes carefully",
   "perception": {
@@ -89,7 +90,92 @@ RAW INPUT: 'inspect the boxes carefully'
       "box_e",
       "trial_key_player"
     ]
-  }
+  },
+  "authored_actions": [
+    {
+      "id": "box.unlock.player",
+      "description": "Use the supplied iron key on the box that bears the player name.",
+      "operation": "unlock_with_key",
+      "entities": [
+        "box_player",
+        "Glen's box"
+      ],
+      "tools": [
+        "trial_key_player"
+      ]
+    },
+    {
+      "id": "box.unlock.other",
+      "description": "Use the supplied iron key on a box that is not the named player box.",
+      "operation": "unlock_with_key",
+      "entities": [
+        "other_box"
+      ],
+      "tools": [
+        "trial_key_player"
+      ]
+    },
+    {
+      "id": "box.inspect",
+      "description": "Inspect, examine, or look closely at the boxes, locks, or table.",
+      "operation": "inspect",
+      "entities": [
+        "boxes",
+        "stone_table"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.search",
+      "description": "Carefully search the boxes or locks for hidden mechanisms or information.",
+      "operation": "search",
+      "entities": [
+        "boxes"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.lock.pick",
+      "description": "Pick the lock on a box without using the supplied key.",
+      "operation": "pick_lock",
+      "entities": [
+        "box"
+      ],
+      "tools": [
+        "lockpicks"
+      ]
+    },
+    {
+      "id": "box.damage",
+      "description": "Hit, smash, break, or otherwise damage a box to force it open.",
+      "operation": "damage_box",
+      "entities": [
+        "box"
+      ],
+      "tools": [
+        "sword",
+        "fist"
+      ]
+    },
+    {
+      "id": "move.passage_ahead",
+      "description": "Leave the table and continue deeper into the dungeon passage.",
+      "operation": "move",
+      "entities": [
+        "passage_ahead"
+      ],
+      "tools": []
+    },
+    {
+      "id": "move.passage_behind",
+      "description": "Turn back toward the entrance / way you came.",
+      "operation": "move",
+      "entities": [
+        "passage_behind"
+      ],
+      "tools": []
+    }
+  ]
 }
 
 --- C. RAW INTERPRETER OUTPUT ---
@@ -97,7 +183,7 @@ RAW INPUT: 'inspect the boxes carefully'
   "action_class": "SEARCH",
   "target": "boxes",
   "method": "careful",
-  "intended_effect": "discover_trap"
+  "intended_effect": "discover_information"
 }
 
 --- D. VALIDATED INTENT ---
@@ -106,7 +192,7 @@ RAW INPUT: 'inspect the boxes carefully'
   "target": "boxes",
   "tool": null,
   "method": "careful",
-  "intended_effect": "discover_trap",
+  "intended_effect": "discover_information",
   "manner": null,
   "destination": null,
   "utterance": null,
@@ -115,11 +201,22 @@ RAW INPUT: 'inspect the boxes carefully'
     "action_class": "SEARCH",
     "target": "boxes",
     "method": "careful",
-    "intended_effect": "discover_trap"
+    "intended_effect": "discover_information"
   },
   "understood": true,
-  "notes": ""
+  "notes": "",
+  "classification": "MATCH_AUTHORED_ACTION",
+  "matched_action_id": null,
+  "confidence": null,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
 }
+classification=MATCH_AUTHORED_ACTION
+matched_action_id=None
+confidence=None
+ambiguities=[]
+needs_clarification=False
 
 --- E. ENTITY GROUNDING ---
 {
@@ -129,7 +226,9 @@ RAW INPUT: 'inspect the boxes carefully'
   },
   "ambiguous": [],
   "failed": [],
-  "notes": ""
+  "notes": "",
+  "grounded": true,
+  "candidates": []
 }
 
 --- F. PYTHON RESOLUTION ---
@@ -169,7 +268,12 @@ RAW INPUT: 'inspect the boxes carefully'
   "addressed_threat": false,
   "situation_changed": true,
   "combat_round": false,
-  "image_dirty": false
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": -999,
+  "productive_for_guidance": true
 }
 
 --- G. STATE DIFF ---
@@ -183,15 +287,20 @@ last_image_prompt: '' -> "pixel art, limited palette, clear silhouette, gentle e
 turn_index: 0 -> 1
 world_time_seconds: 0 -> 45
 
---- H. FICTIONAL TIME / PRESSURE ---
+--- H. FICTIONAL TIME / WORLD PRESSURE / GUIDANCE ---
 {
   "world_time_delta": 45,
   "stall_delta": 0,
   "pursuer_before": "absent",
   "pursuer_after": "absent",
   "events": [],
-  "productive": true
+  "productive": true,
+  "advance_time": true,
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0
 }
+guidance_level (after)=0
 
 --- I. NARRATOR INPUT ---
 {
@@ -203,7 +312,11 @@ world_time_seconds: 0 -> 45
     "Your careful search finds a needle-fine poison dart mechanism set into each locked box."
   ],
   "success": true,
-  "location": "walk_boxes"
+  "location": "walk_boxes",
+  "classification": "MATCH_AUTHORED_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false
 }
 
 --- J. NARRATOR OUTPUT ---
@@ -211,7 +324,7 @@ Your careful search finds a needle-fine poison dart mechanism set into each lock
 
 --- K/L. IMAGE ---
 IMAGE DECISION: REGENERATE
-REASON: visual state changed
+REASON: first image
 PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box
 DEBUG MODE — IMAGE GENERATION SUPPRESSED
 visual_backend_calls=0
@@ -223,7 +336,7 @@ Your key turns smoothly in Glen's box. Inside you find 2 gold pieces and a folde
 ========================================================================
 RAW INPUT: 'use my key on the box with my name'
 
---- B. INTERPRETER INPUT (perception only) ---
+--- B. INTERPRETER INPUT (perception + authored actions) ---
 {
   "player_text": "use my key on the box with my name",
   "perception": {
@@ -320,7 +433,102 @@ RAW INPUT: 'use my key on the box with my name'
       "box_e",
       "trial_key_player"
     ]
-  }
+  },
+  "authored_actions": [
+    {
+      "id": "box.unlock.player",
+      "description": "Use the supplied iron key on the box that bears the player name.",
+      "operation": "unlock_with_key",
+      "entities": [
+        "box_player",
+        "Glen's box"
+      ],
+      "tools": [
+        "trial_key_player"
+      ]
+    },
+    {
+      "id": "box.unlock.other",
+      "description": "Use the supplied iron key on a box that is not the named player box.",
+      "operation": "unlock_with_key",
+      "entities": [
+        "other_box"
+      ],
+      "tools": [
+        "trial_key_player"
+      ]
+    },
+    {
+      "id": "box.inspect",
+      "description": "Inspect, examine, or look closely at the boxes, locks, or table.",
+      "operation": "inspect",
+      "entities": [
+        "boxes",
+        "stone_table"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.search",
+      "description": "Carefully search the boxes or locks for hidden mechanisms or information.",
+      "operation": "search",
+      "entities": [
+        "boxes"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.lock.pick",
+      "description": "Pick the lock on a box without using the supplied key.",
+      "operation": "pick_lock",
+      "entities": [
+        "box"
+      ],
+      "tools": [
+        "lockpicks"
+      ]
+    },
+    {
+      "id": "box.damage",
+      "description": "Hit, smash, break, or otherwise damage a box to force it open.",
+      "operation": "damage_box",
+      "entities": [
+        "box"
+      ],
+      "tools": [
+        "sword",
+        "fist"
+      ]
+    },
+    {
+      "id": "move.passage_ahead",
+      "description": "Leave the table and continue deeper into the dungeon passage.",
+      "operation": "move",
+      "entities": [
+        "passage_ahead"
+      ],
+      "tools": []
+    },
+    {
+      "id": "move.passage_behind",
+      "description": "Turn back toward the entrance / way you came.",
+      "operation": "move",
+      "entities": [
+        "passage_behind"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.trap.disable",
+      "description": "Disable a trap mechanism already discovered on a box.",
+      "operation": "disable_trap",
+      "entities": [
+        "trap",
+        "box"
+      ],
+      "tools": []
+    }
+  ]
 }
 
 --- C. RAW INTERPRETER OUTPUT ---
@@ -351,8 +559,19 @@ RAW INPUT: 'use my key on the box with my name'
     "intended_effect": "open"
   },
   "understood": true,
-  "notes": ""
+  "notes": "",
+  "classification": "MATCH_AUTHORED_ACTION",
+  "matched_action_id": null,
+  "confidence": null,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
 }
+classification=MATCH_AUTHORED_ACTION
+matched_action_id=None
+confidence=None
+ambiguities=[]
+needs_clarification=False
 
 --- E. ENTITY GROUNDING ---
 {
@@ -363,7 +582,9 @@ RAW INPUT: 'use my key on the box with my name'
   },
   "ambiguous": [],
   "failed": [],
-  "notes": ""
+  "notes": "",
+  "grounded": true,
+  "candidates": []
 }
 
 --- F. PYTHON RESOLUTION ---
@@ -392,7 +613,12 @@ RAW INPUT: 'use my key on the box with my name'
   "addressed_threat": false,
   "situation_changed": true,
   "combat_round": false,
-  "image_dirty": true
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": -999,
+  "productive_for_guidance": true
 }
 
 --- G. STATE DIFF ---
@@ -405,15 +631,20 @@ player.knowledge: [] -> ['sukumvit_clue']
 turn_index: 1 -> 2
 world_time_seconds: 45 -> 60
 
---- H. FICTIONAL TIME / PRESSURE ---
+--- H. FICTIONAL TIME / WORLD PRESSURE / GUIDANCE ---
 {
   "world_time_delta": 15,
   "stall_delta": 0,
   "pursuer_before": "absent",
   "pursuer_after": "absent",
   "events": [],
-  "productive": true
+  "productive": true,
+  "advance_time": true,
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0
 }
+guidance_level (after)=0
 
 --- I. NARRATOR INPUT ---
 {
@@ -426,7 +657,11 @@ world_time_seconds: 45 -> 60
     "Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'"
   ],
   "success": true,
-  "location": "walk_boxes"
+  "location": "walk_boxes",
+  "classification": "MATCH_AUTHORED_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false
 }
 
 --- J. NARRATOR OUTPUT ---
@@ -446,7 +681,7 @@ Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the f
 ========================================================================
 RAW INPUT: 'read the note'
 
---- B. INTERPRETER INPUT (perception only) ---
+--- B. INTERPRETER INPUT (perception + authored actions) ---
 {
   "player_text": "read the note",
   "perception": {
@@ -545,7 +780,102 @@ RAW INPUT: 'read the note'
       "box_e",
       "trial_key_player"
     ]
-  }
+  },
+  "authored_actions": [
+    {
+      "id": "box.unlock.player",
+      "description": "Use the supplied iron key on the box that bears the player name.",
+      "operation": "unlock_with_key",
+      "entities": [
+        "box_player",
+        "Glen's box"
+      ],
+      "tools": [
+        "trial_key_player"
+      ]
+    },
+    {
+      "id": "box.unlock.other",
+      "description": "Use the supplied iron key on a box that is not the named player box.",
+      "operation": "unlock_with_key",
+      "entities": [
+        "other_box"
+      ],
+      "tools": [
+        "trial_key_player"
+      ]
+    },
+    {
+      "id": "box.inspect",
+      "description": "Inspect, examine, or look closely at the boxes, locks, or table.",
+      "operation": "inspect",
+      "entities": [
+        "boxes",
+        "stone_table"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.search",
+      "description": "Carefully search the boxes or locks for hidden mechanisms or information.",
+      "operation": "search",
+      "entities": [
+        "boxes"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.lock.pick",
+      "description": "Pick the lock on a box without using the supplied key.",
+      "operation": "pick_lock",
+      "entities": [
+        "box"
+      ],
+      "tools": [
+        "lockpicks"
+      ]
+    },
+    {
+      "id": "box.damage",
+      "description": "Hit, smash, break, or otherwise damage a box to force it open.",
+      "operation": "damage_box",
+      "entities": [
+        "box"
+      ],
+      "tools": [
+        "sword",
+        "fist"
+      ]
+    },
+    {
+      "id": "move.passage_ahead",
+      "description": "Leave the table and continue deeper into the dungeon passage.",
+      "operation": "move",
+      "entities": [
+        "passage_ahead"
+      ],
+      "tools": []
+    },
+    {
+      "id": "move.passage_behind",
+      "description": "Turn back toward the entrance / way you came.",
+      "operation": "move",
+      "entities": [
+        "passage_behind"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.trap.disable",
+      "description": "Disable a trap mechanism already discovered on a box.",
+      "operation": "disable_trap",
+      "entities": [
+        "trap",
+        "box"
+      ],
+      "tools": []
+    }
+  ]
 }
 
 --- C. RAW INTERPRETER OUTPUT ---
@@ -572,8 +902,19 @@ RAW INPUT: 'read the note'
     "intended_effect": "read"
   },
   "understood": true,
-  "notes": ""
+  "notes": "",
+  "classification": "MATCH_AUTHORED_ACTION",
+  "matched_action_id": null,
+  "confidence": null,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
 }
+classification=MATCH_AUTHORED_ACTION
+matched_action_id=None
+confidence=None
+ambiguities=[]
+needs_clarification=False
 
 --- E. ENTITY GROUNDING ---
 {
@@ -582,7 +923,9 @@ RAW INPUT: 'read the note'
   },
   "ambiguous": [],
   "failed": [],
-  "notes": ""
+  "notes": "",
+  "grounded": true,
+  "candidates": []
 }
 
 --- F. PYTHON RESOLUTION ---
@@ -604,22 +947,32 @@ RAW INPUT: 'read the note'
   "addressed_threat": false,
   "situation_changed": false,
   "combat_round": false,
-  "image_dirty": false
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": -999,
+  "productive_for_guidance": true
 }
 
 --- G. STATE DIFF ---
 turn_index: 2 -> 3
 world_time_seconds: 60 -> 80
 
---- H. FICTIONAL TIME / PRESSURE ---
+--- H. FICTIONAL TIME / WORLD PRESSURE / GUIDANCE ---
 {
   "world_time_delta": 20,
   "stall_delta": 0,
   "pursuer_before": "absent",
   "pursuer_after": "absent",
   "events": [],
-  "productive": true
+  "productive": true,
+  "advance_time": true,
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0
 }
+guidance_level (after)=0
 
 --- I. NARRATOR INPUT ---
 {
@@ -631,7 +984,11 @@ world_time_seconds: 60 -> 80
     "Sukumvit's clue: 'In Deathtrap Dungeon, trust neither the obvious door nor the first gift. Keep your key close.'"
   ],
   "success": true,
-  "location": "walk_boxes"
+  "location": "walk_boxes",
+  "classification": "MATCH_AUTHORED_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false
 }
 
 --- J. NARRATOR OUTPUT ---
@@ -651,7 +1008,7 @@ You leave the stone table behind and continue down the passage. You reach a junc
 ========================================================================
 RAW INPUT: 'keep walking down the tunnel'
 
---- B. INTERPRETER INPUT (perception only) ---
+--- B. INTERPRETER INPUT (perception + authored actions) ---
 {
   "player_text": "keep walking down the tunnel",
   "perception": {
@@ -750,7 +1107,102 @@ RAW INPUT: 'keep walking down the tunnel'
       "box_e",
       "trial_key_player"
     ]
-  }
+  },
+  "authored_actions": [
+    {
+      "id": "box.unlock.player",
+      "description": "Use the supplied iron key on the box that bears the player name.",
+      "operation": "unlock_with_key",
+      "entities": [
+        "box_player",
+        "Glen's box"
+      ],
+      "tools": [
+        "trial_key_player"
+      ]
+    },
+    {
+      "id": "box.unlock.other",
+      "description": "Use the supplied iron key on a box that is not the named player box.",
+      "operation": "unlock_with_key",
+      "entities": [
+        "other_box"
+      ],
+      "tools": [
+        "trial_key_player"
+      ]
+    },
+    {
+      "id": "box.inspect",
+      "description": "Inspect, examine, or look closely at the boxes, locks, or table.",
+      "operation": "inspect",
+      "entities": [
+        "boxes",
+        "stone_table"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.search",
+      "description": "Carefully search the boxes or locks for hidden mechanisms or information.",
+      "operation": "search",
+      "entities": [
+        "boxes"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.lock.pick",
+      "description": "Pick the lock on a box without using the supplied key.",
+      "operation": "pick_lock",
+      "entities": [
+        "box"
+      ],
+      "tools": [
+        "lockpicks"
+      ]
+    },
+    {
+      "id": "box.damage",
+      "description": "Hit, smash, break, or otherwise damage a box to force it open.",
+      "operation": "damage_box",
+      "entities": [
+        "box"
+      ],
+      "tools": [
+        "sword",
+        "fist"
+      ]
+    },
+    {
+      "id": "move.passage_ahead",
+      "description": "Leave the table and continue deeper into the dungeon passage.",
+      "operation": "move",
+      "entities": [
+        "passage_ahead"
+      ],
+      "tools": []
+    },
+    {
+      "id": "move.passage_behind",
+      "description": "Turn back toward the entrance / way you came.",
+      "operation": "move",
+      "entities": [
+        "passage_behind"
+      ],
+      "tools": []
+    },
+    {
+      "id": "box.trap.disable",
+      "description": "Disable a trap mechanism already discovered on a box.",
+      "operation": "disable_trap",
+      "entities": [
+        "trap",
+        "box"
+      ],
+      "tools": []
+    }
+  ]
 }
 
 --- C. RAW INTERPRETER OUTPUT ---
@@ -779,8 +1231,19 @@ RAW INPUT: 'keep walking down the tunnel'
     "manner": "onward"
   },
   "understood": true,
-  "notes": ""
+  "notes": "",
+  "classification": "MATCH_AUTHORED_ACTION",
+  "matched_action_id": null,
+  "confidence": null,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
 }
+classification=MATCH_AUTHORED_ACTION
+matched_action_id=None
+confidence=None
+ambiguities=[]
+needs_clarification=False
 
 --- E. ENTITY GROUNDING ---
 {
@@ -789,7 +1252,9 @@ RAW INPUT: 'keep walking down the tunnel'
   },
   "ambiguous": [],
   "failed": [],
-  "notes": ""
+  "notes": "",
+  "grounded": true,
+  "candidates": []
 }
 
 --- F. PYTHON RESOLUTION ---
@@ -817,26 +1282,36 @@ RAW INPUT: 'keep walking down the tunnel'
   "addressed_threat": false,
   "situation_changed": true,
   "combat_round": false,
-  "image_dirty": true
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": -999,
+  "productive_for_guidance": true
 }
 
 --- G. STATE DIFF ---
 encounter: 'walk_boxes' -> 'junction'
-last_image_prompt: "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, open boxes: Glen's box" -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, dungeon junction, white painted arrow pointing west, dusty tracks on stone floor'
+last_image_prompt: "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, torchlit stone dungeon chamber, stone table with six iron-bound locked boxes, one box labeled Glen's box, open boxes: Glen's box" -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, dungeon junction, white painted arrow pointing west, dusty floor'
 player.location: 'walk_boxes' -> 'junction'
 turn_index: 3 -> 4
-visible_entities: ['stone_table', 'six_locked_boxes', 'passage_ahead', 'passage_behind', 'box_player', 'box_a', 'box_b', 'box_c', 'box_d', 'box_e', 'trial_key_player'] -> ['junction', 'white_arrow_west', 'passage_west', 'passage_right', 'floor_tracks']
+visible_entities: ['stone_table', 'six_locked_boxes', 'passage_ahead', 'passage_behind', 'box_player', 'box_a', 'box_b', 'box_c', 'box_d', 'box_e', 'trial_key_player'] -> ['junction', 'white_arrow_west', 'passage_west', 'passage_right', 'dusty_floor']
 world_time_seconds: 80 -> 110
 
---- H. FICTIONAL TIME / PRESSURE ---
+--- H. FICTIONAL TIME / WORLD PRESSURE / GUIDANCE ---
 {
   "world_time_delta": 30,
   "stall_delta": 0,
   "pursuer_before": "absent",
   "pursuer_after": "absent",
   "events": [],
-  "productive": false
+  "productive": false,
+  "advance_time": true,
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0
 }
+guidance_level (after)=0
 
 --- I. NARRATOR INPUT ---
 {
@@ -850,7 +1325,11 @@ world_time_seconds: 80 -> 110
     "Closer inspection of the dusty floor could reveal tracks."
   ],
   "success": true,
-  "location": "junction"
+  "location": "junction",
+  "classification": "MATCH_AUTHORED_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false
 }
 
 --- J. NARRATOR OUTPUT ---
@@ -859,7 +1338,7 @@ You leave the stone table behind and continue down the passage. You reach a junc
 --- K/L. IMAGE ---
 IMAGE DECISION: REGENERATE
 REASON: visual state changed
-PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, dungeon junction, white painted arrow pointing west, dusty tracks on stone floor
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, dungeon junction, white painted arrow pointing west, dusty floor
 DEBUG MODE — IMAGE GENERATION SUPPRESSED
 visual_backend_calls=0
 ========================================================================

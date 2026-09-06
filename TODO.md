@@ -6,6 +6,7 @@
 - [x] Fictional-time pursuer pressure (POC addition; see docs/DEATHTRAP_POC.md).
 - [x] Debug play mode with full pipeline dump; image generation suppressed.
 - [x] Deterministic tests + human-readable traces under tests/traces/.
+- [x] LLM-first semantic interpreter (Ollama default); authored action matching; guidance vs world pressure.
 
 ## Current fix pass (legacy Spirit adventure)
 - [x] Preserve original source/installer and document the audit.

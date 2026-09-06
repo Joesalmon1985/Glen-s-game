@@ -63,8 +63,11 @@ def public_perception(world: WorldState) -> dict:
             'A passage continues deeper into the dungeon behind the table; '
             'the entrance tunnel lies the way you came.'
             if world.encounter == EncounterId.WALK_BOXES.value
-            else 'A junction: a white arrow painted on the wall points west. '
-                 'Passages lead west and right.'
+            else (
+                'A junction: a white arrow painted on the wall points west. '
+                'Passages lead west and right. The floor is dusty.'
+                + (' Tracks are visible in the dust.' if world.junction_inspected else '')
+            )
         ),
         'player': {
             'name': world.player.name,

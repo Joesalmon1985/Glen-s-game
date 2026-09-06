@@ -32,14 +32,31 @@ COST_BY_CLASS = {
     'SURRENDER': 10,
     'LICK': 10,
     'TOUCH': 10,
+    'SHAKE': 10,
+    'TURN': 10,
+    'BODILY': 15,
+    'CARTWHEEL': 15,
+    'PERCEIVE': 5,
+    'QUERY': 5,
+    'META': 5,
+    'IMPOSSIBLE': 10,
     'SIT': 40,
     'CAST': 10,
     'OTHER': 20,
+    'UNINTERPRETABLE': 0,
 }
 
 
 def time_cost(intent: Intent, resolution: dict | None = None) -> int:
+    if resolution and resolution.get('advance_time') is False:
+        return 0
+    if resolution and not resolution.get('intent_understood', True):
+        return 0
     cls = (intent.action_class or 'OTHER').upper()
+    if intent.classification == 'PERCEPTION_QUERY':
+        return 5
+    if intent.classification == 'META_REQUEST':
+        return 5
     cost = COST_BY_CLASS.get(cls, DEFAULT_COST)
     method = (intent.method or '').lower()
     if method in ('careful', 'thorough', 'search'):

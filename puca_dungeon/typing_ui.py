@@ -6,7 +6,8 @@ import json
 import sys
 from pathlib import Path
 
-from puca_dungeon.interpret import HeuristicInterpreter, OllamaInterpreter
+from puca_dungeon.interpret import HeuristicInterpreter, InterpreterUnavailable, OllamaInterpreter
+from puca_dungeon.narrate import OllamaNarrator, TemplateNarrator
 from puca_dungeon.session import GameSession
 
 
@@ -15,6 +16,7 @@ def run_cli(session: GameSession) -> int:
     print()
     print('Debug play mode. Type freely. Developer commands start with / (e.g. /state, /help, /quit).')
     print('IMAGE GENERATION IS SUPPRESSED; would-be prompts still appear in the turn debug dump.')
+    print(f'Interpreter: {type(session.interpreter).__name__}')
     print()
     while True:
         try:
@@ -24,7 +26,11 @@ def run_cli(session: GameSession) -> int:
             return 0
         if not line:
             continue
-        trace = session.submit(line)
+        try:
+            trace = session.submit(line)
+        except InterpreterUnavailable as exc:
+            print(f'\nERROR: {exc}\n', file=sys.stderr)
+            return 2
         if trace.debug_command == '/quit' or trace.narrator_output == '__QUIT__':
             print('Bye.')
             return 0
@@ -50,20 +56,40 @@ def main(argv=None) -> int:
     parser.add_argument('--no-debug', action='store_true', help='Player-facing mode (hide mechanics)')
     parser.add_argument('--seed', type=int, default=91, help='RNG seed for determinism')
     parser.add_argument('--name', default='Adventurer', help='Player name (named box label)')
-    parser.add_argument('--llm', action='store_true', help='Use Ollama interpreter instead of heuristic')
-    parser.add_argument('--model', default='mistral', help='Ollama model when --llm')
+    parser.add_argument('--heuristic', action='store_true',
+                        help='Use deterministic HeuristicInterpreter (tests/offline only)')
+    parser.add_argument('--llm', action='store_true',
+                        help='Deprecated: Ollama is already the default. Kept for compatibility.')
+    parser.add_argument('--allow-heuristic-fallback', action='store_true',
+                        help='If Ollama is down, fall back to HeuristicInterpreter instead of failing')
+    parser.add_argument('--model', default='mistral', help='Ollama model for interpreter/narrator')
+    parser.add_argument('--template-narrator', action='store_true',
+                        help='Use deterministic template narrator instead of Ollama narrator')
     parser.add_argument('--trace-out', type=Path, help='Write JSONL turn traces to this path')
     args = parser.parse_args(argv)
 
     debug = not args.no_debug
-    if args.llm:
-        interpreter = OllamaInterpreter(model=args.model)
-    else:
+    if args.heuristic:
         interpreter = HeuristicInterpreter()
+        narrator = TemplateNarrator()
+    else:
+        interpreter = OllamaInterpreter(model=args.model)
+        narrator = TemplateNarrator() if args.template_narrator else OllamaNarrator(model=args.model)
 
-    session = GameSession(player_name=args.name, seed=args.seed, interpreter=interpreter, debug=debug)
+    try:
+        session = GameSession(
+            player_name=args.name,
+            seed=args.seed,
+            interpreter=interpreter,
+            debug=debug,
+            narrator=narrator,
+            allow_heuristic_fallback=args.allow_heuristic_fallback,
+            ollama_model=args.model,
+        )
+    except InterpreterUnavailable as exc:
+        print(f'ERROR: {exc}', file=sys.stderr)
+        return 2
 
-    # Wrap submit to optionally record traces
     if args.trace_out:
         original = session.submit
 

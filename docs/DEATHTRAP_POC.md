@@ -23,12 +23,12 @@ Derived from the supplied *Deathtrap Dungeon* opening:
 ## Architecture
 
 1. Player free text
-2. Interpreter → structured intent (no outcomes)
-3. Entity grounding
-4. Python resolution (checks, traps, damage, movement)
-5. Fictional time + Encounter-1 pressure
-6. Narrator from resolved facts
-7. Image decision + prompt (suppressed in debug)
+2. **Ollama interpreter** (default) receives raw text + public perception + authored action descriptors → hierarchical classification / intent (no outcomes). HeuristicInterpreter is tests/offline only.
+3. Entity grounding (ambiguity → clarification; no silent named-box pick)
+4. Python resolution (checks, traps, damage, movement, perception/meta answers)
+5. Fictional time + Encounter-1 world pressure (separate from hidden `guidance_level`)
+6. Narrator from resolved facts (+ optional humorous re-anchor from guidance)
+7. Image decision + prompt (suppressed in debug; auditory-only → REUSE)
 
 ## Launch
 
@@ -36,6 +36,8 @@ Derived from the supplied *Deathtrap Dungeon* opening:
 ./launch_dungeon_debug.sh
 # or
 python -m puca_dungeon --debug --seed 91
+# offline / tests:
+python -m puca_dungeon --heuristic
 ```
 
-Windows: `Play Puca Dungeon Debug.bat`
+Requires local Ollama with `mistral` (or `--model`). Fails clearly if Ollama is down unless `--heuristic` / `--allow-heuristic-fallback`.
