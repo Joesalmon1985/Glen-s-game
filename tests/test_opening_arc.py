@@ -91,6 +91,29 @@ def test_scene_change_leads_narration():
     assert 'door' in blob or 'back' in blob or 'away' in blob
 
 
+def test_slit_opens_after_two_facility_responses():
+    s = _session()
+    fac = s.world.facility
+    s.submit('look at the bed')
+    assert fac.phase == 'cell_idle'
+    assert fac.slit_open is False
+    assert fac.cell_idle_turns == 1
+    s.submit('wait')
+    assert fac.cell_idle_turns >= 2
+    assert fac.slit_open or fac.phase == 'slit'
+
+
+def test_book_enter_skips_slit_turn_count():
+    s = _session()
+    fac = s.world.facility
+    s.submit('read the book')
+    assert s.world.mode == 'book_dungeon'
+    assert fac.phase == 'cell_idle'
+    assert fac.slit_open is False
+    assert fac.cell_idle_turns == 0
+    assert fac.book_engaged is True
+
+
 def test_accept_contract_skips_heaven():
     s = _session()
     fac = s.world.facility

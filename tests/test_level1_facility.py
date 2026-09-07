@@ -101,14 +101,11 @@ def test_speech_truncation():
 
 def test_institution_advances_with_time():
     s = _facility()
-    # Burn fictional time past slit threshold
-    for _ in range(8):
+    # Two facility responses open the slit (turn gate, not fictional time).
+    for _ in range(2):
         s.submit('wait')
         if s.world.facility.phase != 'cell_idle':
             break
-    # Force time if waits are short
-    while s.world.world_time_seconds < 200 and s.world.facility.phase == 'cell_idle':
-        s.submit('look at the bed')
     assert s.world.facility.slit_open or s.world.facility.phase != 'cell_idle'
 
 

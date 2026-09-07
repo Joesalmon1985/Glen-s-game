@@ -42,6 +42,7 @@ from puca_dungeon.facility_models import (
     PHASE_SLIT,
     PHASE_WASH,
     SLEEP_FORCE_FATIGUE,
+    SLIT_AFTER_TURNS,
     SLIT_AT,
     WASH_DONE_FORCE,
     FacilityState,
@@ -111,62 +112,74 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
         })
 
     # --- Day 1 ---
-    if phase == PHASE_CELL_IDLE and t >= SLIT_AT:
-        _enter_phase(facility, PHASE_SLIT, t)
-        facility.slit_open = True
-        _set_presence(facility, ['orderly_quiet'], 'wash_corridor')
-        door = facility.entity('door')
-        if door:
-            door.state['slit_open'] = True
-            facility.set_entity(door)
-        speaker = facility.character_name('orderly_quiet')
-        facility.last_npc_utterance = '… keth … back … varr …'
-        facility.last_understood = 'back / away'
-        facility.arc.scene_id = 'slit'
-        facility.arc.last_ask = 'step away from the door'
-        try:
-            from puca_dungeon import discourse as _discourse
-            world.last_npc_referent = 'orderly_quiet'
-            _discourse.set_pending_binary(
-                world,
-                'The slit is open. They want you to step back from the door.',
-                {
-                    'action_class': 'retreat',
-                    'method': 'step_back',
-                    'intended_effect': 'give_door_space',
-                    'classification': 'SYSTEMIC_ACTION',
-                    'understood': True,
-                    'utterance': 'step back',
-                },
-            )
-            if isinstance(world.pending_discourse, dict):
-                world.pending_discourse['reject_intent'] = {
-                    'action_class': 'stand_firm',
-                    'method': 'stand_firm',
-                    'intended_effect': 'maintain_position',
-                    'classification': 'SYSTEMIC_ACTION',
-                    'understood': True,
-                    'utterance': 'I will not back away',
-                }
-        except Exception:
-            pass
-        _lead(
-            resolution, facility,
-            (
-                f'The observation slit in the door opens. A person outside speaks. '
-                f'Most of it is noise. Gesture and repetition push one meaning through: back. Away. '
-                f'They want you to step away from the door.'
-            ),
-            ask='step away from the door',
-            kind='slit_opens',
+    # Wake slit: after N facility responses (not book enter / book dungeon turns).
+    if phase == PHASE_CELL_IDLE:
+        structured = list(getattr(resolution, 'structured_facts', None) or [])
+        entered_book = any(
+            isinstance(f, dict) and f.get('type') == 'book_enter' for f in structured
         )
-        events.append({
-            'type': 'slit_opens',
-            'npc_raw': facility.last_npc_utterance,
-            'understood': 'something like “back” / “away”',
-            'speaker_name': speaker,
-            'text': resolution.facts[0] if resolution.facts else '',
-        })
+        in_book = bool(facility.book_engaged) or entered_book or book_turn
+        if not in_book:
+            facility.cell_idle_turns = int(facility.cell_idle_turns or 0) + 1
+        if (
+            not in_book
+            and int(facility.cell_idle_turns or 0) >= SLIT_AFTER_TURNS
+        ):
+            _enter_phase(facility, PHASE_SLIT, t)
+            facility.slit_open = True
+            _set_presence(facility, ['orderly_quiet'], 'wash_corridor')
+            door = facility.entity('door')
+            if door:
+                door.state['slit_open'] = True
+                facility.set_entity(door)
+            speaker = facility.character_name('orderly_quiet')
+            facility.last_npc_utterance = '… keth … back … varr …'
+            facility.last_understood = 'back / away'
+            facility.arc.scene_id = 'slit'
+            facility.arc.last_ask = 'step away from the door'
+            try:
+                from puca_dungeon import discourse as _discourse
+                world.last_npc_referent = 'orderly_quiet'
+                _discourse.set_pending_binary(
+                    world,
+                    'The slit is open. They want you to step back from the door.',
+                    {
+                        'action_class': 'retreat',
+                        'method': 'step_back',
+                        'intended_effect': 'give_door_space',
+                        'classification': 'SYSTEMIC_ACTION',
+                        'understood': True,
+                        'utterance': 'step back',
+                    },
+                )
+                if isinstance(world.pending_discourse, dict):
+                    world.pending_discourse['reject_intent'] = {
+                        'action_class': 'stand_firm',
+                        'method': 'stand_firm',
+                        'intended_effect': 'maintain_position',
+                        'classification': 'SYSTEMIC_ACTION',
+                        'understood': True,
+                        'utterance': 'I will not back away',
+                    }
+            except Exception:
+                pass
+            _lead(
+                resolution, facility,
+                (
+                    f'The observation slit in the door opens. A person outside speaks. '
+                    f'Most of it is noise. Gesture and repetition push one meaning through: back. Away. '
+                    f'They want you to step away from the door.'
+                ),
+                ask='step away from the door',
+                kind='slit_opens',
+            )
+            events.append({
+                'type': 'slit_opens',
+                'npc_raw': facility.last_npc_utterance,
+                'understood': 'something like “back” / “away”',
+                'speaker_name': speaker,
+                'text': resolution.facts[0] if resolution.facts else '',
+            })
 
     elif phase == PHASE_SLIT:
         if facility.cooperated_door or (t - facility.phase_entered_at) >= 90:

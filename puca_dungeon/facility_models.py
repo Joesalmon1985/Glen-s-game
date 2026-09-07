@@ -37,8 +37,10 @@ PHASE_SECOND_OFFER = 'second_offer'
 PHASE_CONTRACT_PROCESSING = 'contract_processing'
 PHASE_RESEARCH = 'research'
 
+# Wake cell: slit opens after this many facility responses (not book enter).
+SLIT_AFTER_TURNS = 2
 # Time thresholds (seconds of fictional time)
-SLIT_AT = 180
+SLIT_AT = 180  # retained for door-force math (DOOR_FORCE_AT - SLIT_AT)
 DOOR_FORCE_AT = 420
 WASH_DONE_FORCE = 120
 FOOD_DONE_FORCE = 120
@@ -247,6 +249,7 @@ class FacilityState:
     last_understood: str = ''
     book_engaged: bool = False
     phase_entered_at: int = 0
+    cell_idle_turns: int = 0
     notes: list = field(default_factory=list)
     cast: dict = field(default_factory=dict)
     arc: ArcState = field(default_factory=ArcState)
@@ -270,6 +273,7 @@ class FacilityState:
             'last_understood': self.last_understood,
             'book_engaged': self.book_engaged,
             'phase_entered_at': self.phase_entered_at,
+            'cell_idle_turns': self.cell_idle_turns,
             'notes': list(self.notes),
             'cast': dict(self.cast),
             'arc': self.arc.to_dict() if hasattr(self.arc, 'to_dict') else dict(self.arc or {}),
@@ -302,6 +306,7 @@ class FacilityState:
             last_understood=str(data.get('last_understood') or ''),
             book_engaged=bool(data.get('book_engaged', False)),
             phase_entered_at=int(data.get('phase_entered_at', 0) or 0),
+            cell_idle_turns=int(data.get('cell_idle_turns', 0) or 0),
             notes=list(data.get('notes') or []),
             cast=dict(data.get('cast') or {}),
             arc=ArcState.from_dict(data.get('arc')),
