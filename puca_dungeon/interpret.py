@@ -37,6 +37,7 @@ If YES → GENERAL_WORLD_ACTION or PERCEPTION_QUERY. Preserve the player's meani
 STEP 3 — DISMISS:
 Otherwise classify as SILLY_BUT_VALID, META_REQUEST, UNINTERPRETABLE, or NEEDS_CLARIFICATION.
 The narrator will dismiss without changing paragraph.
+The player was still understood — this is not an invalid command; Python will record that no meaningful world action occurred.
 
 Also set step_selected to 1, 2, or 3 for debugging.
 
@@ -125,7 +126,75 @@ _METHOD_BLOCKLIST = {
     'box.search': {'shake', 'rattle', 'lick', 'cartwheel', 'sing'},
     'box.inspect': {'shake', 'rattle', 'lick', 'smash', 'break', 'cartwheel'},
     'box.lock.pick': {'shake', 'rattle', 'lick', 'smash', 'key', 'unlock'},
+    'open_named_box': {'cartwheel', 'dance', 'sing', 'somersault', 'pirouette', 'settings', 'menu', 'options'},
+    'continue_north': {'cartwheel', 'dance', 'sing', 'somersault', 'pirouette', 'settings', 'menu'},
 }
+
+_SILLY_VERBS = ('cartwheel', 'dance', 'sing', 'somersault', 'pirouette', 'moonwalk')
+_META_MARKERS = ('settings', 'menu', 'options', 'inventory screen', 'pause game', 'quit game')
+_IMPOSSIBLE_MARKERS = (
+    'summon', 'dragon', 'cthulhu', 'become invisible', 'fly to the moon',
+    'teleport', 'cheat code',
+)
+_INJECT_MARKERS = (
+    'ignore previous instructions',
+    'ignore all previous',
+    'system:',
+    'force match_authored_action',
+    'matched_action_id',
+    'classification to match',
+    'return only json',
+)
+_TELEPORT_RE = re.compile(
+    r'\b('
+    r'turn\s+to\s+\d+'
+    r'|go\s+to\s+paragraph\s*\d+'
+    r'|paragraph\s+\d+'
+    r'|passage_id\s*=?\s*\d+'
+    r'|skip\s+ahead\s+to\s+the\s+end'
+    r')\b',
+    re.I,
+)
+
+
+def _word_in_blob(word: str, blob: str) -> bool:
+    return bool(re.search(rf'(?<![a-z]){re.escape(word)}(?![a-z])', blob))
+
+
+_PERCEPTION_HINTS = re.compile(
+    r'\b('
+    r'inventory|possessions|what am i carrying|what i am carrying|show me what i am carrying|'
+    r'what am i holding|what are my (stats|scores|skill|stamina|luck)|'
+    r'my skill and stamina|adventure sheet|look around|examine the (room|area|passage)'
+    r')\b',
+    re.I,
+)
+
+
+def promote_clear_perception(raw: dict, player_text: str = '') -> dict:
+    """If the player clearly asks to perceive sheet/inventory/room, force PERCEPTION_QUERY."""
+    out = dict(raw)
+    text_l = player_text.lower()
+    if not _PERCEPTION_HINTS.search(text_l):
+        return out
+    # Don't override real authored matches (e.g. "inspect tracks")
+    if str(out.get('classification') or '').upper() == 'MATCH_AUTHORED_ACTION' and out.get('matched_action_id'):
+        return out
+    focus = 'inventory'
+    if re.search(r'\b(skill|stamina|luck|stats|scores|sheet)\b', text_l):
+        focus = 'sheet'
+    if re.search(r'\b(look around|examine the (room|area|passage)|what do i see)\b', text_l):
+        focus = 'visible'
+    out['classification'] = 'PERCEPTION_QUERY'
+    out['matched_action_id'] = None
+    out['needs_clarification'] = False
+    action = dict(out.get('action') or {}) if isinstance(out.get('action'), dict) else {}
+    action['class'] = 'PERCEIVE'
+    action['query_focus'] = focus
+    out['action'] = action
+    out['query_focus'] = focus
+    out['notes'] = (str(out.get('notes') or '') + ' promoted_clear_perception').strip()
+    return out
 
 
 def validate_authored_match(raw: dict, player_text: str = '') -> dict:
@@ -133,22 +202,82 @@ def validate_authored_match(raw: dict, player_text: str = '') -> dict:
     out = dict(raw)
     classification = str(out.get('classification') or '').upper()
     matched = out.get('matched_action_id')
-    if classification != 'MATCH_AUTHORED_ACTION' or not matched:
-        return out
-
     action = out.get('action') if isinstance(out.get('action'), dict) else {}
     method = str(action.get('method') or out.get('method') or '').lower()
     effect = str(action.get('intended_effect') or out.get('intended_effect') or '').lower()
     utterance = str(action.get('utterance') or out.get('utterance') or '').lower()
     blob = f'{method} {effect} {utterance} {player_text.lower()}'
+    text_l = player_text.lower()
 
-    blocked = _METHOD_BLOCKLIST.get(str(matched), set())
-    if any(b in blob for b in blocked):
+    # Prompt-injection / jailbreak attempts
+    if any(m in text_l for m in _INJECT_MARKERS):
+        out['classification'] = 'META_REQUEST'
+        out['matched_action_id'] = None
+        out['notes'] = (str(out.get('notes') or '') + ' demoted_prompt_injection').strip()
+        action = dict(action) if action else {}
+        action['class'] = 'META'
+        out['action'] = action
+        return out
+
+    # Explicit gamebook cheat teleports ("turn to 400") are meta, not authored
+    if _TELEPORT_RE.search(text_l):
+        out['classification'] = 'META_REQUEST'
+        out['matched_action_id'] = None
+        out['notes'] = (str(out.get('notes') or '') + ' demoted_teleport_cheat').strip()
+        action = dict(action) if action else {}
+        action['class'] = 'META'
+        out['action'] = action
+        return out
+
+    # Meta / out-of-world requests must never become authored turn_to
+    if any(_word_in_blob(m, blob) or m in blob for m in _META_MARKERS):
+        out['classification'] = 'META_REQUEST'
+        out['matched_action_id'] = None
+        out['notes'] = (str(out.get('notes') or '') + ' demoted_meta_from_authored').strip()
+        action = dict(action) if action else {}
+        action['class'] = 'META'
+        out['action'] = action
+        return out
+
+    # Impossible fantasy never becomes an authored world action
+    if any(m in blob for m in _IMPOSSIBLE_MARKERS):
+        out['classification'] = 'SILLY_BUT_VALID'
+        out['matched_action_id'] = None
+        out['notes'] = (str(out.get('notes') or '') + ' demoted_impossible_from_authored').strip()
+        action = dict(action) if action else {}
+        action['class'] = 'BODILY' if 'summon' not in blob else 'SUMMON'
+        out['action'] = action
+        return out
+
+    if classification != 'MATCH_AUTHORED_ACTION':
+        return out
+
+    # Authored match without an id is incoherent — demote
+    if not matched:
+        out['classification'] = 'SILLY_BUT_VALID'
+        out['notes'] = (str(out.get('notes') or '') + ' demoted_authored_without_id').strip()
+        return out
+
+    # open_named_box requires opening-the-box language (not unrelated "open")
+    if str(matched) == 'open_named_box':
+        boxish = any(
+            w in text_l
+            for w in ('box', 'lid', 'chest', 'my name', 'open it', 'open that', 'open my')
+        )
+        if not boxish:
+            out['classification'] = 'SILLY_BUT_VALID'
+            out['matched_action_id'] = None
+            out['notes'] = (str(out.get('notes') or '') + ' demoted_box_without_box_words').strip()
+            return out
+
+    blocked = set(_METHOD_BLOCKLIST.get(str(matched), set()))
+    blocked |= set(_SILLY_VERBS)
+    if any(_word_in_blob(b, blob) for b in blocked):
         out['classification'] = 'GENERAL_WORLD_ACTION'
         out['matched_action_id'] = None
         out['notes'] = (str(out.get('notes') or '') + ' demoted_forced_authored_match').strip()
         action = dict(action) if action else {}
-        if 'shake' in blob or 'rattle' in blob:
+        if _word_in_blob('shake', blob) or _word_in_blob('rattle', blob):
             action['class'] = 'MANIPULATE'
             action['method'] = 'shake'
             action['intended_effect'] = action.get('intended_effect') or 'shake/test'
@@ -158,13 +287,13 @@ def validate_authored_match(raw: dict, player_text: str = '') -> dict:
                 ambs.append('which box')
             out['ambiguities'] = ambs
             out['classification'] = 'NEEDS_CLARIFICATION'
-        elif 'lick' in blob:
+        elif _word_in_blob('lick', blob):
             action['class'] = 'LICK'
             action['method'] = 'lick'
-        elif 'cartwheel' in blob:
+        elif any(_word_in_blob(v, blob) for v in _SILLY_VERBS):
             out['classification'] = 'SILLY_BUT_VALID'
             action['class'] = 'BODILY'
-            action['method'] = 'cartwheel'
+            action['method'] = next((v for v in _SILLY_VERBS if _word_in_blob(v, blob)), 'bodily')
         out['action'] = action
         return out
     return out
@@ -185,6 +314,7 @@ def normalize_intent(
         )
 
     raw = validate_authored_match(raw, player_text=player_text)
+    raw = promote_clear_perception(raw, player_text=player_text)
     # Nested action object (LLM schema) or flat heuristic fields
     action = raw.get('action') if isinstance(raw.get('action'), dict) else {}
     flat = raw
@@ -346,7 +476,6 @@ def match_authored_heuristic(text: str, authored_actions: list | None) -> Option
         for alias in action.get('aliases') or []:
             if alias:
                 phrases.append(str(alias))
-        # Also use label field if present on compact payload
         if action.get('label'):
             phrases.append(str(action['label']))
 
@@ -358,13 +487,29 @@ def match_authored_heuristic(text: str, authored_actions: list | None) -> Option
             if t == p or p in t or t in p:
                 best_len = max(best_len, len(p))
                 continue
-            # Token containment: "continue north" vs alias "go north"
             t_tokens = set(t.split())
             p_tokens = set(p.split())
             if p_tokens and p_tokens <= t_tokens:
                 best_len = max(best_len, len(p))
         if best_len:
             scored.append((best_len, action))
+
+    # Soft movement: "go down the passage" / "run" / "move on" → continue_* when present
+    if not scored:
+        move_words = {
+            'go', 'going', 'run', 'running', 'move', 'moving', 'walk', 'walking',
+            'leave', 'leaving', 'press', 'onward', 'onwards', 'ahead', 'forward',
+            'down', 'along', 'passage', 'tunnel', 'corridor', 'continue', 'north',
+        }
+        tokens = set(t.split())
+        if tokens & move_words and not (tokens & {'back', 'around', 'boxes', 'box', 'eat', 'attack'}):
+            for action in authored_actions:
+                if not isinstance(action, dict):
+                    continue
+                aid = str(action.get('id') or '')
+                if aid.startswith('continue') or aid in ('continue_north', 'continue_after_box'):
+                    scored.append((3, action))
+                    break
 
     if not scored:
         return None

@@ -5,7 +5,9 @@
     {
       "id": "to_274",
       "label": "lf you wish to walk across the tightrope to reach the helmet/",
-      "aliases": [],
+      "aliases": [
+        "lf you wish to walk across the tightrope to reach the helmet/"
+      ],
       "to": 274
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 193, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

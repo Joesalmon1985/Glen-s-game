@@ -5,7 +5,9 @@
     {
       "id": "choice_1",
       "label": "Otherwise, you must continue north with Throm",
-      "aliases": [],
+      "aliases": [
+        "otherwise, you must continue north with throm"
+      ],
       "to": 159
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 75, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

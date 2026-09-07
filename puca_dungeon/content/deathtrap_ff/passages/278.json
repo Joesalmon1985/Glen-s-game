@@ -1,12 +1,46 @@
 {
   "id": 278,
-  "text": "Your blade strikes one oI the Bloodbeast's real eyes with devastatin8 effect. It slumpsbackinto its pool, thrashint about in a frenzy. You seize your opportunity and run round the side o{ the pool to the funnel exit. Tllrn to 134.",
-  "choices": [],
+  "text": "A heavy oak door blocks the way, its iron ring set high. Something scrapes on the far side.",
+  "choices": [
+    {
+      "id": "force_door",
+      "label": "Try to force the door open",
+      "aliases": [
+        "force",
+        "push",
+        "open door",
+        "kick"
+      ],
+      "to": 279
+    },
+    {
+      "id": "knock",
+      "label": "Knock and call out",
+      "aliases": [
+        "knock",
+        "call",
+        "hail"
+      ],
+      "to": 360
+    },
+    {
+      "id": "leave",
+      "label": "Leave the door and find another way",
+      "aliases": [
+        "leave",
+        "another way",
+        "back away"
+      ],
+      "to": 288
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "heavy oak dungeon door with iron ring",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 278; inferred FF beat from continuity rules."
 }

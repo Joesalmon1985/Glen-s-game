@@ -5,31 +5,41 @@
     {
       "id": "to_120",
       "label": "Ifyou $'ish io stop andllftit up",
-      "aliases": [],
+      "aliases": [
+        "ifyou $'ish io stop andllftit up"
+      ],
       "to": 120
     },
     {
       "id": "to_292",
       "label": "Ifyou $'ish io stop andllftit up, turn to 120 If you prefer to keep walking",
-      "aliases": [],
+      "aliases": [
+        "ifyou $'ish io stop andllftit up, turn to 120 if you prefer to keep walking"
+      ],
       "to": 292
     },
     {
       "id": "to_52",
       "label": "Turn to 52",
-      "aliases": [],
+      "aliases": [
+        "turn to 52"
+      ],
       "to": 52
     },
     {
       "id": "to_138",
       "label": "Turn to 138",
-      "aliases": [],
+      "aliases": [
+        "turn to 138"
+      ],
       "to": 138
     },
     {
       "id": "to_369",
       "label": "Turn to 369",
-      "aliases": [],
+      "aliases": [
+        "turn to 369"
+      ],
       "to": 369
     }
   ],
@@ -37,7 +47,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": "death",
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 192, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

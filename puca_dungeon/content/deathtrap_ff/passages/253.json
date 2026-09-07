@@ -1,27 +1,21 @@
 {
   "id": 253,
-  "text": "[Passage 253 — needs review]",
-  "choices": [
-    {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
-      "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
-      ],
-      "to": 254
-    }
-  ],
-  "combat": null,
+  "text": "A goblin bars the passage ahead, weapons ready. There is no way past without a fight.",
+  "choices": [],
+  "combat": {
+    "enemy_name": "Goblin",
+    "skill": 8,
+    "stamina": 5,
+    "win_to": 254,
+    "lose_to": 399,
+    "flee_to": 13
+  },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "image_seed": "goblin blocking a crystal-lit dungeon passage",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 253; inferred FF beat from continuity rules."
 }

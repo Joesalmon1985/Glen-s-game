@@ -1,23 +1,29 @@
 {
   "id": 244,
-  "text": "A brown velvet curtain is draped over an archway in the eastern wall of the tunnel. If you wish to pull back the curtain and walk through the archway, turn to 39J. Ifyou would rather continue north, turn to 29aYou shake your head, tryin8 desperately to stop yourself ftom blacking out, but the heatis too much for you irnd you {a11 unconscious to the floor. Roll two dice If the total is the same as or less than your 5KILL, turn to 48. I{ the total is greater than your SKILL, turn to 365. He takes your Gold Piece and tells you that in a northern funnel there is a wooden chair carved in the shape ofa demon bird.In the arm of the chat is a secretpanelwhichcontainsapotionina glassphial 'lt's a Doppelganger Potion, if I remember right. Good luck. I hope we meet again outside these inlernal tunnels.'The man shuffles off and you continue yourjourney. turn to 109.",
+  "text": "A brown velvet curtain is draped over an archway in the eastern wall of the tunnel. If you wish to pull back the curtain and walk through the archway, turn to 39J. Ifyou would rather continue north, turn to 29aYou shake your head, tryin8 desperately to stop yourself ftom blacking out, but the heatis too much for you irnd you {a11 unconscious to the floor. Roll two dice If the total is the same as or less than your 5KILL, turn to 48. I{ the total is greater than your SKILL, turn to 365. He takes your Gold Piece and tells you that in a northern funnel there is a wooden chair carved in the shape ofa demon bird.In the arm of the chat is a secretpanelwhichcontainsapotionina glassphial 'lt's a Doppelganger Potion, if I remember right. Good luck. I hope we meet again outside these inlernal tunnels.'The man shuffles off and you continue yourjourney.",
   "choices": [
     {
       "id": "to_48",
       "label": "Roll two dice If the total is the same as or less than your 5KILL",
-      "aliases": [],
+      "aliases": [
+        "roll two dice if the total is the same as or less than your 5kill"
+      ],
       "to": 48
     },
     {
       "id": "to_365",
       "label": "I{ the total is greater than your SKILL",
-      "aliases": [],
+      "aliases": [
+        "i{ the total is greater than your skill"
+      ],
       "to": 365
     },
     {
       "id": "to_109",
       "label": "Turn to 109",
-      "aliases": [],
+      "aliases": [
+        "turn to 109"
+      ],
       "to": 109
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 244, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

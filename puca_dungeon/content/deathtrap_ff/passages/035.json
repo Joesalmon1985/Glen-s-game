@@ -1,17 +1,21 @@
 {
   "id": 35,
-  "text": "You run faster than you have ever run in your life before, but still th€ boulder is catching up on you. Roll two dice- If the total is the same as or less than both your srrl-I- and STAMINA scores, turn to 340. lf the total is greater than either your SKILL or STAMINA SCOteS/ turn to 7.",
+  "text": "You run faster than you have ever run in your life before, but still th€ boulder is catching up on you. Roll two dice- If the total is the same as or less than both your srrl-I- and STAMINA scores, turn to 340. lf the total is greater than either your SKILL or STAMINA SCOteS/",
   "choices": [
     {
       "id": "to_340",
       "label": "Roll two dice- If the total is the same as or less than both your srrl-I- and STAMINA scores",
-      "aliases": [],
+      "aliases": [
+        "roll two dice- if the total is the same as or less than both your srrl-i- and stamina scores"
+      ],
       "to": 340
     },
     {
       "id": "to_7",
       "label": "lf the total is greater than either your SKILL or STAMINA SCOteS/",
-      "aliases": [],
+      "aliases": [
+        "lf the total is greater than either your skill or stamina scotes/"
+      ],
       "to": 7
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 35, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

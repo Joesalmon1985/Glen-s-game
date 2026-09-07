@@ -1,17 +1,21 @@
 {
   "id": 240,
-  "text": "You look down and see the crumpled bodies of the two Flying Guardjans lyngmotionless on the floor You start to pdse out the idol's emerald eye with the hp of your sword. At last it comes ftee and you are surprised byits weight when itfalls into your hand. Hoping it may be of use later, you put 1t in your backpack. If you now wish to pdse out the right eye, turn to 34. lfyou would rather climb down the idol, turn to 89",
+  "text": "You look down and see the crumpled bodies of the two Flying Guardjans lyngmotionless on the floor You start to pdse out the idol's emerald eye with the hp of your sword. At last it comes ftee and you are surprised byits weight when itfalls into your hand. Hoping it may be of use later, you put 1t in your backpack. If you now wish to pdse out the right eye, turn to 34. lfyou would rather climb down the idol,",
   "choices": [
     {
       "id": "to_34",
       "label": "If you now wish to pdse out the right eye",
-      "aliases": [],
+      "aliases": [
+        "if you now wish to pdse out the right eye"
+      ],
       "to": 34
     },
     {
       "id": "to_89",
       "label": "lfyou would rather climb down the idol",
-      "aliases": [],
+      "aliases": [
+        "lfyou would rather climb down the idol"
+      ],
       "to": 89
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 240, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

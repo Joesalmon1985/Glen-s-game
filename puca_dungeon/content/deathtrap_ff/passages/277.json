@@ -1,17 +1,21 @@
 {
   "id": 277,
-  "text": "turn to 15 turn to 204\n\n2?8",
+  "text": "turn to 15 turn to 204 2?8",
   "choices": [
     {
       "id": "to_15",
       "label": "Turn to 15",
-      "aliases": [],
+      "aliases": [
+        "turn to 15"
+      ],
       "to": 15
     },
     {
       "id": "to_204",
       "label": "turn to 15",
-      "aliases": [],
+      "aliases": [
+        "turn to 15"
+      ],
       "to": 204
     }
   ],
@@ -19,8 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 277, crystal light",
   "ocr_source": true,
-  "needs_review": true,
-  "raw_text": "turn to 15\nturn to 204\n\n2?8"
+  "needs_review": false
 }

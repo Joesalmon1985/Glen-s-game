@@ -1,11 +1,13 @@
 {
   "id": 267,
-  "text": "The tunnel ends shortly at a junction Looking left rnJ right. \\ ou see r narrow pa..age disappearinB :nto the dim distance Iivouwish toheadwest, turn :.r 152. Ifvou wish to go east, turn to 68.",
+  "text": "The tunnel ends shortly at a junction Looking left rnJ right. \\ ou see r narrow pa..age disappearinB :nto the dim distance Iivouwish toheadwest, turn :.r 152. Ifvou wish to go east,",
   "choices": [
     {
       "id": "to_68",
       "label": "Ifvou wish to go east",
-      "aliases": [],
+      "aliases": [
+        "ifvou wish to go east"
+      ],
       "to": 68
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 267, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

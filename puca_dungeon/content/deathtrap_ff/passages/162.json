@@ -5,13 +5,17 @@
     {
       "id": "to_361",
       "label": "ratul.rlrns you on voLrr victor\\ ' He throws a sac[ do$ n into ihi arenaind tells you to relar and regain vour offerings",
-      "aliases": [],
+      "aliases": [
+        "ratul.rlrns you on volrr victor\\ ' he throws a sac[ do$ n into ihi arenaind tells you to relar and regain vour offerings"
+      ],
       "to": 361
     },
     {
       "id": "to_302",
       "label": "If you would rather just sii down and await his tetutn",
-      "aliases": [],
+      "aliases": [
+        "if you would rather just sii down and await his tetutn"
+      ],
       "to": 302
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 162, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

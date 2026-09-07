@@ -5,7 +5,9 @@
     {
       "id": "to_102",
       "label": "If you wish to open the door",
-      "aliases": [],
+      "aliases": [
+        "if you wish to open the door"
+      ],
       "to": 102
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 239, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

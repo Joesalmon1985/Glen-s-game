@@ -1,26 +1,25 @@
 # Deathtrap FF fidelity
 
-Summary of the `deathtrap_ff` passage pack after `tools/handfix_priority.py`.
+Summary of the `deathtrap_ff` passage pack after `tools/ff_complete_pack.py`.
 
 ## Counts
 
-- **Total passages:** 400 (expected 400)
-- **With choices:** 367
-- **With combat:** 22
-- **With ending:** 14
-- **needs_review:** 273
-- **ocr_source:** 391
-- **Files updated this run:** 0
+- **Total passages:** 400
+- **stub_bridged:** 0
+- **needs_review:** 0
+- **judgement_inferred:** see `gold_graph.json` (OCR gaps filled by editorial judgement)
+- **Gold verify:** `python -m puca_dungeon.gold_verify` must report `ok: true`
+
+## Source policy
+
+- In-repo NNTP OCR only; no cleaner book dump.
+- When OCR is clear: recover turn-tos / combat / tests; paraphrase lightly.
+- When unclear: editorial judgement (`judgement_inferred` + `judgement_note`), staying inside 1–400, no softlocks.
 
 ## Opening path
 
-- opening path 1↔270↔66 verified (1→270→66 and 1→66; 66→101/142/198)
+- `1 ↔ 270 ↔ 66` and west combat `101 → 37 → 400/399` remain protected hand-authored nodes.
 
-## Notes
+## Red team
 
-- Hand-authored priority nodes (1, 66, 270) and the early west demo chain
-  (101 → 37 combat → 400 / lose → 399) are playable demo content.
-- OCR bulk passages still need an editorial pass: many retain garbled text,
-  weak labels, or incomplete graphs even when `needs_review` is false.
-- Prefer paraphrased Fighting Fantasy tone when rewriting; do not ship raw OCR
-  as final player-facing prose.
+LLM-only: `python scripts/deathtrap_redteam.py` (Ollama required; heuristic forbidden).

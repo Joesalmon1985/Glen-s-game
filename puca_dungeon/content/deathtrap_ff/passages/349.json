@@ -5,7 +5,9 @@
     {
       "id": "to_285",
       "label": "Turn to 285",
-      "aliases": [],
+      "aliases": [
+        "turn to 285"
+      ],
       "to": 285
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 349, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

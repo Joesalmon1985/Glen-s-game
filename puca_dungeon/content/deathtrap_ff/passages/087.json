@@ -1,11 +1,13 @@
 {
   "id": 87,
-  "text": "The door opens into a large room. turn to 381.",
+  "text": "The door opens into a large room.",
   "choices": [
     {
       "id": "to_381",
       "label": "Turn to 381",
-      "aliases": [],
+      "aliases": [
+        "turn to 381"
+      ],
       "to": 381
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 87, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

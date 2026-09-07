@@ -1,11 +1,13 @@
 {
   "id": 59,
-  "text": "Ahead in the far distance you hear the sou4d ofslow footsteps coming towards you. Unsure of who or what might be approachmg, you look around for a place to hide, You find a large crack in the tunnel rvallwhichlies rn shadow.Ifyou wish to standyour ground with your sword drawn, turn to J4r. Ifyou rvould rather hrde in the shadows, turn to 283.",
+  "text": "Ahead in the far distance you hear the sou4d ofslow footsteps coming towards you. Unsure of who or what might be approachmg, you look around for a place to hide, You find a large crack in the tunnel rvallwhichlies rn shadow.Ifyou wish to standyour ground with your sword drawn, turn to J4r. Ifyou rvould rather hrde in the shadows,",
   "choices": [
     {
       "id": "to_283",
       "label": "Ifyou rvould rather hrde in the shadows",
-      "aliases": [],
+      "aliases": [
+        "ifyou rvould rather hrde in the shadows"
+      ],
       "to": 283
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 59, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

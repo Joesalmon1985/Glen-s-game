@@ -1,27 +1,45 @@
 {
   "id": 284,
-  "text": "[Passage 284 — needs review]",
+  "text": "The tunnel splits. One branch slopes down into dripping darkness; the other climbs toward a warmer draught smelling of oil and iron.",
   "choices": [
     {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
+      "id": "go_down",
+      "label": "Take the descending path",
       "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
+        "down",
+        "descend",
+        "go down"
       ],
       "to": 285
+    },
+    {
+      "id": "go_up",
+      "label": "Take the climbing path",
+      "aliases": [
+        "up",
+        "climb",
+        "go up"
+      ],
+      "to": 2
+    },
+    {
+      "id": "rest",
+      "label": "Rest a moment then choose",
+      "aliases": [
+        "rest",
+        "wait",
+        "pause"
+      ],
+      "to": 354
     }
   ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "image_seed": "dungeon fork, descending tunnel and climbing path",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 284; inferred FF beat from continuity rules."
 }

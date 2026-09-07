@@ -5,13 +5,17 @@
     {
       "id": "choice_1",
       "label": "swept to your death downriver as it drsappears into the depths of the moun ta...",
-      "aliases": [],
+      "aliases": [
+        "swept to your death downriver as it drsappears into the depths of the moun ta..."
+      ],
       "to": 46
     },
     {
       "id": "choice_2",
       "label": "as it drsappears into the depths of the moun tain By now your lungs are burst...",
-      "aliases": [],
+      "aliases": [
+        "as it drsappears into the depths of the moun tain by now your lungs are burst..."
+      ],
       "to": 219
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 67, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

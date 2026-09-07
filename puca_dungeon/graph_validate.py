@@ -82,6 +82,14 @@ def _collect_outgoing(data: dict) -> list[int]:
     for choice in data.get('choices') or []:
         if isinstance(choice, dict):
             outs.extend(_choice_targets(choice))
+            for cond in choice.get('conditions') or []:
+                if isinstance(cond, dict):
+                    for key in ('success_to', 'fail_to', 'to'):
+                        if cond.get(key) is not None:
+                            try:
+                                outs.append(int(cond[key]))
+                            except (TypeError, ValueError):
+                                pass
     outs.extend(_combat_targets(data.get('combat')))
     for test in data.get('tests') or []:
         if isinstance(test, dict):

@@ -1,11 +1,13 @@
 {
   "id": 44,
-  "text": "The razor-sharp disc thuds into your back with ternble effect. Lose r sxrn pcrint and 4 STAMINA ooini'i. Tf ) oLr dre still ali\\ e. you 5lruggle lo pull the .1rsc Irum vour bacl ds t he \\inia throw,i yel another one at you. turn to 312.",
+  "text": "The razor-sharp disc thuds into your back with ternble effect. Lose r sxrn pcrint and 4 STAMINA ooini'i. Tf ) oLr dre still ali\\ e. you 5lruggle lo pull the .1rsc Irum vour bacl ds t he \\inia throw,i yel another one at you.",
   "choices": [
     {
       "id": "to_312",
       "label": "Turn to 312",
-      "aliases": [],
+      "aliases": [
+        "turn to 312"
+      ],
       "to": 312
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 44, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

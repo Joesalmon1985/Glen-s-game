@@ -1,11 +1,13 @@
 {
   "id": 64,
-  "text": "As soon as you put the dng on your finger, your wholebody starts to shake. Roll two dice. Ifthe total is the same as or less than your S(ILL score, turn to 115. If the total is greater than your s(ILL score, tutn to 19o.\n\nI",
+  "text": "As soon as you put the dng on your finger, your wholebody starts to shake. Roll two dice. Ifthe total is the same as or less than your S(ILL score, turn to 115. If the total is greater than your s(ILL score, tutn to 19o. I",
   "choices": [
     {
       "id": "to_115",
       "label": "Ifthe total is the same as or less than your S(ILL score",
-      "aliases": [],
+      "aliases": [
+        "ifthe total is the same as or less than your s(ill score"
+      ],
       "to": 115
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 64, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

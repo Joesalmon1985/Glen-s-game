@@ -1,27 +1,21 @@
 {
   "id": 132,
-  "text": "Your gem drops into the pool h,ith a dull 'plop'. As you wait for something to happen, you start to feel faint The gas rising from the pool is toxic, and you slump to the floor unconscious. Test laur Luck. If you are Lucky, turn to 53 If you are Unlucky, tutn to 272.\n\n,.- ; l 1f3-334",
+  "text": "Your gem drops into the pool h,ith a dull 'plop'. As you wait for something to happen, you start to feel faint The gas rising from the pool is toxic, and you slump to the floor unconscious. Test laur Luck. If you are Lucky, turn to 53 If you are Unlucky, tutn to 272. ,.- ; l 1f3-334",
   "choices": [
     {
       "id": "to_53",
       "label": "If you are Lucky",
-      "aliases": [],
+      "aliases": [
+        "if you are lucky"
+      ],
       "to": 53
     }
   ],
   "combat": null,
-  "tests": [
-    {
-      "type": "luck",
-      "success_to": 53,
-      "failure_to": null,
-      "lucky_to": 53,
-      "unlucky_to": null
-    }
-  ],
+  "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 132, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

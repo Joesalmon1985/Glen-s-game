@@ -1,41 +1,57 @@
 {
   "id": 20,
-  "text": "Or y your incedible strenSth could withstand the poisonous spider's bite. However, you are rveakened and you notice your hand trembling as you pocket the Gold Piece. Reduce your srrn by r point. You curse the person who dropped thebackpack and set offnorth again. turn to 279. The wound has had no effect on the Bloodbeast, and it continues to attack you as furiously as before. Conhnue yourcombat and as soon as youwinyour nex t Attack Round, ?es t lour Luck. If you, arc Lucky , turn to 97. Ifyou are Unlucky, turn to 116. .{lthough you are slightly uneasy in each othe/s company, knowing that there can only be one winner in the T al of Champlons, you are both content to 'hare in the benefits ut d tempurdry allian(c Y;u begin to tell each other ofyour exploits so Iar, ofthe monsters and traps encountered and the dangers overcome. Walkrng along, you soon come [o the edge ofa wide pit lt is too deep and dark to see the bottom. The Barbarian offers to lowe! you to the bottom with his rope, saying he has a torch which he can light for you to use Willyou: Accept the Barbadan's offer? turn to 63 Offer to lower him down if he is so ea8er to investigate the pit? turn to 184 SuBgest that you both jump over the pit instead? turn to 311",
+  "text": "Or y your incedible strenSth could withstand the poisonous spider's bite. However, you are rveakened and you notice your hand trembling as you pocket the Gold Piece. Reduce your srrn by r point. You curse the person who dropped thebackpack and set offnorth again. turn to 279. The wound has had no effect on the Bloodbeast, and it continues to attack you as furiously as before. Conhnue yourcombat and as soon as youwinyour nex t Attack Round, ?es t lour Luck. If you, arc Lucky , turn to 97. Ifyou are Unlucky, turn to 116. .{lthough you are slightly uneasy in each othe/s company, knowing that there can only be one winner in the T al of Champlons, you are both content to 'hare in the benefits ut d tempurdry allian(c Y;u begin to tell each other ofyour exploits so Iar, ofthe monsters and traps encountered and the dangers overcome. Walkrng along, you soon come [o the edge ofa wide pit lt is too deep and dark to see the bottom. The Barbarian offers to lowe! you to the bottom with his rope, saying he has a torch which he can light for you to use Willyou: Accept the Barbadan's offer? turn to 63 Offer to lower him down if he is so ea8er to investigate the pit? turn to 184 SuBgest that you both jump over the pit instead?",
   "choices": [
+    {
+      "id": "test_luck",
+      "label": "Test your Luck",
+      "aliases": [
+        "test luck",
+        "try your luck",
+        "test your luck",
+        "be careful"
+      ],
+      "to": 97,
+      "to_success": 97,
+      "to_fail": 116,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 97,
+          "fail_to": 116
+        }
+      ]
+    },
     {
       "id": "to_279",
       "label": "Turn to 279",
-      "aliases": [],
+      "aliases": [
+        "turn to 279"
+      ],
       "to": 279
-    },
-    {
-      "id": "to_97",
-      "label": "If you, arc Lucky",
-      "aliases": [],
-      "to": 97
-    },
-    {
-      "id": "to_116",
-      "label": "Ifyou are Unlucky",
-      "aliases": [],
-      "to": 116
     },
     {
       "id": "to_63",
       "label": "Turn to 63",
-      "aliases": [],
+      "aliases": [
+        "turn to 63"
+      ],
       "to": 63
     },
     {
       "id": "to_184",
       "label": "Turn to 184",
-      "aliases": [],
+      "aliases": [
+        "turn to 184"
+      ],
       "to": 184
     },
     {
       "id": "to_311",
       "label": "Turn to 311",
-      "aliases": [],
+      "aliases": [
+        "turn to 311"
+      ],
       "to": 311
     }
   ],
@@ -43,7 +59,9 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 20, crystal light",
   "ocr_source": true,
-  "needs_review": false
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": " Collapsed Lucky/Unlucky into luck_test."
 }

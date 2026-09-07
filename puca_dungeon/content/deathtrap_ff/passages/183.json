@@ -1,17 +1,21 @@
 {
   "id": 183,
-  "text": "You climb on to your stilts and take a few tentative steps across the floor. Your confidence grows, and you soon feel able to tackle the walk across the slime. Smoke ses from the base of the stilts as the slime starts tobum them away. You plod stolidly on and finallyreach firm ground again- Unfortunately, the stilts are sLillcovered in slimeand youare forced to dump them. Setting o{f north, you come to a junction If you wish to go west, turn to j86. Ifyou wish to contlnue no h,tumto218, a82-183\n\nt ' at4 a84 TheBarbarian, who tells youheis called Throm, ties the rope around his waist, givin8 you the free end, As he lights the torch, you see a look of distrust in hjs eyes, Slowly, he climbs over the edge of the pit while you brace yourself and tal<e the shain of the rope. As you lower him little by little, you see the smooth sides of the pit illuminated by Throm's torch. He finally reaches the bottom and calls up to you, sayrng that there is another funnel running north. He tells you to secure ihe rope around a rock protruding from the edge of the pit and lower youlself to the bottom. Ifyou wish to stay with the Balbalian and head north down the lower tunnel, turn to 323. If you wish to abandon himby jumping over the pit to head west, turn to 149. r85-rE6",
+  "text": "You climb on to your stilts and take a few tentative steps across the floor. Your confidence grows, and you soon feel able to tackle the walk across the slime. Smoke ses from the base of the stilts as the slime starts tobum them away. You plod stolidly on and finallyreach firm ground again- Unfortunately, the stilts are sLillcovered in slimeand youare forced to dump them. Setting o{f north, you come to a junction If you wish to go west, turn to j86. Ifyou wish to contlnue no h,tumto218, a82-183 t ' at4 a84 TheBarbarian, who tells youheis called Throm, ties the rope around his waist, givin8 you the free end, As he lights the torch, you see a look of distrust in hjs eyes, Slowly, he climbs over the edge of the pit while you brace yourself and tal<e the shain of the rope. As you lower him little by little, you see the smooth sides of the pit illuminated by Throm's torch. He finally reaches the bottom and calls up to you, sayrng that there is another funnel running north. He tells you to secure ihe rope around a rock protruding from the edge of the pit and lower youlself to the bottom. Ifyou wish to stay with the Balbalian and head north down the lower tunnel, turn to 323. If you wish to abandon himby jumping over the pit to head west, turn to 149. r85-rE6",
   "choices": [
     {
       "id": "to_323",
       "label": "Ifyou wish to stay with the Balbalian and head north down the lower tunnel",
-      "aliases": [],
+      "aliases": [
+        "ifyou wish to stay with the balbalian and head north down the lower tunnel"
+      ],
       "to": 323
     },
     {
       "id": "to_149",
       "label": "If you wish to abandon himby jumping over the pit to head west",
-      "aliases": [],
+      "aliases": [
+        "if you wish to abandon himby jumping over the pit to head west"
+      ],
       "to": 149
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 183, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

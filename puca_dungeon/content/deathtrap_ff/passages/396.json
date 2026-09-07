@@ -1,17 +1,21 @@
 {
   "id": 396,
-  "text": "You make the rope into a lasso, whirl it above your headand throw it at the idol's head, smilinghappily as it falls around its neck. You then tighten lhe noose and start to climb, hauling yourself up the rope. You are soon at the top of the idol, sitting on the bridge of its nose and holding on to the rope. You draw your sword and wonder which jewelled €ye to pdse out first. Ifyou wish to plise out the left eye/ turn to 151. If you wish to prise out the right eYe/ lurn to 34, Although you cannotsee anyvisible trap, youhave a strong feeling that the chest contains a hidden danger. The Potion of Trap Detection is working well. \\ ou sLrnd to one side of the chest and lift thi lid with your sword, holdinB it at arm's lenBth. As the Lid ri5es, an iron ball hanging on a cord .wings back and breaks.r glasscapsule tired inside the lid, instantlyreleasing a gas. Fortunately, you have time to iump back wilhout inhaling the poisonous fumes. Once the gas has cleared, you walk back to thechestandlookinsideit. Thereisapendantchain Iying in the bottom, but somebody has taken the slone ftom its setting. You feel so annoyed that you throw the chain on to the floor and storm out of the room up the funnel. turn to 210.",
+  "text": "You make the rope into a lasso, whirl it above your headand throw it at the idol's head, smilinghappily as it falls around its neck. You then tighten lhe noose and start to climb, hauling yourself up the rope. You are soon at the top of the idol, sitting on the bridge of its nose and holding on to the rope. You draw your sword and wonder which jewelled €ye to pdse out first. Ifyou wish to plise out the left eye/ turn to 151. If you wish to prise out the right eYe/ lurn to 34, Although you cannotsee anyvisible trap, youhave a strong feeling that the chest contains a hidden danger. The Potion of Trap Detection is working well. \\ ou sLrnd to one side of the chest and lift thi lid with your sword, holdinB it at arm's lenBth. As the Lid ri5es, an iron ball hanging on a cord .wings back and breaks.r glasscapsule tired inside the lid, instantlyreleasing a gas. Fortunately, you have time to iump back wilhout inhaling the poisonous fumes. Once the gas has cleared, you walk back to thechestandlookinsideit. Thereisapendantchain Iying in the bottom, but somebody has taken the slone ftom its setting. You feel so annoyed that you throw the chain on to the floor and storm out of the room up the funnel.",
   "choices": [
     {
       "id": "to_151",
       "label": "Ifyou wish to plise out the left eye/",
-      "aliases": [],
+      "aliases": [
+        "ifyou wish to plise out the left eye/"
+      ],
       "to": 151
     },
     {
       "id": "to_210",
       "label": "Turn to 210",
-      "aliases": [],
+      "aliases": [
+        "turn to 210"
+      ],
       "to": 210
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 396, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

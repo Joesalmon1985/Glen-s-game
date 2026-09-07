@@ -1,90 +1,89 @@
 {
   "id": 77,
-  "text": "Youstagger through the open doorway into another tunnel, at the end of whrch is the welcome sight oI daylight Much to yoursurprise, youseetheGnome lving dead halfway down the iunnel. A crossbow bolt prohudes from the side o{ his head The Gnome, in his bid for freedom, has lallen foul of Baron Sukurnvit's final trap. You walk past him and outinto brilliant sunshine. turn to 400 rR There is an open pipe in the ght-hand wall, about a metre in diameter. It is too dark to see far down it. You shoutintoitand hear yourvoice echoing down the iron pipe until eventually the sound fades away If you wish to crawl down the pipe, turn to 30. If you would rather conhnue notth, turn to 142. Z8 If you win, turn to 175. You may Escape after killing the first Guard Dog by running east down the tunnel. turn to 315. 449 Yori let go of the rope and hearit fall to the bottom of the pit. The Barbarian curses, promisingto kill you if your paths should cross again. You step ba& and take a running jump. You land safely on the far side of the pit and continue west. Further down the tunnel, you step on a floor stone which tilts forward, triggering a trap which releases a boulder loosely set in the ceiling. You look up just as it is about to crash on top ol yort. Test your Luck.Ifyott are Lucky, turn to 70. If you are Unlucky, turn to 1.52-L51 The Dwarf congratulates you for guessing correctly. He tells you that you must now progress to the second stage of the test. He reaches for a wicker basket and tells you that a snake is held irithin it. He hps up the basket and the snake drops on to the floor; it is a cobra, and it rears up in the air ready to st ke. The Dwarf tells you that he wishes to test your reactions. Bare-handed, you must grasp the cobra below itshead, avoidingits deadlyfangs. You crouch down on the floor, tensing yoursel{ for the moment to seize it. Roll two dice. lf the total is the same as or less than your SKILL, turn to 55. If the total is gleater than your SKILL, turn to 202. The dooropens intoa small room in which there is a human skull with jewelled eyes resting on top of a marble plinth. A row of loaded crossbows is fixed to the left-hand wall, and two small wooden balls lie on the floor justinside the door. Will you: Walk into the room and pick up the skull? turn to 390 fltrow a wooden ball at the skull ftom the doorway? Twnto 37a Close the door and continue west, taking the wooden balls with you? turn to 74",
+  "text": "Youstagger through the open doorway into another tunnel, at the end of whrch is the welcome sight oI daylight Much to yoursurprise, youseetheGnome lving dead halfway down the iunnel. A crossbow bolt prohudes from the side o{ his head The Gnome, in his bid for freedom, has lallen foul of Baron Sukurnvit's final trap. You walk past him and outinto brilliant sunshine. turn to 400 rR There is an open pipe in the ght-hand wall, about a metre in diameter. It is too dark to see far down it. You shoutintoitand hear yourvoice echoing down the iron pipe until eventually the sound fades away If you wish to crawl down the pipe, turn to 30. If you would rather conhnue notth, turn to 142. Z8 If you win, turn to 175. You may Escape after killing the first Guard Dog by running east down the tunnel. turn to 315. 449 Yori let go of the rope and hearit fall to the bottom of the pit. The Barbarian curses, promisingto kill you if your paths should cross again. You step ba& and take a running jump. You land safely on the far side of the pit and continue west. Further down the tunnel, you step on a floor stone which tilts forward, triggering a trap which releases a boulder loosely set in the ceiling. You look up just as it is about to crash on top ol yort. Test your Luck.Ifyott are Lucky, turn to 70. If you are Unlucky, turn to 1.52-L51 The Dwarf congratulates you for guessing correctly. He tells you that you must now progress to the second stage of the test. He reaches for a wicker basket and tells you that a snake is held irithin it. He hps up the basket and the snake drops on to the floor; it is a cobra, and it rears up in the air ready to st ke. The Dwarf tells you that he wishes to test your reactions. Bare-handed, you must grasp the cobra below itshead, avoidingits deadlyfangs. You crouch down on the floor, tensing yoursel{ for the moment to seize it. Roll two dice. lf the total is the same as or less than your SKILL, turn to 55. If the total is gleater than your SKILL, turn to 202. The dooropens intoa small room in which there is a human skull with jewelled eyes resting on top of a marble plinth. A row of loaded crossbows is fixed to the left-hand wall, and two small wooden balls lie on the floor justinside the door. Will you: Walk into the room and pick up the skull? turn to 390 fltrow a wooden ball at the skull ftom the doorway? Twnto 37a Close the door and continue west, taking the wooden balls with you?",
   "choices": [
+    {
+      "id": "test_luck",
+      "label": "Test your Luck",
+      "aliases": [
+        "test luck",
+        "try your luck",
+        "test your luck",
+        "be careful"
+      ],
+      "to": 70,
+      "to_success": 70,
+      "to_fail": 1,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 70,
+          "fail_to": 1
+        }
+      ]
+    },
     {
       "id": "to_400",
       "label": "Turn to 400",
-      "aliases": [],
+      "aliases": [
+        "turn to 400"
+      ],
       "to": 400
     },
     {
       "id": "to_30",
       "label": "itand hear yourvoice echoing down the iron pipe until eventually the sound fades away If you wish to crawl down the pipe",
-      "aliases": [],
+      "aliases": [
+        "itand hear yourvoice echoing down the iron pipe until eventually the sound fades away if you wish to crawl down the pipe"
+      ],
       "to": 30
     },
     {
       "id": "to_142",
       "label": "If you would rather conhnue notth",
-      "aliases": [],
+      "aliases": [
+        "if you would rather conhnue notth"
+      ],
       "to": 142
-    },
-    {
-      "id": "to_175",
-      "label": "Z8 If you win",
-      "aliases": [],
-      "to": 175
     },
     {
       "id": "to_315",
       "label": "Turn to 315",
-      "aliases": [],
+      "aliases": [
+        "turn to 315"
+      ],
       "to": 315
-    },
-    {
-      "id": "to_70",
-      "label": "Test your Luck.Ifyott are Lucky",
-      "aliases": [],
-      "to": 70
-    },
-    {
-      "id": "to_1",
-      "label": "If you are Unlucky",
-      "aliases": [],
-      "to": 1
-    },
-    {
-      "id": "to_55",
-      "label": "lf the total is the same as or less than your SKILL",
-      "aliases": [],
-      "to": 55
-    },
-    {
-      "id": "to_202",
-      "label": "If the total is gleater than your SKILL",
-      "aliases": [],
-      "to": 202
     },
     {
       "id": "to_390",
       "label": "Turn to 390",
-      "aliases": [],
+      "aliases": [
+        "turn to 390"
+      ],
       "to": 390
     },
     {
       "id": "to_74",
       "label": "Turn to 74",
-      "aliases": [],
+      "aliases": [
+        "turn to 74"
+      ],
       "to": 74
     }
   ],
   "combat": {
     "enemies": [],
-    "win_to": 175
+    "win_to": 175,
+    "enemy_name": "Enemy",
+    "lose_to": 399,
+    "flee_to": 66
   },
-  "tests": [
-    {
-      "type": "luck",
-      "success_to": null,
-      "failure_to": 1,
-      "lucky_to": null,
-      "unlucky_to": 1
-    }
-  ],
+  "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 77, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": " Collapsed Lucky/Unlucky into luck_test."
 }

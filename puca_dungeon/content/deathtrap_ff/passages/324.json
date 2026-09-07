@@ -1,17 +1,21 @@
 {
   "id": 324,
-  "text": "Have you talked to the crippled servant of the Trialmasters? If you have, turn to 256 lf you have not, turn to 79",
+  "text": "Have you talked to the crippled servant of the Trialmasters? If you have, turn to 256 lf you have not,",
   "choices": [
     {
       "id": "to_256",
       "label": "If you have",
-      "aliases": [],
+      "aliases": [
+        "if you have"
+      ],
       "to": 256
     },
     {
       "id": "to_79",
       "label": "If you have, turn to 256 lf you have not",
-      "aliases": [],
+      "aliases": [
+        "if you have, turn to 256 lf you have not"
+      ],
       "to": 79
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 324, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

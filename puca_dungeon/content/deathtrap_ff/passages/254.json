@@ -1,17 +1,21 @@
 {
   "id": 254,
-  "text": "You draw your sword and advance slowly towards the huge, slimy Rock Grub. ROCK CRUB SXILL 7 If you wrn, turn to Z5 You may Es.ape after two Attack Rounds by running west down the tunnel. turn to 117. , 256 Remembering the old man's advice, you search the arm of the chair for a secret panel You find an almostinvisible crack in the am, which you start to press and squeeze. Suddenly a Liny panel springs ouf of the arm and you see a glass phia] Iying in a cavity You pick it out and read the label: 'Doppelganger Potion - one dose only. This liqurd will make you assune the shape of any nearby living being.' You place the strange potion in your backpack and continue north turn to 88",
+  "text": "You draw your sword and advance slowly towards the huge, slimy Rock Grub. ROCK CRUB SXILL 7 If you wrn, turn to Z5 You may Es.ape after two Attack Rounds by running west down the tunnel. turn to 117. , 256 Remembering the old man's advice, you search the arm of the chair for a secret panel You find an almostinvisible crack in the am, which you start to press and squeeze. Suddenly a Liny panel springs ouf of the arm and you see a glass phia] Iying in a cavity You pick it out and read the label: 'Doppelganger Potion - one dose only. This liqurd will make you assune the shape of any nearby living being.' You place the strange potion in your backpack and continue north",
   "choices": [
     {
       "id": "to_117",
       "label": "Turn to 117",
-      "aliases": [],
+      "aliases": [
+        "turn to 117"
+      ],
       "to": 117
     },
     {
       "id": "to_88",
-      "label": " make you assune the shape of any nearby living being.' You place the strange potion in your backpack and continue north",
-      "aliases": [],
+      "label": "make you assune the shape of any nearby living being.' You place the strange potion in your backpack and continue north",
+      "aliases": [
+        "make you assune the shape of any nearby living being.' you place the strange potion in your backpack and continue north"
+      ],
       "to": 88
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 254, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

@@ -1,17 +1,21 @@
 {
   "id": 218,
-  "text": "You soon arrive at a double door in the left hand wall You listen at the door but hear nothing You try the handle, it turns and you open the left door slightly and peer through the crack. An armed warrlor is lying face down on the floor of a bare room with smooth walls and a lol{ ceiling. He is presumablv dead, for he makes no movement even u,hen you call out io him. A large jewel, perhaps a dramond, lies just be,vond his outstretched arm. lI you wish to enter the room and take the jewel, turn to 65 If you would rather continue north, turn to 252",
+  "text": "You soon arrive at a double door in the left hand wall You listen at the door but hear nothing You try the handle, it turns and you open the left door slightly and peer through the crack. An armed warrlor is lying face down on the floor of a bare room with smooth walls and a lol{ ceiling. He is presumablv dead, for he makes no movement even u,hen you call out io him. A large jewel, perhaps a dramond, lies just be,vond his outstretched arm. lI you wish to enter the room and take the jewel, turn to 65 If you would rather continue north,",
   "choices": [
     {
       "id": "to_65",
       "label": "lI you wish to enter the room and take the jewel",
-      "aliases": [],
+      "aliases": [
+        "li you wish to enter the room and take the jewel"
+      ],
       "to": 65
     },
     {
       "id": "to_252",
       "label": "lI you wish to enter the room and take the jewel, turn to 65 If you would rather continue north",
-      "aliases": [],
+      "aliases": [
+        "li you wish to enter the room and take the jewel, turn to 65 if you would rather continue north"
+      ],
       "to": 252
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 218, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

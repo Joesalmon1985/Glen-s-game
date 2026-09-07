@@ -1,17 +1,21 @@
 {
   "id": 289,
-  "text": "The drape rises to the top of the cage and there, to your horror, you see the face of an aged woman whose hair is a mass of seething snakes. lt is the dreaded M E D U S A! Te st llour Lack.Iiyo:u are Ltcky , turn to 216. lfyou are Unlucky, turn to 19.",
+  "text": "The drape rises to the top of the cage and there, to your horror, you see the face of an aged woman whose hair is a mass of seething snakes. lt is the dreaded M E D U S A! Te st llour Lack.Iiyo:u are Ltcky , turn to 216. lfyou are Unlucky,",
   "choices": [
     {
       "id": "to_216",
       "label": "Te st llour Lack.Iiyo:u are Ltcky",
-      "aliases": [],
+      "aliases": [
+        "te st llour lack.iiyo:u are ltcky"
+      ],
       "to": 216
     },
     {
       "id": "to_19",
       "label": "lfyou are Unlucky",
-      "aliases": [],
+      "aliases": [
+        "lfyou are unlucky"
+      ],
       "to": 19
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 289, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

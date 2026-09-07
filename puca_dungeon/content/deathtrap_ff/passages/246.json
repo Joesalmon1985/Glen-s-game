@@ -1,11 +1,13 @@
 {
   "id": 246,
-  "text": "De\\piLe being d5 cdreful as possible. lour leg brushes agarnst one of the poles It lmmediately releases a shower of sharp splinters, each several .entimetres long. Lose 2 LUCK points. They fly out at great speed and in all directions, and you cannot avoid being hit Roll two dice tor the number of splinters that sink into your flesh. Each splinter reduces your STAMINA by one point: lfyou are still alive, you sit down to the painful task of removing the splinters from your bodybefore setting offeast. turn to 313.",
+  "text": "De\\piLe being d5 cdreful as possible. lour leg brushes agarnst one of the poles It lmmediately releases a shower of sharp splinters, each several .entimetres long. Lose 2 LUCK points. They fly out at great speed and in all directions, and you cannot avoid being hit Roll two dice tor the number of splinters that sink into your flesh. Each splinter reduces your STAMINA by one point: lfyou are still alive, you sit down to the painful task of removing the splinters from your bodybefore setting offeast.",
   "choices": [
     {
       "id": "to_313",
       "label": "Turn to 313",
-      "aliases": [],
+      "aliases": [
+        "turn to 313"
+      ],
       "to": 313
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 246, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

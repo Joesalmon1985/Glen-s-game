@@ -1,16 +1,18 @@
 @echo off
-REM Deathtrap Dungeon — Fighting Fantasy gamebook (heuristic offline default)
+REM Deathtrap Dungeon — Fighting Fantasy (Ollama LLM by default; debug CLI)
 cd /d "%~dp0"
 if exist .venv\Scripts\python.exe (
   set "PY=.venv\Scripts\python.exe"
 ) else (
   set "PY=python"
 )
-REM Defaults: offline heuristic + seed 91.
-REM Examples:
-REM   Play Deathtrap Dungeon.bat --no-debug --images
-REM   Play Deathtrap Dungeon.bat --potion potion_fortune --name Glen
-REM For Ollama LLM interpret, drop --heuristic and ensure Ollama+mistral are running:
-REM   Play Deathtrap Dungeon.bat --allow-heuristic-fallback
-"%PY%" -m puca_dungeon --heuristic --seed 91 %*
+REM Debug + LLM (no --heuristic). Pass --allow-heuristic-fallback only if you want offline backup.
+REM Player-facing (no debug dump): Play Deathtrap Dungeon.bat --no-debug
+REM Dedicated shortcut: Play Deathtrap Dungeon Debug LLM.bat
+"%PY%" -m puca_dungeon --seed 91 --model mistral %*
+if errorlevel 1 (
+  echo.
+  echo Ollama LLM required. Start Ollama and run: ollama pull mistral
+  echo Dedicated launcher: Play Deathtrap Dungeon Debug LLM.bat
+)
 pause

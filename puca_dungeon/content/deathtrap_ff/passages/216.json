@@ -5,19 +5,25 @@
     {
       "id": "to_12",
       "label": "lf you wish to open the door",
-      "aliases": [],
+      "aliases": [
+        "lf you wish to open the door"
+      ],
       "to": 12
     },
     {
       "id": "to_100",
       "label": "I{ you would rather keep BoinB north",
-      "aliases": [],
+      "aliases": [
+        "i{ you would rather keep boinb north"
+      ],
       "to": 100
     },
     {
       "id": "to_291",
       "label": "Turn to 291",
-      "aliases": [],
+      "aliases": [
+        "turn to 291"
+      ],
       "to": 291
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 216, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

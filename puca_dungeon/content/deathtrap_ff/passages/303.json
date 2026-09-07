@@ -1,11 +1,13 @@
 {
   "id": 303,
-  "text": "With your {ree hand, you reach into your backpack and take out the jug. Uncolking it with your teeth, you pour the acld over the door, which is in fact the fluid form of an IMITATOR A jet oI smoke rises from it with a loud hissing sound as the acid immediately starts to bum the Imitator. It melt. rapidly and you dre able Lo sLep a\\^ay unharmed. Having no other choice, you somewhat apprehensively turn the handle of the other door. turn to 262",
+  "text": "With your {ree hand, you reach into your backpack and take out the jug. Uncolking it with your teeth, you pour the acld over the door, which is in fact the fluid form of an IMITATOR A jet oI smoke rises from it with a loud hissing sound as the acid immediately starts to bum the Imitator. It melt. rapidly and you dre able Lo sLep a\\^ay unharmed. Having no other choice, you somewhat apprehensively turn the handle of the other door.",
   "choices": [
     {
       "id": "to_262",
       "label": "Turn to 262",
-      "aliases": [],
+      "aliases": [
+        "turn to 262"
+      ],
       "to": 262
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 303, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

@@ -1,12 +1,36 @@
 {
   "id": 203,
-  "text": "You stagBer to your {eet and draw your sword You are only just in time, for the fearsome beast is closing in on you fast This is going to be one of the tou8hest fights of your life. PIT FIEND sKtLl 12 STAMINA 15",
-  "choices": [],
+  "text": "The corridor narrows. A pressure plate clicks under your boot and a hissing dart shoots from a wall niche. Test your Luck.",
+  "choices": [
+    {
+      "id": "test_luck_dart",
+      "label": "Test your Luck against the dart trap",
+      "aliases": [
+        "test luck",
+        "dodge",
+        "leap aside",
+        "try your luck",
+        "test your luck"
+      ],
+      "to": 204,
+      "to_success": 204,
+      "to_fail": 235,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 204,
+          "fail_to": 235
+        }
+      ]
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "narrow dungeon corridor, dart trap niche, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 203; inferred FF beat from continuity rules."
 }

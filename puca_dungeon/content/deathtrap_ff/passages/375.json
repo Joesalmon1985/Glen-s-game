@@ -1,23 +1,29 @@
 {
   "id": 375,
-  "text": "Acrid smoke rises ftom the jug as you lower the cloth into it. The liquid is unmistakably acid. You recork thejugand place it in yourbackpack, hoping it may be of use later. You sheathe vour s\\4'orcl ancl press on northwards, turn to 110. J76 The Gnome, still smjling, says excitedly, 'Excellentl tust one to go. Do you possess a diamond?' If you have {ound a diamond, turn to 62. If you have not found a dlamond, turn to 3.",
+  "text": "Acrid smoke rises ftom the jug as you lower the cloth into it. The liquid is unmistakably acid. You recork thejugand place it in yourbackpack, hoping it may be of use later. You sheathe vour s\\4'orcl ancl press on northwards, turn to 110. J76 The Gnome, still smjling, says excitedly, 'Excellentl tust one to go. Do you possess a diamond?' If you have {ound a diamond, turn to 62. If you have not found a dlamond,",
   "choices": [
     {
       "id": "to_110",
       "label": "You sheathe vour s\\4'orcl ancl press on northwards",
-      "aliases": [],
+      "aliases": [
+        "you sheathe vour s\\4'orcl ancl press on northwards"
+      ],
       "to": 110
     },
     {
       "id": "to_62",
       "label": "Do you possess a diamond?' If you have {ound a diamond",
-      "aliases": [],
+      "aliases": [
+        "do you possess a diamond?' if you have {ound a diamond"
+      ],
       "to": 62
     },
     {
       "id": "to_3",
       "label": "If you have not found a dlamond",
-      "aliases": [],
+      "aliases": [
+        "if you have not found a dlamond"
+      ],
       "to": 3
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 375, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

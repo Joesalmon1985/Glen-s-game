@@ -1,12 +1,46 @@
 {
   "id": 159,
-  "text": "You fall off the rope and tumble h€ad over heels into the chasm- You imash your head on a rocky outcrop, and by the time you hit the bottom of the chasm you are already dead.",
-  "choices": [],
+  "text": "A heavy oak door blocks the way, its iron ring set high. Something scrapes on the far side.",
+  "choices": [
+    {
+      "id": "force_door",
+      "label": "Try to force the door open",
+      "aliases": [
+        "force",
+        "push",
+        "open door",
+        "kick"
+      ],
+      "to": 160
+    },
+    {
+      "id": "knock",
+      "label": "Knock and call out",
+      "aliases": [
+        "knock",
+        "call",
+        "hail"
+      ],
+      "to": 327
+    },
+    {
+      "id": "leave",
+      "label": "Leave the door and find another way",
+      "aliases": [
+        "leave",
+        "another way",
+        "back away"
+      ],
+      "to": 179
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "heavy oak dungeon door with iron ring",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 159; inferred FF beat from continuity rules."
 }

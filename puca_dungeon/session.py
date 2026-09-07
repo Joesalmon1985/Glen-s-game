@@ -174,14 +174,9 @@ class GameSession:
 
     @property
     def opening_text(self) -> str:
+        """Player-facing opener — Adventure Sheet meters stay hidden (§14)."""
         passage = get_passage(1)
-        sheet = self.world.sheet
-        summary = (
-            f"[Adventure Sheet: {sheet.name} — SKILL {sheet.skill}, "
-            f"STAMINA {sheet.stamina}/{sheet.stamina_initial}, LUCK {sheet.luck}, "
-            f"Gold {sheet.gold}, Provisions {sheet.provisions}]"
-        )
-        return f'{passage.text}\n\n{summary}'
+        return (passage.text or '').strip()
 
     def current_passage(self):
         return get_passage(self.world.passage_id)

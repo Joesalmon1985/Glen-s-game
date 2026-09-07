@@ -1,33 +1,35 @@
 {
   "id": 229,
-  "text": "As soon as yourhead goes underthe blue light, you hear the sound of muffled voices. The {aces are no longer laughing, but have changed their expressions to ones of despai and anguish. A young girl's sad {ace hovers in front o{ you, and she be8ins to whisper a poem. Transfixed you listen intently, believing that she has a special message for you as she recites: 'When corridor doth water meet, Do not make a quick refueat. Take a breath and jump deep in I{ your Trial you hope to win.' Memorizingthe spirit girl'spoem, you step throu8h the shaft of light and quickly head on north Turnto ao7. As soon as you win your first Attack Round, Iesl your Luck. Il you arc Lucky, turn to 97. If you are Unlucky, turn to 21.",
+  "text": "As soon as yourhead goes underthe blue light, you hear the sound of muffled voices. The {aces are no longer laughing, but have changed their expressions to ones of despai and anguish. A young girl's sad {ace hovers in front o{ you, and she be8ins to whisper a poem. Transfixed you listen intently, believing that she has a special message for you as she recites: 'When corridor doth water meet, Do not make a quick refueat. Take a breath and jump deep in I{ your Trial you hope to win.' Memorizingthe spirit girl'spoem, you step throu8h the shaft of light and quickly head on north Turnto 207. As soon as you win your first Attack Round, Iesl your Luck. Il you arc Lucky, turn to 97. If you are Unlucky,",
   "choices": [
     {
-      "id": "to_97",
-      "label": "Il you arc Lucky",
-      "aliases": [],
-      "to": 97
-    },
-    {
-      "id": "to_21",
-      "label": "If you are Unlucky",
-      "aliases": [],
-      "to": 21
+      "id": "test_luck",
+      "label": "Test your Luck",
+      "aliases": [
+        "test luck",
+        "try your luck",
+        "test your luck",
+        "be careful"
+      ],
+      "to": 97,
+      "to_success": 97,
+      "to_fail": 21,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 97,
+          "fail_to": 21
+        }
+      ]
     }
   ],
   "combat": null,
-  "tests": [
-    {
-      "type": "luck",
-      "success_to": null,
-      "failure_to": 21,
-      "lucky_to": null,
-      "unlucky_to": 21
-    }
-  ],
+  "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 229, crystal light",
   "ocr_source": true,
-  "needs_review": false
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": " Collapsed Lucky/Unlucky into luck_test."
 }

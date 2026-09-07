@@ -5,7 +5,9 @@
     {
       "id": "to_252",
       "label": "l8o Fust ORC Second ORC If you tfin",
-      "aliases": [],
+      "aliases": [
+        "l8o fust orc second orc if you tfin"
+      ],
       "to": 252
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 380, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

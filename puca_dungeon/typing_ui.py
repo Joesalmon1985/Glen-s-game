@@ -22,6 +22,10 @@ def run_cli(session: GameSession) -> int:
         if session.generate_images:
             print('Image generation enabled.')
     print(f'Interpreter: {type(session.interpreter).__name__}')
+    print(f'Narrator: {type(session.narrator).__name__}')
+    if type(session.interpreter).__name__ == 'HeuristicInterpreter':
+        print('NOTE: HeuristicInterpreter is offline/regex mode — not the LLM. '
+              'For real play, run without --heuristic (Ollama required).')
     print()
     while True:
         try:
@@ -46,12 +50,11 @@ def run_cli(session: GameSession) -> int:
         print()
         print(trace.narrator_output)
         print()
-        sheet = session.world.sheet
-        print(
-            f"— Passage {session.world.passage_id} | "
-            f"SKILL {sheet.skill}  STAMINA {sheet.stamina}/{sheet.stamina_initial}  "
-            f"LUCK {sheet.luck}  GP {sheet.gold}  Prov {sheet.provisions} —"
-        )
+        if session.debug:
+            # Debug dump carries sheet meters; keep the live prompt line diegetic
+            print(f"— Passage {session.world.passage_id} —")
+        else:
+            print(f"— Passage {session.world.passage_id} —")
         if session.world.combat.active:
             c = session.world.combat
             print(

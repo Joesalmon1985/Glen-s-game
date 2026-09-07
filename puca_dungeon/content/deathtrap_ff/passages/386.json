@@ -1,12 +1,21 @@
 {
   "id": 386,
-  "text": "Ifyou wish to dive into the dver, IUrn to 47.",
+  "text": "A skeleton bars the passage ahead, weapons ready. There is no way past without a fight.",
   "choices": [],
-  "combat": null,
+  "combat": {
+    "enemy_name": "Skeleton",
+    "skill": 6,
+    "stamina": 6,
+    "win_to": 387,
+    "lose_to": 316,
+    "flee_to": 276
+  },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "skeleton blocking a crystal-lit dungeon passage",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 386; inferred FF beat from continuity rules."
 }

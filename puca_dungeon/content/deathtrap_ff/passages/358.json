@@ -1,17 +1,21 @@
 {
   "id": 358,
-  "text": "You lose vorr balance and tumble headlong to the floor. Lose 2 srAt\\,rrNA points Yolr decide against trying to clinb the idolagajn, nn(l rult fon{a1.d to the tunnel in the northern u'all turn to 29.\n\nt€aning against the left-hand wall of the tunnel you wish to buy the stilts, turn to 165",
+  "text": "You lose vorr balance and tumble headlong to the floor. Lose 2 srAt\\,rrNA points Yolr decide against trying to clinb the idolagajn, nn(l rult fon{a1.d to the tunnel in the northern u'all turn to 29. t€aning against the left-hand wall of the tunnel you wish to buy the stilts,",
   "choices": [
     {
       "id": "to_29",
       "label": "t\\,rrNA points Yolr decide against trying to clinb the idolagajn, nn(l rult fon{a1.d to the tunnel in the northern u'all",
-      "aliases": [],
+      "aliases": [
+        "t\\,rrna points yolr decide against trying to clinb the idolagajn, nn(l rult fon{a1.d to the tunnel in the northern u'all"
+      ],
       "to": 29
     },
     {
       "id": "to_165",
       "label": "t€aning against the left-hand wall of the tunnel you wish to buy the stilts",
-      "aliases": [],
+      "aliases": [
+        "t€aning against the left-hand wall of the tunnel you wish to buy the stilts"
+      ],
       "to": 165
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 358, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

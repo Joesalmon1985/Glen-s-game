@@ -5,19 +5,34 @@
     {
       "id": "follow_arrow_west",
       "label": "Follow the white arrow west",
-      "aliases": ["go west", "follow arrow", "west", "take the west path"],
+      "aliases": [
+        "go west",
+        "follow arrow",
+        "west",
+        "take the west path"
+      ],
       "to": 101
     },
     {
       "id": "go_east",
       "label": "Take the passage to the east instead",
-      "aliases": ["go east", "east", "ignore the arrow", "right path"],
+      "aliases": [
+        "go east",
+        "east",
+        "ignore the arrow",
+        "right path"
+      ],
       "to": 142
     },
     {
       "id": "inspect_tracks",
       "label": "Inspect the dusty floor for tracks",
-      "aliases": ["look at tracks", "examine floor", "search", "inspect"],
+      "aliases": [
+        "look at tracks",
+        "examine floor",
+        "search",
+        "inspect"
+      ],
       "to": 198
     }
   ],
@@ -25,5 +40,6 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "dungeon junction, white painted arrow pointing west on stone floor, crystal-lit corridors"
+  "image_seed": "dungeon junction, white painted arrow pointing west on stone floor, crystal-lit corridors",
+  "needs_review": false
 }

@@ -1,64 +1,75 @@
 {
   "id": 49,
-  "text": "You peep round the corner and see two small creatures running away from you. Both are dressed in baggy clothes and wear pointed floppy hats They are mischievous LEPRECHAUNS. II you wish to follow them, turn to 205. If you would rather walk back to the lastjunction to head north, turn to 241. 5o You wake to find Throm pulling the ring off your fin8er. He puts it on the floor and ctushes it with the head of his battleaxe. Then, grunting to show his disapproval ofyou, he strides off east. You stand up stowly and stagger off after him. turn to 221.\n\n5a-52 5a The Hbbgoblins are unprepated foryourattack, and you are able to kill.the first one belore he can draw his sword. You turn to face the remaining Hobgoblin, who snarls atyou with hatred. HOBGOBLIN SKILL 6 Ifyou win, turn to 9. As you open the book, it be8ins to disintegrate and the pages turn to dust in youl hands You manage to keep a few ftagments and read the handwritten script. The book appears to be about monsters, and ftom what you can make out it contalns a lull descriotion of a monster called the Bloodbeast. Itis a ho ificbloated creature with tough, sPiny skin and facial blisters which burst open to become mock eyes, evolved to hide the Bloodbeast's only weak spot - its real eyes. Bloodbeasts usually dwell in pools of fetid slime which Bive off a poisonous 8as This gas is so stuong that it can easily knock PeoPle unconscious. The Bloodbeast, although too bulbous to haul itself out of its slime Pool, has a long and STAMINA 5 s1-54 vicious tongue which it wraps around its victims before it drags them into its pool. As the victim's flesh starts to decompose in the vile slime, the Bloodbeast will feed ftom it. You tell Throm altout the grotesque Bloodbeast, but he merely shrugs his shoulders and tells you to get going Ifyouhavenot done so already, you nuy open the black book - turn to 138. Otherwise you must continue north with Throm - turn to 369. The Bloodbeast is too bulbous to climb out of its pool, butits longtonguewhips outand tries to wrap itself around your leg. Fortunately, you have fallen beyond its reach. The air at ground level does not contain any of the poisonous fumes, but you wake with a pain in your throat. You cover your mouth with your sleeve so thatyou can bteathe through it, and decide what td do. lf you wish to run lound the pool towards the tunnel, turn to 370. If you wish to attack the Bloodbeast wlth your sword, turn to 348.",
+  "text": "You peep round the corner and see two small creatures running away from you. Both are dressed in baggy clothes and wear pointed floppy hats They are mischievous LEPRECHAUNS. II you wish to follow them, turn to 205. If you would rather walk back to the lastjunction to head north, turn to 241. 5o You wake to find Throm pulling the ring off your fin8er. He puts it on the floor and ctushes it with the head of his battleaxe. Then, grunting to show his disapproval ofyou, he strides off east. You stand up stowly and stagger off after him. turn to 221. 5a-52 5a The Hbbgoblins are unprepated foryourattack, and you are able to kill.the first one belore he can draw his sword. You turn to face the remaining Hobgoblin, who snarls atyou with hatred. HOBGOBLIN SKILL 6 Ifyou win, turn to 9. As you open the book, it be8ins to disintegrate and the pages turn to dust in youl hands You manage to keep a few ftagments and read the handwritten script. The book appears to be about monsters, and ftom what you can make out it contalns a lull descriotion of a monster called the Bloodbeast. Itis a ho ificbloated creature with tough, sPiny skin and facial blisters which burst open to become mock eyes, evolved to hide the Bloodbeast's only weak spot - its real eyes. Bloodbeasts usually dwell in pools of fetid slime which Bive off a poisonous 8as This gas is so stuong that it can easily knock PeoPle unconscious. The Bloodbeast, although too bulbous to haul itself out of its slime Pool, has a long and STAMINA 5 s1-54 vicious tongue which it wraps around its victims before it drags them into its pool. As the victim's flesh starts to decompose in the vile slime, the Bloodbeast will feed ftom it. You tell Throm altout the grotesque Bloodbeast, but he merely shrugs his shoulders and tells you to get going Ifyouhavenot done so already, you nuy open the black book - turn to 138. Otherwise you must continue north with Throm - turn to 369. The Bloodbeast is too bulbous to climb out of its pool, butits longtonguewhips outand tries to wrap itself around your leg. Fortunately, you have fallen beyond its reach. The air at ground level does not contain any of the poisonous fumes, but you wake with a pain in your throat. You cover your mouth with your sleeve so thatyou can bteathe through it, and decide what td do. lf you wish to run lound the pool towards the tunnel, turn to 370. If you wish to attack the Bloodbeast wlth your sword,",
   "choices": [
     {
       "id": "to_205",
       "label": "II you wish to follow them",
-      "aliases": [],
+      "aliases": [
+        "ii you wish to follow them"
+      ],
       "to": 205
     },
     {
       "id": "to_241",
       "label": "If you would rather walk back to the lastjunction to head north",
-      "aliases": [],
+      "aliases": [
+        "if you would rather walk back to the lastjunction to head north"
+      ],
       "to": 241
     },
     {
       "id": "to_221",
       "label": "Turn to 221",
-      "aliases": [],
+      "aliases": [
+        "turn to 221"
+      ],
       "to": 221
     },
     {
-      "id": "to_9",
-      "label": "HOBGOBLIN SKILL 6 Ifyou win",
-      "aliases": [],
-      "to": 9
-    },
-    {
       "id": "to_138",
-      "label": " but he merely shrugs his shoulders and tells you to get going Ifyouhavenot done so already, you nuy open the black book",
-      "aliases": [],
+      "label": "but he merely shrugs his shoulders and tells you to get going Ifyouhavenot done so already, you nuy open the black book",
+      "aliases": [
+        "but he merely shrugs his shoulders and tells you to get going ifyouhavenot done so already, you nuy open the black book"
+      ],
       "to": 138
     },
     {
       "id": "to_369",
       "label": "Otherwise you must continue north with Throm",
-      "aliases": [],
+      "aliases": [
+        "otherwise you must continue north with throm"
+      ],
       "to": 369
     },
     {
       "id": "to_370",
       "label": "lf you wish to run lound the pool towards the tunnel",
-      "aliases": [],
+      "aliases": [
+        "lf you wish to run lound the pool towards the tunnel"
+      ],
       "to": 370
     },
     {
       "id": "to_348",
       "label": "If you wish to attack the Bloodbeast wlth your sword",
-      "aliases": [],
+      "aliases": [
+        "if you wish to attack the bloodbeast wlth your sword"
+      ],
       "to": 348
     }
   ],
   "combat": {
     "enemies": [],
-    "win_to": 9
+    "win_to": 9,
+    "enemy_name": "Enemy",
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 49, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

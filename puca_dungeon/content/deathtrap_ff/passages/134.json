@@ -1,27 +1,21 @@
 {
   "id": 134,
-  "text": "[Passage 134 — needs review]",
-  "choices": [
-    {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
-      "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
-      ],
-      "to": 135
-    }
-  ],
-  "combat": null,
+  "text": "A cave troll bars the passage ahead, weapons ready. There is no way past without a fight.",
+  "choices": [],
+  "combat": {
+    "enemy_name": "Cave Troll",
+    "skill": 9,
+    "stamina": 6,
+    "win_to": 135,
+    "lose_to": 152,
+    "flee_to": 304
+  },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "image_seed": "cave troll blocking a crystal-lit dungeon passage",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 134; inferred FF beat from continuity rules."
 }

@@ -1,23 +1,29 @@
 {
   "id": 248,
-  "text": "The doors open into a tunnel running north You r lo.e the doors behind you and .et oll once aBain turn to 214 Kopn r,n n,nnin02 Turn to attack him with your s\\^'ord? Tell him you will answer his question?\n\n25a-253 -Jl Once again the myste ous voice calls out, only this time, to your great surprise, in a {arless thteatening tone, 'Good, my master likes those 'ho show sPtrit Take this gift to help you It will grant you one w1sh, but one wish only. Farewell 'A gold ring magtcally appears out ofnowhere and lands atyour feetwith a gentle tinkle. You pick it up and put it on one ofyour fingers. The door opens and you step back into the tunnel to continue north. TuIn to 344. The tunnel contrnues norlh for quite a distance before coming to a dead end. The mouth of a chute protrudes ftom the western wall, and it appears to be the only alternative to turning back. You decide to risk it and climb into the chute. You slide Sently down and emerge into a room, landing on your back. turn to 90. You take the bone out of yourbackPack and throw it down the stairs The barking grows louder, changingto snarlsand growlswhen the bone lands on the floor. You walk slowly down the stePs with your sword drawn and see two huge black GUARD DOGS fighting ovet thebone. You run quickly past them and on down the tunnel. turn to 315",
+  "text": "The doors open into a tunnel running north You r lo.e the doors behind you and .et oll once aBain turn to 214 Kopn r,n n,nnin02 Turn to attack him with your s\\^'ord? Tell him you will answer his question? 25a-253 -Jl Once again the myste ous voice calls out, only this time, to your great surprise, in a {arless thteatening tone, 'Good, my master likes those 'ho show sPtrit Take this gift to help you It will grant you one w1sh, but one wish only. Farewell 'A gold ring magtcally appears out ofnowhere and lands atyour feetwith a gentle tinkle. You pick it up and put it on one ofyour fingers. The door opens and you step back into the tunnel to continue north. TuIn to 344. The tunnel contrnues norlh for quite a distance before coming to a dead end. The mouth of a chute protrudes ftom the western wall, and it appears to be the only alternative to turning back. You decide to risk it and climb into the chute. You slide Sently down and emerge into a room, landing on your back. turn to 90. You take the bone out of yourbackPack and throw it down the stairs The barking grows louder, changingto snarlsand growlswhen the bone lands on the floor. You walk slowly down the stePs with your sword drawn and see two huge black GUARD DOGS fighting ovet thebone. You run quickly past them and on down the tunnel.",
   "choices": [
     {
       "id": "to_214",
       "label": "The doors open into a tunnel running north You r lo.e the doors behind you and .et oll once aBain",
-      "aliases": [],
+      "aliases": [
+        "the doors open into a tunnel running north you r lo.e the doors behind you and .et oll once abain"
+      ],
       "to": 214
     },
     {
       "id": "to_90",
       "label": "Turn to 90",
-      "aliases": [],
+      "aliases": [
+        "turn to 90"
+      ],
       "to": 90
     },
     {
       "id": "to_315",
       "label": "Turn to 315",
-      "aliases": [],
+      "aliases": [
+        "turn to 315"
+      ],
       "to": 315
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 248, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

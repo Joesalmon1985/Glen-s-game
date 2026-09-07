@@ -1,22 +1,18 @@
 {
   "id": 250,
-  "text": "\\s you run for the door, the old man calls out behind you, 'Do not run, nobodyescapes me. Stop, or I shall turn you to stone this instantl' Will you: s(ILL 11 STAMINA 11 If you win, turn to 364",
-  "choices": [
-    {
-      "id": "to_364",
-      "label": "Stop, or I shall turn you to stone this instantl' Will you: s(ILL 11 STAMINA 11 If you win",
-      "aliases": [],
-      "to": 364
-    }
-  ],
+  "text": "\\s you run for the door, the old man calls out behind you, 'Do not run, nobodyescapes me. Stop, or I shall turn you to stone this instantl' Will you: s(ILL 11 STAMINA 11 If you win,",
+  "choices": [],
   "combat": {
     "enemies": [],
-    "win_to": 364
+    "win_to": 364,
+    "enemy_name": "Enemy",
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 250, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

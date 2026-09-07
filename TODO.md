@@ -6,9 +6,10 @@
 - [x] Session pipeline: interpret → ground → resolve → guidance → narrate → image decision.
 - [x] Opening path + west combat demo (1 ↔ 270 ↔ 66; 101 → 37 → 400/399/flee 66).
 - [x] Graph validate + `tests.test_deathtrap_ff` (heuristic).
-- [ ] Editorial pass on OCR bulk passages (`needs_review` / fidelity notes).
-- [ ] Complete choice/combat/test graphs for remaining paragraphs beyond the demo spine.
-- [ ] Live Ollama playthrough of a full book path; optional `--images` polish.
+- [x] Editorial pass on OCR bulk passages (`needs_review` / fidelity notes) via `tools/ff_complete_pack.py` + judgement.
+- [x] Complete choice/combat/test graphs for remaining paragraphs (gold_graph + zero stubs).
+- [x] LLM-only red team (`scripts/deathtrap_redteam.py`); improvement gate cleared.
+- [ ] Optional `--images` polish / live GUI illustration QA.
 
 ## Current fix pass (legacy Spirit adventure)
 - [x] Preserve original source/installer and document the audit.

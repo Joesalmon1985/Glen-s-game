@@ -1,23 +1,29 @@
 {
   "id": 292,
-  "text": "A door comes into view in the left-hand wall of the tunnel You listen carefully at the door but hear nothlng. The door is not locked and the handle tumseasily.If you wish to open the door, h.rrn to 93. If you would rather keep walking along the hrnnel, turn to 230, 29J Following the three sets ofwet footprints along the west passage of the tunnel, you soon afiive at a junction. If you wish to continue west, following two sets of footprints/ turn to 137. If you wish to head north, following the third set of footprints, turn to 382.",
+  "text": "A door comes into view in the left-hand wall of the tunnel You listen carefully at the door but hear nothlng. The door is not locked and the handle tumseasily.If you wish to open the door, h.rrn to 93. If you would rather keep walking along the hrnnel, turn to 230, 29J Following the three sets ofwet footprints along the west passage of the tunnel, you soon afiive at a junction. If you wish to continue west, following two sets of footprints/ turn to 137. If you wish to head north, following the third set of footprints,",
   "choices": [
     {
       "id": "to_230",
       "label": "If you would rather keep walking along the hrnnel",
-      "aliases": [],
+      "aliases": [
+        "if you would rather keep walking along the hrnnel"
+      ],
       "to": 230
     },
     {
       "id": "to_137",
       "label": "If you wish to continue west, following two sets of footprints/",
-      "aliases": [],
+      "aliases": [
+        "if you wish to continue west, following two sets of footprints/"
+      ],
       "to": 137
     },
     {
       "id": "to_382",
       "label": "If you wish to head north, following the third set of footprints",
-      "aliases": [],
+      "aliases": [
+        "if you wish to head north, following the third set of footprints"
+      ],
       "to": 382
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 292, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

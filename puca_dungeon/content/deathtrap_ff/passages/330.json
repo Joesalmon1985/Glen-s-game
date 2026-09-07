@@ -5,7 +5,9 @@
     {
       "id": "to_269",
       "label": "If you have not done so already, you may either rub some of the oinlment into your rvounds",
-      "aliases": [],
+      "aliases": [
+        "if you have not done so already, you may either rub some of the oinlment into your rvounds"
+      ],
       "to": 269
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 330, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

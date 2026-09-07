@@ -1,17 +1,21 @@
 {
   "id": 260,
-  "text": "You just manage to gmb the idol's earlobe and regain vour footinB. You scramble over jts face and sit down on the bridge of its nose You draw your sword and consider which jewelled eye to prise out first Ifyou wish toprise out the lefteye, turn to 166 If ),ou wish to prise out the right eye, turn to 140",
+  "text": "You just manage to gmb the idol's earlobe and regain vour footinB. You scramble over jts face and sit down on the bridge of its nose You draw your sword and consider which jewelled eye to prise out first Ifyou wish toprise out the lefteye, turn to 166 If ),ou wish to prise out the right eye,",
   "choices": [
     {
       "id": "to_166",
       "label": "ge of its nose You draw your sword and consider which jewelled eye to prise out first Ifyou wish toprise out the lefteye",
-      "aliases": [],
+      "aliases": [
+        "ge of its nose you draw your sword and consider which jewelled eye to prise out first ifyou wish toprise out the lefteye"
+      ],
       "to": 166
     },
     {
       "id": "to_140",
-      "label": " jewelled eye to prise out first Ifyou wish toprise out the lefteye, turn to 166 If ),ou wish to prise out the right eye",
-      "aliases": [],
+      "label": "jewelled eye to prise out first Ifyou wish toprise out the lefteye, turn to 166 If ),ou wish to prise out the right eye",
+      "aliases": [
+        "jewelled eye to prise out first ifyou wish toprise out the lefteye, turn to 166 if ),ou wish to prise out the right eye"
+      ],
       "to": 140
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 260, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

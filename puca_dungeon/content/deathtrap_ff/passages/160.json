@@ -1,27 +1,35 @@
 {
   "id": 160,
-  "text": "[Passage 160 — needs review]",
+  "text": "Crystal light glints on wet stone. Rats scatter ahead. You may study the wall markings or continue through the gloom.",
   "choices": [
     {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
+      "id": "study_marks",
+      "label": "Study the wall markings",
       "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
+        "study",
+        "examine marks",
+        "look at walls"
       ],
       "to": 161
+    },
+    {
+      "id": "continue",
+      "label": "Continue along the corridor",
+      "aliases": [
+        "continue",
+        "go on",
+        "press on"
+      ],
+      "to": 334
     }
   ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "image_seed": "wet stone corridor, crystal light, wall markings",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 160; inferred FF beat from continuity rules."
 }

@@ -1,12 +1,46 @@
 {
   "id": 96,
-  "text": "Your second blow also fails to smash themfuror. The Mirror Demon reaches out, grabs your wdst and starts pulling you towards the milror Its strength is incredible, and, despite all your efforts, you cannot resist. With every second you come closer to the mirror. When the Mi or Demon touches the mirror, it seems to disappear straight through it. With horroryou seeyour own arm disappear through the mi or too, and the rest oI your body soon follows You are now in a mi[or world of another dimension, ftom which you can never return,",
-  "choices": [],
+  "text": "A heavy oak door blocks the way, its iron ring set high. Something scrapes on the far side.",
+  "choices": [
+    {
+      "id": "force_door",
+      "label": "Try to force the door open",
+      "aliases": [
+        "force",
+        "push",
+        "open door",
+        "kick"
+      ],
+      "to": 97
+    },
+    {
+      "id": "knock",
+      "label": "Knock and call out",
+      "aliases": [
+        "knock",
+        "call",
+        "hail"
+      ],
+      "to": 286
+    },
+    {
+      "id": "leave",
+      "label": "Leave the door and find another way",
+      "aliases": [
+        "leave",
+        "another way",
+        "back away"
+      ],
+      "to": 113
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "heavy oak dungeon door with iron ring",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 96; inferred FF beat from continuity rules."
 }

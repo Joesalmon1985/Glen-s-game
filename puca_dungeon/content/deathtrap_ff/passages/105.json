@@ -1,41 +1,53 @@
 {
   "id": 105,
-  "text": "Your reflexes are sharp and you quicklyjump aside The dart $'histles past, only just missrng you, and thLrds into the opposite wall. You see the goblet lying on the floor and the red liquid running awayin rivulets over the Brey stone. Atleasi the gobletmay be of use, so you put it in yourbackpack If1'ou have not done so alreadv, you ma,rr walk back to search the Barbarian - turn to 126. Othen{ise, leave the chamber to continue west turnto83. L06 Squeezing the arm of the chair tri8gers a secrei panel which springs into the air. You find a glass phial lyrng ln a cavlty. You pick it up and read the label: 'Doppelganger Potion - one dose only This Lquid will rnake yourbody take on the shape olany nearby being ' You place the strange potion in your backpack and continue north. turn to 188 Hail, Sukumvit? Sukumvit is a worm? turn to 133 turn to 251 ao3 You breathe in the poisonous gas and start to choke Lose j STAMINA points lf you are still alive, turn to 77.\n\n1o7-1O9 ao7 You come to an arched doorway set in the righF hand wall of th€ tunnel The heavy stone door is closed, but there is an iron latch and a round handle tf yorl wish to try the door, tuln to 168. Ifinstead you \\\\'ish to continue along the funnel, tuln to 257. The tunnel ends at a fliEiht of stone steps leading downwards From the floor below you can hear the sound of barking do8s. Have you Bot an old bone wrth your If you have, turn to 253. [{ you have n6t, tun to 148",
+  "text": "Your reflexes are sharp and you quicklyjump aside The dart $'histles past, only just missrng you, and thLrds into the opposite wall. You see the goblet lying on the floor and the red liquid running awayin rivulets over the Brey stone. Atleasi the gobletmay be of use, so you put it in yourbackpack If1'ou have not done so alreadv, you ma,rr walk back to search the Barbarian - turn to 126. Othen{ise, leave the chamber to continue west turnto83. L06 Squeezing the arm of the chair tri8gers a secrei panel which springs into the air. You find a glass phial lyrng ln a cavlty. You pick it up and read the label: 'Doppelganger Potion - one dose only This Lquid will rnake yourbody take on the shape olany nearby being ' You place the strange potion in your backpack and continue north. turn to 188 Hail, Sukumvit? Sukumvit is a worm? turn to 133 turn to 251 ao3 You breathe in the poisonous gas and start to choke Lose j STAMINA points lf you are still alive, turn to 77. 1o7-1O9 207 You come to an arched doorway set in the righF hand wall of th€ tunnel The heavy stone door is closed, but there is an iron latch and a round handle tf yorl wish to try the door, tuln to 168. Ifinstead you \\\\'ish to continue along the funnel, tuln to 257. The tunnel ends at a fliEiht of stone steps leading downwards From the floor below you can hear the sound of barking do8s. Have you Bot an old bone wrth your If you have, turn to 253. [{ you have n6t, tun to 148",
   "choices": [
     {
       "id": "to_126",
       "label": "ay be of use, so you put it in yourbackpack If1'ou have not done so alreadv, you ma,rr walk back to search the Barbarian",
-      "aliases": [],
+      "aliases": [
+        "ay be of use, so you put it in yourbackpack if1'ou have not done so alreadv, you ma,rr walk back to search the barbarian"
+      ],
       "to": 126
     },
     {
       "id": "to_188",
       "label": "Turn to 188",
-      "aliases": [],
+      "aliases": [
+        "turn to 188"
+      ],
       "to": 188
     },
     {
       "id": "to_133",
       "label": "Turn to 133",
-      "aliases": [],
+      "aliases": [
+        "turn to 133"
+      ],
       "to": 133
     },
     {
       "id": "to_251",
       "label": "turn to 133",
-      "aliases": [],
+      "aliases": [
+        "turn to 133"
+      ],
       "to": 251
     },
     {
       "id": "to_77",
-      "label": " to 133 turn to 251 ao3 You breathe in the poisonous gas and start to choke Lose j STAMINA points lf you are still alive",
-      "aliases": [],
+      "label": "to 133 turn to 251 ao3 You breathe in the poisonous gas and start to choke Lose j STAMINA points lf you are still alive",
+      "aliases": [
+        "to 133 turn to 251 ao3 you breathe in the poisonous gas and start to choke lose j stamina points lf you are still alive"
+      ],
       "to": 77
     },
     {
       "id": "to_253",
       "label": "Have you Bot an old bone wrth your If you have",
-      "aliases": [],
+      "aliases": [
+        "have you bot an old bone wrth your if you have"
+      ],
       "to": 253
     }
   ],
@@ -43,7 +55,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 105, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

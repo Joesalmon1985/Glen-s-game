@@ -5,13 +5,26 @@
     {
       "id": "open_named_box",
       "label": "Open the box with your name on it",
-      "aliases": ["open the box", "open my box", "open named box", "use the key", "open lid"],
+      "aliases": [
+        "open the box",
+        "open my box",
+        "open named box",
+        "use the key",
+        "open lid"
+      ],
       "to": 270
     },
     {
       "id": "continue_north",
       "label": "Continue walking north",
-      "aliases": ["continue", "go north", "walk north", "keep walking", "ignore the boxes", "leave"],
+      "aliases": [
+        "continue",
+        "go north",
+        "walk north",
+        "keep walking",
+        "ignore the boxes",
+        "leave"
+      ],
       "to": 66
     }
   ],
@@ -19,5 +32,6 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "crystal-lit cavern tunnel, stone table against wall, six iron-bound boxes, soft crystal light, dank dungeon atmosphere"
+  "image_seed": "crystal-lit cavern tunnel, stone table against wall, six iron-bound boxes, soft crystal light, dank dungeon atmosphere",
+  "needs_review": false
 }

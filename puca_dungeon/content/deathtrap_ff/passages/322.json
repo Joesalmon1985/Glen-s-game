@@ -1,11 +1,13 @@
 {
   "id": 322,
-  "text": "You prss the wooden chair and soon get back to the juncLion, trrrning right to head wosl turn to 43",
+  "text": "You prss the wooden chair and soon get back to the juncLion, trrrning right to head wosl",
   "choices": [
     {
       "id": "to_43",
       "label": "You prss the wooden chair and soon get back to the juncLion, trrrning right to head wosl",
-      "aliases": [],
+      "aliases": [
+        "you prss the wooden chair and soon get back to the junclion, trrrning right to head wosl"
+      ],
       "to": 43
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 322, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

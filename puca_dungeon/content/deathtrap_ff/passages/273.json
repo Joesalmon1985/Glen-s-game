@@ -1,12 +1,36 @@
 {
   "id": 273,
-  "text": "/tThewooden ball smashes into the skull, knockingit ofl the plinth and on to the floor. Much to vour surp se, the crossbows do not release thefu deadly bolts. You step into the room cautiously and pick the skull up off the floor You recognize the yelloB ie$'elled eyes as topaz, andeagerlypluck themftom thelr sockels You put them in your backpack, wonderin8 I{'hether or not a trap still awaits you in the room. Willyou: Get down on all fours and crawl out of the room holding fhe skull? Replace the skull on the plinth before leaving the room?",
-  "choices": [],
+  "text": "The corridor narrows. A pressure plate clicks under your boot and a hissing dart shoots from a wall niche. Test your Luck.",
+  "choices": [
+    {
+      "id": "test_luck_dart",
+      "label": "Test your Luck against the dart trap",
+      "aliases": [
+        "test luck",
+        "dodge",
+        "leap aside",
+        "try your luck",
+        "test your luck"
+      ],
+      "to": 274,
+      "to_success": 274,
+      "to_fail": 325,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 274,
+          "fail_to": 325
+        }
+      ]
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "narrow dungeon corridor, dart trap niche, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 273; inferred FF beat from continuity rules."
 }

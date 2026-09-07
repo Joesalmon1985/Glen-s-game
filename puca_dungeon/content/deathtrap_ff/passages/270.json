@@ -5,18 +5,44 @@
     {
       "id": "continue_after_box",
       "label": "Continue north along the tunnel",
-      "aliases": ["continue", "go north", "leave", "walk on", "press on"],
+      "aliases": [
+        "continue",
+        "go north",
+        "leave",
+        "walk on",
+        "press on",
+        "go down the passage",
+        "go down the tunnel",
+        "head north",
+        "move on",
+        "run on",
+        "proceed"
+      ],
       "to": 66
     }
   ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [
-    {"op": "add_gold", "amount": 2},
-    {"op": "add_item", "item": "sukumvit_clue"},
-    {"op": "set_flag", "flag": "opened_named_box", "value": true},
-    {"op": "add_knowledge", "fact": "clue_get_no_mess"}
+    {
+      "op": "add_gold",
+      "amount": 2
+    },
+    {
+      "op": "add_item",
+      "item": "sukumvit_clue"
+    },
+    {
+      "op": "set_flag",
+      "flag": "opened_named_box",
+      "value": true
+    },
+    {
+      "op": "add_knowledge",
+      "fact": "clue_get_no_mess"
+    }
   ],
   "ending": null,
-  "image_seed": "open named iron box on stone table, two gold coins, scrap of parchment, crystal-lit tunnel"
+  "image_seed": "open named iron box on stone table, two gold coins, scrap of parchment, crystal-lit tunnel",
+  "needs_review": false
 }

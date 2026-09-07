@@ -1,23 +1,29 @@
 {
   "id": 81,
-  "text": "The only furniture in the Goblin's room is a table, two chairs and a cupboard on the wall. There are two closed doors, one in the westwall andthe other in the north wall. Will you: Open the cupboard? Open the west door? Open the north door? turn to 307 turn to 263 turn to 136",
+  "text": "The only furniture in the Goblin's room is a table, two chairs and a cupboard on the wall. There are two closed doors, one in the westwall andthe other in the north wall. Will you: Open the cupboard? Open the west door? Open the north door?",
   "choices": [
     {
       "id": "to_307",
       "label": "Turn to 307",
-      "aliases": [],
+      "aliases": [
+        "turn to 307"
+      ],
       "to": 307
     },
     {
       "id": "to_263",
       "label": "turn to 307",
-      "aliases": [],
+      "aliases": [
+        "turn to 307"
+      ],
       "to": 263
     },
     {
       "id": "to_136",
       "label": "turn to 307 turn to 263",
-      "aliases": [],
+      "aliases": [
+        "turn to 307 turn to 263"
+      ],
       "to": 136
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 81, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

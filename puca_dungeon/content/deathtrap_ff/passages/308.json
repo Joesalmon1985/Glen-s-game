@@ -1,27 +1,36 @@
 {
   "id": 308,
-  "text": "[Passage 308 — needs review]",
+  "text": "The corridor narrows. A pressure plate clicks under your boot and a hissing dart shoots from a wall niche. Test your Luck.",
   "choices": [
     {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
+      "id": "test_luck_dart",
+      "label": "Test your Luck against the dart trap",
       "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
+        "test luck",
+        "dodge",
+        "leap aside",
+        "try your luck",
+        "test your luck"
       ],
-      "to": 309
+      "to": 309,
+      "to_success": 309,
+      "to_fail": 170,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 309,
+          "fail_to": 170
+        }
+      ]
     }
   ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": false,
-  "stub_bridged": true
+  "image_seed": "narrow dungeon corridor, dart trap niche, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 308; inferred FF beat from continuity rules."
 }

@@ -1,12 +1,45 @@
 {
   "id": 151,
-  "text": "451 As you touch the idol's emerald eye you hear a creaking sound below you Looking down, you are shocked to see the two stuffed birds flying off. Their wings flap in jerky movements, but they are soon above you andlook setto attack. Fight the FLYING GUARDIANS one at a time, butreduceyour SKILL by z during this combat because of your restdcted Position. SKILL STAMINA First FLYING GUARDIAN 7 6 Second FLYING GUARDIAN 8 8 Ifyou win, Lurn to 24o. SKILL STAMINA",
-  "choices": [],
+  "text": "The tunnel splits. One branch slopes down into dripping darkness; the other climbs toward a warmer draught smelling of oil and iron.",
+  "choices": [
+    {
+      "id": "go_down",
+      "label": "Take the descending path",
+      "aliases": [
+        "down",
+        "descend",
+        "go down"
+      ],
+      "to": 152
+    },
+    {
+      "id": "go_up",
+      "label": "Take the climbing path",
+      "aliases": [
+        "up",
+        "climb",
+        "go up"
+      ],
+      "to": 271
+    },
+    {
+      "id": "rest",
+      "label": "Rest a moment then choose",
+      "aliases": [
+        "rest",
+        "wait",
+        "pause"
+      ],
+      "to": 91
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "dungeon fork, descending tunnel and climbing path",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 151; inferred FF beat from continuity rules."
 }

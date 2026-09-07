@@ -18,7 +18,8 @@ GUIDANCE_CUES = {
 
 NARRATOR_SYSTEM = """You write short second-person Fighting Fantasy narration from AUTHORITATIVE FACTS only.
 Do not invent discoveries, damage, passage turns, inventory, or combat outcomes not in the facts.
-If facts describe a real attempt, describe it as happening.
+If facts describe a real attempt that failed, describe the attempt happening and the world preventing the intended effect — never a parser-style INVALID COMMAND.
+If the player was understood but nothing meaningful changed, respond naturally and briefly in context.
 Vary wording. Prefer 1-3 sentences.
 Return ONLY the prose, no JSON."""
 

@@ -1,11 +1,13 @@
 {
   "id": 297,
-  "text": "Losing your hard-ea ed Possessions is becoming a bit of a problem. Lose 1 LUcr< Poini. Withorrt even pausing to thank you, Ivy pushes you out of her chamber through a door in the east wall, and you find yourself standing at the end of another tunnel. turn to 305.",
+  "text": "Losing your hard-ea ed Possessions is becoming a bit of a problem. Lose 1 LUcr< Poini. Withorrt even pausing to thank you, Ivy pushes you out of her chamber through a door in the east wall, and you find yourself standing at the end of another tunnel.",
   "choices": [
     {
       "id": "to_305",
       "label": "Turn to 305",
-      "aliases": [],
+      "aliases": [
+        "turn to 305"
+      ],
       "to": 305
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 297, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

@@ -1,27 +1,14 @@
 {
   "id": 226,
-  "text": "[Passage 226 — needs review]",
-  "choices": [
-    {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
-      "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
-      ],
-      "to": 227
-    }
-  ],
+  "text": "The floor gives way. You plunge into a spiked pit too deep to climb. Your adventure ends here.",
+  "choices": [],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
-  "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "ending": "death",
+  "image_seed": "spiked pit trap in a dark dungeon",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 226; inferred FF beat from continuity rules. Death ending."
 }

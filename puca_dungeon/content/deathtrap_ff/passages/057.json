@@ -1,27 +1,21 @@
 {
   "id": 57,
-  "text": "[Passage 57 — needs review]",
-  "choices": [
-    {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
-      "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
-      ],
-      "to": 58
-    }
-  ],
-  "combat": null,
+  "text": "A giant spider bars the passage ahead, weapons ready. There is no way past without a fight.",
+  "choices": [],
+  "combat": {
+    "enemy_name": "Giant Spider",
+    "skill": 7,
+    "stamina": 7,
+    "win_to": 58,
+    "lose_to": 13,
+    "flee_to": 257
+  },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "image_seed": "giant spider blocking a crystal-lit dungeon passage",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 57; inferred FF beat from continuity rules."
 }

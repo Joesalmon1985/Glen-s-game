@@ -3,31 +3,33 @@
   "text": "You crawl along the floor and find yourself in the lair of a tribe of TROGLODYTES. As you creep past them, your scabbard bangs against a rock on the floor. Test your Luck. If you are Lucky, turn to 185 . If you are Unlucky, turn to 395 .",
   "choices": [
     {
-      "id": "to_185",
-      "label": "If you are Lucky",
-      "aliases": [],
-      "to": 185
-    },
-    {
-      "id": "to_395",
-      "label": "If you are Unlucky",
-      "aliases": [],
-      "to": 395
+      "id": "test_luck",
+      "label": "Test your Luck",
+      "aliases": [
+        "test luck",
+        "try your luck",
+        "test your luck",
+        "be careful"
+      ],
+      "to": 185,
+      "to_success": 185,
+      "to_fail": 395,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 185,
+          "fail_to": 395
+        }
+      ]
     }
   ],
   "combat": null,
-  "tests": [
-    {
-      "type": "luck",
-      "success_to": 185,
-      "failure_to": 395,
-      "lucky_to": 185,
-      "unlucky_to": 395
-    }
-  ],
+  "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 5, crystal light",
   "ocr_source": true,
-  "needs_review": false
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": " Collapsed Lucky/Unlucky into luck_test."
 }

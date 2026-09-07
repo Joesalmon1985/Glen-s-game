@@ -1,12 +1,44 @@
 {
   "id": 129,
-  "text": "You step up to the mirror and are amused by your distorted ret'lection Your head looks as latge as a pumpkin and your face is exceedingly stiange. Suddenly, without warning, a terrible Pain Pounds through your head and you try to look away ftom the mifior, butyou are unable to. Some evil force is keeping your eyes glued to yotr own reflectionYou gip your head rvith your hands and realize with horror that it is expanding You can withstand it no longerand, blacking out with the pain, you fall uncon\\crou\\ lo lhe flour, ncver lo w,rke",
-  "choices": [],
+  "text": "A side alcove holds a small iron chest bound with copper wire. Faint scratching echoes from deeper in the tunnel.",
+  "choices": [
+    {
+      "id": "open_chest",
+      "label": "Open the iron chest",
+      "aliases": [
+        "open chest",
+        "loot",
+        "open it"
+      ],
+      "to": 130
+    },
+    {
+      "id": "ignore_chest",
+      "label": "Ignore the chest and press on",
+      "aliases": [
+        "ignore",
+        "continue",
+        "press on"
+      ],
+      "to": 117
+    },
+    {
+      "id": "listen",
+      "label": "Listen to the scratching",
+      "aliases": [
+        "listen",
+        "investigate sound"
+      ],
+      "to": 249
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "dungeon alcove with iron chest, copper wire, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 129; inferred FF beat from continuity rules."
 }

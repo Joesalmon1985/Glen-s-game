@@ -1,17 +1,21 @@
 {
   "id": 224,
-  "text": "There does not appear to be any way of travelling furthernorth. You turn around and walk back down the tunnel, passing the wooden chair. You soon arrive at the junction and turn right to head west. turn to 43. Screarn as loud as you can? Try to deaden the bell with yourboot? turn to 61 Turn to j45 The tunnel leads into a damp, high-ceilinged cavem with a rock-strewn floor. Long dripping teeth-like stalactites hang down threateningly, their constant d pping creating milky pools on the floor. The tunnel caries on throu8h an archway carved in the shape ofa demonic mouth.lfyou wish to search the chamber, tuIn to 374. If yon would rather head shai8htfor the archway, turn Lo 60.\n\nBLOODBEAST sKtL 12 STAMINA 10",
+  "text": "There does not appear to be any way of travelling furthernorth. You turn around and walk back down the tunnel, passing the wooden chair. You soon arrive at the junction and turn right to head west. turn to 43. Screarn as loud as you can? Try to deaden the bell with yourboot? turn to 61 Turn to j45 The tunnel leads into a damp, high-ceilinged cavem with a rock-strewn floor. Long dripping teeth-like stalactites hang down threateningly, their constant d pping creating milky pools on the floor. The tunnel caries on throu8h an archway carved in the shape ofa demonic mouth.lfyou wish to search the chamber, tuIn to 374. If yon would rather head shai8htfor the archway, turn Lo 60. BLOODBEAST sKtL 12 STAMINA 10",
   "choices": [
     {
       "id": "to_43",
       "label": "Turn to 43",
-      "aliases": [],
+      "aliases": [
+        "turn to 43"
+      ],
       "to": 43
     },
     {
       "id": "to_61",
       "label": "Turn to 61",
-      "aliases": [],
+      "aliases": [
+        "turn to 61"
+      ],
       "to": 61
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 224, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

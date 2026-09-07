@@ -1,41 +1,53 @@
 {
   "id": 118,
-  "text": "aa9-121 a1g Ahead you can see a large obstruction on the tunnel floor, although it is too dark to make out exactly whatitis. The wet footpdnts you have been following cary on towards the obstruction. llyou want to continue east, turn to 56. I{ you would rather go back to the luncfion and head h'est, turn to 293. 420 Lying in a hole about a metre deep, you see a Brappling iron and a leather pouch. lf you wish to reach down for them, turn io 228 If you would rather ignore them and continue north, tuin to 292 The Dwarf looks at the dice. 'Not very good at playing rhe odds, are you?'he sneers. 'l regret you must suffer a penalty before you can conhnue.' From outofhis pockethe produces two pills, Oneis stamped h'ith the letter S and the other stamped with the letter L. He asks you to choose one and swallow it. II you wish to swallow the pill stamped with the letter S, turn to 26. If you wish to swallow the other pill, turn to 354.\n\nI 122-424 First GOBLIN Second COBLIN Both Goblins will have a seParate attack on you in each Attack Round, but you must choose which of the two you will fight. Attackyour chosen Goblin as in a normal battle. Against the other you must throw for your Attack Shength in the normal way, but even if your Attack Strength is greater you will not wound it. You must lust count this as though you have defended yourself against its blow. However, if its Attack Strength is gleater, it will have wounded you in the normal way. If you win, turn to El, In {ront of you are two flights of stone steps separated by a banister of rat skulls. You may dimb either the l€ft-hand flight of steps - turn to 176 or the ri8ht-hand flight - turn to 384",
+  "text": "aa9-121 a1g Ahead you can see a large obstruction on the tunnel floor, although it is too dark to make out exactly whatitis. The wet footpdnts you have been following cary on towards the obstruction. llyou want to continue east, turn to 56. I{ you would rather go back to the luncfion and head h'est, turn to 293. 420 Lying in a hole about a metre deep, you see a Brappling iron and a leather pouch. lf you wish to reach down for them, turn io 228 If you would rather ignore them and continue north, tuin to 292 The Dwarf looks at the dice. 'Not very good at playing rhe odds, are you?'he sneers. 'l regret you must suffer a penalty before you can conhnue.' From outofhis pockethe produces two pills, Oneis stamped h'ith the letter S and the other stamped with the letter L. He asks you to choose one and swallow it. II you wish to swallow the pill stamped with the letter S, turn to 26. If you wish to swallow the other pill, turn to 354. I 122-424 First GOBLIN Second COBLIN Both Goblins will have a seParate attack on you in each Attack Round, but you must choose which of the two you will fight. Attackyour chosen Goblin as in a normal battle. Against the other you must throw for your Attack Shength in the normal way, but even if your Attack Strength is greater you will not wound it. You must lust count this as though you have defended yourself against its blow. However, if its Attack Strength is gleater, it will have wounded you in the normal way. If you win, turn to El, In {ront of you are two flights of stone steps separated by a banister of rat skulls. You may dimb either the l€ft-hand flight of steps - turn to 176 or the ri8ht-hand flight -",
   "choices": [
     {
       "id": "to_56",
       "label": "llyou want to continue east",
-      "aliases": [],
+      "aliases": [
+        "llyou want to continue east"
+      ],
       "to": 56
     },
     {
       "id": "to_293",
       "label": "I{ you would rather go back to the luncfion and head h'est",
-      "aliases": [],
+      "aliases": [
+        "i{ you would rather go back to the luncfion and head h'est"
+      ],
       "to": 293
     },
     {
       "id": "to_26",
       "label": "II you wish to swallow the pill stamped with the letter S",
-      "aliases": [],
+      "aliases": [
+        "ii you wish to swallow the pill stamped with the letter s"
+      ],
       "to": 26
     },
     {
       "id": "to_354",
       "label": "If you wish to swallow the other pill",
-      "aliases": [],
+      "aliases": [
+        "if you wish to swallow the other pill"
+      ],
       "to": 354
     },
     {
       "id": "to_176",
       "label": "You may dimb either the l€ft-hand flight of steps",
-      "aliases": [],
+      "aliases": [
+        "you may dimb either the l€ft-hand flight of steps"
+      ],
       "to": 176
     },
     {
       "id": "to_384",
       "label": "You may dimb either the l€ft-hand flight of steps - turn to 176 or the ri8ht-hand flight",
-      "aliases": [],
+      "aliases": [
+        "you may dimb either the l€ft-hand flight of steps - turn to 176 or the ri8ht-hand flight"
+      ],
       "to": 384
     }
   ],
@@ -43,7 +55,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 118, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

@@ -5,31 +5,41 @@
     {
       "id": "to_129",
       "label": "If you have a coil o{ rope and a glapplingiron",
-      "aliases": [],
+      "aliases": [
+        "if you have a coil o{ rope and a glapplingiron"
+      ],
       "to": 129
     },
     {
       "id": "to_245",
       "label": "Ifyou do nothave these items",
-      "aliases": [],
+      "aliases": [
+        "ifyou do nothave these items"
+      ],
       "to": 245
     },
     {
       "id": "to_295",
       "label": "3a6 The tunnelcontinues forquite a dlstancebefore you reach a junction If you wish to head west into the new tunnel",
-      "aliases": [],
+      "aliases": [
+        "3a6 the tunnelcontinues forquite a dlstancebefore you reach a junction if you wish to head west into the new tunnel"
+      ],
       "to": 295
     },
     {
       "id": "to_86",
       "label": "lf you have an iron key",
-      "aliases": [],
+      "aliases": [
+        "lf you have an iron key"
+      ],
       "to": 86
     },
     {
       "id": "to_276",
       "label": "If you do not have a key",
-      "aliases": [],
+      "aliases": [
+        "if you do not have a key"
+      ],
       "to": 276
     }
   ],
@@ -37,7 +47,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": "death",
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 345, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

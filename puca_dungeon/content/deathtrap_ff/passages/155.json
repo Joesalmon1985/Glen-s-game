@@ -1,35 +1,45 @@
 {
   "id": 155,
-  "text": "The words of her poem flash through your mind: 'When corridor doth water meet, do not make a quick retreat. . .'Ofcourse, it is hele that she wants you to dive into the water, Now you must decide what to do, lf you wish to dive into the water, turn to 378. If you would rather walk back down the tunnel, turn to 322. a56 The small plate slides open easily, arrd you 6rrd yourself peering into a room h,ith a deep pit in the floor behind the door- On the opposite wall there are two iron hooks, on one of which hangs a coil of rope. If you wish to open the doo!, jump over the pit afld take the iope, turn to 208. If you would rather continue north along the tunnel, turn to 326. r17-a6o The casket opens eagily, and inside there is a black velvet bag containing a large pearl. Add I LUCK point. Af[er putting the pearl in your pocket, you press on through the cobwebs. turn to 310.",
+  "text": "The words of her poem flash through your mind: 'When corridor doth water meet, do not make a quick retreat. . .'Ofcourse, it is hele that she wants you to dive into the water, Now you must decide what to do, lf you wish to dive into the water, turn to 378. If you would rather walk back down the tunnel, turn to 322. a56 The small plate slides open easily, arrd you 6rrd yourself peering into a room h,ith a deep pit in the floor behind the door- On the opposite wall there are two iron hooks, on one of which hangs a coil of rope. If you wish to open the doo!, jump over the pit afld take the iope, turn to 208. If you would rather continue north along the tunnel, turn to 326. r17-a6o The casket opens eagily, and inside there is a black velvet bag containing a large pearl. Add I LUCK point. Af[er putting the pearl in your pocket, you press on through the cobwebs.",
   "choices": [
     {
       "id": "to_378",
       "label": "it is hele that she wants you to dive into the water, Now you must decide what to do, lf you wish to dive into the water",
-      "aliases": [],
+      "aliases": [
+        "it is hele that she wants you to dive into the water, now you must decide what to do, lf you wish to dive into the water"
+      ],
       "to": 378
     },
     {
       "id": "to_322",
       "label": "If you would rather walk back down the tunnel",
-      "aliases": [],
+      "aliases": [
+        "if you would rather walk back down the tunnel"
+      ],
       "to": 322
     },
     {
       "id": "to_208",
       "label": "If you wish to open the doo!, jump over the pit afld take the iope",
-      "aliases": [],
+      "aliases": [
+        "if you wish to open the doo!, jump over the pit afld take the iope"
+      ],
       "to": 208
     },
     {
       "id": "to_326",
       "label": "If you would rather continue north along the tunnel",
-      "aliases": [],
+      "aliases": [
+        "if you would rather continue north along the tunnel"
+      ],
       "to": 326
     },
     {
       "id": "to_310",
       "label": "Turn to 310",
-      "aliases": [],
+      "aliases": [
+        "turn to 310"
+      ],
       "to": 310
     }
   ],
@@ -37,7 +47,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 155, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

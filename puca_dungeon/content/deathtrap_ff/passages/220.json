@@ -1,17 +1,21 @@
 {
   "id": 220,
-  "text": "A dull 'bong' sounds ftom the bell like a death toll. Evbrything around you starts to vibrate, and you Brit your teeth as your head too starts to shudder Your whole body is trembling and you fall to the floor. You quiver and shake, w thing convulsively on the floor as the vibiations intensify. Lose 2 s(rLL points and 2 STAMINA points. You search desperately for a way of stopping the bell. Will you: You recognize the beast it is a MANTICORE Taking heed o{ the poem's warning, you watch out {or its tail which sprouts a pro{usion ofsharp spikes, thick and hard as iron bolts, at its tip. lf you have a shield, turn to 196. If you are not carrying a shield, turn to 6",
+  "text": "A dull 'bong' sounds ftom the bell like a death toll. Evbrything around you starts to vibrate, and you Brit your teeth as your head too starts to shudder Your whole body is trembling and you fall to the floor. You quiver and shake, w thing convulsively on the floor as the vibiations intensify. Lose 2 s(rLL points and 2 STAMINA points. You search desperately for a way of stopping the bell. Will you: You recognize the beast it is a MANTICORE Taking heed o{ the poem's warning, you watch out {or its tail which sprouts a pro{usion ofsharp spikes, thick and hard as iron bolts, at its tip. lf you have a shield, turn to 196. If you are not carrying a shield,",
   "choices": [
     {
       "id": "to_196",
       "label": "lf you have a shield",
-      "aliases": [],
+      "aliases": [
+        "lf you have a shield"
+      ],
       "to": 196
     },
     {
       "id": "to_6",
       "label": "If you are not carrying a shield",
-      "aliases": [],
+      "aliases": [
+        "if you are not carrying a shield"
+      ],
       "to": 6
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 220, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

@@ -1,17 +1,21 @@
 {
   "id": 282,
-  "text": "The tunnel soon ends at a junction Standin8 there alone andwondedng whichway to go is one ofyour dvals.lt is one ofthe Barbarrans You call out to hlm, but ai first he does not answer, he merely stares at you coldl,v, his hands firmll' gnpprng his axe You walk up to him and askwhich way he is heading. He grunts his reply, saying that he is going west, and you may go u'ith him if you wish. If you would like to head west with the Barbarian, turn to 22 If you h'ould rather decline his offer and head east alone, turn to 388.",
+  "text": "The tunnel soon ends at a junction Standin8 there alone andwondedng whichway to go is one ofyour dvals.lt is one ofthe Barbarrans You call out to hlm, but ai first he does not answer, he merely stares at you coldl,v, his hands firmll' gnpprng his axe You walk up to him and askwhich way he is heading. He grunts his reply, saying that he is going west, and you may go u'ith him if you wish. If you would like to head west with the Barbarian, turn to 22 If you h'ould rather decline his offer and head east alone,",
   "choices": [
     {
       "id": "to_22",
       "label": "If you would like to head west with the Barbarian",
-      "aliases": [],
+      "aliases": [
+        "if you would like to head west with the barbarian"
+      ],
       "to": 22
     },
     {
       "id": "to_388",
       "label": "If you would like to head west with the Barbarian, turn to 22 If you h'ould rather decline his offer and head east alone",
-      "aliases": [],
+      "aliases": [
+        "if you would like to head west with the barbarian, turn to 22 if you h'ould rather decline his offer and head east alone"
+      ],
       "to": 388
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 282, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

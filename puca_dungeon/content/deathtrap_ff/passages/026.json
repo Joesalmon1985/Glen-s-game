@@ -1,17 +1,21 @@
 {
   "id": 26,
-  "text": "The pill makes you feel dull and lethargic. Lose two 5(ILL points. The Dwarf tells you that you can now progress to the second stage o{ the test He reaches for a wickerbasketand tells you that there is a snake inside 1t He tips up the basket and the snake drbps onto the floor; it rs a cobra andit rears up into the air ready to st ke. The Dwa#says hewants to testyour reactions. You must grasp the cobra bare-handed below its head, avoiding its deadly fangs You crouch down on the floor, tensrng yourself for the moment at which to seize it Roll two d1ce. If the total is the same as or less than your SKILL, fuin to 55.Ifthe totalis greater thanyoursKrLL, turn to2o2\n\nYou step up to the frightened man and cleave the chain with your sword He drops to h1s knees and bows, thanking you over and over again. He tells you that four years ago he entered the Trial o{ Championsbut failed. He fell down a pitand had to be rescued by a T almaster, one of Baron Sukumvit's dungeon administrators. He lvas offered a choice between death or servitude in Deathtrap Dungeon as the Trialmaster's mrnion. Choosing the latLer, he worked Jike a slave until he could stand it no longer and tried tb escape Alas, he was unsuccessful and was captured by the Trialmaste/s wandering Orc guards. To teach him a lesson, they cut off his hand and condemned him to a year's imprisonment in this cell. You ask him whether he has anyinformation thatmightbe of use to you. He scratches his head 'Well, I haven't exactly done very well in here myselt'he says, 'but I do know that you need to collect gems and precious stones if you hope to get out. I don't know why, but there it is.' Without anothei word, the ragged pdsoner dashes out of the room, tuming left into the tunnel. You decide to keep heading north and turn right into the tunnel. turn to 78. 2E-1a 2g The Dwarf 's chainmail coatis of finest quality iron, obviously made by a master armourer. You st p it frorn his body and place it over your head. Add r s(rLL point There is nothinfi else of use to you in the chamber, so you decide to investigate the new funnel. turn to 213.",
+  "text": "The pill makes you feel dull and lethargic. Lose two 5(ILL points. The Dwarf tells you that you can now progress to the second stage o{ the test He reaches for a wickerbasketand tells you that there is a snake inside 1t He tips up the basket and the snake drbps onto the floor; it rs a cobra andit rears up into the air ready to st ke. The Dwa#says hewants to testyour reactions. You must grasp the cobra bare-handed below its head, avoiding its deadly fangs You crouch down on the floor, tensrng yourself for the moment at which to seize it Roll two d1ce. If the total is the same as or less than your SKILL, fuin to 55.Ifthe totalis greater thanyoursKrLL, turn to2o2 You step up to the frightened man and cleave the chain with your sword He drops to h1s knees and bows, thanking you over and over again. He tells you that four years ago he entered the Trial o{ Championsbut failed. He fell down a pitand had to be rescued by a T almaster, one of Baron Sukumvit's dungeon administrators. He lvas offered a choice between death or servitude in Deathtrap Dungeon as the Trialmaster's mrnion. Choosing the latLer, he worked Jike a slave until he could stand it no longer and tried tb escape Alas, he was unsuccessful and was captured by the Trialmaste/s wandering Orc guards. To teach him a lesson, they cut off his hand and condemned him to a year's imprisonment in this cell. You ask him whether he has anyinformation thatmightbe of use to you. He scratches his head 'Well, I haven't exactly done very well in here myselt'he says, 'but I do know that you need to collect gems and precious stones if you hope to get out. I don't know why, but there it is.' Without anothei word, the ragged pdsoner dashes out of the room, tuming left into the tunnel. You decide to keep heading north and turn right into the tunnel. turn to 78. 2E-1a 2g The Dwarf 's chainmail coatis of finest quality iron, obviously made by a master armourer. You st p it frorn his body and place it over your head. Add r s(rLL point There is nothinfi else of use to you in the chamber, so you decide to investigate the new funnel.",
   "choices": [
     {
       "id": "to_78",
       "label": "Turn to 78",
-      "aliases": [],
+      "aliases": [
+        "turn to 78"
+      ],
       "to": 78
     },
     {
       "id": "to_213",
       "label": "Turn to 213",
-      "aliases": [],
+      "aliases": [
+        "turn to 213"
+      ],
       "to": 213
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 26, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

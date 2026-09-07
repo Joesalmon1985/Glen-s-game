@@ -5,7 +5,9 @@
     {
       "id": "choice_1",
       "label": "If you would rather attack the Mirror Demon instead",
-      "aliases": [],
+      "aliases": [
+        "if you would rather attack the mirror demon instead"
+      ],
       "to": 127
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 300, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

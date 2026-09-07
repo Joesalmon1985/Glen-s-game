@@ -1,27 +1,36 @@
 {
   "id": 217,
-  "text": "[Passage 217 — needs review]",
+  "text": "The corridor narrows. A pressure plate clicks under your boot and a hissing dart shoots from a wall niche. Test your Luck.",
   "choices": [
     {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
+      "id": "test_luck_dart",
+      "label": "Test your Luck against the dart trap",
       "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
+        "test luck",
+        "dodge",
+        "leap aside",
+        "try your luck",
+        "test your luck"
       ],
-      "to": 218
+      "to": 218,
+      "to_success": 218,
+      "to_fail": 333,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 218,
+          "fail_to": 333
+        }
+      ]
     }
   ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "image_seed": "narrow dungeon corridor, dart trap niche, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 217; inferred FF beat from continuity rules."
 }

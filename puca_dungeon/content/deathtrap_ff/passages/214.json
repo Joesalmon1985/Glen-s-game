@@ -1,29 +1,37 @@
 {
   "id": 214,
-  "text": "Walking along, you see d red line Painted across the lunnel floor ind notice d sign on the wall which reads: 'No weapons beyond this Point' If you wish to abandon any weapons before continuing north, turn to J89. If you would rather ignore the notice and carry on north, turn to 181. You find a pool behind the dead Hobgoblins and take great gulps of the cool water as fast as you can. This neutralizes the acid and slowly you begin to recover. Still in pain, you standupand setoffnoth. turn to 110 If you are unarmed, turn to 286 If you still have your weaPons/ tutn to 32o.\n\n2t3-215 You break off a large piecJif the mushroom and biie into it eagerly. lmmediately your stomach feels bloated and you can even see it beginning to bulge below yourbelt. Your whole body starts to exPand, bursting out of your clothes with a loud ripping sound You grow biSger and bigger, and soon yout face is pressed against the ceiling. The mushrooms you have eaten are much sought after bywizards for their growth potions, but to you they spell doom. You are too large ever to leave the cellar, and your adventure ends hete ' 234 A little fartheronyou cometo a sectionofthe tunnel which is covered with thick green slime. It looks threatening, so you decide to testit lirst with a piece o{ cloth- The slime's conosive jelly bums the cloth instantly, leaving no trace. Ifyou are carrying a pair of stilts, tuln to 183. If you do not have them, turn to 207.",
+  "text": "Walking along, you see d red line Painted across the lunnel floor ind notice d sign on the wall which reads: 'No weapons beyond this Point' If you wish to abandon any weapons before continuing north, turn to J89. If you would rather ignore the notice and carry on north, turn to 181. You find a pool behind the dead Hobgoblins and take great gulps of the cool water as fast as you can. This neutralizes the acid and slowly you begin to recover. Still in pain, you standupand setoffnoth. turn to 110 If you are unarmed, turn to 286 If you still have your weaPons/ tutn to 32o. 2t3-215 You break off a large piecJif the mushroom and biie into it eagerly. lmmediately your stomach feels bloated and you can even see it beginning to bulge below yourbelt. Your whole body starts to exPand, bursting out of your clothes with a loud ripping sound You grow biSger and bigger, and soon yout face is pressed against the ceiling. The mushrooms you have eaten are much sought after bywizards for their growth potions, but to you they spell doom. You are too large ever to leave the cellar, and your adventure ends hete ' 234 A little fartheronyou cometo a sectionofthe tunnel which is covered with thick green slime. It looks threatening, so you decide to testit lirst with a piece o{ cloth- The slime's conosive jelly bums the cloth instantly, leaving no trace. Ifyou are carrying a pair of stilts, tuln to 183. If you do not have them, turn to 207.",
   "choices": [
     {
       "id": "to_181",
       "label": "If you would rather ignore the notice and carry on north",
-      "aliases": [],
+      "aliases": [
+        "if you would rather ignore the notice and carry on north"
+      ],
       "to": 181
     },
     {
       "id": "to_110",
       "label": "Turn to 110",
-      "aliases": [],
+      "aliases": [
+        "turn to 110"
+      ],
       "to": 110
     },
     {
       "id": "to_286",
       "label": "turn to 110 If you are unarmed",
-      "aliases": [],
+      "aliases": [
+        "turn to 110 if you are unarmed"
+      ],
       "to": 286
     },
     {
       "id": "to_207",
       "label": "If you do not have them",
-      "aliases": [],
+      "aliases": [
+        "if you do not have them"
+      ],
       "to": 207
     }
   ],
@@ -31,7 +39,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": "death",
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 214, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

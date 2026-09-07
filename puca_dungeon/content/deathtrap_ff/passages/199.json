@@ -1,14 +1,7 @@
 {
   "id": 199,
   "text": "MANTICORE s(ILL 11 I{ you win, turn to j64. STAMINA 11",
-  "choices": [
-    {
-      "id": "choice_1",
-      "label": "MANTICORE s(ILL 11 I{ you win",
-      "aliases": [],
-      "to": 164
-    }
-  ],
+  "choices": [],
   "combat": {
     "enemy_name": "Manticore",
     "enemy_skill": 11,
@@ -20,12 +13,16 @@
         "skill": 11,
         "stamina": 11
       }
-    ]
+    ],
+    "skill": 11,
+    "stamina": 11,
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 199, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

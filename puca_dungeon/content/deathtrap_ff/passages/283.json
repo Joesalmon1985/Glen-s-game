@@ -1,17 +1,21 @@
 {
   "id": 283,
-  "text": "You have to squeeze yoursel{ deep into the crack to conceal yourself completely. From thrs cramped position you are unable to see the owner of the {eet that shuffle slonly by. A minute later all is quiet again, so you pull youmelfback out into the tunnel and head west. Tuin to 1o9284 Have you drunk a potion found in a black leather book? lf you have, turn to 398. If you have not swallowed this potion, turn to 57.\n\n2E5",
+  "text": "You have to squeeze yoursel{ deep into the crack to conceal yourself completely. From thrs cramped position you are unable to see the owner of the {eet that shuffle slonly by. A minute later all is quiet again, so you pull youmelfback out into the tunnel and head west. Tuin to 1o9284 Have you drunk a potion found in a black leather book? lf you have, turn to 398. If you have not swallowed this potion, turn to 57. 2E5",
   "choices": [
     {
       "id": "to_398",
       "label": "lf you have",
-      "aliases": [],
+      "aliases": [
+        "lf you have"
+      ],
       "to": 398
     },
     {
       "id": "to_57",
       "label": "If you have not swallowed this potion",
-      "aliases": [],
+      "aliases": [
+        "if you have not swallowed this potion"
+      ],
       "to": 57
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 283, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

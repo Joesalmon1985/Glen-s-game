@@ -5,7 +5,9 @@
     {
       "id": "to_29",
       "label": "You are angry at your loss and stomp oif norlh, determined to have your revenge",
-      "aliases": [],
+      "aliases": [
+        "you are angry at your loss and stomp oif norlh, determined to have your revenge"
+      ],
       "to": 29
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 306, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

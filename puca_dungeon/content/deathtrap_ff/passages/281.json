@@ -1,27 +1,21 @@
 {
   "id": 281,
-  "text": "[Passage 281 — needs review]",
-  "choices": [
-    {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
-      "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
-      ],
-      "to": 282
-    }
-  ],
-  "combat": null,
+  "text": "A skeleton bars the passage ahead, weapons ready. There is no way past without a fight.",
+  "choices": [],
+  "combat": {
+    "enemy_name": "Skeleton",
+    "skill": 6,
+    "stamina": 9,
+    "win_to": 282,
+    "lose_to": 381,
+    "flee_to": 321
+  },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": false,
-  "stub_bridged": true
+  "image_seed": "skeleton blocking a crystal-lit dungeon passage",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 281; inferred FF beat from continuity rules."
 }

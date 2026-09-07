@@ -1,13 +1,21 @@
 {
   "id": 295,
-  "text": "II I",
+  "text": "A orc bars the passage ahead, weapons ready. There is no way past without a fight.",
   "choices": [],
-  "combat": null,
+  "combat": {
+    "enemy_name": "Orc",
+    "skill": 5,
+    "stamina": 5,
+    "win_to": 296,
+    "lose_to": 79,
+    "flee_to": 75
+  },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "raw_text": "II\nI"
+  "image_seed": "orc blocking a crystal-lit dungeon passage",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 295; inferred FF beat from continuity rules."
 }

@@ -1,11 +1,13 @@
 {
   "id": 242,
-  "text": "Gripping the rope firmly, you step back to take a runningjump. However, in the dim light you do not notice that someone has cut the rope almost in two just a little way above the section you are holding. As you swing out across the pit it suddenly breaks, and you scream with fearas you plunge headlong to the depths below. turn to 285.",
+  "text": "Gripping the rope firmly, you step back to take a runningjump. However, in the dim light you do not notice that someone has cut the rope almost in two just a little way above the section you are holding. As you swing out across the pit it suddenly breaks, and you scream with fearas you plunge headlong to the depths below.",
   "choices": [
     {
       "id": "to_285",
       "label": "Turn to 285",
-      "aliases": [],
+      "aliases": [
+        "turn to 285"
+      ],
       "to": 285
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 242, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

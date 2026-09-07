@@ -1,23 +1,29 @@
 {
   "id": 298,
-  "text": "You see a backpack propped up agalnst the tunnel wall. You wonder i{ it belongs to one ofyoff vals Ifyou wish to look inside the backPack, tuIn to 3o4 lfyou would rather conlinue north, turn to 279 BLOODBEAST SKILL 12 STAMINA 10 As soon as you win your first Attack Round, Tesi uout I u,k. ll you are I ucly. turn to 97. If you dre Unlucky, turn to 21.",
+  "text": "You see a backpack propped up agalnst the tunnel wall. You wonder i{ it belongs to one ofyoff vals Ifyou wish to look inside the backPack, tuIn to 3o4 lfyou would rather conlinue north, turn to 279 BLOODBEAST SKILL 12 STAMINA 10 As soon as you win your first Attack Round, Tesi uout I u,k. ll you are I ucly. turn to 97. If you dre Unlucky,",
   "choices": [
     {
       "id": "to_279",
       "label": "r i{ it belongs to one ofyoff vals Ifyou wish to look inside the backPack, tuIn to 3o4 lfyou would rather conlinue north",
-      "aliases": [],
+      "aliases": [
+        "r i{ it belongs to one ofyoff vals ifyou wish to look inside the backpack, tuin to 3o4 lfyou would rather conlinue north"
+      ],
       "to": 279
     },
     {
       "id": "to_97",
       "label": "Turn to 97",
-      "aliases": [],
+      "aliases": [
+        "turn to 97"
+      ],
       "to": 97
     },
     {
       "id": "to_21",
       "label": "If you dre Unlucky",
-      "aliases": [],
+      "aliases": [
+        "if you dre unlucky"
+      ],
       "to": 21
     }
   ],
@@ -25,20 +31,23 @@
     "enemy_name": "turn to 279 BLOODBEAST",
     "enemy_skill": 12,
     "enemy_stamina": 10,
-    "win_to": null,
+    "win_to": 299,
     "enemies": [
       {
         "name": "turn to 279 BLOODBEAST",
         "skill": 12,
         "stamina": 10
       }
-    ]
+    ],
+    "skill": 12,
+    "stamina": 10,
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 298, crystal light",
   "ocr_source": true,
-  "needs_review": true,
-  "raw_text": "You see a backpack propped up agalnst the tunnel\nwall. You wonder i{ it belongs to one ofyoff vals\nIfyou wish to look inside the backPack, tuIn to 3o4\nlfyou would rather conlinue north, turn to 279\nBLOODBEAST SKILL 12 STAMINA 10\nAs soon as you win your first Attack Round, Tesi\nuout I u,k. ll you are I ucly. turn to 97. If you dre\nUnlucky, turn to 21."
+  "needs_review": false
 }

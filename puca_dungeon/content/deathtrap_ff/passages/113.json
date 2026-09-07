@@ -1,27 +1,21 @@
 {
   "id": 113,
-  "text": "[Passage 113 — needs review]",
-  "choices": [
-    {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
-      "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
-      ],
-      "to": 114
-    }
-  ],
-  "combat": null,
+  "text": "A goblin bars the passage ahead, weapons ready. There is no way past without a fight.",
+  "choices": [],
+  "combat": {
+    "enemy_name": "Goblin",
+    "skill": 8,
+    "stamina": 9,
+    "win_to": 114,
+    "lose_to": 5,
+    "flee_to": 73
+  },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": false,
-  "stub_bridged": true
+  "image_seed": "goblin blocking a crystal-lit dungeon passage",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 113; inferred FF beat from continuity rules."
 }

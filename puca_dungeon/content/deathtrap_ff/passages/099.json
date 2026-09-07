@@ -1,17 +1,21 @@
 {
   "id": 99,
-  "text": "Smiling, you tell Ivy that you think she and Sour belly look very alike Then, whrle she stares admir ingly at the painting, you pick up a broken stool, creep up behind her and smash heroverthe back of the head with it as hard as you can. To your im mense relie{, she slumPs unconscious to the floor If you wish to search her room, turn to 266. I{ not, leave by the door in the east wall. You lind yollrself standing at the end of a tunnel. turn to 305.",
+  "text": "Smiling, you tell Ivy that you think she and Sour belly look very alike Then, whrle she stares admir ingly at the painting, you pick up a broken stool, creep up behind her and smash heroverthe back of the head with it as hard as you can. To your im mense relie{, she slumPs unconscious to the floor If you wish to search her room, turn to 266. I{ not, leave by the door in the east wall. You lind yollrself standing at the end of a tunnel.",
   "choices": [
     {
       "id": "to_266",
       "label": "To your im mense relie{, she slumPs unconscious to the floor If you wish to search her room",
-      "aliases": [],
+      "aliases": [
+        "to your im mense relie{, she slumps unconscious to the floor if you wish to search her room"
+      ],
       "to": 266
     },
     {
       "id": "to_305",
       "label": "Turn to 305",
-      "aliases": [],
+      "aliases": [
+        "turn to 305"
+      ],
       "to": 305
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 99, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

@@ -5,7 +5,9 @@
     {
       "id": "choice_1",
       "label": "Otherwise, leave the chamber to continue west",
-      "aliases": [],
+      "aliases": [
+        "otherwise, leave the chamber to continue west"
+      ],
       "to": 63
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 70, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

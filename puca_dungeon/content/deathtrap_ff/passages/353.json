@@ -1,27 +1,44 @@
 {
   "id": 353,
-  "text": "[Passage 353 — needs review]",
+  "text": "A side alcove holds a small iron chest bound with copper wire. Faint scratching echoes from deeper in the tunnel.",
   "choices": [
     {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
+      "id": "open_chest",
+      "label": "Open the iron chest",
       "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
+        "open chest",
+        "loot",
+        "open it"
       ],
       "to": 354
+    },
+    {
+      "id": "ignore_chest",
+      "label": "Ignore the chest and press on",
+      "aliases": [
+        "ignore",
+        "continue",
+        "press on"
+      ],
+      "to": 85
+    },
+    {
+      "id": "listen",
+      "label": "Listen to the scratching",
+      "aliases": [
+        "listen",
+        "investigate sound"
+      ],
+      "to": 313
     }
   ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": false,
-  "stub_bridged": true
+  "image_seed": "dungeon alcove with iron chest, copper wire, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 353; inferred FF beat from continuity rules."
 }

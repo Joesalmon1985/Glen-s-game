@@ -5,7 +5,9 @@
     {
       "id": "to_80",
       "label": "II the total is the same as or less than your SKILL scote",
-      "aliases": [],
+      "aliases": [
+        "ii the total is the same as or less than your skill scote"
+      ],
       "to": 80
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 58, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

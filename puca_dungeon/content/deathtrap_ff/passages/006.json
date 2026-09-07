@@ -1,14 +1,7 @@
 {
   "id": 6,
-  "text": "Knowing that the Manticore will fire the spikes in its tail at you, you run for cover behind one of the pillars. Before you reach it, a volley of spikes flies through the air and one of them sinks into your arm. Lose u STAMINA points. lf you aie still alive, you 'ivaste no time and attack the Manticore with your sword before it has time to unleash more of its deadly spikes. MANTICORE SKILL 11 STAMINA 11 llyou win, turn to 364.",
-  "choices": [
-    {
-      "id": "to_364",
-      "label": "MANTICORE SKILL 11 STAMINA 11 llyou win",
-      "aliases": [],
-      "to": 364
-    }
-  ],
+  "text": "Knowing that the Manticore will fire the spikes in its tail at you, you run for cover behind one of the pillars. Before you reach it, a volley of spikes flies through the air and one of them sinks into your arm. Lose 2 STAMINA points. If you are still alive, you waste no time and attack the Manticore with your sword before it has time to unleash more of its deadly spikes. MANTICORE SKILL 11 STAMINA 11 If you win,",
+  "choices": [],
   "combat": {
     "enemy_name": "Manticore",
     "enemy_skill": 11,
@@ -20,12 +13,16 @@
         "skill": 11,
         "stamina": 11
       }
-    ]
+    ],
+    "skill": 11,
+    "stamina": 11,
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 6, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

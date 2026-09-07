@@ -1,11 +1,13 @@
 {
   "id": 279,
-  "text": "You a[ive at a junction in the tunnel Anewbranch leads west, but the wet footpdnts you have been following contrnue nofth. You decide to keep following the footpdnts. turn to 32",
+  "text": "You a[ive at a junction in the tunnel Anewbranch leads west, but the wet footpdnts you have been following contrnue nofth. You decide to keep following the footpdnts.",
   "choices": [
     {
       "id": "to_32",
       "label": "Turn to 32",
-      "aliases": [],
+      "aliases": [
+        "turn to 32"
+      ],
       "to": 32
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 279, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

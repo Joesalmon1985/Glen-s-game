@@ -1,11 +1,13 @@
 {
   "id": 104,
-  "text": "Reacting quickly, you manage to tump over the outstretched tongue and run into the tunnel, leaving the Bloodbeast wallowing in its pool to arvalt another victim. turn to 134",
+  "text": "Reacting quickly, you manage to tump over the outstretched tongue and run into the tunnel, leaving the Bloodbeast wallowing in its pool to arvalt another victim.",
   "choices": [
     {
       "id": "to_134",
       "label": "Turn to 134",
-      "aliases": [],
+      "aliases": [
+        "turn to 134"
+      ],
       "to": 134
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 104, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

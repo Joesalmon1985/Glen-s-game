@@ -1,11 +1,13 @@
 {
   "id": 364,
-  "text": "As you are wiping the Manticords blood from your sword, you are surprised to see a small man with a large nose suddenly jump out from behind one of the marble pilla$. He is dressed in a tighFfitting green tunic and looks quite harmless, althoughyou are wary o{ the way he is holding an opaque glass ball with a shimmering green light. 'Greetings,' he sayschee ully. 'Myname is Igbut the Gnome, and I am the Trialmaster for your final test, Needle6s to say, my magicalpowers are Ereat, so you should not try to attack me. You may have lealnt during your quest that gems play an essential part in the Trial of Champions. The iron door in front of you is the victory eit, but there is only one way of openingit. Three gems have tobeputinto the lock mechanism, in a particular order, for the door to open. Each gem radiates a unique energy which will trigger the mechanism - if you do it corectly, that is. I will help you to a degree, but first we need the coEect gems. Have you an emerald?' lf you possess an emerald, turn to 31",
+  "text": "As you are wiping the Manticords blood from your sword, you are surprised to see a small man with a large nose suddenly jump out from behind one of the marble pilla$. He is dressed in a tighFfitting green tunic and looks quite harmless, althoughyou are wary o{ the way he is holding an opaque glass ball with a shimmering green light. 'Greetings,' he sayschee ully. 'Myname is Igbut the Gnome, and I am the Trialmaster for your final test, Needle6s to say, my magicalpowers are Ereat, so you should not try to attack me. You may have lealnt during your quest that gems play an essential part in the Trial of Champions. The iron door in front of you is the victory eit, but there is only one way of openingit. Three gems have tobeputinto the lock mechanism, in a particular order, for the door to open. Each gem radiates a unique energy which will trigger the mechanism - if you do it corectly, that is. I will help you to a degree, but first we need the coEect gems. Have you an emerald?' lf you possess an emerald,",
   "choices": [
     {
       "id": "to_31",
       "label": "Have you an emerald?' lf you possess an emerald",
-      "aliases": [],
+      "aliases": [
+        "have you an emerald?' lf you possess an emerald"
+      ],
       "to": 31
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 364, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

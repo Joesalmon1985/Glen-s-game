@@ -1,11 +1,13 @@
 {
   "id": 29,
-  "text": "The tunnel leads north for some distance before coming to a dead end. The mouth of a chute protrudes from the tunnel's easternwall. lt seems to be the only way out- You decide to risk it and climb into the chute. You slide gently down and come out in a room, landing on yourback. turn to 90",
+  "text": "The tunnel leads north for some distance before coming to a dead end. The mouth of a chute protrudes from the tunnel's easternwall. lt seems to be the only way out- You decide to risk it and climb into the chute. You slide gently down and come out in a room, landing on yourback.",
   "choices": [
     {
       "id": "to_90",
       "label": "Turn to 90",
-      "aliases": [],
+      "aliases": [
+        "turn to 90"
+      ],
       "to": 90
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 29, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

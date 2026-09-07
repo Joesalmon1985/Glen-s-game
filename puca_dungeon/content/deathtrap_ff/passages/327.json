@@ -1,27 +1,46 @@
 {
   "id": 327,
-  "text": "[Passage 327 — needs review]",
+  "text": "A heavy oak door blocks the way, its iron ring set high. Something scrapes on the far side.",
   "choices": [
     {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
+      "id": "force_door",
+      "label": "Try to force the door open",
       "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
+        "force",
+        "push",
+        "open door",
+        "kick"
       ],
       "to": 328
+    },
+    {
+      "id": "knock",
+      "label": "Knock and call out",
+      "aliases": [
+        "knock",
+        "call",
+        "hail"
+      ],
+      "to": 303
+    },
+    {
+      "id": "leave",
+      "label": "Leave the door and find another way",
+      "aliases": [
+        "leave",
+        "another way",
+        "back away"
+      ],
+      "to": 27
     }
   ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "image_seed": "heavy oak dungeon door with iron ring",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 327; inferred FF beat from continuity rules."
 }

@@ -600,11 +600,29 @@ def _perception_query(world: WorldState, intent: Intent, passage: PassageLike, r
 
     labels = _choice_labels(passage)
     inv = ', '.join(str(i).replace('_', ' ') for i in sheet.inventory) or 'little'
-    cue = f' Obvious paths: {"; ".join(labels)}.' if labels else ''
-    res.facts.append(
-        f'Passage {world.passage_id}. SKILL {sheet.skill}, STAMINA {sheet.stamina}, '
-        f'LUCK {sheet.luck}. You carry {inv}.{cue}'
-    )
+    cue = f' Ways onward: {"; ".join(labels)}.' if labels else ''
+    focus = (intent.query_focus or '').lower()
+    # Hide raw Skill/Stamina/Luck meters from player-facing perception (§14)
+    if focus in ('inventory',):
+        res.facts.append(f'You are carrying: {inv}.{cue}')
+    elif focus in ('sheet', 'stats', 'scores'):
+        res.facts.append(
+            'You take stock of yourself: fit enough to fight, but the Trial will still test you.'
+            f' You carry {inv}.{cue}'
+        )
+    else:
+        # Visible look-around: prefer passage text cue over meter dump
+        body = ''
+        if isinstance(passage, dict):
+            body = str(passage.get('text') or '').strip()
+        else:
+            body = str(getattr(passage, 'text', '') or '').strip()
+        if body:
+            # Short re-anchor, not the entire paragraph again
+            snippet = body if len(body) <= 280 else (body[:277].rsplit(' ', 1)[0] + '…')
+            res.facts.append(f'{snippet}{cue}')
+        else:
+            res.facts.append(f'You look around carefully. You carry {inv}.{cue}')
     return res
 
 
@@ -630,11 +648,48 @@ def _dismiss(world: WorldState, intent: Intent, res: Resolution, bump_guidance: 
     res.interacted = True
     if bump_guidance:
         res.guidance_delta = max(res.guidance_delta, 1)
-    said = (intent.utterance or intent.method or intent.action_class or 'that').strip()
-    res.facts.append(
-        f'You attempt “{said[:120]}”, but it does not change your place in the dungeon. '
-        'The passage remains as it is.'
-    )
+    classification = (intent.classification or '').upper()
+    cls = (intent.action_class or '').upper()
+    said = (intent.utterance or intent.method or '').strip()
+    verb = (intent.action_class or 'that').strip().replace('_', ' ').lower()
+
+    if classification == 'SILLY_BUT_VALID' or cls in ('BODILY', 'SUMMON', 'CARTWHEEL'):
+        if 'dragon' in (said or verb).lower() or 'summon' in (said or verb).lower():
+            res.facts.append(
+                'No dragon answers. Crystal light and damp stone stay exactly as they were.'
+            )
+        elif 'lick' in (said or verb).lower() or cls == 'LICK':
+            res.facts.append(
+                'You taste cold iron and dust. The boxes do not appreciate the attention.'
+            )
+        else:
+            res.facts.append(
+                'You do something odd in the gloom. The dungeon is unimpressed and unchanged.'
+            )
+    elif cls == 'LICK':
+        res.facts.append(
+            'You taste cold iron and dust. The boxes do not appreciate the attention.'
+        )
+    elif classification == 'META_REQUEST' or cls == 'META':
+        res.facts.append(
+            'That request sits outside the Trial. The cavern waits for a real move.'
+        )
+    elif 'cross' in (said or '').lower() or 'stupid' in (said or '').lower() or 'sense' in (said or '').lower():
+        res.facts.append(
+            'You seethe for a moment. The dungeon does not argue back; it simply waits.'
+        )
+    elif cls == 'MOVE' or any(w in (said or '').lower() for w in ('run', 'move', 'go back', 'turn around')):
+        res.facts.append(
+            'You pace and turn, but this stretch of tunnel offers no new route from that alone.'
+        )
+    elif said:
+        res.facts.append(
+            f'You try to {said[:100].rstrip(".")}. Nothing in the world shifts for it.'
+        )
+    else:
+        res.facts.append(
+            f'You try to {verb}. Nothing in the world shifts for it.'
+        )
     return res
 
 

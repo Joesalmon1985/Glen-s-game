@@ -5,24 +5,23 @@
     {
       "id": "to_83",
       "label": "lf you would rather keep going west",
-      "aliases": [],
+      "aliases": [
+        "lf you would rather keep going west"
+      ],
       "to": 83
-    },
-    {
-      "id": "to_11",
-      "label": "First FLYING GUARDIAN Second FLYING GUARDI AN lfyou win",
-      "aliases": [],
-      "to": 11
     }
   ],
   "combat": {
     "enemies": [],
-    "win_to": 11
+    "win_to": 11,
+    "enemy_name": "Enemy",
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 164, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

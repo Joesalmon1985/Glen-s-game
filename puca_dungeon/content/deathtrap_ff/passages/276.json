@@ -1,12 +1,44 @@
 {
   "id": 276,
-  "text": "1t l9y try to charge down the door with your shoulder, you hear the shrieking voices oa the Tro€ilodytes coming down the tinnel. you are trapped and draw your sword. The Troglodytes approach you, ther bows drawn, and a hail of arrows strikes you with fatal impact. your lifeless body^slumpr tn thq ground in thc depth\\ ot DerthraP uUngeon.",
-  "choices": [],
+  "text": "A side alcove holds a small iron chest bound with copper wire. Faint scratching echoes from deeper in the tunnel.",
+  "choices": [
+    {
+      "id": "open_chest",
+      "label": "Open the iron chest",
+      "aliases": [
+        "open chest",
+        "loot",
+        "open it"
+      ],
+      "to": 277
+    },
+    {
+      "id": "ignore_chest",
+      "label": "Ignore the chest and press on",
+      "aliases": [
+        "ignore",
+        "continue",
+        "press on"
+      ],
+      "to": 346
+    },
+    {
+      "id": "listen",
+      "label": "Listen to the scratching",
+      "aliases": [
+        "listen",
+        "investigate sound"
+      ],
+      "to": 266
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "dungeon alcove with iron chest, copper wire, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 276; inferred FF beat from continuity rules."
 }

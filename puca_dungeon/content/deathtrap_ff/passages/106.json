@@ -1,27 +1,21 @@
 {
   "id": 106,
-  "text": "[Passage 106 — needs review]",
-  "choices": [
-    {
-      "id": "press_on",
-      "label": "Press on deeper into the dungeon",
-      "aliases": [
-        "press on",
-        "continue",
-        "go on",
-        "onward",
-        "deeper"
-      ],
-      "to": 107
-    }
-  ],
-  "combat": null,
+  "text": "A skeleton bars the passage ahead, weapons ready. There is no way past without a fight.",
+  "choices": [],
+  "combat": {
+    "enemy_name": "Skeleton",
+    "skill": 6,
+    "stamina": 8,
+    "win_to": 107,
+    "lose_to": 356,
+    "flee_to": 396
+  },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "referenced": true,
-  "stub_bridged": true
+  "image_seed": "skeleton blocking a crystal-lit dungeon passage",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 106; inferred FF beat from continuity rules."
 }

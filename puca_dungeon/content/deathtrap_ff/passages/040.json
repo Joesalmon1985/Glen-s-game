@@ -3,32 +3,33 @@
   "text": "You callout to the Dwarf thatyou are ready to fight the MINOTAUR. The wooden door dses slowlv and you see the fears.rme beast, half ma n, l.ralf buli, step into lhe arena. Stealn blows from its nostdls as it works itself up into a rage, ready to attack. Suddenly ,rt rushes forward, swinginq it. doubleMIN-OTAUR SKILL 9 If you win, turn to 163. D nk the red Lquid? Leave the goblet and walk back to search the Barbarian (if you have not done so aiready)? Leave the chamber to continue west? STAMINA 9 4a You rvalk slorulv over to the alcove, carefully check ing the floor {or any more hidden traps. You see that ihe goblet contains a sparkling red liquid. Will you: turn to 98 turn to 125 turn to E3",
   "choices": [
     {
-      "id": "to_163",
-      "label": "doubleMIN-OTAUR SKILL 9 If you win",
-      "aliases": [],
-      "to": 163
-    },
-    {
       "id": "to_98",
       "label": "Will you",
-      "aliases": [],
+      "aliases": [
+        "will you"
+      ],
       "to": 98
     },
     {
       "id": "to_125",
       "label": "Will you: turn to 98",
-      "aliases": [],
+      "aliases": [
+        "will you: turn to 98"
+      ],
       "to": 125
     }
   ],
   "combat": {
     "enemies": [],
-    "win_to": 163
+    "win_to": 163,
+    "enemy_name": "Enemy",
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 40, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

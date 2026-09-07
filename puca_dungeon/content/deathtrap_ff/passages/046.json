@@ -1,23 +1,29 @@
 {
   "id": 46,
-  "text": "Yotr lower yourself carefully dor,r'n the idol and, wasting no mote time in the cavern, run torward to ihe tunnel in the northern wall, turn to 239.\n\nYou step round the great bulk of the dead Rock Grub and peer into the darkness of its borehole. You can only see a lew metres, but are able to make out that it inclines slightly and is wet from the secreted slime of the Rock Grub. If you wish to explore the borehole, turn to 312. Ifyou would ratherwalk west along the tunnel, turn to 117",
+  "text": "Yotr lower yourself carefully dor,r'n the idol and, wasting no mote time in the cavern, run torward to ihe tunnel in the northern wall, turn to 239. You step round the great bulk of the dead Rock Grub and peer into the darkness of its borehole. You can only see a lew metres, but are able to make out that it inclines slightly and is wet from the secreted slime of the Rock Grub. If you wish to explore the borehole, turn to 312. Ifyou would ratherwalk west along the tunnel,",
   "choices": [
     {
       "id": "to_239",
       "label": "rself carefully dor,r'n the idol and, wasting no mote time in the cavern, run torward to ihe tunnel in the northern wall",
-      "aliases": [],
+      "aliases": [
+        "rself carefully dor,r'n the idol and, wasting no mote time in the cavern, run torward to ihe tunnel in the northern wall"
+      ],
       "to": 239
     },
     {
       "id": "to_312",
       "label": "If you wish to explore the borehole",
-      "aliases": [],
+      "aliases": [
+        "if you wish to explore the borehole"
+      ],
       "to": 312
     },
     {
       "id": "to_117",
       "label": "Ifyou would ratherwalk west along the tunnel",
-      "aliases": [],
+      "aliases": [
+        "ifyou would ratherwalk west along the tunnel"
+      ],
       "to": 117
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 46, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

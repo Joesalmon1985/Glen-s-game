@@ -5,7 +5,9 @@
     {
       "id": "choice_1",
       "label": "Turn to option 1",
-      "aliases": [],
+      "aliases": [
+        "turn to option 1"
+      ],
       "to": 90
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 294, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

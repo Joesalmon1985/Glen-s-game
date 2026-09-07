@@ -1,13 +1,36 @@
 {
   "id": 392,
-  "text": "ABC\n\n?93-394",
-  "choices": [],
+  "text": "The corridor narrows. A pressure plate clicks under your boot and a hissing dart shoots from a wall niche. Test your Luck.",
+  "choices": [
+    {
+      "id": "test_luck_dart",
+      "label": "Test your Luck against the dart trap",
+      "aliases": [
+        "test luck",
+        "dodge",
+        "leap aside",
+        "try your luck",
+        "test your luck"
+      ],
+      "to": 393,
+      "to_success": 393,
+      "to_fail": 358,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 393,
+          "fail_to": 358
+        }
+      ]
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true,
-  "raw_text": "ABC\n\n?93-394"
+  "image_seed": "narrow dungeon corridor, dart trap niche, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 392; inferred FF beat from continuity rules."
 }

@@ -1,17 +1,21 @@
 {
   "id": 107,
-  "text": "The cupboard contains a wooden mallet and ten iron spikes, which you put in your backpack while wondering u'hich door to operl If you wish to open the u'est door, turn to 263 If you wish to open the north door, turn to 1J6308 The Medusa shrieks as you enter her cage, keeping Vour eyes firmly closed and slashing your sword wildlv fuom side to side. You feel the blade sink deep into her side and hear a loLld thud as she slumps heavily to the ground. You open your eyes again and shudder at the sight of the prostrate fLgure of the Medusa. Her gorvn is tbstened by a large brooch bearing a single bright fed gem It is a garnet, and you prise it out of its sethnS, Put it in ),our pocket and leave the room to head north turn to 315.",
+  "text": "The cupboard contains a wooden mallet and ten iron spikes, which you put in your backpack while wondering u'hich door to operl If you wish to open the u'est door, turn to 263 If you wish to open the north door, turn to 1J6308 The Medusa shrieks as you enter her cage, keeping Vour eyes firmly closed and slashing your sword wildlv fuom side to side. You feel the blade sink deep into her side and hear a loLld thud as she slumps heavily to the ground. You open your eyes again and shudder at the sight of the prostrate fLgure of the Medusa. Her gorvn is tbstened by a large brooch bearing a single bright fed gem It is a garnet, and you prise it out of its sethnS, Put it in ),our pocket and leave the room to head north",
   "choices": [
     {
       "id": "to_263",
-      "label": " ten iron spikes, which you put in your backpack while wondering u'hich door to operl If you wish to open the u'est door",
-      "aliases": [],
+      "label": "ten iron spikes, which you put in your backpack while wondering u'hich door to operl If you wish to open the u'est door",
+      "aliases": [
+        "ten iron spikes, which you put in your backpack while wondering u'hich door to operl if you wish to open the u'est door"
+      ],
       "to": 263
     },
     {
       "id": "to_315",
       "label": "ight fed gem It is a garnet, and you prise it out of its sethnS, Put it in ),our pocket and leave the room to head north",
-      "aliases": [],
+      "aliases": [
+        "ight fed gem it is a garnet, and you prise it out of its sethns, put it in ),our pocket and leave the room to head north"
+      ],
       "to": 315
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 107, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

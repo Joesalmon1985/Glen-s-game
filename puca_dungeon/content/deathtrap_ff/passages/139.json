@@ -1,23 +1,29 @@
 {
   "id": 139,
-  "text": "As you touch the door handle, it goes soft in your hand, and whe you try to pull yoff hand away. you find it is glued to the handle. A giant fist then forms in the centre of the door panel and shoots forward, punching you in the stomach. Lose 1 s'rAMrNA point. lf you have a jug of acid, turn to 303. If you do rrot, tuln to 236 J40 Your fear gives you a new surge of energy and somehow your hred legs manage to keep you in front of the boulder Ahead on your ght you see the welcome sight of a door-way. You lunge at the door and mercifully it flies open. The boL der thunders past and you are left lying exhausted on the floor of a large room Tumto381.\n\nt41-342 J4a A cdppled man with shackled feet shuft'les into sight car+ng a \\'\\,ooden tray laden rvith bread and water. He looks tired and miserable and, quite unmoved by the slght ofyou, tries to walk past. \\{ill you: turn to 367 Turn to 3E Offer him some ofyour provisions (ifyou have any left)? turn to 169",
+  "text": "As you touch the door handle, it goes soft in your hand, and whe you try to pull yoff hand away. you find it is glued to the handle. A giant fist then forms in the centre of the door panel and shoots forward, punching you in the stomach. Lose 1 s'rAMrNA point. lf you have a jug of acid, turn to 303. If you do rrot, tuln to 236 J40 Your fear gives you a new surge of energy and somehow your hred legs manage to keep you in front of the boulder Ahead on your ght you see the welcome sight of a door-way. You lunge at the door and mercifully it flies open. The boL der thunders past and you are left lying exhausted on the floor of a large room Tumto381. t41-342 J4a A cdppled man with shackled feet shuft'les into sight car+ng a \\'\\,ooden tray laden rvith bread and water. He looks tired and miserable and, quite unmoved by the slght ofyou, tries to walk past. \\{ill you: turn to 367 Turn to 3E Offer him some ofyour provisions (ifyou have any left)?",
   "choices": [
     {
       "id": "to_303",
       "label": "lf you have a jug of acid",
-      "aliases": [],
+      "aliases": [
+        "lf you have a jug of acid"
+      ],
       "to": 303
     },
     {
       "id": "to_367",
       "label": "\\{ill you",
-      "aliases": [],
+      "aliases": [
+        "\\{ill you"
+      ],
       "to": 367
     },
     {
       "id": "to_169",
       "label": "Turn to 169",
-      "aliases": [],
+      "aliases": [
+        "turn to 169"
+      ],
       "to": 169
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 139, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

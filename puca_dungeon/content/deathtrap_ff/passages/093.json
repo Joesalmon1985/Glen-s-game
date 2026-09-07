@@ -5,7 +5,9 @@
     {
       "id": "to_284",
       "label": "est has only recently been placed on the shelfby one of thb Trialmasterslf you wish to enter the room and open the chest",
-      "aliases": [],
+      "aliases": [
+        "est has only recently been placed on the shelfby one of thb trialmasterslf you wish to enter the room and open the chest"
+      ],
       "to": 284
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 93, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

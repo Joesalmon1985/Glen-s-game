@@ -1,11 +1,13 @@
 {
   "id": 190,
-  "text": "Your body vibrates wildll. and you are unabie to stop yourself passing out. Lose J sraMrNA points. l{you are still alive, turn to 50",
+  "text": "Your body vibrates wildll. and you are unabie to stop yourself passing out. Lose J sraMrNA points. l{you are still alive,",
   "choices": [
     {
       "id": "to_50",
       "label": "l{you are still alive",
-      "aliases": [],
+      "aliases": [
+        "l{you are still alive"
+      ],
       "to": 50
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 190, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

@@ -1,17 +1,21 @@
 {
   "id": 90,
-  "text": "believed. Its bodyis greenand covered all over with fearcomelooking spikes_ Its face is a mass of crimBLOODBEAST in a leather-bound book, turn to 172. Ifyou have not read this book, turn to 357.",
+  "text": "believed. Its bodyis greenand covered all over with fearcomelooking spikes_ Its face is a mass of crimBLOODBEAST in a leather-bound book, turn to 172. Ifyou have not read this book,",
   "choices": [
     {
       "id": "to_172",
       "label": "dyis greenand covered all over with fearcomelooking spikes_ Its face is a mass of crimBLOODBEAST in a leather-bound book",
-      "aliases": [],
+      "aliases": [
+        "dyis greenand covered all over with fearcomelooking spikes_ its face is a mass of crimbloodbeast in a leather-bound book"
+      ],
       "to": 172
     },
     {
       "id": "to_357",
       "label": "Ifyou have not read this book",
-      "aliases": [],
+      "aliases": [
+        "ifyou have not read this book"
+      ],
       "to": 357
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 90, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

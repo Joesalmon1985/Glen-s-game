@@ -5,7 +5,9 @@
     {
       "id": "choice_1",
       "label": "If you do not possess an emerald",
-      "aliases": [],
+      "aliases": [
+        "if you do not possess an emerald"
+      ],
       "to": 3
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 365, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

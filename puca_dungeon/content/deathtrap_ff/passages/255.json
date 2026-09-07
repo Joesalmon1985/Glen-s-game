@@ -1,12 +1,44 @@
 {
   "id": 255,
-  "text": "As you run round the na ow path, you suddenly start to feel dizzy. The gas from the pool is taking effect: your vision starts to Lrlur and you lose vour balance. You are only half aware of the Bloodbeasfs tongue as it wraps itselfaround your leg and drags ) ou into the pool of \\[me. After being predigesLed b1 the vile slime, the hideou: Bloodbea:t will consume you atits leisure.",
-  "choices": [],
+  "text": "A side alcove holds a small iron chest bound with copper wire. Faint scratching echoes from deeper in the tunnel.",
+  "choices": [
+    {
+      "id": "open_chest",
+      "label": "Open the iron chest",
+      "aliases": [
+        "open chest",
+        "loot",
+        "open it"
+      ],
+      "to": 256
+    },
+    {
+      "id": "ignore_chest",
+      "label": "Ignore the chest and press on",
+      "aliases": [
+        "ignore",
+        "continue",
+        "press on"
+      ],
+      "to": 199
+    },
+    {
+      "id": "listen",
+      "label": "Listen to the scratching",
+      "aliases": [
+        "listen",
+        "investigate sound"
+      ],
+      "to": 35
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "dungeon alcove with iron chest, copper wire, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 255; inferred FF beat from continuity rules."
 }

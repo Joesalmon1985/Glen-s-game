@@ -1,14 +1,7 @@
 {
   "id": 387,
-  "text": "Ahead you hear the thud of heavy footsteps approdchin8. Out of lhe Eloom slep5 d large, primitive being dressed in animal hide and carrying a stone club. On seeing you, he grunts and spits on the floor, then raises his club and lumbers on towards you, lookrng anything but friendly. You draw your sword and prepare to fight the CAVENIAN. CAVEMAN sKlLL 7 STAMINA 7 Ifyou win, turn to 114.",
-  "choices": [
-    {
-      "id": "to_114",
-      "label": "CAVEMAN sKlLL 7 STAMINA 7 Ifyou win",
-      "aliases": [],
-      "to": 114
-    }
-  ],
+  "text": "Ahead you hear the thud of heavy footsteps approdchin8. Out of lhe Eloom slep5 d large, primitive being dressed in animal hide and carrying a stone club. On seeing you, he grunts and spits on the floor, then raises his club and lumbers on towards you, lookrng anything but friendly. You draw your sword and prepare to fight the CAVENIAN. CAVEMAN sKlLL 7 STAMINA 7 Ifyou win,",
+  "choices": [],
   "combat": {
     "enemy_name": "Caveman",
     "enemy_skill": 7,
@@ -20,12 +13,16 @@
         "skill": 7,
         "stamina": 7
       }
-    ]
+    ],
+    "skill": 7,
+    "stamina": 7,
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 387, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

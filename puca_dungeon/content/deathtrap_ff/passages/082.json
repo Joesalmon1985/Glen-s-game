@@ -1,12 +1,46 @@
 {
   "id": 82,
-  "text": "As the PitFiend slamsits body against the wall, you let go of the rope and drop salely to the floor. You run towards the double doors arird are relieved to feel them swing open as you push on them You let them swing shut behind you and head north a1on8 rh- +\"---l r\".- r^ \",",
-  "choices": [],
+  "text": "A heavy oak door blocks the way, its iron ring set high. Something scrapes on the far side.",
+  "choices": [
+    {
+      "id": "force_door",
+      "label": "Try to force the door open",
+      "aliases": [
+        "force",
+        "push",
+        "open door",
+        "kick"
+      ],
+      "to": 83
+    },
+    {
+      "id": "knock",
+      "label": "Knock and call out",
+      "aliases": [
+        "knock",
+        "call",
+        "hail"
+      ],
+      "to": 188
+    },
+    {
+      "id": "leave",
+      "label": "Leave the door and find another way",
+      "aliases": [
+        "leave",
+        "another way",
+        "back away"
+      ],
+      "to": 132
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "heavy oak dungeon door with iron ring",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 82; inferred FF beat from continuity rules."
 }

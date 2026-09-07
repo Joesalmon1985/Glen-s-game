@@ -1,11 +1,13 @@
 {
   "id": 377,
-  "text": "The huge beast slams its body againstyour arm, and you lose your grip on the rope. Crying out in pain, you tumble to the bottom ofthe pit- Lose 5 5 raMrNA points. Ifyou are still alive, turn to 203.\n\nJ7E",
+  "text": "The huge beast slams its body againstyour arm, and you lose your grip on the rope. Crying out in pain, you tumble to the bottom ofthe pit- Lose 5 5 raMrNA points. Ifyou are still alive, turn to 203. J7E",
   "choices": [
     {
       "id": "to_203",
       "label": "Ifyou are still alive",
-      "aliases": [],
+      "aliases": [
+        "ifyou are still alive"
+      ],
       "to": 203
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 377, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

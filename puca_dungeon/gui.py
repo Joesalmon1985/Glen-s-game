@@ -75,15 +75,18 @@ class DeathtrapGui:
         self.allow_heuristic_fallback = allow_heuristic_fallback
         self.session: GameSession | None = None
         self.messages = queue.Queue()
-        self.busy = False
+        self.turn_busy = False
+        self.image_busy = False
         self.closed = False
         self.worker = None
+        self.image_worker = None
         self.cancel_image = threading.Event()
         self.poll_id = None
         self.font_size = 18
         self._pixel_image = None
         self._shown_image_signature = None
         self.status_warning = ''
+        self.example_hint = None
         self.images = ImageGenerator(
             self.cache_dir,
             resource_path('pixel_style_lora_style_only'),
@@ -183,8 +186,16 @@ class DeathtrapGui:
             'Ollama interprets your words locally. Illustrations use the same image stack as Puca.'
         )
 
-        self.choice_frame = ttk.Frame(outer)
-        self.choice_frame.grid(row=4, column=0, sticky='ew', pady=(12, 6))
+        examples_row = ttk.Frame(outer)
+        examples_row.grid(row=4, column=0, sticky='ew', pady=(12, 6))
+        self.example_hint = ttk.Label(
+            examples_row,
+            text='Try something like (fills the box — you still press Act):',
+            foreground=MUTED,
+        )
+        self.example_hint.pack(side='left', padx=(0, 10))
+        self.choice_frame = ttk.Frame(examples_row)
+        self.choice_frame.pack(side='left', fill='x', expand=True)
         self.choice_buttons = []
 
         entry = ttk.Frame(outer)
@@ -227,7 +238,12 @@ class DeathtrapGui:
 
     def _controls(self, active=None):
         if active is None:
-            active = self.session is not None and not self.busy and self.session.world.sheet.alive and not self.session.world.victory
+            active = (
+                self.session is not None
+                and not self.turn_busy
+                and self.session.world.sheet.alive
+                and not self.session.world.victory
+            )
 
         def set_state(widget, enabled):
             widget.configure(state='normal' if enabled else 'disabled')
@@ -236,9 +252,10 @@ class DeathtrapGui:
         set_state(self.action_entry, active)
         for button in self.choice_buttons:
             set_state(button, active)
-        set_state(self.play_button, self.session is None and not self.busy)
-        set_state(self.resume_button, not self.busy)
-        set_state(self.new_button, not self.busy)
+        set_state(self.play_button, self.session is None and not self.turn_busy and not self.image_busy)
+        set_state(self.resume_button, not self.turn_busy and not self.image_busy)
+        set_state(self.new_button, not self.turn_busy and not self.image_busy)
+        set_state(self.skip_button, self.image_busy and self.images_var.get())
 
     def _resize_layout(self, event):
         if event.widget is not self.master:
@@ -301,7 +318,7 @@ class DeathtrapGui:
             button.destroy()
         self.choice_buttons = []
         for label in self._choice_labels():
-            btn = ttk.Button(self.choice_frame, text=label, command=lambda t=label: self.choose(t))
+            btn = ttk.Button(self.choice_frame, text=label, command=lambda t=label: self.fill_example(t))
             btn.pack(side='left', padx=(0, 8), pady=2)
             self.choice_buttons.append(btn)
 
@@ -339,7 +356,7 @@ class DeathtrapGui:
         )
 
     def begin(self):
-        if self.busy:
+        if self.turn_busy or self.image_busy:
             return
         name = (self.name_var.get() or 'Adventurer').strip()[:40] or 'Adventurer'
         potion = self.potion_var.get() or 'potion_skill'
@@ -360,7 +377,7 @@ class DeathtrapGui:
             self._autosave()
 
     def resume(self):
-        if self.busy:
+        if self.turn_busy or self.image_busy:
             return
         if not self.save_path.is_file():
             messagebox.showinfo('Deathtrap Dungeon', 'No saved run found.')
@@ -384,8 +401,9 @@ class DeathtrapGui:
             self._launch_image_only()
 
     def new_run(self):
-        if self.busy:
+        if self.turn_busy or self.image_busy:
             return
+        self.cancel_image.set()
         self.session = None
         self._clear_story()
         self._append(
@@ -402,12 +420,14 @@ class DeathtrapGui:
         self.status_var.set('Ready for a new run.')
         self._controls(active=False)
 
-    def choose(self, label: str):
+    def fill_example(self, label: str):
+        """Fill the free-text box only — examples are not a choice menu."""
         self.action_var.set(label)
-        self.submit()
+        self.action_entry.focus_set()
+        self.action_entry.icursor('end')
 
     def submit(self, event=None):
-        if self.busy or not self.session:
+        if self.turn_busy or not self.session:
             return
         text = (self.action_var.get() or '').strip()
         if not text:
@@ -425,28 +445,35 @@ class DeathtrapGui:
         self.font_size = max(12, min(28, self.font_size + delta))
         self.story.configure(font=('Georgia', self.font_size))
 
-    def _launch(self, action: str):
-        self.busy = True
-        self.cancel_image.clear()
-        self._controls(active=False)
+    def _reset_progress_indeterminate(self):
+        self.progress.stop()
+        self.progress.configure(mode='indeterminate', value=0)
         self.progress.start(12)
+
+    def _launch(self, action: str):
+        # Cancel any in-flight paint when the player acts again
+        self.cancel_image.set()
+        self.turn_busy = True
+        self.cancel_image = threading.Event()
+        self._controls(active=False)
+        self._reset_progress_indeterminate()
         self.status_var.set('Resolving your action...')
         self.worker = threading.Thread(target=self._work, args=(action,), daemon=True)
         self.worker.start()
 
     def _launch_image_only(self):
-        self.busy = True
-        self.cancel_image.clear()
-        self._controls(active=False)
-        self.progress.start(12)
-        self.status_var.set('Painting the scene...')
-        self.worker = threading.Thread(target=self._work_image_only, daemon=True)
-        self.worker.start()
+        self.cancel_image.set()
+        self.cancel_image = threading.Event()
+        self.image_busy = True
+        self._controls()
+        self._reset_progress_indeterminate()
+        self.status_var.set('The story is ready to read. Painting its illustration...')
+        self.image_worker = threading.Thread(target=self._work_image_only, daemon=True)
+        self.image_worker.start()
 
     def _work(self, action: str):
         assert self.session is not None
         try:
-            # Text first (images off inside submit); then optional illustration
             self.session.generate_images = False
             trace = self.session.submit(action)
             prose = trace.narrator_output or ''
@@ -464,11 +491,15 @@ class DeathtrapGui:
                 else:
                     self.messages.put(('ended', 'death'))
 
-            if self.images_var.get() and not self.cancel_image.is_set():
-                self.messages.put(('status', 'Painting the scene...'))
-                self._generate_current_image(trace)
             self._autosave()
-            self.messages.put(('done', None))
+            # Unlock input before paint — story advances first
+            self.messages.put(('turn_done', None))
+
+            if self.images_var.get() and not ended and not self.cancel_image.is_set():
+                self.messages.put(('status', 'Ready — painting the scene...'))
+                self.messages.put(('image_busy', True))
+                self._generate_current_image(trace)
+            self.messages.put(('image_done', None))
         except Exception as exc:
             logging.exception('Deathtrap turn failed')
             self.messages.put(('error', str(exc)))
@@ -480,7 +511,7 @@ class DeathtrapGui:
 
             prompt = build_image_prompt(self.session.world, get_passage(self.session.world.passage_id))
             if self.cancel_image.is_set():
-                self.messages.put(('done', None))
+                self.messages.put(('image_done', None))
                 return
             self.images.use_lora = self.lora_var.get() and (
                 resource_path('pixel_style_lora_style_only') / 'adapter_model.safetensors'
@@ -489,16 +520,17 @@ class DeathtrapGui:
                 f'passage_{self.session.world.passage_id}',
                 prompt,
                 cancel=self.cancel_image,
+                progress=lambda step, total: self.messages.put(('progress', step, total)),
             )
             self.session.last_image_path = Path(path)
             self.session.world.last_image_prompt = prompt
             self.messages.put(('image', str(path)))
             self._autosave()
-            self.messages.put(('done', None))
+            self.messages.put(('image_done', None))
         except Exception as exc:
             logging.exception('Deathtrap image failed')
             self.messages.put(('notice', f'Illustration failed: {exc}'))
-            self.messages.put(('done', None))
+            self.messages.put(('image_done', None))
 
     def _generate_current_image(self, trace):
         assert self.session is not None
@@ -515,13 +547,19 @@ class DeathtrapGui:
         self.images.use_lora = self.lora_var.get() and (
             resource_path('pixel_style_lora_style_only') / 'adapter_model.safetensors'
         ).is_file()
-        _key, path = self.images.generate(
-            f'passage_{self.session.world.passage_id}',
-            prompt,
-            cancel=self.cancel_image,
-        )
-        self.session.last_image_path = Path(path)
-        self.messages.put(('image', str(path)))
+        try:
+            _key, path = self.images.generate(
+                f'passage_{self.session.world.passage_id}',
+                prompt,
+                cancel=self.cancel_image,
+                progress=lambda step, total: self.messages.put(('progress', step, total)),
+            )
+            self.session.last_image_path = Path(path)
+            self.messages.put(('image', str(path)))
+        except RuntimeError as exc:
+            if 'cancelled' in str(exc).lower():
+                return
+            raise
 
     def _autosave(self):
         if not self.session:
@@ -542,6 +580,14 @@ class DeathtrapGui:
             pass
         self.poll_id = self.master.after(40, self._poll)
 
+    def _alive(self) -> bool:
+        return (
+            self.session is not None
+            and self.session.world.sheet.alive
+            and not self.session.world.victory
+            and self.session.world.ending not in ('death', 'victory')
+        )
+
     def _handle(self, event):
         kind = event[0]
         if kind == 'prose':
@@ -551,21 +597,49 @@ class DeathtrapGui:
                 button.destroy()
             self.choice_buttons = []
             for label in event[1]:
-                btn = ttk.Button(self.choice_frame, text=label, command=lambda t=label: self.choose(t))
+                btn = ttk.Button(self.choice_frame, text=label, command=lambda t=label: self.fill_example(t))
                 btn.pack(side='left', padx=(0, 8), pady=2)
                 self.choice_buttons.append(btn)
         elif kind == 'image':
             self._show_image(event[1])
+        elif kind == 'progress':
+            self.progress.stop()
+            self.progress.configure(mode='determinate', maximum=event[2], value=event[1])
         elif kind == 'status':
             self.status_var.set(event[1])
         elif kind == 'notice':
             self.status_var.set(event[1])
             self.status_warning = event[1]
+        elif kind == 'image_busy':
+            self.image_busy = True
+            self._controls()
+        elif kind == 'turn_done':
+            self.progress.stop()
+            self.progress.configure(mode='indeterminate', value=0)
+            self.turn_busy = False
+            alive = self._alive()
+            self._controls(active=alive)
+            if alive and not self.images_var.get():
+                self.status_var.set(self.status_warning or 'Ready for your next action.')
+                self.status_warning = ''
+            elif alive:
+                self.status_var.set(self.status_warning or 'Ready — painting the scene...')
+        elif kind == 'image_done':
+            self.progress.stop()
+            self.progress.configure(mode='indeterminate', value=0)
+            self.image_busy = False
+            alive = self._alive()
+            self._controls(active=alive and not self.turn_busy)
+            if alive and not self.turn_busy:
+                self.status_var.set(self.status_warning or 'Ready for your next action.')
+                self.status_warning = ''
         elif kind == 'error':
             self.progress.stop()
-            self.busy = False
+            self.progress.configure(mode='indeterminate', value=0)
+            self.turn_busy = False
+            self.image_busy = False
             messagebox.showerror('Deathtrap Dungeon', event[1])
-            self._controls(active=self.session is not None)
+            self._controls(active=self.session is not None and self._alive())
         elif kind == 'ended':
             if event[1] == 'victory':
                 self.status_var.set('Victory. You have conquered Deathtrap Dungeon.')
@@ -574,18 +648,11 @@ class DeathtrapGui:
                 self.status_var.set('Your adventure ends here.')
                 self._append('[You have died.]')
         elif kind == 'done':
+            # Legacy compatibility — treat as full unlock
             self.progress.stop()
-            self.busy = False
-            alive = (
-                self.session is not None
-                and self.session.world.sheet.alive
-                and not self.session.world.victory
-                and self.session.world.ending not in ('death', 'victory')
-            )
-            self._controls(active=alive)
-            if alive:
-                self.status_var.set(self.status_warning or 'Ready for your next action.')
-                self.status_warning = ''
+            self.turn_busy = False
+            self.image_busy = False
+            self._controls(active=self._alive())
 
     def close(self):
         if self.closed:

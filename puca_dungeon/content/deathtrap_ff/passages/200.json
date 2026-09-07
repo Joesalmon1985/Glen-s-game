@@ -1,17 +1,21 @@
 {
   "id": 200,
-  "text": "The door opens into a small room with a sttawcovered floor In the centre of the room there is a large draped cage standlng some two metres high. There is a cord fired to the top of the drape which runs up through an ron ng in the ceiling and hangs down to the floor If you wish to pull the drape up, turn to 321 If you would prefer to leave the room and head notth along the tunnel, turn to 36.",
+  "text": "The door opens into a small room with a sttawcovered floor In the centre of the room there is a large draped cage standlng some two metres high. There is a cord fired to the top of the drape which runs up through an ron ng in the ceiling and hangs down to the floor If you wish to pull the drape up, turn to 321 If you would prefer to leave the room and head notth along the tunnel,",
   "choices": [
     {
       "id": "to_321",
       "label": "of the drape which runs up through an ron ng in the ceiling and hangs down to the floor If you wish to pull the drape up",
-      "aliases": [],
+      "aliases": [
+        "of the drape which runs up through an ron ng in the ceiling and hangs down to the floor if you wish to pull the drape up"
+      ],
       "to": 321
     },
     {
       "id": "to_36",
       "label": "loor If you wish to pull the drape up, turn to 321 If you would prefer to leave the room and head notth along the tunnel",
-      "aliases": [],
+      "aliases": [
+        "loor if you wish to pull the drape up, turn to 321 if you would prefer to leave the room and head notth along the tunnel"
+      ],
       "to": 36
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 200, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

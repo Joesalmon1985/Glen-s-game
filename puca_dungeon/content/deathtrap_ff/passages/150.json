@@ -1,11 +1,13 @@
 {
   "id": 150,
-  "text": "Having had the sense not to put your sword arm into thehole, the effects of fhe tentacled armarenot too serious. Lose 1 s(rr-L point. You reach back into the hole and pull out the grdppling iron and the leather pouch lnside the pouch you find a tiny brass bell You pack away your new possessrons and continue north. turn to 292",
+  "text": "Having had the sense not to put your sword arm into thehole, the effects of fhe tentacled armarenot too serious. Lose 1 s(rr-L point. You reach back into the hole and pull out the grdppling iron and the leather pouch lnside the pouch you find a tiny brass bell You pack away your new possessrons and continue north.",
   "choices": [
     {
       "id": "to_292",
       "label": "Turn to 292",
-      "aliases": [],
+      "aliases": [
+        "turn to 292"
+      ],
       "to": 292
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 150, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

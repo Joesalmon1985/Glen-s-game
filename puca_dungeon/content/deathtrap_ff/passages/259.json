@@ -5,7 +5,9 @@
     {
       "id": "to_118",
       "label": "You look behind and see the Troglodl.tes in hot pursuit Ifyou u'ish to run overthebridge",
-      "aliases": [],
+      "aliases": [
+        "you look behind and see the troglodl.tes in hot pursuit ifyou u'ish to run overthebridge"
+      ],
       "to": 118
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 259, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

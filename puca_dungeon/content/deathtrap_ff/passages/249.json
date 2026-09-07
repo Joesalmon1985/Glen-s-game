@@ -5,49 +5,65 @@
     {
       "id": "to_15",
       "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald",
-      "aliases": [],
+      "aliases": [
+        "c sapphire emerald diamond diamond sapphire emerald"
+      ],
       "to": 15
     },
     {
       "id": "to_392",
       "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15",
-      "aliases": [],
+      "aliases": [
+        "c sapphire emerald diamond diamond sapphire emerald turn to 15"
+      ],
       "to": 392
     },
     {
       "id": "to_177",
       "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392",
-      "aliases": [],
+      "aliases": [
+        "c sapphire emerald diamond diamond sapphire emerald turn to 15 turn to 392"
+      ],
       "to": 177
     },
     {
       "id": "to_287",
       "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177",
-      "aliases": [],
+      "aliases": [
+        "c sapphire emerald diamond diamond sapphire emerald turn to 15 turn to 392 turn to 177"
+      ],
       "to": 287
     },
     {
       "id": "to_249",
       "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2",
-      "aliases": [],
+      "aliases": [
+        "c sapphire emerald diamond diamond sapphire emerald turn to 15 turn to 392 turn to 177 turn to 287 turn to 1j2"
+      ],
       "to": 249
     },
     {
       "id": "to_44",
       "label": "Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2 turn to 249",
-      "aliases": [],
+      "aliases": [
+        "sapphire emerald diamond diamond sapphire emerald turn to 15 turn to 392 turn to 177 turn to 287 turn to 1j2 turn to 249"
+      ],
       "to": 44
     },
     {
       "id": "to_195",
       "label": "erald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2 turn to 249 turn to 44",
-      "aliases": [],
+      "aliases": [
+        "erald diamond diamond sapphire emerald turn to 15 turn to 392 turn to 177 turn to 287 turn to 1j2 turn to 249 turn to 44"
+      ],
       "to": 195
     },
     {
       "id": "to_382",
       "label": "d Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2 turn to 249 turn to 44 turn to 195",
-      "aliases": [],
+      "aliases": [
+        "d diamond sapphire emerald turn to 15 turn to 392 turn to 177 turn to 287 turn to 1j2 turn to 249 turn to 44 turn to 195"
+      ],
       "to": 382
     }
   ],
@@ -55,7 +71,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 249, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

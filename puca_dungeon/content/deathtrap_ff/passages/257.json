@@ -1,12 +1,46 @@
 {
   "id": 257,
-  "text": "Inside one of the Orcs' pockets you find one Cold Piece and a hollou' \\\\,ooden tube. You prlt vour findings in vorLr backpack and set off lvest lurn to 1b4",
-  "choices": [],
+  "text": "A heavy oak door blocks the way, its iron ring set high. Something scrapes on the far side.",
+  "choices": [
+    {
+      "id": "force_door",
+      "label": "Try to force the door open",
+      "aliases": [
+        "force",
+        "push",
+        "open door",
+        "kick"
+      ],
+      "to": 258
+    },
+    {
+      "id": "knock",
+      "label": "Knock and call out",
+      "aliases": [
+        "knock",
+        "call",
+        "hail"
+      ],
+      "to": 213
+    },
+    {
+      "id": "leave",
+      "label": "Leave the door and find another way",
+      "aliases": [
+        "leave",
+        "another way",
+        "back away"
+      ],
+      "to": 57
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "heavy oak dungeon door with iron ring",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 257; inferred FF beat from continuity rules."
 }

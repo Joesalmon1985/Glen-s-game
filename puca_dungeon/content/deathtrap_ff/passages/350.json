@@ -1,17 +1,21 @@
 {
   "id": 350,
-  "text": "The Giant Fly dives down and setzes you with four of its legs. lt climbs quickly back to the roof of the your STAMINA score. lfyou are stillalive, you draw your sword just in time as the Giant FIy swoops down to try and recapture you. turn to 39. The idol is very smooth and will be difficult to climb. Do 1'ou have any rope? If you do, turn to 396. lfyou do not, furn to 186.\n\ni i I I I J52-353",
+  "text": "The Giant Fly dives down and setzes you with four of its legs. lt climbs quickly back to the roof of the your STAMINA score. lfyou are stillalive, you draw your sword just in time as the Giant FIy swoops down to try and recapture you. turn to 39. The idol is very smooth and will be difficult to climb. Do 1'ou have any rope? If you do, turn to 396. lfyou do not, furn to 186. i i I I I J52-353",
   "choices": [
     {
       "id": "to_39",
       "label": "Turn to 39",
-      "aliases": [],
+      "aliases": [
+        "turn to 39"
+      ],
       "to": 39
     },
     {
       "id": "to_396",
       "label": "If you do",
-      "aliases": [],
+      "aliases": [
+        "if you do"
+      ],
       "to": 396
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 350, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

@@ -1,12 +1,46 @@
 {
   "id": 61,
-  "text": "6a-62 b1 Despite the terible nging sound in your ears, you hear footsteps coming down the tunnel. Your loud screams have athacted a tunnel guardian Standing over you is a HOBGOBLIN. His face bears a sickly smile as he presses the point of his sword against your neck. You are unable to defend yourself and prevent the Hobgoblin from running you through. Your advenfure ends here,",
-  "choices": [],
+  "text": "A heavy oak door blocks the way, its iron ring set high. Something scrapes on the far side.",
+  "choices": [
+    {
+      "id": "force_door",
+      "label": "Try to force the door open",
+      "aliases": [
+        "force",
+        "push",
+        "open door",
+        "kick"
+      ],
+      "to": 62
+    },
+    {
+      "id": "knock",
+      "label": "Knock and call out",
+      "aliases": [
+        "knock",
+        "call",
+        "hail"
+      ],
+      "to": 41
+    },
+    {
+      "id": "leave",
+      "label": "Leave the door and find another way",
+      "aliases": [
+        "leave",
+        "another way",
+        "back away"
+      ],
+      "to": 301
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "heavy oak dungeon door with iron ring",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 61; inferred FF beat from continuity rules."
 }

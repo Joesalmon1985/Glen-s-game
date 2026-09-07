@@ -1,17 +1,21 @@
 {
   "id": 225,
-  "text": "You react quickly and manage to cleave the Bloodbeast's outstretched tongue with one swipe of your blade The beast screams in pain and hurls itsel{ forward to try and clasp you between itsblood-filled jaws. This will be a fiSht to the death. 22E-229 The meat contains herbs which will increase your stren8th. Add 3 to your STAMINA score. You may either walk over to the alcove if you have not done so already - furn to 41 - or leave the chamber to continuewest turn to 83 Still smiling, the old man looks at you. 'Wrong,'he says quietly. turn to 85.",
+  "text": "You react quickly and manage to cleave the Bloodbeast's outstretched tongue with one swipe of your blade The beast screams in pain and hurls itsel{ forward to try and clasp you between itsblood-filled jaws. This will be a fiSht to the death. 22E-229 The meat contains herbs which will increase your stren8th. Add 3 to your STAMINA score. You may either walk over to the alcove if you have not done so already - furn to 41 - or leave the chamber to continuewest turn to 83 Still smiling, the old man looks at you. 'Wrong,'he says quietly.",
   "choices": [
     {
       "id": "to_83",
       "label": "u may either walk over to the alcove if you have not done so already - furn to 41 - or leave the chamber to continuewest",
-      "aliases": [],
+      "aliases": [
+        "u may either walk over to the alcove if you have not done so already - furn to 41 - or leave the chamber to continuewest"
+      ],
       "to": 83
     },
     {
       "id": "to_85",
       "label": "Turn to 85",
-      "aliases": [],
+      "aliases": [
+        "turn to 85"
+      ],
       "to": 85
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 225, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

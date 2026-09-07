@@ -1,11 +1,13 @@
 {
   "id": 186,
-  "text": "You walk no more than three metres west before you hit an invisible barrier. lt starts fizzing and crackling, and you are thrownback. You have hit an energy screen. Lose r srevwe point There is no alternative but to walk back to the junction and head north. turn to 218.",
+  "text": "You walk no more than three metres west before you hit an invisible barrier. lt starts fizzing and crackling, and you are thrownback. You have hit an energy screen. Lose r srevwe point There is no alternative but to walk back to the junction and head north.",
   "choices": [
     {
       "id": "to_218",
       "label": "Turn to 218",
-      "aliases": [],
+      "aliases": [
+        "turn to 218"
+      ],
       "to": 218
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 186, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

@@ -1,11 +1,13 @@
 {
   "id": 94,
-  "text": "Taking a deep breath, you lean over the pit and plunge your forearm into the mass of wriggling worms. They are cold alrd clammy and feel extreme ly nasty, but at least they are harmless and you are ableto seize the daggerby the hilt. You give it a hard tug and it comes away ftom the crack in which the hp l{'as embedded. Admiring its beauty, and wonderin8 whether it might once have belonged to some luckless contestant, you put the opal studded dagger frrmlv m your belt and leave the cavem turn to 124 t\n\nI i L I",
+  "text": "Taking a deep breath, you lean over the pit and plunge your forearm into the mass of wriggling worms. They are cold alrd clammy and feel extreme ly nasty, but at least they are harmless and you are ableto seize the daggerby the hilt. You give it a hard tug and it comes away ftom the crack in which the hp l{'as embedded. Admiring its beauty, and wondering whether it might once have belonged to some luckless contestant, you put the opal studded dagger frrmlv m your belt and leave the cavem turn to 124 t I i L I",
   "choices": [
     {
       "id": "to_124",
       "label": "t once have belonged to some luckless contestant, you put the opal studded dagger frrmlv m your belt and leave the cavem",
-      "aliases": [],
+      "aliases": [
+        "t once have belonged to some luckless contestant, you put the opal studded dagger frrmlv m your belt and leave the cavem"
+      ],
       "to": 124
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 94, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

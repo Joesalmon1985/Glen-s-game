@@ -1,12 +1,14 @@
 {
   "id": 310,
-  "text": "3aL-344 3aa The Barbanan reluctantly agrees to your alternative suggestion You both step back and take running jumps over the pit Landing safel)' on the other side, you continue down the tunnel. The Barba an, who is leadrng the way, suddenly stumbles on a floor stone which tilts forr^,ard, triggering a boulder loosely set in the ceiling It crashes down on top o{ hrm, knocking him to the floor and crushing his skull. You must continue your quest alone. Turn to The razor-sharp disc whistles past your head and bites deep into one of the pillars. Turning to lace your would-be assassin, you prepare yourself as he advances, his long sword drawn. NINJA SKTIL 1I If you wrn, tu to232. STAMINA 9",
+  "text": "The floor gives way. You plunge into a spiked pit too deep to climb. Your adventure ends here.",
   "choices": [],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
-  "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "ending": "death",
+  "image_seed": "spiked pit trap in a dark dungeon",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 310; inferred FF beat from continuity rules. Death ending."
 }

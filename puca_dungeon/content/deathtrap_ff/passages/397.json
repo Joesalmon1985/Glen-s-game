@@ -1,11 +1,13 @@
 {
   "id": 397,
-  "text": "The liquid is a magical potion which will enable you to detecl hidden traps. Add 2 LUc( pointc. If you have not done so dlready, you may open the red book - turn to 52",
+  "text": "The liquid is a magical potion which will enable you to detecl hidden traps. Add 2 LUc( pointc. If you have not done so dlready, you may open the red book -",
   "choices": [
     {
       "id": "to_52",
       "label": "If you have not done so dlready, you may open the red book",
-      "aliases": [],
+      "aliases": [
+        "if you have not done so dlready, you may open the red book"
+      ],
       "to": 52
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 397, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

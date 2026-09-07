@@ -1,17 +1,21 @@
 {
   "id": 258,
-  "text": "You are exhausted and sit clolvn for a rest on the tail oI the dead beast Lookin8 clown at your feet, you suddenly notice an iron rin8 poking up through the sand. If you wish to pull the iing, turn to 95. If you would rather leave the pit via the double doors, turn to 248",
+  "text": "You are exhausted and sit clolvn for a rest on the tail oI the dead beast Lookin8 clown at your feet, you suddenly notice an iron rin8 poking up through the sand. If you wish to pull the iing, turn to 95. If you would rather leave the pit via the double doors,",
   "choices": [
     {
       "id": "to_95",
       "label": "If you wish to pull the iing",
-      "aliases": [],
+      "aliases": [
+        "if you wish to pull the iing"
+      ],
       "to": 95
     },
     {
       "id": "to_248",
       "label": "If you would rather leave the pit via the double doors",
-      "aliases": [],
+      "aliases": [
+        "if you would rather leave the pit via the double doors"
+      ],
       "to": 248
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 258, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

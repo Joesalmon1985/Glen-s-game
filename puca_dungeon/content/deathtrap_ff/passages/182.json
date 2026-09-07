@@ -5,7 +5,9 @@
     {
       "id": "to_25",
       "label": "lf you drank the liquid ftom the bamboo pipe",
-      "aliases": [],
+      "aliases": [
+        "lf you drank the liquid ftom the bamboo pipe"
+      ],
       "to": 25
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 182, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

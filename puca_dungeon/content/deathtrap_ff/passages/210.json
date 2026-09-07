@@ -6,20 +6,23 @@
     "enemy_name": "Ivy",
     "enemy_skill": 9,
     "enemy_stamina": 9,
-    "win_to": null,
+    "win_to": 211,
     "enemies": [
       {
         "name": "Ivy",
         "skill": 9,
         "stamina": 9
       }
-    ]
+    ],
+    "skill": 9,
+    "stamina": 9,
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 210, crystal light",
   "ocr_source": true,
-  "needs_review": true,
-  "raw_text": "IVY SKILL 9 STAMINA 9\n2aa-243\nYou malage to free yourself from lv]r's grip and\ndraw your sword Picking up a broken stool as a\nweapon, she advances towards you,\n2a4-2a6"
+  "needs_review": false
 }

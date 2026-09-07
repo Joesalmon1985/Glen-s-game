@@ -3,37 +3,41 @@
   "text": "Taking a step forward, you leap towards the far edge of the pit Test laur Luck.It yo1r are Lucky, turn to 160. If you are Unlucky, turn to 319. 3a Ihe Gnome smiles and says,'Good Now, haveyou a sapphire in youl possession?' lf you cto have a sapphire, turn to 376. if you do not, turn to j.",
   "choices": [
     {
-      "id": "to_160",
-      "label": "Taking a step forward, you leap towards the far edge of the pit Test laur Luck.It yo1r are Lucky",
-      "aliases": [],
-      "to": 160
-    },
-    {
-      "id": "to_319",
-      "label": "If you are Unlucky",
-      "aliases": [],
-      "to": 319
+      "id": "test_luck",
+      "label": "Test your Luck",
+      "aliases": [
+        "test luck",
+        "try your luck",
+        "test your luck",
+        "be careful"
+      ],
+      "to": 160,
+      "to_success": 160,
+      "to_fail": 319,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 160,
+          "fail_to": 319
+        }
+      ]
     },
     {
       "id": "to_376",
       "label": "3a Ihe Gnome smiles and says,'Good Now, haveyou a sapphire in youl possession?' lf you cto have a sapphire",
-      "aliases": [],
+      "aliases": [
+        "3a ihe gnome smiles and says,'good now, haveyou a sapphire in youl possession?' lf you cto have a sapphire"
+      ],
       "to": 376
     }
   ],
   "combat": null,
-  "tests": [
-    {
-      "type": "luck",
-      "success_to": null,
-      "failure_to": 319,
-      "lucky_to": null,
-      "unlucky_to": 319
-    }
-  ],
+  "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 30, crystal light",
   "ocr_source": true,
-  "needs_review": false
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": " Collapsed Lucky/Unlucky into luck_test."
 }

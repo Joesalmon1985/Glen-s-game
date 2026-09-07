@@ -5,54 +5,63 @@
     {
       "id": "to_74",
       "label": "Back in the tunnel you head on west",
-      "aliases": [],
+      "aliases": [
+        "back in the tunnel you head on west"
+      ],
       "to": 74
     },
     {
       "id": "to_392",
       "label": "hire B Diamond Sapphire Emerald Sapphire Emerald Diamond c Sapphire Emerald Diamond Diamond Sapphire Emerald Tull1 to 16",
-      "aliases": [],
+      "aliases": [
+        "hire b diamond sapphire emerald sapphire emerald diamond c sapphire emerald diamond diamond sapphire emerald tull1 to 16"
+      ],
       "to": 392
     },
     {
       "id": "to_177",
       "label": "nd Sapphire Emerald Sapphire Emerald Diamond c Sapphire Emerald Diamond Diamond Sapphire Emerald Tull1 to 16 turn to 392",
-      "aliases": [],
+      "aliases": [
+        "nd sapphire emerald sapphire emerald diamond c sapphire emerald diamond diamond sapphire emerald tull1 to 16 turn to 392"
+      ],
       "to": 177
     },
     {
       "id": "to_287",
       "label": "Emerald Sapphire Emerald Diamond c Sapphire Emerald Diamond Diamond Sapphire Emerald Tull1 to 16 turn to 392 turn to 177",
-      "aliases": [],
+      "aliases": [
+        "emerald sapphire emerald diamond c sapphire emerald diamond diamond sapphire emerald tull1 to 16 turn to 392 turn to 177"
+      ],
       "to": 287
     },
     {
       "id": "to_132",
       "label": "hire Emerald Diamond c Sapphire Emerald Diamond Diamond Sapphire Emerald Tull1 to 16 turn to 392 turn to 177 turn to 287",
-      "aliases": [],
+      "aliases": [
+        "hire emerald diamond c sapphire emerald diamond diamond sapphire emerald tull1 to 16 turn to 392 turn to 177 turn to 287"
+      ],
       "to": 132
     },
     {
       "id": "to_249",
-      "label": " Diamond c Sapphire Emerald Diamond Diamond Sapphire Emerald Tull1 to 16 turn to 392 turn to 177 turn to 287 turn to 132",
-      "aliases": [],
+      "label": "Diamond c Sapphire Emerald Diamond Diamond Sapphire Emerald Tull1 to 16 turn to 392 turn to 177 turn to 287 turn to 132",
+      "aliases": [
+        "diamond c sapphire emerald diamond diamond sapphire emerald tull1 to 16 turn to 392 turn to 177 turn to 287 turn to 132"
+      ],
       "to": 249
-    },
-    {
-      "id": "to_9",
-      "label": "erald Tull1 to 16 turn to 392 turn to 177 turn to 287 turn to 132 turn to 249 First HOBCOBLIN Second HOBGOBLIN Ifyou win",
-      "aliases": [],
-      "to": 9
     }
   ],
   "combat": {
     "enemies": [],
-    "win_to": 9
+    "win_to": 9,
+    "enemy_name": "Enemy",
+    "lose_to": 399,
+    "flee_to": 66
   },
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 131, crystal light",
   "ocr_source": true,
-  "needs_review": true
+  "needs_review": false
 }

@@ -1,11 +1,13 @@
 {
   "id": 148,
-  "text": "You lun8e at the Bloodbeast, .trying to avoid the tongue which flicks out to grab your leg. Roll two dice. If the total is the same as or less than you! SKILL, turn to 225",
+  "text": "You lun8e at the Bloodbeast, .trying to avoid the tongue which flicks out to grab your leg. Roll two dice. If the total is the same as or less than you! SKILL,",
   "choices": [
     {
       "id": "to_225",
       "label": "SKILL",
-      "aliases": [],
+      "aliases": [
+        "skill"
+      ],
       "to": 225
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 148, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

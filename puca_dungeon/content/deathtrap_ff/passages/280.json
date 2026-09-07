@@ -1,17 +1,21 @@
 {
   "id": 280,
-  "text": "The tunnel continues east for quite a long way before reaching a junction. The walls, ceiling and floor of the tunnel leading south are covered with a thick green slime You decide it would be safer to head north. turn to 218. 2E1 2E1 With one swipe ofyour trusty blade you behead the Boa Constrictor. You uncoil its massive body from around lhe Elf dnd tD to recu\\citale her. Her eyes open a little, but you can see that there is no hope She looks at you and smiles, then says in a whisper, 'Thankyou I know it's too late for me, but I \\,\\' ttell you what I have learned. Your way out lies ahead, but you need gems to unlock the final door One of them is a diamond, but I do not know what the others are. Alas, I have not found a diamond, but would urge you to look for one. Cood luck ' Her eyescloseandshe slumps downon to thecold floor. You watch sadly as she breathes her last Knowing she would not mind, you take two of her daggers and search her leather backpack. lnside you find some unleavened bread, a mirrorand a bonecharm in the shape of a monkey If you wish to eat the bread, turn to j99 If you would rather just take the mirror and charm and return to ihe tunnel to head north, turn to 192.",
+  "text": "The tunnel continues east for quite a long way before reaching a junction. The walls, ceiling and floor of the tunnel leading south are covered with a thick green slime You decide it would be safer to head north. turn to 218. 2E1 2E1 With one swipe ofyour trusty blade you behead the Boa Constrictor. You uncoil its massive body from around lhe Elf dnd tD to recu\\citale her. Her eyes open a little, but you can see that there is no hope She looks at you and smiles, then says in a whisper, 'Thankyou I know it's too late for me, but I \\,\\' ttell you what I have learned. Your way out lies ahead, but you need gems to unlock the final door One of them is a diamond, but I do not know what the others are. Alas, I have not found a diamond, but would urge you to look for one. Cood luck ' Her eyescloseandshe slumps downon to thecold floor. You watch sadly as she breathes her last Knowing she would not mind, you take two of her daggers and search her leather backpack. lnside you find some unleavened bread, a mirrorand a bonecharm in the shape of a monkey If you wish to eat the bread, turn to j99 If you would rather just take the mirror and charm and return to ihe tunnel to head north,",
   "choices": [
     {
       "id": "to_218",
       "label": "Turn to 218",
-      "aliases": [],
+      "aliases": [
+        "turn to 218"
+      ],
       "to": 218
     },
     {
       "id": "to_192",
-      "label": " to eat the bread, turn to j99 If you would rather just take the mirror and charm and return to ihe tunnel to head north",
-      "aliases": [],
+      "label": "to eat the bread, turn to j99 If you would rather just take the mirror and charm and return to ihe tunnel to head north",
+      "aliases": [
+        "to eat the bread, turn to j99 if you would rather just take the mirror and charm and return to ihe tunnel to head north"
+      ],
       "to": 192
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 280, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

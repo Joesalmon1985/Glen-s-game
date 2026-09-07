@@ -1,23 +1,29 @@
 {
   "id": 243,
-  "text": "The tunnel soon divides into two. You hear a buzzing sound coming ftom the western branch. If you wish to walk west to investigate who or what is making the noise, turn to 108. If you would rather continue north, turn to 14.\n\nThe passage slowly stafts to climb, leading you relentlessly northwards. You do not come across a single junction. There are no doorways or even an alcove to investigate, and you become less guarded as you plod on. After a while you become so non chalant thatyou fail to notice a thin tripwire stretched low across the passage. It is only when your foot catches it and you hear a distant rumble that you realize your mistake. The rumbling sound swells to an almost deafening level, and suddenly out o{ the gloom of the tunnel ahead you see a masstve boulder roiling towards you, gathering speed with everysecond. Droppingyourshieldif youhaveone (lose l SKILL point), you turn to flee the oncomrng boulder turn to 36",
+  "text": "The tunnel soon divides into two. You hear a buzzing sound coming ftom the western branch. If you wish to walk west to investigate who or what is making the noise, turn to 108. If you would rather continue north, turn to 14. The passage slowly stafts to climb, leading you relentlessly northwards. You do not come across a single junction. There are no doorways or even an alcove to investigate, and you become less guarded as you plod on. After a while you become so non chalant thatyou fail to notice a thin tripwire stretched low across the passage. It is only when your foot catches it and you hear a distant rumble that you realize your mistake. The rumbling sound swells to an almost deafening level, and suddenly out o{ the gloom of the tunnel ahead you see a masstve boulder roiling towards you, gathering speed with everysecond. Droppingyourshieldif youhaveone (lose l SKILL point), you turn to flee the oncomrng boulder",
   "choices": [
     {
       "id": "to_108",
       "label": "If you wish to walk west to investigate who or what is making the noise",
-      "aliases": [],
+      "aliases": [
+        "if you wish to walk west to investigate who or what is making the noise"
+      ],
       "to": 108
     },
     {
       "id": "to_14",
       "label": "If you would rather continue north",
-      "aliases": [],
+      "aliases": [
+        "if you would rather continue north"
+      ],
       "to": 14
     },
     {
       "id": "to_36",
       "label": "Droppingyourshieldif youhaveone (lose l SKILL point), you turn to flee the oncomrng boulder",
-      "aliases": [],
+      "aliases": [
+        "droppingyourshieldif youhaveone (lose l skill point), you turn to flee the oncomrng boulder"
+      ],
       "to": 36
     }
   ],
@@ -25,7 +31,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 243, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

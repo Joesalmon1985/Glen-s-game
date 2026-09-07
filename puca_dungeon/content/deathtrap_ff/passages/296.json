@@ -1,17 +1,21 @@
 {
   "id": 296,
-  "text": "Ahead you see that the tunnel turns a colner, beyond which it continues north. You stop before the comer, startled by the sound o{ hiSh-Pitched voices whispering and sniggering. II you wish to drawyour sword and lookround thecorner, turn to 49. Ifyou would rather walk back to fhe junction to head north, turn to 241.",
+  "text": "Ahead you see that the tunnel turns a colner, beyond which it continues north. You stop before the comer, startled by the sound o{ hiSh-Pitched voices whispering and sniggering. II you wish to drawyour sword and lookround thecorner, turn to 49. Ifyou would rather walk back to fhe junction to head north,",
   "choices": [
     {
       "id": "to_49",
       "label": "II you wish to drawyour sword and lookround thecorner",
-      "aliases": [],
+      "aliases": [
+        "ii you wish to drawyour sword and lookround thecorner"
+      ],
       "to": 49
     },
     {
       "id": "to_241",
       "label": "Ifyou would rather walk back to fhe junction to head north",
-      "aliases": [],
+      "aliases": [
+        "ifyou would rather walk back to fhe junction to head north"
+      ],
       "to": 241
     }
   ],
@@ -19,7 +23,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 296, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

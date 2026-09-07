@@ -1,11 +1,13 @@
 {
   "id": 263,
-  "text": "The door opens into another tunnel. Walking west, i ou soon aril'e at a door in the north rvall If vor.r t:rh t,, rrpen thc door, turn t,' r53 lf you nrruld rather continue west, turn to 74.",
+  "text": "The door opens into another tunnel. Walking west, i ou soon aril'e at a door in the north rvall If vor.r t:rh t,, rrpen thc door, turn t,' r53 lf you nrruld rather continue west,",
   "choices": [
     {
       "id": "to_74",
       "label": "on aril'e at a door in the north rvall If vor.r t:rh t,, rrpen thc door, turn t,' r53 lf you nrruld rather continue west",
-      "aliases": [],
+      "aliases": [
+        "on aril'e at a door in the north rvall if vor.r t:rh t,, rrpen thc door, turn t,' r53 lf you nrruld rather continue west"
+      ],
       "to": 74
     }
   ],
@@ -13,7 +15,7 @@
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
+  "image_seed": "dungeon chamber paragraph 263, crystal light",
   "ocr_source": true,
   "needs_review": false
 }

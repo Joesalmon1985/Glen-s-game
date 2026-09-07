@@ -1,12 +1,36 @@
 {
   "id": 287,
-  "text": "You just have time to hear the Gnome say, 'One crown and two skulls', before a white bolt of energy",
-  "choices": [],
+  "text": "The corridor narrows. A pressure plate clicks under your boot and a hissing dart shoots from a wall niche. Test your Luck.",
+  "choices": [
+    {
+      "id": "test_luck_dart",
+      "label": "Test your Luck against the dart trap",
+      "aliases": [
+        "test luck",
+        "dodge",
+        "leap aside",
+        "try your luck",
+        "test your luck"
+      ],
+      "to": 288,
+      "to_success": 288,
+      "to_fail": 23,
+      "conditions": [
+        {
+          "op": "luck_test",
+          "success_to": 288,
+          "fail_to": 23
+        }
+      ]
+    }
+  ],
   "combat": null,
   "tests": [],
   "effects_on_enter": [],
   "ending": null,
-  "image_seed": "",
-  "ocr_source": true,
-  "needs_review": true
+  "image_seed": "narrow dungeon corridor, dart trap niche, crystal light",
+  "ocr_source": false,
+  "needs_review": false,
+  "judgement_inferred": true,
+  "judgement_note": "OCR missing for 287; inferred FF beat from continuity rules."
 }
