@@ -1,0 +1,150 @@
+{
+  "campaign": "tools\\playtests\\coherence_wave1_llm",
+  "runs": 11,
+  "ok": false,
+  "total_actionable_defects": 5,
+  "reports": [
+    {
+      "run": "absurd_surreal_seed106",
+      "path": "tools\\playtests\\coherence_wave1_llm\\absurd_surreal_seed106",
+      "turns_judged": 26,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "book_diver_seed107",
+      "path": "tools\\playtests\\coherence_wave1_llm\\book_diver_seed107",
+      "turns_judged": 29,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "cooperative_serious_seed101",
+      "path": "tools\\playtests\\coherence_wave1_llm\\cooperative_serious_seed101",
+      "turns_judged": 31,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "escape_obsessed_seed105",
+      "path": "tools\\playtests\\coherence_wave1_llm\\escape_obsessed_seed105",
+      "turns_judged": 29,
+      "ok": false,
+      "defect_count": 2,
+      "defects": [
+        {
+          "turn": 13,
+          "rubric": "causality",
+          "question": "Can I understand what just caused the current situation?",
+          "detail": "Intention meta commentary",
+          "quote": "In the dimly lit washroom, the large, silent staff member and the younger, tense one continue their vigil, their eyes fixed on you. The basin remains, a constant reminder of the routine procedure they intend for you. The water, now still, r",
+          "actionable": true
+        },
+        {
+          "turn": 13,
+          "rubric": "causality",
+          "question": "Can I understand what just caused the current situation?",
+          "detail": "Desire meta commentary",
+          "quote": "In the dimly lit washroom, the large, silent staff member and the younger, tense one continue their vigil, their eyes fixed on you. The basin remains, a constant reminder of the routine procedure they intend for you. The water, now still, r",
+          "actionable": true
+        }
+      ],
+      "soft_notes": []
+    },
+    {
+      "run": "hostile_violent_seed104",
+      "path": "tools\\playtests\\coherence_wave1_llm\\hostile_violent_seed104",
+      "turns_judged": 28,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "language_maximalist_seed108",
+      "path": "tools\\playtests\\coherence_wave1_llm\\language_maximalist_seed108",
+      "turns_judged": 24,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "long_serious_seed201",
+      "path": "tools\\playtests\\coherence_wave1_llm\\long_serious_seed201",
+      "turns_judged": 38,
+      "ok": false,
+      "defect_count": 1,
+      "defects": [
+        {
+          "turn": 4,
+          "rubric": "causality",
+          "question": "Can I understand what just caused the current situation?",
+          "detail": "Intention meta commentary",
+          "quote": "The cup, a common vessel half-filled with water, remains unchanged beside the bed. Despite your intention to examine it more closely, the water in the cup remains undisturbed. Your eyes trace the still surface, the water seemingly unaffecte",
+          "actionable": true
+        }
+      ],
+      "soft_notes": []
+    },
+    {
+      "run": "minimalist_inspector_seed102",
+      "path": "tools\\playtests\\coherence_wave1_llm\\minimalist_inspector_seed102",
+      "turns_judged": 33,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "mixed_resist_then_book_seed110",
+      "path": "tools\\playtests\\coherence_wave1_llm\\mixed_resist_then_book_seed110",
+      "turns_judged": 30,
+      "ok": false,
+      "defect_count": 2,
+      "defects": [
+        {
+          "turn": 10,
+          "rubric": "causality",
+          "question": "Can I understand what just caused the current situation?",
+          "detail": "Desire meta commentary",
+          "quote": "The corridor stretches out before you, identical to the one that confined you earlier. Your arms are once again grasped, this time by two different figures – Dom and Ben, as if the institution were a single, unyielding entity. The large, si",
+          "actionable": true
+        },
+        {
+          "turn": 18,
+          "rubric": "presence",
+          "question": "Can I tell who is physically present?",
+          "detail": "Staff are present per state but prose has no human presence cue",
+          "quote": "In the dimly lit cell, you're returned to the same space where whatever you moved remains untouched. The air is heavy with the weight of fatigue. The bed beneath you offers a worn comfort, the cup beside it a silent promise of respite. A bo",
+          "actionable": true
+        }
+      ],
+      "soft_notes": []
+    },
+    {
+      "run": "object_chaos_seed109",
+      "path": "tools\\playtests\\coherence_wave1_llm\\object_chaos_seed109",
+      "turns_judged": 26,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "obstructive_seed103",
+      "path": "tools\\playtests\\coherence_wave1_llm\\obstructive_seed103",
+      "turns_judged": 35,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    }
+  ]
+}

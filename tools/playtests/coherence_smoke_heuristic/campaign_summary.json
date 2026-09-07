@@ -1,0 +1,64 @@
+[
+  {
+    "persona": "cooperative_serious",
+    "seed": 101,
+    "turns": 31,
+    "enactment_histogram": {
+      "direct": 31
+    },
+    "mode_switches": [
+      "facility->book_dungeon@4",
+      "book_dungeon->facility@6"
+    ],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "research",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 17,
+    "language_attempts": 1,
+    "contract": "ACCEPT",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Dom",
+      "anxious": "Glen",
+      "senior": "Sovan"
+    },
+    "layout_seed": 101,
+    "layout_fingerprint": "56edc097cb58aaa8"
+  },
+  {
+    "persona": "long_serious",
+    "seed": 201,
+    "turns": 35,
+    "enactment_histogram": {
+      "direct": 35
+    },
+    "mode_switches": [
+      "facility->book_dungeon@6",
+      "book_dungeon->facility@7",
+      "facility->book_dungeon@22",
+      "book_dungeon->facility@26"
+    ],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "heaven_memories",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 21,
+    "language_attempts": 3,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Cam",
+      "anxious": "Ben",
+      "senior": "Veyra"
+    },
+    "layout_seed": 201,
+    "layout_fingerprint": "ad9dc1b6e93cb12d"
+  }
+]

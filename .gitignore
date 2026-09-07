@@ -16,6 +16,12 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 
+# Sprite red-team bakeoff artifacts (galleries / candidates)
+tools/sprite_redteam/
+
+# SD raw sprite generation cache
+assets/sprites/cache/
+
 # Windows shortcuts and local originals
 *.lnk
 original/

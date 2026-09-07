@@ -1,0 +1,107 @@
+{
+  "campaign": "tools\\playtests\\coherence_wave2_llm",
+  "runs": 11,
+  "ok": true,
+  "total_actionable_defects": 0,
+  "reports": [
+    {
+      "run": "absurd_surreal_seed106",
+      "path": "tools\\playtests\\coherence_wave2_llm\\absurd_surreal_seed106",
+      "turns_judged": 26,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "book_diver_seed107",
+      "path": "tools\\playtests\\coherence_wave2_llm\\book_diver_seed107",
+      "turns_judged": 29,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "cooperative_serious_seed101",
+      "path": "tools\\playtests\\coherence_wave2_llm\\cooperative_serious_seed101",
+      "turns_judged": 31,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "escape_obsessed_seed105",
+      "path": "tools\\playtests\\coherence_wave2_llm\\escape_obsessed_seed105",
+      "turns_judged": 29,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "hostile_violent_seed104",
+      "path": "tools\\playtests\\coherence_wave2_llm\\hostile_violent_seed104",
+      "turns_judged": 28,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "language_maximalist_seed108",
+      "path": "tools\\playtests\\coherence_wave2_llm\\language_maximalist_seed108",
+      "turns_judged": 24,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "long_serious_seed201",
+      "path": "tools\\playtests\\coherence_wave2_llm\\long_serious_seed201",
+      "turns_judged": 38,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "minimalist_inspector_seed102",
+      "path": "tools\\playtests\\coherence_wave2_llm\\minimalist_inspector_seed102",
+      "turns_judged": 33,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "mixed_resist_then_book_seed110",
+      "path": "tools\\playtests\\coherence_wave2_llm\\mixed_resist_then_book_seed110",
+      "turns_judged": 30,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "object_chaos_seed109",
+      "path": "tools\\playtests\\coherence_wave2_llm\\object_chaos_seed109",
+      "turns_judged": 26,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "obstructive_seed103",
+      "path": "tools\\playtests\\coherence_wave2_llm\\obstructive_seed103",
+      "turns_judged": 35,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    }
+  ]
+}

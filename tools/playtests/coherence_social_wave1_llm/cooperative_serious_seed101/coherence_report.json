@@ -1,0 +1,17 @@
+{
+  "campaign": "tools\\playtests\\coherence_social_wave1_llm\\cooperative_serious_seed101",
+  "runs": 1,
+  "ok": true,
+  "total_actionable_defects": 0,
+  "reports": [
+    {
+      "run": "cooperative_serious_seed101",
+      "path": "tools\\playtests\\coherence_social_wave1_llm\\cooperative_serious_seed101",
+      "turns_judged": 31,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    }
+  ]
+}

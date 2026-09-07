@@ -155,9 +155,25 @@ def _bind_discourse_referents(world: WorldState, intent: Intent, g: Grounding) -
     referent = getattr(world, 'last_npc_referent', None) or None
     fac = getattr(world, 'facility', None)
     claimed = ''
+    current_request = ''
     if fac is not None:
         from puca_dungeon.characters import id_for_name
         present = list(getattr(getattr(fac, 'arc', None), 'present_ids', None) or [])
+        nc = getattr(getattr(fac, 'arc', None), 'narrative_context', None) or {}
+        if isinstance(nc, dict):
+            current_request = str(
+                nc.get('current_request') or nc.get('open_ask') or ''
+            ).strip()
+            refs = nc.get('recent_referents') or {}
+            if not referent and isinstance(refs, dict):
+                # Prefer diegetic name → cast id
+                for key in ('him', 'her', 'them', 'they'):
+                    name = str(refs.get(key) or '').strip()
+                    if name:
+                        named = id_for_name(getattr(fac, 'cast', None) or {}, name.lower())
+                        if named:
+                            referent = named
+                            break
         if not referent and present:
             referent = present[0]
         if not referent and getattr(fac, 'staff_present', False):
@@ -193,11 +209,37 @@ def _bind_discourse_referents(world: WorldState, intent: Intent, g: Grounding) -
             g.bindings['pronoun_resolved'] = tgt or intent.target
         elif tgt in player_names:
             intent.target = None
-    utt = (intent.utterance or '').lower()
+    utt = (intent.utterance or '').lower().strip()
     if referent and not intent.target:
         if re.search(r'\b(him|her|them|he|she|they)\b', utt):
             intent.target = referent
             g.bindings['target'] = referent
+    # Bare no / why / again → current social request
+    if fac is not None and current_request:
+        bare = re.sub(r'[?.!]+$', '', utt).strip()
+        if bare in ('no', 'n', 'nope', 'nah'):
+            g.bindings['refuse_current_request'] = True
+            g.bindings['current_request'] = current_request
+            ask = str(getattr(getattr(fac, 'arc', None), 'last_ask', '') or current_request)
+            if ask and (intent.classification or '').upper() in ('', 'NONE', 'UNKNOWN'):
+                intent.classification = 'REFUSE'
+            if not intent.utterance or bare in ('no', 'n'):
+                intent.utterance = f'no — {ask}'
+        elif bare in ('why', 'why not', 'what for'):
+            g.bindings['ask_about_request'] = True
+            g.bindings['current_request'] = current_request
+            intent.action_class = intent.action_class or 'SPEAK'
+            intent.classification = intent.classification or 'SPEAK'
+            intent.utterance = f'why {current_request}'
+            if referent:
+                intent.target = referent
+                g.bindings['target'] = referent
+        elif bare == 'again':
+            g.bindings['repeat_current_request'] = True
+            g.bindings['current_request'] = current_request
+            if referent:
+                intent.target = referent
+                g.bindings['target'] = referent
 
 
 def ground_intent(

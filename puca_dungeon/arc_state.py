@@ -36,6 +36,7 @@ class ArcState:
     wash_style: str = ''
     claimed_name: str = ''
     narrative_context: dict = field(default_factory=dict)
+    relationship_expectations: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -68,6 +69,7 @@ class ArcState:
             'wash_style': self.wash_style,
             'claimed_name': self.claimed_name,
             'narrative_context': dict(self.narrative_context or {}),
+            'relationship_expectations': dict(self.relationship_expectations or {}),
         }
 
     @classmethod
@@ -103,6 +105,7 @@ class ArcState:
             wash_style=str(data.get('wash_style') or ''),
             claimed_name=str(data.get('claimed_name') or ''),
             narrative_context=dict(data.get('narrative_context') or {}),
+            relationship_expectations=dict(data.get('relationship_expectations') or {}),
         )
 
     def flag(self, key: str, value: Any = True) -> None:

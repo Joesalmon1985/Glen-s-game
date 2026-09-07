@@ -1,0 +1,26 @@
+{
+  "campaign": "tools\\playtests\\coherence_social_wave1_llm\\minimalist_inspector_seed102",
+  "runs": 1,
+  "ok": false,
+  "total_actionable_defects": 1,
+  "reports": [
+    {
+      "run": "minimalist_inspector_seed102",
+      "path": "tools\\playtests\\coherence_social_wave1_llm\\minimalist_inspector_seed102",
+      "turns_judged": 33,
+      "ok": false,
+      "defect_count": 1,
+      "defects": [
+        {
+          "turn": 3,
+          "rubric": "scene_boundary",
+          "question": "Does prose distinguish scene continuation vs new scene?",
+          "detail": "Book-dungeon and cell facility details mixed in one beat",
+          "quote": "In the dim light of your torch, you turn to the book, its pages a testament to the printer's poor craft. The first two pages are a blur, but by the third, you find yourself somewhere else.\n\nThe tunnel opens into a shallow alcove. A low tabl",
+          "actionable": true
+        }
+      ],
+      "soft_notes": []
+    }
+  ]
+}

@@ -21,33 +21,22 @@ GUIDANCE_CUES = {
 
 NARRATOR_SYSTEM = """You write short second-person narration from authoritative Python facts only.
 
-You receive:
-- scene_context: the continuing dramatic situation (where you are, who is present, what each
-  visibly appears to want, unresolved tension, recent beats, what just changed).
-- facts / structured_facts / world_events: what actually happened this turn (authoritative).
-- body_sensations: optional sensory evidence — use sparingly when salient.
-
-Your job is to narrate this turn as part of the continuing scene, not as an isolated
-action result. Prefer clear causal sequence over abstraction.
+You receive a NarrativeTurnSpec projection:
+- turn_spec: where you are/were, attempt vs actual, physical_contrast, ordered_events,
+  people_present, must_narrate / should_narrate, social_context, discourse.
+- scene_context: continuing dramatic situation.
+- facts / world_events: supporting authoritative lines.
 
 Hard rules:
-- Narrate ACTUAL reality from facts/world_events. Never invent objects, movement, success,
-  damage, inventory, windows, or exits absent from the facts.
-- Never mention or paraphrase: intention, enactment, direct action, wanted_action,
-  actual_action, "despite your intention", "you meant to", "Structured State",
-  "facility phase", "sated", "quenched", "alert", "hygiene aware", "restrained",
-  SKILL, STAMINA, LUCK, or meter numbers.
-- If the player wanted something that did not happen, show the physical contrast in
-  sensory terms (planted feet, hands that do not open, water that arrives anyway) —
-  do not comment on intention vs outcome as meta.
-- Use scene_context to keep place, people, and stakes clear. If this_is_a_new_scene or
-  world_events contain type scene_change (must_lead), the FIRST paragraph MUST announce
-  the change (room left, slit opened, what they are asking). Then narrate the action.
-  Scene changes may use 4-8 sentences. Continuations stay economical (1-3 sentences)
-  unless several facts demand weight.
-- NPC behaviour should read as people with immediate goals from scene_context, not as
-  machine phases. Mystery about the institution is fine; the physical sequence must be clear.
-- Failure is content. Do not coach. No named inner personalities.
+- The turn_spec is immutable authoritative reality. Preserve ordered_events causal order.
+- MEMORY_CUE / interview_prompt / recollection events are internal or conversational —
+  they do NOT change physical location unless an explicit location change / scene_change exists.
+- Never invent objects, people, movement, injuries, or dialogue absent from the turn_spec/facts.
+- If attempt differs from actual, dramatise physical contrast only — never say intention,
+  enactment, wanted_action, "despite your intention", or "you meant to".
+- Use social_context lines as observable significance only; do not invent hidden motives
+  beyond what is supplied; never print trust meters, strategy names, or cooperation scores.
+- Prefer short causal prose. Scene changes may use 4-8 sentences; continuations 1-3.
 - Return ONLY the prose, no JSON."""
 
 
@@ -153,18 +142,40 @@ def build_narrator_input(
     # Facility narrative evidence only while actually in the facility
     if mode == 'facility' and getattr(world, 'facility', None) is not None:
         try:
-            from puca_dungeon.enactment import salient_sensations
-            sensations = salient_sensations(world.facility.pressures)
-            if sensations:
-                payload['body_sensations'] = sensations
-        except Exception:
-            pass
-        try:
             from puca_dungeon.narrative_context import get_scene_context, ensure_initial_context
             ensure_initial_context(world.facility)
             payload['scene_context'] = get_scene_context(world.facility).narrator_packet()
         except Exception:
             pass
+    # Prefer finalized NarrativeEvent projection when present
+    nev = getattr(resolution, 'narrative_event', None)
+    if isinstance(nev, dict) and nev:
+        try:
+            from puca_dungeon.narrative_event import NarrativeEvent
+            payload['turn_spec'] = NarrativeEvent(
+                turn_id=str(nev.get('turn_id') or ''),
+                reality=str(nev.get('reality') or mode),
+                location_before=str(nev.get('location_before') or ''),
+                location_after=str(nev.get('location_after') or ''),
+                player_attempt=dict(nev.get('player_attempt') or {}),
+                actual_outcome=dict(nev.get('actual_outcome') or {}),
+                contrast=dict(nev.get('contrast') or {}),
+                events=list(nev.get('events') or []),
+                current_scene=dict(nev.get('current_scene') or {}),
+                discourse=dict(nev.get('discourse') or {}),
+                sensations=list(nev.get('sensations') or []),
+                social_meaning=list(nev.get('social_meaning') or []),
+                conversational_moves=list(nev.get('conversational_moves') or []),
+                salience=dict(nev.get('salience') or {}),
+                ordered_beats=list(nev.get('ordered_beats') or []),
+            ).narrator_projection()
+            if nev.get('sensations'):
+                payload['body_sensations'] = list(nev.get('sensations') or [])[:3]
+        except Exception:
+            payload['turn_spec'] = {
+                'attempt': payload.get('wanted_action'),
+                'actual': payload.get('actual_action'),
+            }
     return payload
 
 
@@ -268,14 +279,14 @@ class OllamaNarrator:
         payload = build_narrator_input(world, resolution, player_text, intent)
         if resolution.needs_clarification:
             return payload, template_narrate(payload, resolution)
-        # Strip dual-truth field names from the LLM prompt — they invite meta commentary.
-        # Full payload (with wanted_action/enactment) is retained for debugging/prosecutor.
+        # Diegetic attempt/actual/contrast via turn_spec; strip raw engine dual-truth fields.
         llm_payload = {
             k: v for k, v in payload.items()
             if k not in (
                 'wanted_action', 'actual_action', 'enactment', 'enactment_cause',
                 'intended_effect_achieved', 'success', 'attempted', 'state_changed',
                 'classification', 'guidance_level', 'guidance_cue', 'body_qualitative',
+                'body_state',
             )
         }
         body = {
@@ -295,14 +306,14 @@ class OllamaNarrator:
             prose = (raw.get('response') or '').strip()
             if not prose:
                 return self.fallback.narrate(world, resolution, player_text, intent)
-            # Prosecutor: fall back to template if prose contradicts facts / leaks engine vocab
+            # Prosecutor: fail closed — never show unvalidated prose on checker crash
             try:
                 from puca_dungeon.narrator_prosecutor import prosecute, has_blocking_failure
                 hits = prosecute(prose, resolution, world)
                 if has_blocking_failure(hits):
                     return payload, template_narrate(payload, resolution)
             except Exception:
-                pass
+                return payload, template_narrate(payload, resolution)
             return payload, prose
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError):
             return self.fallback.narrate(world, resolution, player_text, intent)

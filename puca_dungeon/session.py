@@ -642,7 +642,11 @@ class GameSession:
         passage,
         authored: list,
         player_text: str = '',
+        *,
+        finalize: bool = True,
     ) -> tuple[Any, Resolution]:
+        fac0 = getattr(self.world, 'facility', None)
+        location_before = str(getattr(fac0, 'room_id', '') or '') if fac0 is not None else ''
         if self.world.mode == 'facility':
             grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
             resolution = resolve_facility(self.world, intent, grounding, self.rng, player_text)
@@ -663,6 +667,10 @@ class GameSession:
                     prose = self.exit_book()
                     resolution.facts.append(prose)
             facility_react.after_facility_action(self.world, resolution, book_turn=False)
+            if finalize:
+                self._finalize_narrative(
+                    resolution, player_text=player_text, location_before=location_before,
+                )
             return grounding, resolution
 
         grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
@@ -686,6 +694,10 @@ class GameSession:
                 time_cost=10,
             )
             facility_react.after_facility_action(self.world, resolution, book_turn=False)
+            if finalize:
+                self._finalize_narrative(
+                    resolution, player_text=player_text, location_before=location_before,
+                )
             return grounding, resolution
 
         resolution = resolve(self.world, intent, grounding, self.rng, passage)
@@ -744,7 +756,47 @@ class GameSession:
                         )
                 except Exception:
                     pass
+        if finalize:
+            self._finalize_narrative(
+                resolution, player_text=player_text, location_before=location_before,
+            )
         return grounding, resolution
+
+    def _finalize_narrative(self, resolution, *, player_text: str = '', location_before: str = '') -> None:
+        """Social meaning + NarrativeEvent after world is final for this turn."""
+        if resolution is None:
+            return
+        fac = getattr(self.world, 'facility', None)
+        if not location_before and fac is not None:
+            for ev in list(getattr(resolution, 'world_events', None) or []):
+                if isinstance(ev, dict) and ev.get('type') == 'scene_change' and ev.get('from_room'):
+                    location_before = str(ev.get('from_room') or '')
+                    break
+            if not location_before:
+                location_before = str(getattr(fac, 'room_id', '') or 'cell')
+        social_events: list = []
+        moves: list = []
+        try:
+            from puca_dungeon.social_meaning import classify_social_events
+            social_events = classify_social_events(
+                self.world, resolution, player_text=player_text,
+            )
+            for f in getattr(resolution, 'structured_facts', None) or []:
+                if isinstance(f, dict) and f.get('type') == 'conversational_move':
+                    moves.append(f.get('surface') or f)
+        except Exception:
+            social_events = []
+        try:
+            from puca_dungeon.narrative_event import finalize_resolution
+            finalize_resolution(
+                self.world,
+                resolution,
+                location_before=location_before,
+                social_events=social_events,
+                conversational_moves=moves,
+            )
+        except Exception:
+            pass
 
     def _run_compound(
         self,
@@ -763,9 +815,12 @@ class GameSession:
         snapshot = self.world.clone()
         rng_snap = self.rng.snapshot()
         performed: list[Resolution] = []
-        narrations: list[str] = []
         last_resolution: Optional[Resolution] = None
         combat_was_active = self.world.combat.active
+        location_before = ''
+        fac0 = getattr(self.world, 'facility', None)
+        if fac0 is not None:
+            location_before = str(getattr(fac0, 'room_id', '') or '')
 
         try:
             for i, step in enumerate(steps):
@@ -784,7 +839,10 @@ class GameSession:
                         trace.compound_steps.append({'stopped': 'combat_interrupt', 'index': i})
                         break
 
-                grounding, resolution = self._resolve_one(step_intent, passage, authored, player_text)
+                # Defer NarrativeEvent until all steps merge into one TurnSpec
+                grounding, resolution = self._resolve_one(
+                    step_intent, passage, authored, player_text, finalize=False,
+                )
                 performed.append(resolution)
                 last_resolution = resolution
                 trace.compound_steps.append({
@@ -793,13 +851,6 @@ class GameSession:
                     'grounding': grounding.to_dict(),
                     'resolution': resolution.to_dict(),
                 })
-
-                # Compose per-step narration for steps actually performed
-                _nin, prose = self._compose_output(
-                    resolution, player_text, step_intent.to_dict(), passage,
-                )
-                if prose:
-                    narrations.append(prose)
 
                 failed = (
                     resolution.success is False
@@ -833,7 +884,7 @@ class GameSession:
                 advance_time=False,
             )
 
-        # Merge facts from performed steps into last resolution for guidance/narrate fallback
+        # Merge facts from performed steps into last resolution — ONE narrator call later
         if len(performed) > 1:
             merged_facts: list = []
             merged_structured: list = []
@@ -846,11 +897,9 @@ class GameSession:
             last_resolution.structured_facts = merged_structured
             last_resolution.world_events = merged_events
 
-        # Stash composed compound narration on resolution for _compose_output override
-        if narrations:
-            last_resolution.facts = list(last_resolution.facts or [])
-            # Prefer joined step prose via a dedicated attribute on trace
-            trace.narrator_output = '\n\n'.join(narrations)
+        self._finalize_narrative(
+            last_resolution, player_text=player_text, location_before=location_before,
+        )
 
         if not trace.grounding and performed:
             # Use last step grounding from compound_steps

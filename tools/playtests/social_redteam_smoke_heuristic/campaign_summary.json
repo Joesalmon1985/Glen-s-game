@@ -1,0 +1,37 @@
+{
+  "runs": [
+    {
+      "agent": "Social",
+      "seed": 301,
+      "turns": 15,
+      "heuristic": true,
+      "final_phase": "second_offer",
+      "final_room": "hell",
+      "names_seen": [
+        "Most",
+        "Gesture",
+        "Away",
+        "Stay",
+        "Hands",
+        "That",
+        "Tell",
+        "Glen",
+        "Water",
+        "Heat",
+        "Warm",
+        "Sunlight"
+      ],
+      "asked_about": [
+        "away",
+        "gesture",
+        "glen",
+        "hands",
+        "most",
+        "stay",
+        "tell",
+        "that",
+        "water"
+      ]
+    }
+  ]
+}

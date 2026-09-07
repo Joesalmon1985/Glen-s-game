@@ -266,6 +266,8 @@ def prosecute(prose: str, resolution: Any = None, world: Any = None) -> list[dic
                 passage_after = entered
 
     world_visible = None
+    facility_room_before = None
+    facility_room_after = None
     if world is not None:
         if hasattr(world, 'passage_id'):
             passage_before = world.passage_id
@@ -279,11 +281,39 @@ def prosecute(prose: str, resolution: Any = None, world: Any = None) -> list[dic
         elif isinstance(world, dict):
             passage_before = world.get('passage_id')
             world_visible = world
+        # Facility TurnSpec locations (room awareness beyond passages)
+        nev = None
+        if resolution is not None and not isinstance(resolution, dict):
+            nev = getattr(resolution, 'narrative_event', None)
+        elif isinstance(resolution, dict):
+            nev = resolution.get('narrative_event')
+        if isinstance(nev, dict):
+            facility_room_before = nev.get('location_before') or None
+            facility_room_after = nev.get('location_after') or None
+        fac = getattr(world, 'facility', None) if not isinstance(world, dict) else None
+        if fac is not None and world_visible is None:
+            try:
+                entities = [e.id for e in fac.entities_in_room()]
+            except Exception:
+                entities = []
+            world_visible = {
+                'entities': entities,
+                'room_id': getattr(fac, 'room_id', None),
+            }
+            if facility_room_after is None:
+                facility_room_after = str(getattr(fac, 'room_id', '') or '')
+            if facility_room_before is None:
+                facility_room_before = facility_room_after
 
     # Passage unchanged → movement claims contradict
     passage_unchanged = (
         passage_after is None
         or (passage_before is not None and int(passage_after) == int(passage_before))
+    )
+    facility_room_unchanged = (
+        facility_room_before is not None
+        and facility_room_after is not None
+        and str(facility_room_before) == str(facility_room_after)
     )
 
     failures: list[dict] = []
@@ -293,7 +323,11 @@ def prosecute(prose: str, resolution: Any = None, world: Any = None) -> list[dic
         pl = prop.lower()
 
         # Extra deterministic checks
-        if pl == 'movement_claim' and passage_unchanged:
+        if pl == 'movement_claim' and passage_unchanged and (
+            facility_room_unchanged or facility_room_before is None
+        ):
+            label = CONTRADICTS_STATE
+        if pl == 'movement_claim' and facility_room_unchanged and passage_before is None:
             label = CONTRADICTS_STATE
 
         for name, pat in _ENTITY_PATTERNS:
@@ -395,8 +429,8 @@ def has_blocking_failure(failures: list | None) -> bool:
     for f in failures or []:
         if not isinstance(f, dict):
             continue
-        if f.get('label') == CONTRADICTS_STATE:
+        if f.get('label') in (CONTRADICTS_STATE, UNSUPPORTED):
             return True
-        if f.get('reason') in ('engine_vocab', 'negates_wash_fact', 'meter_leak'):
+        if f.get('reason') in ('engine_vocab', 'negates_wash_fact', 'meter_leak', 'intention_meta'):
             return True
     return False

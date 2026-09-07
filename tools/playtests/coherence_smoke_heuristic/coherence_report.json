@@ -1,0 +1,26 @@
+{
+  "campaign": "tools\\playtests\\coherence_smoke_heuristic",
+  "runs": 2,
+  "ok": true,
+  "total_actionable_defects": 0,
+  "reports": [
+    {
+      "run": "cooperative_serious_seed101",
+      "path": "tools\\playtests\\coherence_smoke_heuristic\\cooperative_serious_seed101",
+      "turns_judged": 31,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    },
+    {
+      "run": "long_serious_seed201",
+      "path": "tools\\playtests\\coherence_smoke_heuristic\\long_serious_seed201",
+      "turns_judged": 35,
+      "ok": true,
+      "defect_count": 0,
+      "defects": [],
+      "soft_notes": []
+    }
+  ]
+}

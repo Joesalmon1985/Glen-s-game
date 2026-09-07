@@ -345,6 +345,124 @@ class SensibleCautious(Agent):
         return 'look around carefully'
 
 
+class Social(Agent):
+    """Dialogue-seeking facility agent — talk to every person who appears."""
+
+    name = 'Social'
+
+    _KNOWN = re.compile(
+        r'\b(Iven|Nessa|Ruan|Glen|Cam|Hadrik|Toma|Maelin|'
+        r'orderly|researcher|attendant)\b',
+        re.I,
+    )
+    _INTRO = re.compile(
+        r'\b([A-Z][a-z]{2,})\s+(?:is here|arrives|stands|waits|speaks|says|asks)\b'
+    )
+    _PERSON_CUE = re.compile(
+        r'\b(she|he|they|someone|staff|orderly|woman|man|figure|voice|'
+        r'Iven|Nessa|Ruan|attendant|researcher|Glen|Cam)\b',
+        re.I,
+    )
+
+    def __init__(self, rng: Optional[random.Random] = None):
+        super().__init__(rng)
+        self.seen_names: list[str] = []
+        self.asked_about: set[str] = set()
+        self.cooperated_door = False
+        self.washed = False
+        self.fed = False
+        self.slept = False
+
+    def observe(self, ctx: AgentContext, prose: str) -> None:
+        super().observe(ctx, prose)
+        low = (prose or '').lower()
+        if 'bowl' in low or 'food' in low or 'eat' in low:
+            self.fed = self.fed or 'empty' in low or 'ate' in low
+        for m in self._KNOWN.finditer(prose or ''):
+            name = m.group(1)
+            if name.lower() not in {n.lower() for n in self.seen_names}:
+                self.seen_names.append(name)
+        for m in self._INTRO.finditer(prose or ''):
+            name = m.group(1)
+            if name.lower() in {
+                'sarel', 'they', 'then', 'there', 'when', 'what', 'your',
+                'cell', 'door', 'book', 'cup', 'bed', 'room', 'nothing',
+                'something', 'someone', 'hands', 'water', 'heat', 'warm',
+            }:
+                continue
+            if name.lower() not in {n.lower() for n in self.seen_names}:
+                self.seen_names.append(name)
+
+    def next_command(self, ctx: AgentContext) -> Optional[str]:
+        prose = ctx.last_prose or ''
+        low = prose.lower()
+
+        # Advance arc when procedures block talk
+        if not self.cooperated_door and re.search(r'step away|back from the door|give.*(door|space)', low):
+            self.cooperated_door = True
+            return 'step back from the door'
+        if ('wash' in low and 'yourself' in low) or (
+            re.search(r'\bbasin\b|\bsoap\b', low) and not self.washed
+        ):
+            self.washed = True
+            return 'wash myself'
+        if re.search(r'\bbowl\b|\bfood\b|\bmeal\b', low) and not self.fed:
+            self.fed = True
+            return 'eat the food'
+        if re.search(r'\blie down\b|\bsleep\b|rest', low) and not self.slept and ctx.turn > 8:
+            self.slept = True
+            return 'sleep'
+
+        # Address newly mentioned people
+        if self._PERSON_CUE.search(prose):
+            for name in self.seen_names:
+                key = name.lower()
+                if key not in self.asked_about:
+                    self.asked_about.add(key)
+                    return self.rng.choice([
+                        f'ask {name} who they are',
+                        f'ask {name} where I am',
+                        f'ask {name} what they want',
+                        f'ask {name} why this is happening',
+                        f'tell {name} my name is Sarel',
+                        f'ask {name} if they will help me',
+                    ])
+            # Pronoun-only presence
+            if 'ask_anon' not in self.asked_about:
+                self.asked_about.add('ask_anon')
+                return self.rng.choice([
+                    'ask them who they are',
+                    'ask them where I am',
+                    'ask what they want from me',
+                    'ask why the procedures happen',
+                    'will you help me?',
+                ])
+
+        # Follow up on revealed content
+        if re.search(r'“|\'[A-Za-z]|says|tells you|asks', prose):
+            return self.rng.choice([
+                'why?',
+                'tell me more',
+                'what do you mean?',
+                'ask again',
+                'will you help?',
+            ])
+
+        # Alone / waiting for staff
+        if not self._PERSON_CUE.search(prose) and ctx.turn % 3 == 0:
+            return 'wait'
+        if ctx.turn % 5 == 0:
+            return 'look around'
+        return self.rng.choice([
+            'look around',
+            'wait',
+            'ask if anyone is there',
+            'who are you?',
+            'where am I?',
+            'what is this place?',
+        ])
+
+
 ALL_AGENTS: list[type[Agent]] = [
     SemanticParaphraser,
     CompoundAbuser,
@@ -367,6 +485,7 @@ ALL_AGENTS: list[type[Agent]] = [
     MetaNonsense,
     RecklessExplorer,
     SensibleCautious,
+    Social,
 ]
 
 

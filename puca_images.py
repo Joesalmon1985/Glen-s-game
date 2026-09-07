@@ -5,7 +5,13 @@ from pathlib import Path
 
 BASE_MODEL = 'stable-diffusion-v1-5/stable-diffusion-v1-5'
 STEPS = 20
+BAKEOFF_STEPS = 28
 STYLE = 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering'
+DEFAULT_NEGATIVE = (
+    'photorealistic, blurry, text, watermark, explicit, gore, '
+    'noise, static, grain, dithering, multiple subjects, wrong subject, animal, bird'
+)
+
 
 class ImageGenerator:
     def __init__(self, cache_dir, lora_folder, use_lora=True):
@@ -29,14 +35,18 @@ class ImageGenerator:
         except (OSError, ValueError, ImportError):
             return False
 
-    def key(self, location, prompt):
+    def key(self, location, prompt, negative_prompt=None, seed=None):
         weights = self.lora_folder / 'adapter_model.safetensors'
         config_file = self.lora_folder / 'adapter_config.json'
         if self.use_lora and (not weights.is_file() or not config_file.is_file()):
             raise RuntimeError('Pixel adapter files are missing. Disable the pixel adapter to use base art.')
         if self._adapter_hash is None:
             self._adapter_hash = hashlib.sha256(weights.read_bytes() + config_file.read_bytes()).hexdigest() if self.use_lora else 'base'
-        config = [BASE_MODEL, STYLE, location, prompt, self._adapter_hash, 0.7, STEPS, 512, 'dpm++-v1']
+        neg = negative_prompt if negative_prompt is not None else DEFAULT_NEGATIVE
+        config = [
+            BASE_MODEL, STYLE, location, prompt, self._adapter_hash, 0.7, STEPS, 512, 'dpm++-v1',
+            neg, seed if seed is not None else 'auto',
+        ]
         return hashlib.sha256(json.dumps(config).encode()).hexdigest()
 
     def _load_pipeline(self):
@@ -88,9 +98,12 @@ class ImageGenerator:
         if self.torch is not None and self.torch.cuda.is_available():
             self.torch.cuda.empty_cache()
 
-    def generate(self, location, prompt, cancel=None, progress=None):
-        key = self.key(location, prompt)
-        destination = self.cache_dir / (key + '.png')
+    def generate(self, location, prompt, cancel=None, progress=None, negative_prompt=None, seed=None, steps=None):
+        neg = negative_prompt if negative_prompt is not None else DEFAULT_NEGATIVE
+        use_steps = int(steps) if steps is not None else STEPS
+        key = self.key(location, prompt, negative_prompt=neg, seed=seed)
+        # Include steps in on-disk key path via location tag already; also salt cache file
+        destination = self.cache_dir / (key + (f'_s{use_steps}' if use_steps != STEPS else '') + '.png')
         if destination.is_file():
             if self.valid_image(destination):
                 return key, destination
@@ -107,15 +120,15 @@ class ImageGenerator:
             if cancel and cancel.is_set():
                 raise RuntimeError('Illustration cancelled')
             if progress:
-                progress(index + 1, STEPS)
+                progress(index + 1, use_steps)
             return kwargs
         try:
-            seed = int(key[:8], 16)
+            use_seed = int(seed) if seed is not None else int(key[:8], 16)
             with self.torch.inference_mode():
                 result = self.pipe(prompt=f'{STYLE}, {prompt}',
-                                   negative_prompt='photorealistic, blurry, text, watermark, explicit, gore',
-                                   width=512, height=512, num_inference_steps=STEPS, guidance_scale=7.0,
-                                   generator=self.torch.Generator(device='cpu').manual_seed(seed),
+                                   negative_prompt=neg,
+                                   width=512, height=512, num_inference_steps=use_steps, guidance_scale=7.5,
+                                   generator=self.torch.Generator(device='cpu').manual_seed(use_seed),
                                    callback_on_step_end=callback)
             if cancel and cancel.is_set():
                 raise RuntimeError('Illustration cancelled')

@@ -18,8 +18,9 @@ def build_speaker_packet(
     ch = CharacterState.from_dict(raw if isinstance(raw, dict) else None)
     rel = ch.rel('sarel')
     relationship_summary = (
-        f'familiarity {rel.familiarity}, trust {rel.trust}, '
-        f'fear {rel.fear}, suspicion {rel.suspicion}'
+        'knows Sarel only through recent encounters'
+        if rel.familiarity < 2
+        else 'has a short shared history with Sarel'
     )
     return {
         'speaker_id': speaker_id,
@@ -30,7 +31,9 @@ def build_speaker_packet(
         'emotion': ch.emotion,
         'relationship_summary': relationship_summary,
         'may_reveal': list(ch.may_reveal) + list(may_add or []),
-        'must_conceal': list(ch.must_conceal),
+        'must_conceal': list(ch.must_conceal) + [
+            'relationship_scores', 'strategy_label', 'trust_meter',
+        ],
         'language_constraint': (
             'simple_words_only' if language_ability < 35
             else 'short_sentences' if language_ability < 55

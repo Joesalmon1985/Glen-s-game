@@ -93,8 +93,9 @@ def test_scene_resets_on_washroom():
 def test_narrator_system_forbids_intention_meta():
     lower = NARRATOR_SYSTEM.lower()
     assert 'intention' in lower or 'wanted_action' in lower
-    assert 'scene_context' in lower
-    assert 'never mention' in lower or 'never quote' in lower
+    assert 'scene_context' in lower or 'turn_spec' in lower
+    assert 'never' in lower
+    assert 'trust' in lower or 'strategy' in lower
 
 
 def test_wait_and_default_facts_not_meta():

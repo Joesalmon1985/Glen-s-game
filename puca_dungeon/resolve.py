@@ -60,6 +60,7 @@ class Resolution:
     wanted_action: dict = field(default_factory=dict)
     actual_action: dict = field(default_factory=dict)
     enactment_cause: str = ''
+    narrative_event: Optional[dict] = None
 
     def to_dict(self) -> dict:
         return {
@@ -98,6 +99,7 @@ class Resolution:
             'wanted_action': dict(self.wanted_action or {}),
             'actual_action': dict(self.actual_action or {}),
             'enactment_cause': self.enactment_cause,
+            'narrative_event': dict(self.narrative_event) if isinstance(self.narrative_event, dict) else self.narrative_event,
         }
 
 

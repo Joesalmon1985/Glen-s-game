@@ -1,0 +1,306 @@
+# Short playtest: obstructive
+seed=103
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+You are in a small locked room. Nothing is happening yet.
+
+## Turn 1
+> wait
+
+In the dimly lit cell, you find yourself still, as the room remains unyielding to your presence. The bed, cup, book, and door stand as silent sentinels in the cramped space. A faint sensation of uncleanliness permeates your skin, a stark reminder of the environment. Despite your attempt to speak with more conviction, the words seem to slip from your grasp, dissolving in the quiet. The cell remains unperturbed, waiting with an eerie tranquility.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> wait
+
+In the dimly lit cell, you find yourself alone, the quiet echoing off the stone walls. The bed, cup, book, and door are the only companions in this small, unassuming space. Your skin feels unclean, a constant reminder of your surroundings.
+
+You wait, your breaths matching the silence of the room. Time seems to stretch on, the words you speak coming out thinner than you intend. The cell keeps its quiet, a testament to the routines and rules that govern this place. Despite your efforts, nothing changes. You wait, and the cell waits with you.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> wait
+
+The observation slit in the door creaks open, revealing a figure beyond. Their words are a mix of muffled noises and deliberate gestures, the meaning clear despite the lack of clarity: they want you to step back from the door. You remain stationary, the cell's silence your only response. The figure's gaze lingers, before the slit closes with a soft click. The cell remains quiet, the air heavy with unspoken tension. The figure's demand echoes in your mind, a reminder of your confined existence. The cold stone walls seem to close in, a stark reminder of your isolation. Your heart pounds in your chest, the rhythm a constant reminder of your existence. The cell, as always, keeps its quiet.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 4
+> wait
+
+In the dimly lit cell, you wait, the air heavy with tension. The large, silent staff member beyond the door continues to gesture, their repeated words a mere echo of the command: step away from the door. The cell remains quiet, save for the faint sound of your own breath. Your skin feels unclean, a constant reminder of the confined space you inhabit, and the words that leave your mouth seem thinner than you intend. The staff member's gaze never wavers, their patience unbroken. The cell keeps its quiet, the tension unresolved.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 5
+> refuse
+
+The observation slit in the door remains open, the person outside persists with their insistent gesturing and short, repetitive sounds, urging you to step away from the door. In a moment, you find yourself struggling to articulate your refusal, your words coming out thinner than you intend. "Refuse?" you manage to utter. The large, silent staff member repeats the same short sound and gesture, confirming their request for you to move back from the door. The cell keeps its quiet, the tension unresolved.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 6
+> no
+
+In the cell, the door procedure commences. The staff member pauses, observing your steadfast stance. The door remains closed, the gap between you and the barrier unyielding. You maintain your ground, a firm grip on the air where the door once stood. The staff member, momentarily taken aback, turns to call for assistance. The cell echoes with the weight of the unspoken tension. The door remains closed, and the staff member's gaze continues to linger on your resolute position. The procedure carries on, the staff member's expectations unchanged. You remain unyielding, your body a testament to your resolve. The air in the cell feels heavy, and your words seem thinner than intended, yet you stand firm, a barrier in itself. The staff member continues to wait, their gaze unwavering, as the door procedure persists.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 7
+> I will not move
+
+In the dimly lit corridor, the same bolts as the cell door echo your recent departure. Hands, rough and steadfast, remain clamped on your arms, guiding you forward. The institution's pace is unyielding, a testament to its unwavering control. But this time, you resist. You stand firm, your feet planted steadfastly against the cold, unyielding floor. The hands on your arms pause, a momentary disruption in the institution's rhythm. The air around you seems to thicken, a palpable tension born from the contrast between your will and theirs. Yet, the corridor remains unmoving, the hands on your arms unyielding, and the institution moves forward, unperturbed by your defiance.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 8
+> stand in front of the door
+
+In the dimly lit corridor, you find yourself standing before a massive door, its surface rough and unyielding. The door, devoid of an inner handle, stands as a stark reminder of your confinement. A slit, narrow and obscured, offers a glimpse of the world beyond. Your hands, bound, restrict your movement, and the air around you carries an unsettling chill. The institution's pace remains unwavering, the staff members, one large and silent, the other young and tense, continue to guide you forward, their intentions clear. The door, your momentary obstacle, has not budged despite your presence.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 9
+> refuse again
+
+They take you out of the corridor and into a washroom. Water. A basin. They intend to wash you. You only manage part of it. Water. A basin. Soap that smells medicinal. Staff wait without patience. You manage: “Refuse?” Glen is here. They listen more than they explain.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 10
+> struggle
+
+In the sterile washroom, under the watchful eyes of two staff members, one large and silent, the other tense and rule-bound, the basin remains, unyielding. The water remains, waiting. The soap, medicinal and cold, remains nearby. Your struggle, though earnest, goes unheeded, as they continue to wait, their patience worn thin but unwavering. The air remains heavy with the scent of soap and a hint of unease. Your skin, despite your struggle, remains unclean, a stark reminder of the routine procedure that looms ahead. The words you utter, though meant to defy, come out thin and weak, a testament to the power dynamic at play. The tension, unresolved, lingers like a heavy fog, pervading the room. The basin, the water, the soap - they remain, a stark contrast to your planted feet and unyielding hands.
+
+The large, silent staff member continues to stand by the basin, their gaze steady and unyielding. The younger, tense one remains at attention, their fingers tapping against the washroom's cool stone wall. The air between them is thick with anticipation, the scent of medicinal soap lingering.
+
+Despite your attempt to express resistance, your words come out thinner than you intend, lost in the quiet of the room. The water in the basin does not recede, and the younger staff member does not look away. Your hands, bound or not, remain still, a stark contrast to the fluidity of the water that waits.
+
+The basin, the soap, the large and young staff members - they are all reminders of what each wants: to wash you. The unresolved tension in the room is a testament to the unyielding routine of this washroom procedure. The silence is deafening, the air heavy with the weight of the unspoken. The wait continues. The water in the bas
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 11
+> refuse to wash
+
+In the mess room, a table and a bowl of warm food now occupy the space, heat rising from the meal as anticipation simmers. The staff members, one large and silent, the other younger and tense, continue to expect you to eat. You brace yourself, hands bound, as water and soap arrive, washing you against your will. Despite your refusal, the routine persists. Ruan, lucid and fractured, watches on. They are still waiting for you to eat.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 12
+> refuse to wash
+
+In the mess, amidst the hum of the facility, you refuse the food before you, your actions met with quiet disapproval from the staff. The large, silent one watches you, unyielding, while the younger, tense one maintains a rigid demeanor. Ruan, their eyes lucid yet fractured, seems to understand the defiance in your gesture.
+
+The spoon and bowl, though still present, feel out of reach, as if they're symbols of a different world. The staff continue their grip, unwavering, as water and soap arrive, regardless of your intent. A sense of unease settles beneath your ribs, a reminder of the rules that bind you here. The bowl remains untouched, a testament to your refusal, as your stomach voices its discontent subtly. The meal continues, the staff waiting for you to eat or at least leave it alone.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 13
+> refuse the food
+
+In the dimly lit mess, the air heavy with the scent of food, you find yourself at a table, surrounded by staff members who expect you to eat. One, larger and more silent, continues to grip you firmly, while another, younger and more tense, watches attentively. Ruan, lucid and fractured, watches too. The table holds a warm bowl of food, a spoon, and water and soap at the ready.
+
+Refusing their expectations, you vocalize your refusal, but the words come out thinner than you intended. The larger staff member's grip does not loosen, but continues its silent, unyielding pressure. Unease sits under your ribs, a constant reminder of the tension in the air. The staff continue to watch, waiting for you to eat or at least leave the food untouched. Despite your refusal, the water and soap arrive anyway, and you are washed, whether you comply or not.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 14
+> push the bowl away
+
+In the dimly lit mess, the bowl, once before you, now lies shattered on the floor. The remnants of your meal spill out, creating a mess that echoes the discord in the air. The staff members, one large and silent, the other younger and tense, watch you with eyes that hold a mix of disappointment and determination. Ruan, lucid and fractured, remains a silent observer. The room is heavy with the unspoken tension that a refusal to eat has brought. The staff are still waiting, their expectations of compliance unwavering. The scent of food, once enticing, now serves as a reminder of your defiance.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl food spilled, wary adventurer
+
+## Turn 15
+> stay awake
+
+In the cell, where the day winds toward sleep, you're returned, a weary echo of your earlier self. The bed beneath you, the cup beside it, and the book on the floor, all remain unchanged from your departure. The door, devoid of a handle, remains closed, its narrow slit offering a glimpse of the corridor. The room, much like you, is cleaner but more tired.
+
+A dull tiredness sits behind your eyes, unease under the ribs, and words come out thinner than intended. You resist sleep, fighting the urge to give in. The institution, ever watchful, expects rest.
+
+In a contrast to your effort, hunger eases a little, as food, left as a debate for far too long, is no longer delayed. The day, though winding toward sleep, still has a flicker of life in its exhaustion.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 16
+> stay awake
+
+The cell, your sole companion for the past day, remains unyielding as you battle the encroaching slumber. The bed, once bleak, begins to look like an argument you will lose. Your eyes burn, a testament to your resistance, yet the mattress beckons with a promise of rest. Your limbs feel heavy; staying upright takes work. Unease sits under the ribs, a constant companion. Despite the fatigue, you remain vigilant, the weight of the unknown pressing upon you. The day ends, marking the passage of time in this solitary confinement.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 17
+> stay awake
+
+In the dimly lit cell, as the day draws to a close, you find yourself battling against the encroaching drowsiness. The bed, once stark and unwelcoming, now seems an enticing prospect you'd rather not face. The struggle is evident; your eyes burn, and staying upright takes effort. The unease in your chest is a constant reminder of the battle you're waging. The words you speak come out thinner than you intend, a testament to the fatigue that threatens to overcome you. Despite it all, you persist, maintaining your consciousness in the face of weariness. The cell and the bed dominate; waking will bring a new day.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 18
+> stay awake
+
+In the confines of your cell, the struggle against slumber persists. The bed, once stark and uninviting, now appears a formidable obstacle. Your limbs feel heavy; staying upright takes work. The room's edges grow soft, a testament to the exhaustion that threatens to consume you. Despite your efforts, words come out thinner than you intend, a symptom of the battle you wage within. The day draws to a close, and the cell remains your prison, a stark reminder of the struggle yet to come.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 19
+> wait
+
+In the somber cell, the first light of a new day breaks through the slit, signaling the institution's formal collection. You, however, find yourself still within the confines of the cell, waiting. The room, softened by the weight of exhaustion, feels more like a cushion than a prison.
+
+Despite a grand plan to stay awake, sleep overtakes you again, your face pressing against the cold wall. Upon waking, a sense of unease lingers beneath your ribs, words coming out thinner than intended. The cell remains quiet, keeping its watchful vigil as you stir.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 20
+> wait
+
+In the dim morning, you're led from your cell, the clang of bolts echoing in the formal corridor. The institution's pace is deliberate, hands guiding you along the plain, cold walls. The cell, now behind, remains silent, a quiet testament to the night. You wait, the unease beneath your ribs growing as words seem to thin on your tongue, but you remain still. The staff move with a purpose, their expectations of compliance palpable. The day's interrogation looms ahead.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 21
+> wait
+
+In the formal corridor, under the dim, unyielding light, you find yourself sandwiched between two staff members. One, a towering figure of quiet practicality, grips your arm firmly. The other, a younger, tense individual, adhering rigidly to the rules, mirrors the action. The air between you is thick with expectation, a palpable demand for compliance.
+
+The silence is broken as the larger staff member presents a word, a name, that seems to hang in the air, a question. Unease settles under your ribs, and words come out thinner than you intend. The name they display is yours. It echoes off the cold, unyielding walls, a reminder of the institution's control. The corridor remains unchanged, the bolts on the door the same as those that confined you earlier. You wait, the institution moving at its own pace, the question hanging in the air.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 22
+> wait
+
+In the dimly lit corridor, the hum of voices and footsteps echo, but the scene shifts as you're ushered into a brighter room. A table, adorned with images and objects, stands at its center, reminiscent of a lesson. Opposite you, Elian, attired in a collar as if it were ordinary clothing, sits poised and silent. The air thickens with anticipation, the questions yet unanswered. Unease gnaws at the pit of your stomach, and your words feel thin as they slip past your lips. The room, once alien, becomes your new interview chamber. The interrogators wait, their eyes expectant, the silence heavy with the weight of unasked questions.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 23
+> wait
+
+In the facility's sterile interview room, the air thick with unspoken tension, you wait. The room, dimly lit, houses three figures - a staff member who exudes control, another who is large and practical, and Iven, gentle and believing.
+
+The controlled staff member taps two figures, older and younger, prompting a question that hangs in the air - "Family?" A smaller figure, possibly a brother, joins the tableau. The smell in the room triggers something within you, stirring memories that manifest without being summoned. Some feel vivid, some feel wrong.
+
+You find yourself waiting, unease gnawing at your insides, words escaping thinner than you intend. The staff members continue their unspoken interrogation, waiting for your answer to their questions. The facility's moment continues, the stakes unchanged, the tension palpable.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 24
+> wait
+
+In the facility's dimly lit interview room, the air grows chillier, the wooden floor creaking beneath your feet as if echoing the past. The memories of childhood seem to surge unbidden, the touch of cold ground under someone's hand a palpable sensation. The staff members, one controlled and kind, the other large and practical, continue to wait, their questions still unanswered. Unease settles in your ribs, and your words feel thinner than intended. The facility moment presses on, the tension palpable as the staff members continue to seek their answers.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 25
+> wait
+
+In the facility, the air thickens with tension. The questioning shifts, veering toward the unknown. You are asked about your eating habits, and then, unexpectedly, about your death. The staff member who seems controlled, collared, and professionally kind presents bread and a bowl, inquiring about your last meal. As you ponder, the larger, silent, practical staff member remains steadfast. Iven, the gentle believer, watches attentively.
+
+The memories of your death, if you have any, refuse to surface. Instead, images of childhood and cold air fill your mind. The taste of bread lingers on your tongue, a stark contrast to the chill that runs through your veins. Your hands remain firm, clenched around the memory of the past, while your words come out thinner than intended, echoing the emptiness you feel. The staff continues their line of questioning, pressing on about the moments of your death: darkness, waking, warmth, pain, voices, light.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 26
+> wait
+
+In the dimly lit facility, the air thick with unspoken questions, the controlled staff member glances at you, expectantly. The large, practical one continues with their tasks, the rhythmic clatter of their work echoing through the room. Iven, gentle and believing, watches you intently. The previous conversations linger, a palpable tension in the air.
+
+Suddenly, a new element is introduced: nets and repetitive work. Your hands, once still, now find themselves occupied with the unfamiliar task. The nets, rough and heavy, pull at your fingers, a stark contrast to the silence that hangs heavily in the air. Unease settles beneath your ribs, and words seem to slip through your grasp, thin and elusive.
+
+The staff member who seemed controlled, collared, and professionally kind, turns to you, waiting for an answer. But your response, like the nets in your hands, remains tangled, unwilling to be untangled. The question, "What happened when
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 27
+> wait
+
+In the sterile facility, you find yourself amidst an interview. A staff member who appears controlled and professionally kind, another who seems large and silent, and Iven, gentle believer, are all present. The air is thick with tension, each party with their own unspoken desires.
+
+As the minutes pass, the room falls silent. You wait, your heart pounding in your chest. The smell of wet rope fills the air, and a chill runs down your spine. Unease sits under your ribs, words coming out thinner than intended.
+
+Suddenly, your senses are assaulted by visions of warmth, sunlight, clean bedding, food, and running water. These elements, a stark contrast to your current reality, are presented as evidence. You are not told whether they are memories, dreams, or made things. The staff continues their questioning, asking what happened when you died. Despite your uncertainty, you remain silent.
+
+The room remains unchanged, the staff continuing their routine, waiting for your response. The game
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 28
+> no
+
+In the facility, the air grows tense as the senior researcher awaits your response. The room is lined with wooden benches and metal shelves, a stark contrast to the dim light that filters through the slit in the door. Iven, the gentle believer, watches with a solemn expression, while the large, silent staff member attends to their tasks.
+
+You hesitate, the words catching in your throat. Unease sits under your ribs, and words come out thinner than you intend. Your hands, clenched around the bowl of bread, tremble slightly. The staff member who seems controlled, professionally kind, raises an eyebrow, but says nothing.
+
+With a deep breath, you place the bowl on the table and attempt to answer their question about what happened when you died. Your voice is steady as you say, "I don't remember." There is a moment of silence, and then the senior researcher speaks, their voice calm but firm.
+
+"Someone left on water," they say, their gaze
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 29
+> wait
+
+In the dimming twilight, the stones beneath your feet remain unyielding as you stand on a jetty, the water's edge a mere arm's reach away. The facility's staff, a mix of controlled and practical individuals, continue their interrogation. A gentle believer named Iven stands among them.
+
+The question about the other place echoes through the air, a chilling reminder of the facility's mysteries. The words hang heavy in the air, a tangible reminder of the heat, cold, foul air, noise, and unquenchable thirst that pervade that place. The fear of that place settles deep within you, a fear that seems impossible to shake off.
+
+Despite your attempt to wait, the fear keeps your shoulders tight, and words come out thinner than you intend. The staff continues to wait, their questions unanswered. The dusk deepens, the stones and water merging into one indistinct line as twilight stretches on. The facility
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 30
+> look around
+
+In the facility's illuminated chamber, the table that had once been shrouded in darkness now gleams under the bright light. Objects and images, meticulously arranged, resemble a lesson ready to be taught. Across from you, Elian, the staff member with the fitted collar, remains seated, eyes fixed on the spread. Iven, the gentle believer, and a large, silent staff member, stand nearby, their gaze flicking between you and the table. The atmosphere is tense, thick with anticipation, as they await answers to what happened when you died. Your heart races, and your words feel thin against the weight of their expectations. The air in the room seems heavy, as if carrying the unspoken question like a palpable presence.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 31
+> examine the grate
+
+The room, dimly lit and sterile, continues to hold you captive. Your feet, planted firmly on the cold, hard floor, do not move. The staff member, controlled and collared, continues their explanation, their words slow and deliberate. Nessa, abrasive and skeptical, listens intently.
+
+You ask about the grate, but there is no grate here. Instead, they explain, in slow words: you continued after death. Consciousness can persist. They maintain environments for that. Heaven is reward. Hell is permanent exclusion. They do not present this as a threat. They present it as reality. Fear keeps your shoulders tight, and words come out thinner than you intend. The staff member waits, poised for your next question.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 32
+> wait
+
+In the sterile interview room, the air thick with tension, you find yourself waiting amidst the scrutinizing gaze of a staff member and the skeptical Nessa. The terms of a five-year research agreement are laid out before you: examinations, surgery, neurological procedures, biopsies, testing, drugs, memory experiments, sleep studies, language assessment, monitoring. The promise of five years in Heaven hangs heavy, the terms bureaucratic and unyielding. Your heart races, your palms slick, as you wait, your voice faltering as the silence stretches. The room remains still, their eyes trained on you, waiting for your decision.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 33
+> wait
+
+In the sterile interview room, the tension lingers heavy. The staff member, clad in a crisp white uniform, maintains an air of controlled calm. Nessa, a woman with a sharp gaze and a dismissive air, remains skeptical. You, your body taut with fear, continue to wait, your words sounding thinner than intended. The air is thick with the weight of unspoken decisions, the promise of Heaven hanging in the balance. The bureaucratic contract still awaits your agreement, an unyielding presence in the room. Time seems to drag, each second a reminder of the decision you're about to make. Despite your efforts to find the right words, the silence persists, a testament to the gravity of the situation. The staff member remains patient, their gaze steady, waiting for your agreement to the five-year research service.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 34
+> stay here
+
+In the sterile, bureaucratic interview room, the tension lingers. The staff member, clad in a collared uniform, maintains a controlled demeanor. Nessa, a skeptical figure, remains unyielding. The offer of a five-year research agreement still hangs in the air, a proposition that threatens to blur the line between service and salvation.
+
+You find yourself in the same position, your body still, a testament to your hesitation. Words, usually fluid, seem to falter, trapped by the weight of the decision. Fear tightens your shoulders, a physical manifestation of the unease that grips you. Yet, there's no action, no words spoken. The room remains silent, the contract offer still on the table, the clock ticking away the seconds. The anticipation, the uncertainty, the fear—they all persist, a silent symphony of indecision.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 35
+> look around
+
+The staff member's eyes remain fixed on you, a subtle tension in the air as the seconds tick by. Your heart beats faster, the rhythm echoing in your chest, and words seem to falter at the edge of your lips. Despite your attempt to look around, you find yourself waiting, your gaze locked with the bureaucrat's. The room remains unchanged, the air heavy with the weight of the contract offer still on the table: service now, Heaven later. Nessa, her scepticism unabated, continues to watch you from the corner, her silence as deafening as a closed door. The bureaucratic contract waits, unyielding, for your decision.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer

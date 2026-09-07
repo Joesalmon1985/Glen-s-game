@@ -1,0 +1,29 @@
+{
+  "persona": "mixed_resist_then_book",
+  "seed": 110,
+  "turns": 30,
+  "enactment_histogram": {
+    "direct": 25,
+    "compromised": 4,
+    "aborted": 1
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 2,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "heaven_memories",
+  "slept": true,
+  "washed": true,
+  "fed": true,
+  "language_ability": 23,
+  "language_attempts": 4,
+  "contract": "",
+  "player_final_intent": "",
+  "staff_names": {
+    "quiet": "Dom",
+    "anxious": "Ben",
+    "senior": "Veyra"
+  },
+  "layout_seed": 110,
+  "layout_fingerprint": null
+}

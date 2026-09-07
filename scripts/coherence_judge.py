@@ -29,6 +29,13 @@ RUBRIC = {
     'memory': 'Does earlier discovered information affect later narration when relevant?',
     'scene_boundary': 'Does prose distinguish scene continuation vs new scene?',
     'summarisable': 'Could I summarise the last five minutes without debug state?',
+    # Social meaning (9–14)
+    'motive_continuity': 'Do NPC motives stay continuous across related turns?',
+    'earned_callback': 'Do callbacks to earlier social facts feel earned?',
+    'dialogue_purpose': 'Does dialogue serve a readable purpose (test/verify/withhold/reassure)?',
+    'no_game_theory_leak': 'No PD/trust-meter/strategy labels in player-facing prose?',
+    'divergent_npc_reads': 'Do different NPCs interpret the same events differently when relevant?',
+    'betrayal_reciprocity': 'Are betrayal and reciprocation narrated consistently with prior behaviour?',
 }
 
 META_PATTERNS = [
@@ -56,6 +63,12 @@ META_PATTERNS = [
     (re.compile(r'the room does not hurry', re.I), 'summarisable', 'Stock meta wait line'),
     (re.compile(r'nothing in the world shifts for it', re.I), 'summarisable', 'Stock meta null result'),
     (re.compile(r'\bsated\b|\bquenched\b|hygiene aware', re.I), 'summarisable', 'Pressure label leak'),
+    # Social / PD leaks
+    (re.compile(r'\btrust\s*(=|:|\d)|trust meter|trust score', re.I), 'no_game_theory_leak', 'Trust meter leak'),
+    (re.compile(r'\b(tit[-\s]?for[-\s]?tat|GENEROUS_TIT|defection|payoff matrix|nash)\b', re.I), 'no_game_theory_leak', 'Game-theory label leak'),
+    (re.compile(r'\b(COOPERATE|DEFECT)\b'), 'no_game_theory_leak', 'COOPERATE/DEFECT label leak'),
+    (re.compile(r'\b(strategy_label|relationship_scores|disclose_depth)\b', re.I), 'no_game_theory_leak', 'Strategy internals leak'),
+    (re.compile(r'\b(TEST|VERIFY|WITHHOLD|RECIPROCATE|TERMINATE)\s+move\b', re.I), 'dialogue_purpose', 'Conversational move enum leaked'),
 ]
 
 ROOM_WORDS = {
@@ -330,6 +343,31 @@ def judge_run(run_dir: Path) -> dict[str, Any]:
             defects.append(_defect(turn_n, 'summarisable', 'Empty narration', prose))
 
         prev_room = room or prev_room
+
+    # Social rubric soft/hard checks across the full run
+    full = '\n'.join(t.get('prose') or '' for t in turns)
+    full_low = full.lower()
+    if re.search(r'\btrust\s*(=|:)|tit[-\s]?for[-\s]?tat|\bdefection\b|\bCOOPERATE\b|\bDEFECT\b', full):
+        defects.append(_defect(0, 'no_game_theory_leak', 'Game-theory / trust meter leak in run prose', full[:200]))
+    # Dialogue purpose: when subjects/staff speech is heavy, look for purposeful verbs (soft)
+    if re.search(r'“|\"|says|asks|replies|tells', full_low) and len(full) > 400:
+        purposeful = re.search(
+            r'\b(wait|watch|test|repeat|refuse|gesture|ask|warn|offer|mark|note|listen)\b',
+            full_low,
+        )
+        if not purposeful and ('social' in run_dir.name or 'nessa' in run_dir.name or 'reciproc' in run_dir.name):
+            soft_notes.append({
+                'rubric': 'dialogue_purpose',
+                'detail': 'Speech-heavy social run lacks clear purposeful dialogue cues (soft)',
+                'actionable': False,
+            })
+    if 'nessa' in full_low and re.search(r'tell (?:the )?staff|report', full_low):
+        if not re.search(r'\b(trust|quiet|cold|withdraw|less|guarded|silence)\b', full_low):
+            soft_notes.append({
+                'rubric': 'betrayal_reciprocity',
+                'detail': 'Possible betrayal of Nessa without later social consequence cue (soft)',
+                'actionable': False,
+            })
 
     # Run-level checks for serious personas
     persona = run_dir.name

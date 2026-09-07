@@ -1,0 +1,28 @@
+{
+  "persona": "absurd_surreal",
+  "seed": 106,
+  "turns": 26,
+  "enactment_histogram": {
+    "direct": 24,
+    "compromised": 2
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 0,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "interview",
+  "slept": true,
+  "washed": true,
+  "fed": true,
+  "language_ability": 21,
+  "language_attempts": 3,
+  "contract": "",
+  "player_final_intent": "",
+  "staff_names": {
+    "quiet": "Laurie",
+    "anxious": "Glen",
+    "senior": "Tirren"
+  },
+  "layout_seed": 106,
+  "layout_fingerprint": null
+}

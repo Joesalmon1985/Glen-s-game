@@ -417,32 +417,48 @@ def resolve_facility(
         tags = tag_action(intent, player_text, enactment)
         facility.arc.tendencies = apply_tags(facility.arc.tendencies, tags)
 
-    # Apply enactment gating before world mutations
+    # Apply enactment gating before world mutations (structured fact synced AFTER perform)
     res.enactment = enactment
     res.enactment_cause = cause
     res.actual_action = dict(actual_patch)
-    res.structured_facts.append({
-        'type': 'enactment',
-        'enactment': enactment,
-        'cause': cause or None,
-        'wanted': wanted,
-        'actual': dict(actual_patch),
-    })
 
     if enactment == ENACTMENT_ABORTED:
         res.success = False
         res.intended_effect_achieved = False
         res.facts.append(_abort_fact(cause, intent))
         res.time_cost = 20
+        res.structured_facts.append({
+            'type': 'enactment',
+            'enactment': res.enactment,
+            'cause': res.enactment_cause or None,
+            'wanted': wanted,
+            'actual': dict(getattr(res, 'actual_action', None) or {}),
+        })
         return res
 
     if enactment == ENACTMENT_INVERTED:
-        return _perform_inverted(facility, intent, res, actual_patch, player_text, rng)
+        out = _perform_inverted(facility, intent, res, actual_patch, player_text, rng)
+        out.structured_facts.append({
+            'type': 'enactment',
+            'enactment': out.enactment,
+            'cause': out.enactment_cause or None,
+            'wanted': wanted,
+            'actual': dict(getattr(out, 'actual_action', None) or {}),
+        })
+        return out
 
-    return _perform_action(
+    out = _perform_action(
         facility, intent, res, player_text, rng,
         compromised=(enactment == ENACTMENT_COMPROMISED),
     )
+    out.structured_facts.append({
+        'type': 'enactment',
+        'enactment': out.enactment,
+        'cause': out.enactment_cause or None,
+        'wanted': wanted,
+        'actual': dict(getattr(out, 'actual_action', None) or {}),
+    })
+    return out
 
 
 def _abort_fact(cause: str, intent: Intent) -> str:
@@ -966,25 +982,70 @@ def _speak(facility, intent, res, player_text, *, compromised: bool) -> Resoluti
         return _handle_interview_speech(facility, res, player_text)
     if facility.staff_present and facility.phase in (PHASE_SLIT, PHASE_DOOR):
         speaker_id = present[0] if present else 'orderly_quiet'
-        speaker = facility.character_name(speaker_id)
-        res.facts.append(
-            f'{speaker} repeats a short sound and a gesture: back. They are still waiting: step away from the door.'
-        )
+        from puca_dungeon.social_meaning import resolve_conversational_move
+        from puca_dungeon.npc_strategy import apply_move_to_speech_facts
+        move = resolve_conversational_move(facility, speaker_id, player_text=player_text)
+        speaker = move.get('speaker_name') or facility.character_name(speaker_id)
+        ask = getattr(getattr(facility, 'arc', None), 'last_ask', '') or 'step away from the door'
+        if move.get('tone') == 'careful' or 'without unnecessary force' in str(move.get('objective') or ''):
+            res.facts.append(
+                f'{speaker} gestures again, clearer this time: back from the door. '
+                f'Then: please. They are still waiting: {ask}.'
+            )
+            facility.last_understood = 'back / please / away'
+        else:
+            res.facts.append(
+                f'{speaker} repeats a short sound and a gesture: back. They are still waiting: {ask}.'
+            )
+            facility.last_understood = 'back / away'
         facility.last_npc_utterance = '… … back …'
-        facility.last_understood = 'back / away'
-        res.structured_facts.append({
-            'type': 'npc_speech',
-            'raw': facility.last_npc_utterance,
-            'understood': facility.last_understood,
-            'speaker': speaker_id,
-            'speaker_name': speaker,
-        })
+        res.structured_facts.extend(apply_move_to_speech_facts(
+            facility, move,
+            raw=facility.last_npc_utterance,
+            understood=facility.last_understood,
+        ))
         res.structured_facts.append({'type': 'discourse_focus', 'referent': speaker_id})
+        res.structured_facts.append({
+            'type': 'conversational_move',
+            'speaker': speaker_id,
+            'surface': move.get('surface') or {},
+        })
     elif present:
         cid = present[0]
-        nm = facility.character_name(cid)
-        res.facts.append(f'{nm} is here. They listen more than they explain.')
+        from puca_dungeon.social_meaning import resolve_conversational_move
+        from puca_dungeon.npc_strategy import apply_move_to_speech_facts
+        move = resolve_conversational_move(facility, cid, player_text=player_text)
+        nm = move.get('speaker_name') or facility.character_name(cid)
+        surface = move.get('surface') or {}
+        manner = surface.get('manner') or move.get('tone') or 'guarded'
+        if move.get('move') == 'TEST':
+            res.facts.append(
+                f'{nm} mentions something small and odd — water behind a wall — without explaining why. '
+                f'Their manner is {manner}.'
+            )
+            facility.last_understood = 'a low-risk detail offered as a test'
+        elif move.get('move') == 'WITHHOLD':
+            res.facts.append(f'{nm} listens. Then: “That\'s all I know.” It plainly isn\'t.')
+            facility.last_understood = 'refusal to say more'
+        elif move.get('move') == 'RECIPROCATE':
+            res.facts.append(
+                f'{nm} looks once toward the corridor, then offers a more useful fragment than before.'
+            )
+            facility.last_understood = 'a careful reciprocation'
+        else:
+            res.facts.append(
+                f'{nm} is here. They listen more than they explain. They appear to want: '
+                f'{surface.get("appears_to_want") or move.get("objective") or "information"}.'
+            )
+        res.structured_facts.extend(apply_move_to_speech_facts(
+            facility, move, raw=facility.last_npc_utterance or '…', understood=facility.last_understood or '',
+        ))
         res.structured_facts.append({'type': 'discourse_focus', 'referent': cid})
+        res.structured_facts.append({
+            'type': 'conversational_move',
+            'speaker': cid,
+            'surface': surface,
+        })
     elif not facility.staff_present:
         res.facts.append('No one answers.')
         res.structured_facts.append({'type': 'social_no_uptake'})
@@ -1216,12 +1277,15 @@ def _advance_interview(facility, res, player_text, *, skipped: bool) -> Resoluti
         return res
     kind = 'no_answer' if skipped else score_answer(q, player_text, load_reference())
     facility.arc.interview_answers.append({'id': q['id'], 'kind': kind, 'text': player_text})
+    answered_prompt = str(q.get('prompt') or '')
     facility.arc.interview_index += 1
     frag = fragment_for(q['id']) if facility.phase in (
         PHASE_INTERVIEW, PHASE_MEMORY_INSTABILITY, PHASE_DEATH_QUESTIONS,
     ) else None
-    lines = [q['prompt']]
-    if kind == 'correct':
+    lines: list[str] = []
+    if skipped:
+        lines.append('You give them nothing useful for that question.')
+    elif kind == 'correct':
         lines.append('They make a small mark. Their face does not change much.')
     elif kind == 'refuse':
         lines.append('They wait, then move to the next object.')
@@ -1229,11 +1293,60 @@ def _advance_interview(facility, res, player_text, *, skipped: bool) -> Resoluti
         lines.append('They glance at one another. The next image comes anyway.')
     elif kind == 'incorrect':
         lines.append('That is not the answer they expected. They do not say so.')
+    else:
+        lines.append('They note the silence and continue.')
     if frag and facility.arc.interview_index >= 3:
         lines.append(frag)
         facility.arc.discover('involuntary_fragment')
+        res.structured_facts.append({
+            'type': 'memory_cue',
+            'content': frag,
+            'physical_location_change': False,
+            'scope': 'internal',
+        })
+    next_q = current_question(facility.arc.interview_index)
+    if next_q:
+        nxt = str(next_q.get('prompt') or '')
+        lines.append(nxt)
+        res.structured_facts.append({
+            'type': 'interview_prompt',
+            'question': next_q.get('id'),
+            'content': nxt,
+            'physical_location_change': False,
+            'speaker': 'interviewer',
+        })
+        facility.arc.last_ask = 'answer their questions'
     res.facts.extend(lines)
-    res.structured_facts.append({'type': 'interview_answer', 'question': q['id'], 'kind': kind})
+    res.structured_facts.append({
+        'type': 'interview_answer',
+        'question': q['id'],
+        'kind': kind,
+        'answered_prompt': answered_prompt,
+        'physical_location_change': False,
+    })
+    # Python-owned interviewer move before any free dialogue fluff
+    present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
+    speaker_id = (
+        'senior_researcher' if 'senior_researcher' in present
+        else (present[0] if present else '')
+    )
+    if speaker_id:
+        try:
+            from puca_dungeon.social_meaning import resolve_conversational_move
+            from puca_dungeon.npc_strategy import apply_move_to_speech_facts
+            move = resolve_conversational_move(facility, speaker_id, player_text=player_text)
+            res.structured_facts.extend(apply_move_to_speech_facts(
+                facility, move,
+                raw=facility.last_npc_utterance or '…',
+                understood=facility.last_understood or 'next question',
+            ))
+            res.structured_facts.append({
+                'type': 'conversational_move',
+                'speaker': speaker_id,
+                'surface': move.get('surface') or {},
+            })
+        except Exception:
+            pass
     res.intended_effect_achieved = not skipped
     res.state_changed = True
     return res
@@ -1253,8 +1366,8 @@ def _handle_contract(facility, res, *, accept, player_text, stay_in_hell: bool =
         res.enactment = ENACTMENT_INVERTED
         res.enactment_cause = 'overwhelming_fear_of_hell'
         res.facts.append(
-            'You mean to say no. You have even prepared the word. '
-            'Then something nearby screams again. Your body reaches the conclusion before you do. '
+            'You prepare the refusal. Then something nearby screams again. '
+            'Your body reaches the conclusion before you do. '
             f'“{spoken}.” It is out of your mouth before you can drag it back.'
         )
         res.structured_facts.append({

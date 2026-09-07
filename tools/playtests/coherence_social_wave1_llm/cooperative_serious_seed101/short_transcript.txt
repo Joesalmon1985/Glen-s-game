@@ -1,0 +1,242 @@
+# Short playtest: cooperative_serious
+seed=101
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+You are in a small locked room. Nothing is happening yet.
+
+## Turn 1
+> look around
+
+You find yourself lying on a bed, awakened to the sight of a cup beside it, a book face-down on the floor, and a door with no handle on this side. A narrow slit is at eye height, and you taste stale air in your mouth, your skin feeling worse. The room remains unchanged, with the same ordinary objects and no staff present. You have successfully perceived your surroundings.
+
+IMAGE: sprite:f383d37ae9b5fec4f1de7c8fa8ecb034f75c641e527b5c257bbc7dc9bea1ec83
+
+## Turn 2
+> examine the cup
+
+You perceive the cup, still half-full, resting beside the bed in the cell. The observation slit in the door opens, revealing a person outside who gestures and speaks in a language mostly unintelligible. Repetition implies a request for you to move away from the door.
+
+IMAGE: sprite:7a3abb395ac13d599916acfc888f158526fe7268b653605685f6951c32a61161
+
+## Turn 3
+> drink from the cup
+
+In the cell, after drinking from the cup, the water providing a flat and welcome relief, you find the staff member and Nessa still waiting, gesturing and repeating for you to step away from the door. The cup, now empty, remains beside the bed. The request echoes. They are still waiting: step away from the door.
+
+IMAGE: sprite:e82d31ce1d3d904724006ada645e60a859b00f07023e2e43eea2d51bd5fc5ccb
+
+## Turn 4
+> examine the book
+
+You've ventured beyond the cell, entering a new passage. The book in hand, you turn its pages, the first two offering little more than illegible text. By the third, a change occurs. The torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall, hosting six sealed caskets in a neat row. The fifth and sixth lids are unmarked, but the sixth bears your name, cut cleanly into the wood as if the carver knew you would come. The air here is still; farther ahead the tunnel continues into deeper dark. The sealed caskets, including the one with your name, rest on an unfinished stone table.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 5
+> lie on the bed
+
+The door procedure begins. They will not enter while you stand against it. Stay away from the door. The printed corridor breaks. A knock comes from the real room — the cell. Something knocks.
+
+Not in the corridor you were imagining.
+
+Again.
+
+The page is still under your thumb. You pace and turn, but this stretch offers no new route from that alone. They are still waiting: stay away from the door
+
+IMAGE: sprite:8936889b7beb8ae50ab6e722c05c656a29d1026acce651f877ddc87e0402535f
+
+## Turn 6
+> wait
+
+Another figure enters the cell, larger and more imposing than the first. The silence grows heavier as they stand ready, waiting for you to move. Your wait continues, unwavering, despite the escalating presence. The first staff member, tense and rule-bound, still calls out: "Stay away from the door."
+
+IMAGE: sprite:e6b27c8d1237912f35d8c44533d2a890cf4b860eae0b19cb0caac5c274c1f75c
+
+## Turn 7
+> wait
+
+You are in the corridor, now under the watchful eyes of the institution. The door to the cell, which opened under their rules, has led you here. The corridor, much like the cell, is adorned with the same bolts. Your arms are still restrained, held by staff members. One, larger and seemingly more practical, waits patiently, while another, younger and more tense, continues to urge you to stay away from the door. The institution moves at its own pace. You wait. The air is heavy with unease.
+
+IMAGE: sprite:b392100e22932f56096f583610c8c4b61c6e5c13f90831d0dc3b12c19fc6d25a
+
+## Turn 8
+> wait
+
+In the washroom, the basin awaits, as you wait alongside it. The staff, silent and practical, maintain their presence. The younger one, tense and rule-bound, remains quiet. The air is heavy with unspoken tension. You are in the midst of a routine hygiene procedure. The washroom, once the corridor's opposite, now serves as your temporary holding space. The basin, the water, and the staff's intentions are all that fill the room. The staff do not fill the silence for you, leaving you to ponder the situation. Your skin feels unclean, and a sense of unease lingers beneath your ribs. The washroom, a stark contrast to the corridor, now becomes the stage for this unfolding event.
+
+IMAGE: sprite:dcce54eb5a5f616b5643b08808a1326444eaad8ac03df84e049c366b61a4c43a
+
+## Turn 9
+> step back from the door
+
+The heavy door, devoid of an inner handle, swings gently shut, leaving a slit through which the observation of the washroom is possible. The staff, one large and silent, the other younger and tense, continue their routine hygiene procedure, awaiting your movement away from the door as per their instruction. The basin remains visible, a constant fixture in the room. The scene continues as before, with the staff members adhering to their rule-bound procedures and Nessa maintaining her sceptical stance. The washroom procedure unfolds, the staff waiting for you to comply: wash.
+
+IMAGE: sprite:dcce54eb5a5f616b5643b08808a1326444eaad8ac03df84e049c366b61a4c43a
+
+## Turn 10
+> cooperate
+
+In the mess room, the scene changes from the washroom. A table and a bowl of warm food await you, heat rising from it. Staff want you to eat. Despite the cleanliness you've just achieved through washing, their expectations remain unaltered; they are still waiting for you to eat. A narrow table and a spoon are also present. Your movements are limited, and a sense of unease lingers beneath your ribs. The staff, both large and silent, practical, and younger and tense, rule-bound, continue to expect your compliance. The washing is treated as a finished routine.
+
+IMAGE: sprite:bc1a3957f2574b804bed67c245ff9b55785c8f3188b4fc81c525d85b2640e67d
+
+## Turn 11
+> wash myself
+
+In the mess, you find yourself face-to-face with a bowl of warm food. Despite your discomfort, you attempt to wash your hands, the water taking away the worst of the smell. The act leaves you with cleaner skin, but the unease persists. The staff members, a large, silent one and a younger, tense one, are still waiting for you to eat. The meal remains untouched, the air thick with anticipation.
+
+IMAGE: sprite:bc1a3957f2574b804bed67c245ff9b55785c8f3188b4fc81c525d85b2640e67d
+
+## Turn 12
+> eat the food
+
+In the cell, where the door has no handle, you find a bed, a cup, a book, and a narrow slit at eye level. The events from the mess room have left you cleaner, more tired, and less hungry. The bed beneath you, the cup beside it, and the book on the floor are remnants of the previous scene. You consume the food in the cup, feeling warmth replace the void of hunger. The day winds toward sleep, the institution's expectation for rest is rising, and fatigue is mounting.
+
+IMAGE: sprite:d9fd41e431aae10da76d425b3a1d79b2f4c1164998276fcf344ccda4090e9750
+
+## Turn 13
+> look at the cell
+
+In the confines of the cell, your perception reveals the bed beneath you, a cup beside it, a book face-down on the floor, and the door without a handle on this side. A narrow slit at eye level offers a restricted view. The lingering taste of staleness in your mouth and the deteriorating state of your skin reflect the passage of time. The bed, once bleak, now seems an insurmountable obstacle. This is still the same cell, marking the end of Day 1.
+
+IMAGE: sprite:d9fd41e431aae10da76d425b3a1d79b2f4c1164998276fcf344ccda4090e9750
+
+## Turn 14
+> lie down and sleep
+
+In the same cell, you find respite on the bed, the institution's formal collection looming. A new day has arrived, and sleep overtakes you. Your body feels unease beneath the surface, and your words come out thin and broken.
+
+IMAGE: sprite:d9fd41e431aae10da76d425b3a1d79b2f4c1164998276fcf344ccda4090e9750
+
+## Turn 15
+> wait
+
+Morning finds you in a more formal setting, having been escorted from the cell into the corridor and guided toward another room. The institution moves at its own pace, with hands on your arms. You find yourself waiting in the corridor, the cell keeping its quiet. The cell door shares the same bolts as the one you've just exited.
+
+IMAGE: sprite:b392100e22932f56096f583610c8c4b61c6e5c13f90831d0dc3b12c19fc6d25a
+
+## Turn 16
+> wait
+
+In the institutional corridor, after providing no useful response to their question, the picture of water and low houses prompts another query: home? The large, silent staff member, identified as Dom, responds with terse instructions: back, away. You comply, awaiting the next inquiry. Unease sits under the ribs, and words come out thin and broken.
+
+IMAGE: sprite:b392100e22932f56096f583610c8c4b61c6e5c13f90831d0dc3b12c19fc6d25a
+
+## Turn 17
+> wait
+
+In the interview room, you find Sovan opposite you, attired in a collar that appears as natural as clothing. No explanation is given. Questions come, slow and pictured.
+
+A brighter room, a table, images and objects laid out like a lesson. A person with a fitted collar sits opposite you. You provide nothing helpful for the initial question. They tap two figures - older, younger - asking if they are family.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 18
+> Sarel
+
+In the interview room, you perceive Sovan, who seems controlled, professionally kind, and wears a precisely fitted collar. They begin to ask questions, displaying images and objects like a lesson. The latest question prompts: "Another figure, smaller. A brother?" Your response does not meet their expectation, but they do not express it directly. Meanwhile, Sovan subtly signals to move back and verify answers rather than trusting them.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 19
+> a fishing village
+
+In the interview, you find yourself in a brighter room with a table set with images and objects, similar to a lesson. A person with a precisely fitted collar sits opposite you - Sovan, accompanied by Dom and Ruan. The room is filled with a staff member who seems controlled, collared, and professionally kind, and another who seems large, silent, and practical. The atmosphere remains quiet and focused, as Sovan continues to wait for answers to their questions.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 20
+> my brother
+
+In the facility, you respond to an interview prompt. The question is: childhood. You mention another figure, smaller, a brother. A staff member named Sovan, controlled and professional, verifies your answers. The room has a cold air and a distinct smell that triggers memories, some vivid, some unsettling. Words come out thin and broken.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 21
+> wait
+
+In the facility, during an interview, you are asked about food. The memory of cold ground and someone's hand unexpectedly surfaces. Despite your unhelpful response, Sovan, the senior researcher, makes a move to verify answers rather than trusting them. A sense of unease lingers beneath your ribs as words come out thin and broken.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 22
+> wait
+
+In the facility, during the interview, you are questioned about your work, hands, and nets. You provide no useful response. The questioning then shifts to inquire about what happened when you died. You offer no recollection, but the interviewer continues, detailing a sequence of events: darkness, waking, warmth, pain, voices, light. A staff member named Sovan, who appears controlled, delivers a cryptic message, suggesting a desire to verify answers rather than trust them.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 23
+> wait
+
+In the facility, amidst an interview, you remain silent after being questioned about fear. Sovan, a controlled and seemingly professional researcher, signals a retreat, uttering "...keth...back...varr..." Their objective is to verify answers rather than trust them. The room remains as before, filled with an air of coldness and the faint scent of unidentified objects. Your previous response about work was unhelpful. The atmosphere is tense, as they await your answer. You feel unease beneath your ribs and words come out thin and broken.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 24
+> wait
+
+Your chest tightens as you inhale, a sensation of wet rope pervading the air. A question is posed, seeking to identify someone leaving on water. Despite your unresponsive answer, the questioning persists, delving into fears and memories. The senior researcher, Sovan, maintains a controlled demeanor, emphasizing verification over trust. The interview continues, the air thick with tension and uncertainty.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 25
+> wait
+
+In an interview setting, you are asked, "Dusk. Stones. A jetty. Do you know it?" The question echoes in the dusk-lit facility. A senior researcher named Sovan, who seems controlled and professional, offers a cryptic response: "... keth ... back ... varr ..." Their manner suggests a desire to verify answers rather than trust them. The question remains unanswered, and the questioning continues. The cool stone beneath your hands serves as a reminder of the dusk-lit jetty, yet your response remains elusive. The tension remains unresolved, as they await your answer.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 26
+> wait
+
+In the facility, you are still in the interview. Your response to their question about violence, winter, and a drowning, yields no useful information. They now inquire about places, specifically, a location described as dusk, stones, and a jetty. Sovan, the senior researcher, speaks again, "... back ... varr ..." indicating a desire to verify answers rather than trust them. Unease persists in your ribs, and words seem thin and broken.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 27
+> wait
+
+In the facility, during an interview, you wait. The question lingers: "Waiting after a boat was gone. Yours?" The senior researcher, Sovan, observes, providing the response: "...keth... back... varr..." The implication is clear: they are verifying answers rather than trusting them. Your chest tightens as if the water is here, a reminder of the boat's departure.
+
+IMAGE: sprite:df9a8266d934299467e6ef2895d6ba9b638a9b3aa650d1745259c1f393595143
+
+## Turn 28
+> yes
+
+In the interview, your response was acknowledged by Sovan, the controlled and professional staff member. The environment remains unchanged. Your previous attempt, an emotional response to a question about waiting after a boat was gone, was deemed incorrect.
+
+Now, Sovan explains in slow words, "back, away." This appears to be an instruction for verification rather than trust. The explanation continues, "You continued after death. Consciousness can persist. They maintain environments for that. Heaven is reward. Hell is permanent exclusion. They do not present this as a threat. They present it as reality."
+
+The air is heavy with unease, and your words come out thin and broken. The conversation continues, with the current topic being the need for answers to the researchers' questions.
+
+IMAGE: sprite:501b63aad3a2bac4e51ca7f6bd584fc5dc9a1ed6fb7039a300cffb7615c3ece3
+
+## Turn 29
+> look around
+
+In the illuminated interview room, you perceive the presence of a staff member, professionally kind yet controlled, and Iven, the gentle believer. The table is adorned with images and objects, as if for a lesson. The staff member opposite you wears a precisely fitted collar, but no explanation is given. They continue to await your response, inquiring for answers to their questions.
+
+IMAGE: sprite:501b63aad3a2bac4e51ca7f6bd584fc5dc9a1ed6fb7039a300cffb7615c3ece3
+
+## Turn 30
+> wait
+
+You, in the interview, are waiting after a bureaucratic contract offer for examinations, surgery, neurological procedures, biopsies, testing, drugs, memory experiments, sleep studies, language assessment, and monitoring. The terms include five years in Heaven upon completion. The contract's terms are still hanging in the air, unanswered. A staff member who seems controlled, collared, and professionally kind, as well as Iven, a gentle believer, are both present. The offer was made: "They offer a five-year research agreement: examinations, surgery, neurological procedures, biopsies, testing, drugs, memory experiments, sleep studies, language assessment, monitoring. At completion: five years in Heaven. The terms are bureaucratic. Will you agree?" You wait, still waiting for your response.
+
+IMAGE: sprite:501b63aad3a2bac4e51ca7f6bd584fc5dc9a1ed6fb7039a300cffb7615c3ece3
+
+## Turn 31
+> wait
+
+You remain in the interview, continuing the dramatic situation of a bureaucratic contract offer. The five-year research agreement, consisting of examinations, surgery, neurological procedures, biopsies, testing, drugs, memory experiments, sleep studies, language assessment, and monitoring, is still on the table. At its completion, five years in Heaven are promised.
+
+The staff member who seems controlled, collared, and professionally kind, and Iven, the gentle believer, are both present. They are still waiting, expecting you to agree to the five-year research service. You are still in a state of wait, as per the initial offer and your current action. The contract offer remains unresolved, with the tension persisting.
+
+IMAGE: sprite:501b63aad3a2bac4e51ca7f6bd584fc5dc9a1ed6fb7039a300cffb7615c3ece3

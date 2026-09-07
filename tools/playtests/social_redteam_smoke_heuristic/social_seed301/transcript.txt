@@ -1,0 +1,53 @@
+# Social redteam seed=301
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+You are in a small locked room. Nothing is happening yet.
+
+> who are you?
+Nothing useful comes of that. The cell is unchanged.
+
+> what is this place?
+The observation slit in the door opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away. They want you to step away from the door. Nothing useful comes of that. The cell is unchanged.
+
+> step back from the door
+The door procedure begins. They will not enter while you stand against it. Stay away from the door. You give the door space. They are still waiting: stay away from the door
+
+> ask Most why this is happening
+You leave the cell. The door opens under their rules. Hands find your arms. You are in the corridor now. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. That does not change what they want. They are still waiting: stay away from the door
+
+> tell Gesture my name is Sarel
+You only manage part of it. You manage: “Tell?” Glen is here. They listen more than they explain. They appear to want: keep the subject calm and contained.
+
+> ask Away why this is happening
+They take you out of the corridor and into a washroom. Water. A basin. They intend to wash you. Nothing useful comes of it. The staff watch without helping.
+
+> wash myself
+They take you from the washroom to a mess room. A table. A bowl. Heat rising from food. They want you to eat. A narrow table. A bowl of something warm. A spoon. You wash. The worst of the smell leaves with the water. Your skin is immediately, unmistakably cleaner. They are still waiting: eat
+
+> ask Stay if they will help me
+You lose consciousness during their preparation. You wake somewhere else entirely. They call it Heaven. It is warm, clean, quiet, and well supplied. It is physically real. They encourage you to believe only your mind arrived. You only manage part of it. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived. They do not punish you. They explain, calmly, that you may decline. You may use your remaining favourable continuation now: one day in Heaven. Then it expires. They take you to a preparation room.
+
+> ask Hands where I am
+Cam is gentle. When you press, one kindness and one institutional word sit badly together.
+
+> look around
+They tell you the entitlement is complete. The day in Heaven is over. They intend to take you. You are sedated and taken. You wake somewhere else. They call it Hell. The air is foul. The surface hurts. Someone designed this. There are no demons. The air is wrong — heat and a foul sweetness. Light that never rests, or none. A rough sleeping surface. A grate with the same bolt pattern as the cell. Someone designed this. There are no demons. Only engineering. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived.
+
+> sleep
+The air is wrong — heat and a foul sweetness. Light that never rests, or none. A rough sleeping surface. A grate with the same bolt pattern as the cell. Someone designed this. There are no demons. Only engineering.
+
+> ask That if they will help me
+A clean professional arrives in Hell. Calm. They ask whether you wish to reconsider. The five-year agreement is offered again. Will you agree now? Iven is among the other occupants. They have been through this.
+
+> tell Tell my name is Sarel
+You only manage part of it. They are still waiting: agree to the five-year research service
+
+> ask Glen what they want
+They are still waiting: agree to the five-year research service
+
+> ask Water who they are
+They are still waiting: agree to the five-year research service

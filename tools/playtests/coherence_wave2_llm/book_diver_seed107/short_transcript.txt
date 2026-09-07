@@ -1,0 +1,246 @@
+# Short playtest: book_diver
+seed=107
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+You are in a small locked room. Nothing is happening yet.
+
+## Turn 1
+> pick up the book
+
+In the dimly lit cell, your hand, feeling unclean with the passing of time, reaches out and grasps the book. The weight of it settles into your palm, the pages remaining stubbornly shut. The book, despite your touch, remains closed. The cell, with its solitude and ordinary objects, remains unchanged. The door, as before, shows no sign of a staff presence. The sense of mystery deepens.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, door, wary adventurer
+
+## Turn 2
+> read the book
+
+The book, worn and tattered, catches your eye. You turn to it, the pages a blur as you delve into its contents. The first page is badly printed, the second worse. By the third, you're disoriented.
+
+Torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your name, cut cleanly into the wood as if the carver knew you would come. The air here is still; farther ahead the tunnel continues into deeper dark.
+
+Six caskets line the alcove, your name etched on one. The unmarked ones remain silent, but yours whispers secrets of a journey yet to unfold.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 3
+> look around
+
+In the dim glow of your torch, the tunnel opens to a small alcove, revealing a crude stone table against the left wall. Six sealed caskets rest atop it, each bound with iron straps and a simple latch. Five lids are plain, but the sixth bears your name, catching your eye. Your hands, steady in your lap, do not open, as if in quiet defiance of your curiosity. The echo of dripping water fills the air, a reminder of the dampness surrounding you. Time advances, adding a layer of grime to the already worn caskets, yet they remain unopened, their secrets hidden.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 4
+> open the named casket
+
+The latch on the named casket lifts with a dry click. Inside, nestled in coarse cloth, sits a small oil phial sealed with wax and a scarred token of dark metal—worn smooth at the edges, as if carried for years. Nothing else. The other five caskets remain sealed and silent.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 5
+> continue
+
+In the dimly lit chamber, the air thick with ancient mystery, your words fall short, unraveling into a tangled web that fails to coalesce into an action the world can recognize. The casket, adorned with intricate carvings, remains untouched, its secrets undisturbed. The oil phial, a potential key to understanding, sits untouched beside the casket. The scarred token, a relic from a bygone era, lies where it was, a silent testament to the enigmatic history of this place. Your hands, though firm, hold no tool to interact with these objects. The room, a labyrinth of history and riddles, continues to hold its secrets, leaving you in awe and frustration.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 6
+> go west
+
+In the dimly lit chamber, the walls adorned with intricate carvings, you find yourself at a standstill. Your feet planted firmly, you take a series of steps towards the west, hoping to find an exit or a new path. Yet, as you turn, the stretch before you remains unchanged, offering no new route. The passage ahead seems just as inaccessible as before. The ticking of the clock echoes in the silence, reminding you of the urgency that lies within the labyrinth. The casket, the oil phial, and the scarred token remain the only company in this mysterious place. Despite your effort, the west remains elusive for now.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 7
+> look around
+
+In the dimly lit chamber, the click of your own hands echoes as you reach for the latch on the named casket. The sound is sharp against the silence that hangs heavy in the air. With a dry, unyielding click, the latch lifts, and the casket swings open. Inside, nestled in coarse cloth, you find a small oil phial sealed with wax and a scarred token of dark metal—worn smooth at the edges, as if carried for years. The other five caskets remain sealed and silent, their contents hidden. The oil phial and the token are now visible to you, standing out against the shadows of the chamber.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 8
+> continue
+
+In the dimly lit chamber, the quiet crack of the latch echoes off the stone walls. Your heart beats steadily as you observe the named casket before you. With a dry click, it opens, revealing its contents: a small oil phial sealed with wax and a worn, dark token. The other five caskets remain silent and sealed. Your eyes are drawn to the phial and token, nestled in coarse cloth, as if waiting for your discovery. The atmosphere in the chamber remains unchanged, save for the ticking of the distant clock and the distant whisper of wind through the stonework. You now notice the named casket, the oil phial, and the scarred token. The other caskets continue their silent vigil.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 9
+> attack
+
+In the dimly lit chamber, you find yourself standing before the enigmatic, ornate casket, its surface gleaming ominously under the flickering torchlight. The oil phial clutched in your hand remains untouched, while the scarred token lies nearby, a constant reminder of the institution's mysteries. The casket, however, remains steadfast, unyielding to your attack. The air around you is still, the only sound being the distant drip of water from the chamber's damp walls. Your grip on the phial tightens, the desire to shatter the casket's defenses palpable, but it remains unscathed, a testament to its resilience.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 10
+> attack
+
+The observation slit in the door creaks open, revealing a large, silent figure on the other side. Their hands gesture and repeat a meaning, something like “back” or “away”. The figure wants you to step back from the door, yet the cell remains unyielding. A knock echoes through the confined space, not from where you might expect. The page under your thumb doesn't waver. Your voice emerges thinner than intended, a testament to the mounting tension. The air in the cell feels stagnant, skin-deep dirt a constant reminder of the cell's reality. The figure beyond the slit continues to wait, their gaze unwavering.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, door slit open, wary adventurer
+
+## Turn 11
+> attack
+
+In the dingy cell, the air thick with grime and uncertainty, the staff member looms larger than ever, their silence punctuated by the echo of your failed attempt. The attempt is messy and short, a clumsy lunge that ends in a tighter grip from the staff. The staff's eyes never leave you, their gaze unyielding. The cup on the bed remains untouched, its contents untainted by your struggle. The slit in the door, through which the unseen figure had communicated their demand, remains closed, offering no respite or reprieve. The staff's grip tightens, a silent reminder of the rules that bind you here. The slit stays shut, and the unseen figure continues to wait, their insistence on distance unwavering. Your words, spoken thin and desperate, seem lost in the cold, unforgiving cell. Your skin feels unclean, a testament to the harsh reality of your surroundings. The slit in the door, once a symbol of communication,
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, door slit open, wary adventurer
+
+## Turn 12
+> put the book down
+
+In the confined cell, the slit in the door, which had opened earlier, remains ajar. The silence is punctuated by the unyielding gaze of a staff member who seems large, silent, and practical. They continue to gesture and repeat a singular demand: step away from the door.
+
+The request echoes in the stillness, and you find your hands closing around the book you were holding. With a deliberate motion, you place the book down, its closed cover landing softly on the makeshift bed. It stays exactly where you put it, unyielding and silent, just like the guard outside.
+
+The staff member's gaze does not waver. They wait, their posture still as the room around them. The only evidence of your actions is the faint scent of uncleanliness that lingers in the air, a constant reminder of the cell's stark reality.
+
+The demand remains, unanswered, as the silence deepens. You find yourself standing a few feet away from the door,
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 13
+> look at the cup
+
+The cup remains, half-full of water, its contents untouched and unstirred, resting beside the bed. The room, with its solitary book, remains as it was, a silent and still testament to your presence. The staff member, large and practical, continues to stand watch, their silence a deafening presence. The slit in the door, through which the unintelligible sounds came earlier, remains open, a silent question echoing through the cell. The staff's grip tightens slightly, a subtle shift in the air that carries a hint of tension. The water, untouched and undisturbed, continues to sit, a stark contrast to your attempted action. The room, as it has been, remains your confined world. The staff's silent demand, "step away from the door," still hangs in the air, unresolved.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 14
+> read the book
+
+The door remains resolute, barring entry as you stand a safe distance away. Your gaze shifts to the book, its pages still untouched. The latch on the named casket clicks, releasing its contents. Inside, a small oil phial sealed with wax and a worn dark metal token await. The other five caskets remain undisturbed.
+
+A knock, unexpected and distant, echoes through the room. The book, still under your thumb, seems oblivious. The casket, the phial, and the token - the only companions in this solitary cell. The knock comes again, a reminder of the unyielding door.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 15
+> look around
+
+In the dimly lit chamber, you carefully study the scene around you. The latch on the named casket clicks softly, and with a sigh, it swings open to reveal its contents. Inside, nestled in coarse cloth, sits a small oil phial sealed with wax and a scarred token of dark metal – worn smooth at the edges, as if carried for years. The other five caskets remain sealed and silent.
+
+As your eyes drift towards the door, you notice the figures still waiting, their gazes never wavering. They remind you to maintain a respectful distance. Your grip remains firm, your breath steady. The air is thick with anticipation.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 16
+> put the book down
+
+The cell door remains unyielding as you depart the printed corridors, the echoes of your footsteps fading. The cell, a familiar yet oppressive space, remains unaltered. The staff member, large and silent, continues to watch, their focus still fixed on the door. The book, now closed, lies where you left it. The oil phial and the dark metal token within the casket remain untouched, the other caskets still sealed and silent. The staff member's request, "stay away from the door," lingers in the air, a silent but persistent reminder of the unresolved tension.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 17
+> wait
+
+In the cell, you find yourself still waiting, hands firm on the cup, the book within arm's reach, but not quite touched. The air carries a hint of impatience from beyond the door, a short call echoing in the corridor. The silence is broken by the sound of footsteps, growing nearer.
+
+Another figure enters, larger and more imposing than the first. They stand ready, their presence a clear indication that they will enter whether you move or not. The younger staff member, tense and rule-bound, seems to have given up on further gestures, their hope abandoned. The door remains a barrier, a testament to the unresolved tension that permeates the cell. The book, the casket, and the oil phial remain as they were, silent and still, a stark contrast to the escalating situation at the door.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 18
+> wait
+
+You leave the cell. The door opens under their rules. Hands find your arms. You are in the corridor now. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. You wait. They are still waiting: stay away from the door The person at the door abandons the hope that another gesture will work. A short call carries into the corridor. Footsteps answer. Another figure arrives — larger, ready to enter whether you move or not.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 19
+> sleep
+
+In the washroom, the staff guide you towards a basin filled with water. Soap with a medicinal scent lingers nearby. The air is thick with anticipation, yet their patience wears thin. Despite your wish for rest, the staff's attempts at washing prove fruitless. They continue to watch, offering no assistance. Water, soap, and the looming presence of the staff fill the room, a stark contrast to your desire for sleep. The staff's focus remains on the washing procedure, a routine task for them, yet one that remains elusive for you. The washroom, once unfamiliar, now echoes with the sound of unfulfilled rest.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 20
+> wait
+
+In the washroom, the air is heavy with the scent of sterilization. The large, silent staff member and the younger, tense one remain stationary, their gazes fixed on you. The basin, still filled with water, is the only movement in the room. Your skin feels unclean enough to notice, a sensation that heightens your unease. Words come out thinner than you intend, but you wait. The staff continue to watch, their patience unwavering, the silence thickening. They are still waiting, their expectation for you to follow through with washing evident.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 21
+> wait
+
+In the dimly lit mess room, the air heavy with the scent of cooking, you find yourself seated at a narrow table. A bowl of something warm and steaming sits before you, accompanied by a spoon. The staff members who had escorted you here remain, their gaze fixed on you, anticipating.
+
+Your attempts to delay are thwarted as they take matters into their own hands. Resistance proves futile, and you are washed despite your efforts to resist. The air around you suddenly smells less like you, your skin immediately and undeniably cleaner.
+
+The staff members continue to watch expectantly, still waiting for you to partake of the food before you. Unease settles beneath your ribs, your hands or bindings limiting your movements. Words come out thinner than intended, as you remain seated at the table, confronted by the meal that was placed in front of you.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 22
+> wait
+
+In the dimly lit mess, the air heavy with anticipation, you find yourself surrounded by the watchful eyes of the staff and Ruan, the fractured. The meal, a warm bowl of sustenance, sits before you, steam rising, a reminder of the expected ritual. You wait, hands bound, the tension palpable. The staff members, a silent giant and a tense, rule-bound individual, continue to watch, their gaze unwavering. The quiet hum of the room is punctuated only by the soft sound of your own breath, and the distant murmurs of the institution. The wait continues, the silence growing heavier as the moments tick by. The bowl remains, the staff still expectant, waiting for your response.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 23
+> wait
+
+In the dimly lit cell, you find yourself returned, the same worn bed beneath you, the cup beside it untouched, a book face-down on the floor. The door, devoid of a handle on this side, remains shut, and the narrow slit at eye level offers no solace. A sense of unease settles under your ribs as you wait, the day winding toward sleep.
+
+Time passes, and the gentle believer, Iven, does not leave the food as a debate forever. Hunger eases a little, but a dull tiredness sits behind your eyes. Words come out thinner than intended, a testament to the fatigue rising. The institution's expectations for rest remain unyielding. You wait, the cell walls bearing silent witness to your tired body and weary spirit.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door, wary adventurer
+
+## Turn 24
+> wait
+
+In the confines of the cell, you remain still, adhering to the rhythm of waiting. The bed, once bleak and uninviting, now seems to challenge your resolve. Its worn-out fabric, frayed edges, and the musty odor that lingers in the air all serve as a silent testament to the passage of time. The clock, unseen yet omnipresent, ticks away as Day 1 draws to a close. Iven, the gentle believer, remains nearby, his focus unwavering. The cell, your temporary prison, maintains an air of quietude, its walls echoing the monotony of the day that has passed.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door, wary adventurer
+
+## Turn 25
+> wait
+
+In the dim confines of your cell, the quiet lingers, a constant companion as you wait. The bed, once bleak, now seems an enticing argument you're hesitant to refuse. The cup, the book, and the door remain, silent sentinels in the dim light. Time ticks by, each second a testament to your resolve. A dull tiredness weighs heavily behind your eyes, unease settles under your ribs, and words seem to lose their thickness as they leave your lips. Yet, you persist, waiting in the silence, the cell keeping its quiet company.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door, wary adventurer
+
+## Turn 26
+> wait
+
+The day breaks, heralding a new cycle in the cell. The institution prepares to collect you more formally than before. You wait, your breath mingling with the quiet of the cell. Despite your attempts to stay awake, the weight of the night eventually claims you, and you wake later, face pressed against the cold, unyielding wall. Unease lingers beneath your ribs, and words come out thinner than intended, a testament to the disquiet that pervades this place. Iven, the gentle believer, remains a constant presence, his intentions towards you unclear. The cell keeps its quiet vigil, the only witness to your struggles. The institution awaits, its intentions a looming question in the air.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door, wary adventurer
+
+## Turn 27
+> wait
+
+The morning unfolds with a sense of formality. The institution's staff, a large, silent presence and a younger, more tense individual, lead you from your cell into a corridor, moving at their own deliberate pace. The cold metal bolts of the door echo those of the corridor, a reminder of the enclosed space.
+
+You wait, the silence of the cell a constant companion. The air is heavy with unease, and your words seem thinner than you intend. The institution continues its methodical advance, each step a testament to its unyielding control. Iven, a gentle presence, remains with you, offering a semblance of comfort in this unfamiliar environment. The corridor stretches ahead, the next room waiting. The day's events are unfolding, and you are a part of them, whether you wait or not.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 28
+> yes
+
+In the institutional corridor, the rhythm of footsteps echoes off the cold, sterile walls. Your escorts, a figure of practical silence and another of tense rule-bound demeanor, lead you further, their grip firm yet unyielding. Iven, a gentle presence, accompanies you, his belief a comforting constant amidst the institution's unwavering pace.
+
+Suddenly, one of the escorts presents you with a word, a name. Not the one they expected. The silence that follows is thick with unspoken expectations, a tension that stretches between you and your escorts. The word hangs in the air, your answer falling short, thinner than you intended. Unease settles under your ribs as the corridor continues to move past, leading you deeper into the unknown.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 29
+> look around
+
+In the sterile, fluorescent-lit interview room, you find yourself facing Elian, a figure clad in a precisely fitted collar as if it were common attire. The room, reminiscent of a lesson hall, is adorned with images and objects, each silently demanding your attention. The air is thick with anticipation, as Elian begins to pose their questions, slowly and deliberately, as if each word were carefully chosen.
+
+Your heartbeat echoes in your ears, a testament to the tension that permeates the room. The words you speak seem to lose volume as they leave your lips, a stark contrast to the authoritative tone you intended. The room, much like the institution itself, moves at its own pace.
+
+To your left, Laurie and Cam, both present, remain silent observers, their faces betraying no emotion. Iven, the orderly who seemed anxious earlier, now stands guard, his presence a constant reminder of the institution's control.
+
+You are here, in this interview,
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer

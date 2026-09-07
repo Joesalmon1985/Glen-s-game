@@ -344,11 +344,24 @@ def get_scene_context(facility) -> NarrativeSceneContext:
     return refresh_scene_for_phase(facility, new_scene=True)
 
 
+_DISCOURSE_KEYS = (
+    'active_speaker', 'active_addressee', 'current_request', 'current_topic',
+    'recent_referents',
+)
+
+
 def set_scene_context(facility, ctx: NarrativeSceneContext) -> None:
     arc = getattr(facility, 'arc', None)
     if arc is None:
         return
-    arc.narrative_context = ctx.to_dict()
+    prev = dict(getattr(arc, 'narrative_context', None) or {})
+    merged = ctx.to_dict()
+    for key in _DISCOURSE_KEYS:
+        if key in prev and key not in merged:
+            merged[key] = prev[key]
+        elif key in prev and not merged.get(key):
+            merged[key] = prev[key]
+    arc.narrative_context = merged
     facility.arc = arc
 
 

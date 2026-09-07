@@ -45,27 +45,27 @@
     "bed": {
       "file": "props/bed.png",
       "size": [160, 96],
-      "prompt": "narrow institutional bed with thin bedding, pixel art prop, isolated on solid magenta background #FF00FF, centered, no room"
+      "prompt": "narrow institutional metal bed with thin mattress and pillow, furniture prop only, no people no animals no birds, pixel art, isolated on solid bright magenta background #FF00FF, centered"
     },
     "bed_bedding_floor": {
       "file": "props/bed_bedding_floor.png",
       "size": [160, 96],
-      "prompt": "narrow institutional bed with folded blanket and sheet piled neatly on the floor beside it, pixel art furniture prop, isolated on solid magenta background #FF00FF, centered, no people"
+      "prompt": "narrow institutional bed with folded blanket and sheet piled neatly on the floor beside it, furniture prop only, no people no animals, pixel art, isolated on solid bright magenta background #FF00FF, centered"
     },
     "cup_full": {
       "file": "props/cup_full.png",
       "size": [48, 48],
-      "prompt": "plain half-full water cup, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+      "prompt": "plain ceramic half-full water cup, simple drinking vessel prop, no people, pixel art, isolated on solid bright magenta background #FF00FF, centered"
     },
     "cup_empty": {
       "file": "props/cup_empty.png",
       "size": [48, 48],
-      "prompt": "plain empty cup, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+      "prompt": "plain empty ceramic cup, drinking vessel prop, no people, pixel art, isolated on solid bright magenta background #FF00FF, centered"
     },
     "cup_broken": {
       "file": "props/cup_broken.png",
       "size": [48, 48],
-      "prompt": "broken plain cup shards, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+      "prompt": "broken plain ceramic cup shards, prop only, no people, pixel art, isolated on solid bright magenta background #FF00FF, centered"
     },
     "book_face_down": {
       "file": "props/book_face_down.png",
@@ -142,37 +142,37 @@
     "player_wary": {
       "file": "characters/player_wary.png",
       "size": [72, 120],
-      "prompt": "wary adult adventurer standing, simple clothes, clear silhouette, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+      "prompt": "one wary human adult adventurer full body front view, tunic and trousers, visible face eyes nose, arms at sides, readable 32-bit style pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure, no bird no animal"
     },
     "player_wounded": {
       "file": "characters/player_wounded.png",
       "size": [72, 120],
-      "prompt": "wounded adult adventurer standing carefully, simple clothes, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+      "prompt": "one wounded human adult adventurer full body, bandage on arm, pained stance, visible face, readable pixel art with coloured clothes, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure"
     },
     "player_fallen": {
       "file": "characters/player_fallen.png",
       "size": [120, 72],
-      "prompt": "fallen adult adventurer on the ground, pixel art character, isolated on solid magenta background #FF00FF, centered, single figure"
+      "prompt": "one fallen human adult adventurer lying on side on the ground, visible face and clothes, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure"
     },
     "player_triumphant": {
       "file": "characters/player_triumphant.png",
       "size": [72, 120],
-      "prompt": "triumphant adult adventurer standing, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+      "prompt": "one triumphant human adult adventurer full body standing confidently, coloured tunic, visible face, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure"
     },
     "staff_orderly": {
       "file": "characters/staff_orderly.png",
       "size": [72, 128],
-      "prompt": "large silent institutional orderly staff member, plain uniform, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+      "prompt": "one large silent institutional orderly, plain grey medical uniform, human adult full body front view, visible face, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure only"
     },
     "staff_anxious": {
       "file": "characters/staff_anxious.png",
       "size": [72, 128],
-      "prompt": "anxious institutional orderly staff member, plain uniform, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+      "prompt": "one anxious institutional orderly, plain uniform, human adult full body, worried expression, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure only"
     },
     "staff_senior": {
       "file": "characters/staff_senior.png",
       "size": [72, 128],
-      "prompt": "senior researcher with fitted collar, institutional authority, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+      "prompt": "one senior researcher adult human, fitted collar coat, authoritative stance, visible face, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure only"
     }
   },
   "layouts": {

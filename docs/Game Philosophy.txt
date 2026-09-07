@@ -1,0 +1,409 @@
+# PUCA — DESIGN THEORY AND GAMEPLAY PHILOSOPHY
+
+## What Puca is
+
+Puca is a natural-language role-playing game where the player types what they want their character to do.
+
+There are no conventional action menus, dialogue trees, visible RPG stats, or lists of available interactions. The player simply describes their intention in ordinary language.
+
+The core loop is:
+
+**THE GAME DESCRIBES THE WORLD
+→ THE PLAYER TYPES WHAT THEY WANT TO DO
+→ AN LLM INTERPRETS WHAT THEY MEAN
+→ PYTHON DECIDES WHAT ACTUALLY HAPPENS
+→ THE WORLD CHANGES
+→ AN LLM DESCRIBES THAT NEW REALITY BACK TO THE PLAYER**
+
+The central rule is:
+
+> **The LLM understands and communicates. Python owns reality.**
+
+---
+
+## Wide language, bounded reality
+
+The player should be able to express almost any sensible intention.
+
+They might:
+
+* inspect something;
+* manipulate an object;
+* attack someone;
+* lie;
+* refuse;
+* run away;
+* wait;
+* sing;
+* hide;
+* attempt something ridiculous;
+* combine several actions together.
+
+The game should try to understand the meaning behind that language rather than force the player to discover specific commands.
+
+However, understanding an action does not mean allowing it.
+
+The world remains physically, socially and mechanically constrained.
+
+The desired experience is:
+
+> **“The game understood what I wanted to do, but reality stopped me.”**
+
+Never:
+
+> **“The game rejected my sentence because I didn't use the right words.”**
+
+---
+
+## The player controls intention, not guaranteed action
+
+A major part of Puca is the distinction between:
+
+**what the player wants the character to do;**
+
+**what the character actually manages to do;**
+
+and
+
+**what the world allows to happen.**
+
+The player owns intention.
+
+Python determines execution.
+
+A frightened, exhausted, injured, inexperienced or socially overwhelmed character may fail to perform exactly what the player requested.
+
+A player might type:
+
+> `Punch him.`
+
+But the character may freeze.
+
+They may hesitate.
+
+They may attempt it weakly.
+
+In extreme cases, they may do something almost opposite to what the player wanted.
+
+The narrator should acknowledge this conflict directly.
+
+This makes failure, embarrassment, fear and bodily limitation part of the game rather than invisible restrictions imposed by the engine.
+
+---
+
+## Python is the authoritative world
+
+Python owns all facts that matter.
+
+This includes:
+
+* locations;
+* objects;
+* NPCs;
+* injuries;
+* physical capability;
+* inventory;
+* doors and locks;
+* time;
+* world events;
+* NPC goals and behaviour;
+* hunger;
+* thirst;
+* fatigue;
+* cleanliness;
+* relationships;
+* knowledge;
+* language ability;
+* hazards;
+* combat;
+* Luck;
+* persistent consequences.
+
+The LLM cannot invent these things.
+
+If Python says an object does not exist, the narrator cannot introduce it.
+
+If Python says an NPC is unconscious, that NPC cannot continue acting.
+
+If the player leaves an object behind, it stays there until something in the world moves it.
+
+The world should remember what happens.
+
+---
+
+## The LLM works in both directions
+
+The LLM is fundamental to Puca, but it does not control the game world.
+
+It has two major jobs.
+
+### Understanding the player
+
+The interpretation LLM converts natural language into structured intent.
+
+It works out what the player actually means, including:
+
+* unusual phrasing;
+* pronouns;
+* slang;
+* mistakes;
+* compound actions;
+* emotional tone;
+* indirect instructions;
+* follow-up references.
+
+It does not decide whether the action succeeds.
+
+### Representing the world
+
+The narration LLM receives authoritative facts from Python and turns them into natural prose.
+
+Python decides:
+
+> what happened.
+
+The narrator decides:
+
+> how the player experiences what happened.
+
+This is what allows Puca to have flexible, expressive prose without surrendering control of reality to generative AI.
+
+---
+
+## The narrator
+
+The narrator speaks directly to the player in the second person.
+
+It should feel intimate, observant, occasionally dry, occasionally absurd, and highly aware of the difference between intention and reality.
+
+It can describe:
+
+* bodily sensations;
+* hesitation;
+* fear;
+* memory;
+* instinct;
+* embarrassment;
+* perception;
+* reasonable inference.
+
+It does not know things the character cannot know.
+
+It should never expose game mechanics.
+
+The player should not see:
+
+* HP;
+* STAMINA;
+* SKILL;
+* LUCK;
+* dice rolls;
+* DCs;
+* damage numbers;
+* passage numbers;
+* combat rounds;
+* hidden state.
+
+Instead of:
+
+> `You lose 3 HP.`
+
+the player experiences:
+
+> Teeth close around your calf. When the animal tears free, your leg gives way beneath you.
+
+The mechanics remain real.
+
+Only their representation changes.
+
+---
+
+## Failure is content
+
+Puca should not treat failure as a dead end.
+
+A failed action should often produce some of the most interesting narration and consequences.
+
+A player who tries something reckless may:
+
+* hurt themselves;
+* attract attention;
+* lose an object;
+* anger an NPC;
+* become exhausted;
+* trigger a hazard;
+* expose themselves to an enemy.
+
+The world does not pause because the player's action was foolish.
+
+If the player sings while something is trying to kill them, the creature does not politely wait for the song to finish.
+
+The player sings.
+
+Time passes.
+
+The creature attacks.
+
+The important rule is:
+
+> **Bad judgement should increase exposure to real dangers already present in the situation.**
+
+Not:
+
+> **Invalid input causes random punishment.**
+
+---
+
+## The world has agency too
+
+Puca is not made from static rooms waiting for the player to choose something.
+
+NPCs and environments have their own behaviour.
+
+NPCs have:
+
+* goals;
+* schedules;
+* knowledge;
+* fears;
+* duties;
+* relationships;
+* locations.
+
+Events can happen because time passes.
+
+People can arrive, leave, attack, intervene or change plans without waiting for the player to trigger the correct dialogue option.
+
+The player is an actor inside the world.
+
+They are not the mechanism that makes the world exist.
+
+---
+
+## Hidden bodily state
+
+The character's body is an important part of gameplay.
+
+Python may track things such as:
+
+* hunger;
+* thirst;
+* fatigue;
+* cleanliness;
+* comfort;
+* pain;
+* injury.
+
+These are never shown as meters.
+
+Instead they change what becomes important in the narration.
+
+Hunger makes food harder to ignore.
+
+Fatigue makes a bed increasingly attractive.
+
+Pain changes how movement feels.
+
+Dirty skin makes washing more desirable.
+
+The player should experience bodily state rather than manage a dashboard.
+
+---
+
+## Authored depth and systemic breadth
+
+Puca combines two kinds of interaction.
+
+### Systemic breadth
+
+General rules allow ordinary actions such as:
+
+* move;
+* take;
+* drop;
+* push;
+* pull;
+* open;
+* close;
+* throw;
+* attack;
+* hide;
+* inspect;
+* speak;
+* wait.
+
+These should work across many different situations.
+
+### Authored depth
+
+Important situations can contain specially authored possibilities and consequences.
+
+The player should not see these as choices.
+
+They should discover them naturally through interaction.
+
+The goal is not to predict every sentence the player might type.
+
+The goal is to build situations where a wide range of likely human behaviour produces an intelligible response.
+
+---
+
+## Persistent consequences
+
+The world should remember.
+
+If the player:
+
+* moves something;
+* injures someone;
+* breaks something;
+* hides an object;
+* spills food;
+* learns information;
+* frightens an NPC;
+* makes an enemy;
+
+those facts should continue to matter.
+
+Leaving and returning should not reset the scene.
+
+Saving and loading should preserve the same world.
+
+Persistence is what turns free-text interaction from improvisation into gameplay.
+
+---
+
+## Variable worlds and replayability
+
+Where appropriate, locations such as dungeons can use seeded procedural layouts.
+
+The encounters themselves may remain authored and learnable, while their order, connections, routes, shortcuts and dependencies vary between runs.
+
+This creates a useful balance:
+
+> **Players can learn encounters without memorising the entire journey.**
+
+Repeated play should feel familiar without becoming identical.
+
+---
+
+## The overall design principle
+
+Puca should not attempt to simulate an infinite world.
+
+Instead it should create strong, legible situations in which a very wide range of player intentions can be meaningfully understood and resolved.
+
+The design philosophy can be summarised as:
+
+> **Wide expression.
+> Bounded reality.
+> Deep consequences.
+> Persistent worlds.
+> Python-owned truth.
+> LLM-mediated understanding and narration.**
+
+And the most important player-facing promise is:
+
+> **You can try almost anything.
+> The game will understand what you mean.
+> But the world is under no obligation to let you get away with it.**
