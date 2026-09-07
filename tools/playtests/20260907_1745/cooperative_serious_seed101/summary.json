@@ -1,0 +1,21 @@
+{
+  "persona": "cooperative_serious",
+  "seed": 101,
+  "turns": 14,
+  "enactment_histogram": {
+    "direct": 14
+  },
+  "mode_switches": [
+    "facility->book_dungeon@4",
+    "book_dungeon->facility@9"
+  ],
+  "prosecutor_hits": 0,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "removal",
+  "slept": false,
+  "washed": false,
+  "fed": false,
+  "layout_seed": 101,
+  "layout_fingerprint": "56edc097cb58aaa8"
+}

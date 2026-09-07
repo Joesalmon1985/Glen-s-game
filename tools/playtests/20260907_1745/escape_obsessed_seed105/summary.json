@@ -1,0 +1,19 @@
+{
+  "persona": "escape_obsessed",
+  "seed": 105,
+  "turns": 16,
+  "enactment_histogram": {
+    "direct": 15,
+    "compromised": 1
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 0,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "done",
+  "slept": true,
+  "washed": true,
+  "fed": true,
+  "layout_seed": 105,
+  "layout_fingerprint": null
+}

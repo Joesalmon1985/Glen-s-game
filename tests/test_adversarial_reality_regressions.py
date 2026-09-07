@@ -16,6 +16,7 @@ def _session(**kwargs) -> GameSession:
     kwargs.setdefault('narrator', TemplateNarrator())
     kwargs.setdefault('debug', True)
     kwargs.setdefault('seed', 91)
+    kwargs.setdefault('start_mode', 'legacy_pack')
     return GameSession(**kwargs)
 
 

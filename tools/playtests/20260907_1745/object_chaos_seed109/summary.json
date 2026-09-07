@@ -1,0 +1,21 @@
+{
+  "persona": "object_chaos",
+  "seed": 109,
+  "turns": 16,
+  "enactment_histogram": {
+    "direct": 16
+  },
+  "mode_switches": [
+    "facility->book_dungeon@4",
+    "book_dungeon->facility@6"
+  ],
+  "prosecutor_hits": 1,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "food",
+  "slept": false,
+  "washed": true,
+  "fed": false,
+  "layout_seed": 109,
+  "layout_fingerprint": "1cf4af870b4ec719"
+}

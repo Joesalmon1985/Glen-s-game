@@ -55,6 +55,11 @@ class Resolution:
     requested_entity: Optional[str] = None
     structured_facts: list = field(default_factory=list)
     world_events: list = field(default_factory=list)
+    # Intention vs enactment (narrator dual-truth)
+    enactment: str = 'direct'  # direct | compromised | aborted | inverted
+    wanted_action: dict = field(default_factory=dict)
+    actual_action: dict = field(default_factory=dict)
+    enactment_cause: str = ''
 
     def to_dict(self) -> dict:
         return {
@@ -89,6 +94,10 @@ class Resolution:
             'requested_entity': self.requested_entity,
             'structured_facts': list(self.structured_facts),
             'world_events': list(self.world_events),
+            'enactment': self.enactment,
+            'wanted_action': dict(self.wanted_action or {}),
+            'actual_action': dict(self.actual_action or {}),
+            'enactment_cause': self.enactment_cause,
         }
 
 

@@ -1,0 +1,290 @@
+{
+  "pack_id": "book_dungeon",
+  "title": "The Badly Printed Book",
+  "notes": "Authored encounter pool for seeded topology. Original prose; gamebook grammar only.",
+  "encounters": [
+    {
+      "id": "alcove_caskets",
+      "category": "entry",
+      "difficulty": "easy",
+      "slot_roles": ["entry"],
+      "requires": [],
+      "produces": [],
+      "optional": false,
+      "text": "Torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your name, cut cleanly into the wood as if the carver knew you would come. The air here is still; farther ahead the tunnel continues into deeper dark.",
+      "entities": ["six_caskets", "named_casket", "stone_table"],
+      "image_seed": "original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond",
+      "choice_templates": [
+        {
+          "id": "open_named_box",
+          "label": "Open the casket marked with your name",
+          "aliases": ["open the box", "open my box", "open named box", "open lid"],
+          "edge": "open_casket"
+        },
+        {
+          "id": "continue_north",
+          "label": "Leave the alcove and press deeper into the tunnel",
+          "aliases": ["continue", "go north", "walk north", "keep walking", "leave the boxes"],
+          "edge": "forward"
+        }
+      ]
+    },
+    {
+      "id": "named_casket_loot",
+      "category": "reward",
+      "difficulty": "easy",
+      "slot_roles": ["loot"],
+      "requires": [],
+      "produces": ["oil_phial", "scarred_token", "flag:opened_named_casket"],
+      "optional": true,
+      "text": "The latch on the named casket lifts with a dry click. Inside, nestled in coarse cloth, sits a small oil phial sealed with wax and a scarred token of dark metal—worn smooth at the edges, as if carried for years. Nothing else. The other five caskets remain sealed and silent.",
+      "entities": ["named_casket", "oil_phial", "scarred_token"],
+      "image_seed": "original open named casket on stone table, oil phial and scarred metal token in coarse cloth",
+      "effects_on_enter": [
+        {"op": "add_item", "item": "oil_phial"},
+        {"op": "add_item", "item": "scarred_token"},
+        {"op": "set_flag", "flag": "opened_named_casket", "value": true}
+      ],
+      "choice_templates": [
+        {
+          "id": "continue_after_box",
+          "label": "Leave the alcove and press deeper into the tunnel",
+          "aliases": ["continue", "go north", "leave", "walk on", "press on"],
+          "edge": "forward"
+        }
+      ]
+    },
+    {
+      "id": "junction",
+      "category": "hub",
+      "difficulty": "easy",
+      "slot_roles": ["hub"],
+      "requires": [],
+      "produces": [],
+      "optional": false,
+      "text": "The tunnel widens into a rough junction. Long claw marks rake the floor toward one mouth, where a warm animal musk drifts out on still air. Another tunnel runs colder; water ticks steadily from its ceiling into the dark. Both ways are open. Neither is marked.",
+      "entities": ["claw_marks", "warm_mouth", "cold_tunnel"],
+      "image_seed": "original dungeon junction, claw-scratched floor, warm mouth, colder dripping tunnel",
+      "choice_templates": [
+        {
+          "id": "go_warm",
+          "label": "Take the warmer mouth",
+          "aliases": ["go west", "west", "follow the musk", "warm path"],
+          "edge": "branch_a"
+        },
+        {
+          "id": "go_cold",
+          "label": "Take the colder tunnel",
+          "aliases": ["go east", "east", "cold tunnel", "right path"],
+          "edge": "branch_b"
+        },
+        {
+          "id": "inspect_tracks",
+          "label": "Study the claw marks on the floor",
+          "aliases": ["look at tracks", "examine floor", "search", "inspect"],
+          "edge": "inspect"
+        }
+      ]
+    },
+    {
+      "id": "claw_tracks",
+      "category": "optional",
+      "difficulty": "easy",
+      "slot_roles": ["optional"],
+      "requires": [],
+      "produces": ["knowledge:claw_tracks_lead_warm", "flag:inspected_junction_tracks"],
+      "optional": true,
+      "text": "You kneel and trace the scratches. They are fresh enough that grit still sits loose in the grooves, and they lead firmly into the warmer mouth. Whatever made them was heavy and moving with purpose—likely the source of the warm musk. You have learned what the floor can tell you.",
+      "entities": ["claw_marks"],
+      "image_seed": "original close study of claw marks on stone floor at a dungeon junction",
+      "effects_on_enter": [
+        {"op": "add_knowledge", "fact": "claw_tracks_lead_warm"},
+        {"op": "set_flag", "flag": "inspected_junction_tracks", "value": true}
+      ],
+      "choice_templates": [
+        {
+          "id": "return_to_junction",
+          "label": "Rise and face the junction again",
+          "aliases": ["go back", "return", "stand up", "continue", "back"],
+          "edge": "return"
+        }
+      ]
+    },
+    {
+      "id": "cold_dead_end",
+      "category": "dead_end",
+      "difficulty": "easy",
+      "slot_roles": ["optional", "dead_end"],
+      "requires": [],
+      "produces": [],
+      "optional": true,
+      "text": "The colder mouth soon pinches shut. Cold water beads along the ceiling and drips into a shallow pool that covers the floor. Beyond the pool the rock is unbroken—no door, no crawlspace, only a dead end that smells of wet mineral. The junction waits behind you.",
+      "entities": ["pool", "dead_end_wall"],
+      "image_seed": "original damp dead-end tunnel, pooled water, unbroken rock wall, cold drip",
+      "choice_templates": [
+        {
+          "id": "return_from_dead_end",
+          "label": "Return to the junction",
+          "aliases": ["go back", "return", "back", "leave"],
+          "edge": "return"
+        }
+      ]
+    },
+    {
+      "id": "rope_cache",
+      "category": "reward",
+      "difficulty": "easy",
+      "slot_roles": ["optional", "loot"],
+      "requires": [],
+      "produces": ["rope"],
+      "optional": true,
+      "text": "A side niche holds a coil of frayed rope, still sound enough to take weight. Someone left it here on purpose—or fled too quickly to reclaim it.",
+      "entities": ["rope_coil", "niche"],
+      "image_seed": "original stone niche with coiled frayed rope",
+      "effects_on_enter": [
+        {"op": "add_item", "item": "rope"}
+      ],
+      "choice_templates": [
+        {
+          "id": "leave_niche",
+          "label": "Leave the niche",
+          "aliases": ["continue", "leave", "go back", "return"],
+          "edge": "return"
+        }
+      ]
+    },
+    {
+      "id": "chasm_bridge",
+      "category": "traversal",
+      "difficulty": "medium",
+      "slot_roles": ["mid"],
+      "requires": [["rope"], ["climbing"]],
+      "requires_mode": "any_of_groups",
+      "produces": ["crossed_chasm"],
+      "optional": false,
+      "text": "The floor drops away into a black chasm. A splintered beam leans from this side toward a ledge opposite, but it will not hold without something to steady it. Cold air rises from below.",
+      "entities": ["chasm", "splintered_beam", "far_ledge"],
+      "image_seed": "original dungeon chasm with splintered beam toward a far ledge",
+      "choice_templates": [
+        {
+          "id": "cross_with_rope",
+          "label": "Brace the beam and cross",
+          "aliases": ["cross", "use rope", "climb across", "go across"],
+          "edge": "forward",
+          "requires_any": ["rope", "climbing"]
+        },
+        {
+          "id": "retreat_chasm",
+          "label": "Fall back the way you came",
+          "aliases": ["go back", "return", "retreat"],
+          "edge": "return"
+        }
+      ]
+    },
+    {
+      "id": "lair_approach",
+      "category": "approach",
+      "difficulty": "medium",
+      "slot_roles": ["gate"],
+      "requires": [],
+      "produces": [],
+      "optional": false,
+      "text": "The passage slopes down a short way. The musk thickens. Ahead, the stone opens into a low chamber—bones and scraps litter the threshold. A low growl answers your approach. You can press in and meet whatever waits, or fall back.",
+      "entities": ["lair_threshold", "bone_scraps"],
+      "image_seed": "original sloping tunnel toward a low lair threshold, bone scraps, thick animal musk",
+      "choice_templates": [
+        {
+          "id": "fight_on",
+          "label": "Advance into the lair",
+          "aliases": ["continue", "go on", "press on", "fight", "enter", "onward"],
+          "edge": "forward"
+        },
+        {
+          "id": "return_from_approach",
+          "label": "Fall back",
+          "aliases": ["go back", "return", "back"],
+          "edge": "return"
+        }
+      ]
+    },
+    {
+      "id": "tunnel_hound",
+      "category": "combat",
+      "difficulty": "hard",
+      "slot_roles": ["boss"],
+      "requires": [],
+      "produces": [],
+      "optional": false,
+      "text": "The lair opens under a low ceiling. Torn strips of leather hang from a niche in the wall. Something growls from the dark—a gaunt tunnel-hound, ribs sharp under patchy hide, jaws wet with saliva. It plants its paws and waits for you to move. There is no quiet way past.",
+      "entities": ["gaunt_tunnel_hound", "torn_leather"],
+      "image_seed": "original gaunt tunnel-hound in a low stone lair, torn leather scraps, growling with wet jaws",
+      "combat": {
+        "enemy_name": "gaunt tunnel-hound",
+        "enemy_skill": 5,
+        "enemy_stamina": 6,
+        "win_edge": "victory",
+        "lose_edge": "death",
+        "flee_edge": "return"
+      },
+      "exposure": {"active_threat": true, "time_sensitive": true},
+      "choice_templates": []
+    },
+    {
+      "id": "collapsed_shortcut",
+      "category": "shortcut",
+      "difficulty": "medium",
+      "slot_roles": ["optional", "shortcut"],
+      "requires": [["scarred_token"]],
+      "requires_mode": "any_of_groups",
+      "produces": ["used_shortcut"],
+      "optional": true,
+      "text": "A sealed iron hatch sits flush in the wall. The scarred token fits a shallow recess as if cast for it. Beyond, a narrow crawl leads somewhere you have not yet walked.",
+      "entities": ["iron_hatch", "token_recess"],
+      "image_seed": "original iron hatch in dungeon wall with token-shaped recess",
+      "choice_templates": [
+        {
+          "id": "use_token_hatch",
+          "label": "Fit the token and open the hatch",
+          "aliases": ["open hatch", "use token", "unlock", "crawl through"],
+          "edge": "forward",
+          "requires_any": ["scarred_token"]
+        },
+        {
+          "id": "leave_hatch",
+          "label": "Leave the hatch alone",
+          "aliases": ["leave", "go back", "return"],
+          "edge": "return"
+        }
+      ]
+    },
+    {
+      "id": "victory",
+      "category": "ending",
+      "difficulty": "easy",
+      "slot_roles": ["victory"],
+      "requires": [],
+      "produces": [],
+      "optional": false,
+      "text": "The tunnel-hound collapses. Silence returns to the low chamber. Beyond a narrow cleft in the far wall, cooler air and a thin seam of daylight wait. You push through and step out of the trial—alive, and finished with this stretch of stone.",
+      "entities": [],
+      "image_seed": "original exit from stone trial into daylight through a narrow cleft",
+      "ending": "victory",
+      "choice_templates": []
+    },
+    {
+      "id": "death",
+      "category": "ending",
+      "difficulty": "easy",
+      "slot_roles": ["death"],
+      "requires": [],
+      "produces": [],
+      "optional": false,
+      "text": "The tunnel-hound's jaws close on your throat. Strength drains; the stone ceiling swims and goes dark. Your trial ends here.",
+      "entities": [],
+      "image_seed": "original fallen adventurer in tunnel gloom, gaunt hound silhouette, defeat",
+      "effects_on_enter": [{"op": "death"}],
+      "ending": "death",
+      "choice_templates": []
+    }
+  ]
+}

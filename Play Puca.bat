@@ -1,19 +1,11 @@
 @echo off
+REM Puca Level 1 — full GUI with illustrations, Ollama LLM, facility cell + book dungeon
 setlocal
 cd /d "%~dp0"
 if not exist ".venv\Scripts\python.exe" (
-  echo Run install.bat first. The original EXE is unchanged.
+  echo Run install.bat first.
   pause
   exit /b 1
 )
-.venv\Scripts\python.exe scripts\ensure_story.py
-if errorlevel 1 (
-  pause
-  exit /b 1
-)
-if exist "dist-qhd\Puca\VERIFIED.json" (
-  "dist-qhd\Puca\Puca.exe" %*
-) else (
-  call launch.bat %*
-)
+call launch_deathtrap_gui.bat %*
 if errorlevel 1 pause

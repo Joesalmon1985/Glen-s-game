@@ -1,0 +1,23 @@
+{
+  "persona": "book_diver",
+  "seed": 107,
+  "turns": 19,
+  "enactment_histogram": {
+    "direct": 19
+  },
+  "mode_switches": [
+    "facility->book_dungeon@1",
+    "book_dungeon->facility@11",
+    "facility->book_dungeon@14",
+    "book_dungeon->facility@15"
+  ],
+  "prosecutor_hits": 1,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "wash",
+  "slept": false,
+  "washed": false,
+  "fed": false,
+  "layout_seed": 107,
+  "layout_fingerprint": "184dd99ee821e768"
+}

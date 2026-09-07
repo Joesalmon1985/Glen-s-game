@@ -1,0 +1,21 @@
+{
+  "persona": "minimalist_inspector",
+  "seed": 102,
+  "turns": 20,
+  "enactment_histogram": {
+    "direct": 20
+  },
+  "mode_switches": [
+    "facility->book_dungeon@3",
+    "book_dungeon->facility@20"
+  ],
+  "prosecutor_hits": 1,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "slit",
+  "slept": false,
+  "washed": false,
+  "fed": false,
+  "layout_seed": 102,
+  "layout_fingerprint": "f6b5491140f15433"
+}

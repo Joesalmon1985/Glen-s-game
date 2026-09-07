@@ -1,0 +1,19 @@
+{
+  "persona": "language_maximalist",
+  "seed": 108,
+  "turns": 14,
+  "enactment_histogram": {
+    "direct": 12,
+    "compromised": 2
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 0,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "done",
+  "slept": true,
+  "washed": true,
+  "fed": true,
+  "layout_seed": 108,
+  "layout_fingerprint": null
+}

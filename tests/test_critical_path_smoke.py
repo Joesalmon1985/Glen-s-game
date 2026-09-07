@@ -11,6 +11,7 @@ class CriticalPathSmokeTests(unittest.TestCase):
     def session(self, seed=91, name="Glen", **kwargs):
         kwargs.setdefault("interpreter", HeuristicInterpreter())
         kwargs.setdefault("debug", True)
+        kwargs.setdefault("start_mode", "legacy_pack")
         return GameSession(player_name=name, seed=seed, **kwargs)
 
     def test_path_1_270_66(self):

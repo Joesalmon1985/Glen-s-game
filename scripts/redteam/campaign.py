@@ -87,6 +87,7 @@ def make_session(
             allow_heuristic_fallback=True,
             ollama_model=model,
             generate_images=False,
+            start_mode='legacy_pack',
         )
     if not ollama_reachable():
         raise SystemExit(
@@ -108,6 +109,7 @@ def make_session(
         allow_heuristic_fallback=False,
         ollama_model=model,
         generate_images=False,
+        start_mode='legacy_pack',
     )
     if not isinstance(session.interpreter, OllamaInterpreter):
         raise SystemExit('RED TEAM ABORT: session interpreter is not OllamaInterpreter')

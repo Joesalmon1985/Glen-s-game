@@ -120,6 +120,12 @@ class WorldState:
     # pending_discourse: {shape:'binary'|'exclusive_choice', prompt, options:[{id,label}], antecedent}
     visible_entities: list = field(default_factory=list)
     aftermath: dict = field(default_factory=dict)
+    # Dual-mode Level 1 + book dungeon
+    mode: str = 'facility'  # facility | book_dungeon
+    facility: Any = None
+    dungeon_layout: Optional[dict] = None
+    book_bookmark: Optional[dict] = None  # {world, layout} snapshot while reading
+    layout_seed: Optional[int] = None
 
     def to_dict(self) -> dict:
         return world_to_dict(self)
@@ -129,6 +135,10 @@ class WorldState:
 
 
 def world_to_dict(world: WorldState) -> dict:
+    facility = world.facility
+    facility_dict = None
+    if facility is not None:
+        facility_dict = facility.to_dict() if hasattr(facility, 'to_dict') else dict(facility)
     return {
         'passage_id': world.passage_id,
         'sheet': world.sheet.to_dict(),
@@ -146,6 +156,11 @@ def world_to_dict(world: WorldState) -> dict:
         ),
         'visible_entities': list(world.visible_entities or []),
         'aftermath': dict(world.aftermath or {}),
+        'mode': str(world.mode or 'facility'),
+        'facility': facility_dict,
+        'dungeon_layout': dict(world.dungeon_layout) if world.dungeon_layout else None,
+        'book_bookmark': dict(world.book_bookmark) if world.book_bookmark else None,
+        'layout_seed': world.layout_seed,
     }
 
 
@@ -237,6 +252,11 @@ def world_from_dict(data: dict) -> WorldState:
     pending = data.get('pending_discourse')
     if pending is not None and not isinstance(pending, dict):
         pending = None
+    facility_raw = data.get('facility')
+    facility = None
+    if isinstance(facility_raw, dict):
+        from puca_dungeon.facility_models import FacilityState
+        facility = FacilityState.from_dict(facility_raw)
     return WorldState(
         passage_id=int(data.get('passage_id', 1) or 1),
         sheet=sheet,
@@ -252,6 +272,11 @@ def world_from_dict(data: dict) -> WorldState:
         pending_discourse=dict(pending) if isinstance(pending, dict) else None,
         visible_entities=list(data.get('visible_entities') or []),
         aftermath=dict(data.get('aftermath') or {}),
+        mode=str(data.get('mode') or 'facility'),
+        facility=facility,
+        dungeon_layout=dict(data['dungeon_layout']) if isinstance(data.get('dungeon_layout'), dict) else None,
+        book_bookmark=dict(data['book_bookmark']) if isinstance(data.get('book_bookmark'), dict) else None,
+        layout_seed=int(data['layout_seed']) if data.get('layout_seed') is not None else None,
     )
 
 

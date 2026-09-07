@@ -1,0 +1,203 @@
+[
+  {
+    "persona": "cooperative_serious",
+    "seed": 101,
+    "turns": 14,
+    "enactment_histogram": {
+      "direct": 14
+    },
+    "mode_switches": [
+      "facility->book_dungeon@4",
+      "book_dungeon->facility@9"
+    ],
+    "prosecutor_hits": 0,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "removal",
+    "slept": false,
+    "washed": false,
+    "fed": false,
+    "layout_seed": 101,
+    "layout_fingerprint": "56edc097cb58aaa8"
+  },
+  {
+    "persona": "hostile_violent",
+    "seed": 104,
+    "turns": 15,
+    "enactment_histogram": {
+      "direct": 9,
+      "aborted": 4,
+      "compromised": 2
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "wash",
+    "slept": false,
+    "washed": false,
+    "fed": false,
+    "layout_seed": 104,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "minimalist_inspector",
+    "seed": 102,
+    "turns": 20,
+    "enactment_histogram": {
+      "direct": 20
+    },
+    "mode_switches": [
+      "facility->book_dungeon@3",
+      "book_dungeon->facility@20"
+    ],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "slit",
+    "slept": false,
+    "washed": false,
+    "fed": false,
+    "layout_seed": 102,
+    "layout_fingerprint": "f6b5491140f15433"
+  },
+  {
+    "persona": "obstructive",
+    "seed": 103,
+    "turns": 18,
+    "enactment_histogram": {
+      "direct": 17,
+      "compromised": 1
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 2,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "sleep",
+    "slept": false,
+    "washed": true,
+    "fed": true,
+    "layout_seed": 103,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "escape_obsessed",
+    "seed": 105,
+    "turns": 16,
+    "enactment_histogram": {
+      "direct": 15,
+      "compromised": 1
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 0,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "done",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "layout_seed": 105,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "absurd_surreal",
+    "seed": 106,
+    "turns": 16,
+    "enactment_histogram": {
+      "direct": 15,
+      "compromised": 1
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 2,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "food",
+    "slept": false,
+    "washed": true,
+    "fed": false,
+    "layout_seed": 106,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "book_diver",
+    "seed": 107,
+    "turns": 19,
+    "enactment_histogram": {
+      "direct": 19
+    },
+    "mode_switches": [
+      "facility->book_dungeon@1",
+      "book_dungeon->facility@11",
+      "facility->book_dungeon@14",
+      "book_dungeon->facility@15"
+    ],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "wash",
+    "slept": false,
+    "washed": false,
+    "fed": false,
+    "layout_seed": 107,
+    "layout_fingerprint": "184dd99ee821e768"
+  },
+  {
+    "persona": "language_maximalist",
+    "seed": 108,
+    "turns": 14,
+    "enactment_histogram": {
+      "direct": 12,
+      "compromised": 2
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 0,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "done",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "layout_seed": 108,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "object_chaos",
+    "seed": 109,
+    "turns": 16,
+    "enactment_histogram": {
+      "direct": 16
+    },
+    "mode_switches": [
+      "facility->book_dungeon@4",
+      "book_dungeon->facility@6"
+    ],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "food",
+    "slept": false,
+    "washed": true,
+    "fed": false,
+    "layout_seed": 109,
+    "layout_fingerprint": "1cf4af870b4ec719"
+  },
+  {
+    "persona": "mixed_resist_then_book",
+    "seed": 110,
+    "turns": 17,
+    "enactment_histogram": {
+      "direct": 13,
+      "compromised": 1
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 0,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "done",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "layout_seed": 110,
+    "layout_fingerprint": null
+  }
+]

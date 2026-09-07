@@ -11,14 +11,6 @@
   "online_smoke": true,
   "seed": 91,
   "quota_scale": 0.1,
-  "model": "mistral",
-  "agents": [
-    "CombatStaller",
-    "ImpossiblePower",
-    "FoolishPhysical",
-    "SensibleCautious",
-    "AmbiguousReply"
-  ],
   "quotas": {
     "semantic_per_family": {
       "perceive": 10,
@@ -39,8 +31,7 @@
     "image_state": 0,
     "playthroughs": 0
   },
-  "timestamp": 1788797052.4025571,
-  "report": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_online_smoke_report.json",
-  "traces": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_online_smoke_traces.jsonl",
-  "notes": "Online smoke passed clean on first run (zero P0/P1/P2). Layer A/B at 10% quotas with inline Layer C prosecutor/image checks; short runs of five black-box agents. No root-cause code fixes required from this smoke. Companion offline seeds 91 and 4242 also clean — see puca_reality_gate.json."
+  "timestamp": 1788798945.4416373,
+  "report": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_report.json",
+  "traces": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_traces.jsonl"
 }

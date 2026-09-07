@@ -1,5 +1,5 @@
 {
-  "timestamp": 1788797061.3701544,
+  "timestamp": 1788798441.3374693,
   "offline": true,
   "online_smoke": false,
   "quota_scale": 1.0,
@@ -106,7 +106,7 @@
       },
       "CombatPacifist": {
         "turns": 12,
-        "ended": ""
+        "ended": "death"
       },
       "Violent": {
         "turns": 12,
@@ -195,7 +195,7 @@
     "needs_review": [],
     "judgement_inferred_count": 0
   },
-  "report_path": "tools\\_redteam_reality_report.json",
-  "traces": "tools\\_redteam_reality_traces.jsonl",
+  "report_path": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_reality_report.json",
+  "traces": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_reality_traces.jsonl",
   "agents": null
 }

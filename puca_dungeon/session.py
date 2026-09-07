@@ -6,9 +6,13 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
 
-from puca_dungeon import discourse, engine_leak, world_react
+from puca_dungeon import discourse, engine_leak, facility_react, world_react
 from puca_dungeon.authored_actions import build_authored_actions
 from puca_dungeon.content_loader import get_passage
+from puca_dungeon.dungeon_gen import GeneratedDungeon, generate_dungeon, set_active_dungeon
+from puca_dungeon.dungeon_validate import validate_dungeon
+from puca_dungeon.facility_models import OPENING_TEXT, make_initial_facility
+from puca_dungeon.facility_resolve import resolve_facility, wants_book_enter, wants_book_exit
 from puca_dungeon.ff_rules import make_adventure_sheet
 from puca_dungeon.ground import ground_intent
 from puca_dungeon.image_prompt import image_decision
@@ -18,6 +22,7 @@ from puca_dungeon.narrate import TemplateNarrator, narrate
 from puca_dungeon.pressure import apply_guidance
 from puca_dungeon.resolve import Resolution, resolve
 from puca_dungeon.rng import GameRNG
+from puca_dungeon.enactment import wanted_action_from_intent
 
 
 DEBUG_COMMANDS = {
@@ -149,21 +154,44 @@ class GameSession:
         generate_images: bool = False,
         image_generator=None,
         image_cache_dir: Optional[Path] = None,
+        start_mode: str = 'facility',
+        layout_seed: Optional[int] = None,
     ):
         self.debug = debug
         self.generate_images = bool(generate_images)
         self.rng = GameRNG.from_seed(seed)
         sheet = make_adventure_sheet(self.rng, name=player_name, potion_id=potion_id)
+        layout_seed = int(layout_seed if layout_seed is not None else seed)
+        # Normalize legacy alias
+        if start_mode == 'legacy_pack':
+            mode = 'book_dungeon'
+            use_generated = False
+            facility = None
+        elif start_mode == 'book_dungeon':
+            mode = 'book_dungeon'
+            use_generated = True
+            facility = None
+        else:
+            mode = 'facility'
+            use_generated = False
+            facility = make_initial_facility()
         self.world = WorldState(
             passage_id=1,
             sheet=sheet,
             rng_seed_note=str(seed),
+            mode=mode,
+            facility=facility,
+            layout_seed=layout_seed,
         )
+        if facility is not None:
+            self.world.visible_entities = [e.id for e in facility.entities_in_room()]
         self.allow_heuristic_fallback = allow_heuristic_fallback
         self.ollama_model = ollama_model
         self._image_generator = image_generator
         self._image_cache_dir = Path(image_cache_dir) if image_cache_dir else (Path.home() / 'Puca' / 'deathtrap_images')
         self.last_image_path: Optional[Path] = None
+        self._generated_dungeon: Optional[GeneratedDungeon] = None
+        self._use_generated_dungeon = use_generated
 
         if interpreter is not None:
             self.interpreter = interpreter
@@ -188,14 +216,170 @@ class GameSession:
         self.traces: list[TurnTrace] = []
         self.save_path = Path.home() / 'Puca' / 'deathtrap-ff.json'
 
+        if use_generated:
+            self._ensure_dungeon_layout()
+            self.world.passage_id = self._generated_dungeon.entry_id
+            set_active_dungeon(self._generated_dungeon)
+        else:
+            set_active_dungeon(None)
+
     @property
     def opening_text(self) -> str:
-        """Player-facing opener from puca_trial passage 1."""
-        passage = get_passage(1)
-        return (passage.text or '').strip()
+        """Player-facing opener."""
+        if self.world.mode == 'facility' and self.world.facility is not None:
+            return OPENING_TEXT
+        passage = self.current_passage()
+        text = passage.get('text') if isinstance(passage, dict) else getattr(passage, 'text', '')
+        return (text or '').strip()
+
+    def _ensure_dungeon_layout(self) -> GeneratedDungeon:
+        if self._generated_dungeon is not None:
+            set_active_dungeon(self._generated_dungeon)
+            return self._generated_dungeon
+        if self.world.dungeon_layout:
+            dungeon = GeneratedDungeon.from_dict(self.world.dungeon_layout)
+        else:
+            seed = int(self.world.layout_seed or self.rng.seed)
+            dungeon = generate_dungeon(seed)
+            report = validate_dungeon(dungeon)
+            if not report['ok']:
+                for i in range(1, 50):
+                    dungeon = generate_dungeon(seed + i)
+                    report = validate_dungeon(dungeon)
+                    if report['ok']:
+                        break
+                if not report['ok']:
+                    raise RuntimeError(f'Could not generate valid dungeon: {report["errors"]}')
+            self.world.dungeon_layout = dungeon.to_dict()
+            self.world.layout_seed = dungeon.layout_seed
+        self._generated_dungeon = dungeon
+        set_active_dungeon(dungeon)
+        return dungeon
 
     def current_passage(self):
+        if self.world.mode == 'book_dungeon' and getattr(self, '_use_generated_dungeon', False):
+            dungeon = self._ensure_dungeon_layout()
+            return dungeon.get_passage(self.world.passage_id)
+        if self.world.mode == 'facility' and self.world.facility is not None:
+            fac = self.world.facility
+            room = fac.rooms.get(fac.room_id) or {}
+            ents = [e.id for e in fac.entities_in_room()]
+            return {
+                'id': 0,
+                'text': str(room.get('description') or ''),
+                'choices': [],
+                'combat': None,
+                'entities': ents,
+                'hazards': [],
+                'effects_on_enter': [],
+                'ending': 'sleep' if fac.slept else None,
+                'image_seed': 'facility cell sparse bed cup book door',
+            }
         return get_passage(self.world.passage_id)
+
+    def enter_book(self) -> str:
+        """Diegetic transition into the nested randomised dungeon."""
+        fac = self.world.facility
+        if fac is None:
+            return 'There is no book here.'
+        book = fac.entity('book')
+        if book is None or book.location not in (fac.room_id, 'inventory'):
+            return 'There is no book here.'
+        if self.world.book_bookmark:
+            bm = self.world.book_bookmark
+            dungeon_world = world_from_dict(bm['world'])
+            self.world.dungeon_layout = bm.get('layout') or self.world.dungeon_layout
+            self._generated_dungeon = (
+                GeneratedDungeon.from_dict(self.world.dungeon_layout)
+                if self.world.dungeon_layout else None
+            )
+            outer_facility = fac
+            outer_time = self.world.world_time_seconds
+            layout_seed = self.world.layout_seed
+            layout = self.world.dungeon_layout
+            turn_index = self.world.turn_index
+            self.world = dungeon_world
+            self.world.mode = 'book_dungeon'
+            self.world.facility = outer_facility
+            self.world.facility.book_engaged = True
+            self.world.world_time_seconds = outer_time
+            self.world.layout_seed = layout_seed
+            self.world.dungeon_layout = layout
+            self.world.book_bookmark = None
+            self.world.turn_index = turn_index
+            self._ensure_dungeon_layout()
+            passage = self.current_passage()
+            text = passage.get('text') if isinstance(passage, dict) else getattr(passage, 'text', '')
+            return 'The page is still under your thumb.\n\n' + (text or '').strip()
+        dungeon = self._ensure_dungeon_layout()
+        name = self.world.sheet.name
+        dungeon_sheet = make_adventure_sheet(self.rng, name=name, potion_id='potion_skill')
+        fac.book_engaged = True
+        book.state['open'] = True
+        book.state['face_down'] = False
+        fac.set_entity(book)
+        self.world.mode = 'book_dungeon'
+        self._use_generated_dungeon = True
+        self.world.passage_id = dungeon.entry_id
+        self.world.sheet = dungeon_sheet
+        from puca_dungeon.models import CombatState
+        self.world.combat = CombatState()
+        self.world.ending = ''
+        self.world.victory = False
+        set_active_dungeon(dungeon)
+        passage = dungeon.get_passage(dungeon.entry_id)
+        return (
+            'The first page is badly printed. The second is worse.\n\n'
+            'By the third, you are somewhere else.\n\n'
+            + str(passage.get('text') or '').strip()
+        )
+
+    def exit_book(self, *, interrupted: bool = False) -> str:
+        """Leave book dungeon; bookmark state for resume."""
+        if self.world.mode != 'book_dungeon':
+            return ''
+        fac = self.world.facility
+        bookmark = {
+            'world': {
+                **{k: v for k, v in self.world.to_dict().items() if k not in ('facility', 'book_bookmark')},
+                'facility': None,
+                'book_bookmark': None,
+                'mode': 'book_dungeon',
+            },
+            'layout': self.world.dungeon_layout,
+        }
+        outer_time = self.world.world_time_seconds
+        layout_seed = self.world.layout_seed
+        layout = self.world.dungeon_layout
+        turn_index = self.world.turn_index
+        sheet_name = self.world.sheet.name if self.world.sheet else 'Adventurer'
+        if fac is None:
+            fac = make_initial_facility()
+        fac.book_engaged = False
+        from puca_dungeon.models import AdventureSheet, CombatState
+        self.world = WorldState(
+            passage_id=0,
+            sheet=AdventureSheet(name=sheet_name, alive=True),
+            combat=CombatState(),
+            rng_seed_note=str(self.rng.seed),
+            mode='facility',
+            facility=fac,
+            dungeon_layout=layout,
+            book_bookmark=bookmark,
+            layout_seed=layout_seed,
+            world_time_seconds=outer_time,
+            turn_index=turn_index,
+        )
+        self.world.visible_entities = [e.id for e in fac.entities_in_room()]
+        set_active_dungeon(None)
+        if interrupted:
+            return (
+                'Something knocks.\n\n'
+                'Not in the corridor you were imagining.\n\n'
+                'Again.\n\n'
+                'The page is still under your thumb.'
+            )
+        return 'You leave the printed corridors. The cell is still the cell.'
 
     def concise_state(self) -> dict:
         w = self.world
@@ -287,8 +471,19 @@ class GameSession:
         ]
 
         if resolution.show_passage_text and resolution.passage_entered is not None:
-            new_passage = get_passage(resolution.passage_entered)
-            body = (new_passage.text or '').strip()
+            new_passage = self.current_passage()
+            if resolution.passage_entered != getattr(self.world, 'passage_id', None):
+                # Prefer entered id from active dungeon / pack
+                try:
+                    from puca_dungeon.dungeon_gen import get_generated_passage
+                    gen = get_generated_passage(resolution.passage_entered)
+                    new_passage = gen if gen is not None else get_passage(resolution.passage_entered)
+                except Exception:
+                    new_passage = get_passage(resolution.passage_entered)
+            body = (
+                (new_passage.get('text') if isinstance(new_passage, dict) else getattr(new_passage, 'text', ''))
+                or ''
+            ).strip()
             extras = [
                 f for f in combat_or_dismiss_facts
                 if f and not (isinstance(f, str) and f.startswith('You gain '))
@@ -389,10 +584,65 @@ class GameSession:
         intent: Intent,
         passage,
         authored: list,
+        player_text: str = '',
     ) -> tuple[Any, Resolution]:
+        if self.world.mode == 'facility':
+            grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
+            resolution = resolve_facility(self.world, intent, grounding, self.rng, player_text)
+            for fact in list(resolution.structured_facts or []):
+                if isinstance(fact, dict) and fact.get('type') == 'book_enter':
+                    prose = self.enter_book()
+                    resolution.facts.append(prose)
+                    resolution.show_passage_text = False
+                    resolution.state_changed = True
+                    resolution.situation_changed = True
+                elif isinstance(fact, dict) and fact.get('type') == 'book_exit':
+                    prose = self.exit_book()
+                    resolution.facts.append(prose)
+            facility_react.after_facility_action(self.world, resolution, book_turn=False)
+            return grounding, resolution
+
         grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
+        if wants_book_exit(player_text) and self.world.facility is not None:
+            prose = self.exit_book()
+            resolution = Resolution(
+                intent_understood=True,
+                grounded=True,
+                feasible=True,
+                success=True,
+                attempted=True,
+                intended_effect_achieved=True,
+                facts=[prose],
+                structured_facts=[{'type': 'book_exit', 'kind': 'mode'}],
+                enactment='direct',
+                wanted_action=wanted_action_from_intent(intent),
+                actual_action={'action_class': 'close_book', 'performed': True},
+                advance_time=True,
+                time_cost=10,
+            )
+            facility_react.after_facility_action(self.world, resolution, book_turn=False)
+            return grounding, resolution
+
         resolution = resolve(self.world, intent, grounding, self.rng, passage)
+        if not getattr(resolution, 'wanted_action', None):
+            resolution.wanted_action = wanted_action_from_intent(intent)
+        if not getattr(resolution, 'actual_action', None):
+            resolution.actual_action = {
+                'action_class': intent.action_class,
+                'performed': bool(resolution.attempted),
+                'success': resolution.success,
+            }
         world_react.after_player_action(self.world, intent, resolution, self.rng)
+        if self.world.facility is not None:
+            facility_react.after_facility_action(self.world, resolution, book_turn=True)
+            interrupted = any(
+                isinstance(e, dict) and e.get('type') == 'book_interrupt'
+                for e in (resolution.world_events or [])
+            )
+            if interrupted:
+                prose = self.exit_book(interrupted=True)
+                resolution.facts.append(prose)
+                resolution.situation_changed = True
         return grounding, resolution
 
     def _run_compound(
@@ -405,7 +655,7 @@ class GameSession:
         steps = list(intent.sequence or [])
         if not steps:
             passage, _perception, authored = self._build_perception_and_authored()
-            grounding, resolution = self._resolve_one(intent, passage, authored)
+            grounding, resolution = self._resolve_one(intent, passage, authored, player_text)
             trace.grounding = grounding.to_dict()
             return resolution
 
@@ -433,7 +683,7 @@ class GameSession:
                         trace.compound_steps.append({'stopped': 'combat_interrupt', 'index': i})
                         break
 
-                grounding, resolution = self._resolve_one(step_intent, passage, authored)
+                grounding, resolution = self._resolve_one(step_intent, passage, authored, player_text)
                 performed.append(resolution)
                 last_resolution = resolution
                 trace.compound_steps.append({
@@ -627,10 +877,10 @@ class GameSession:
             ):
                 resolution = self._run_compound(intent, text, trace)
             else:
-                grounding, resolution = self._resolve_one(intent, passage, authored)
+                grounding, resolution = self._resolve_one(intent, passage, authored, text)
                 trace.grounding = grounding.to_dict()
         else:
-            grounding, resolution = self._resolve_one(intent, passage, authored)
+            grounding, resolution = self._resolve_one(intent, passage, authored, text)
             trace.grounding = grounding.to_dict()
 
         # Clarification with exclusive options: ensure discourse pending if needed
@@ -708,10 +958,11 @@ class GameSession:
         path = Path(path or self.save_path)
         path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
-            'version': 2,
+            'version': 3,
             'world': self.world.to_dict(),
             'rng': self.rng.snapshot(),
             'debug': self.debug,
+            'use_generated_dungeon': bool(getattr(self, '_use_generated_dungeon', False)),
         }
         path.write_text(
             json.dumps(payload, ensure_ascii=False, indent=2, default=_json_default),
@@ -724,6 +975,15 @@ class GameSession:
         self.world = world_from_dict(payload['world'])
         self.rng = GameRNG.restore(payload['rng'])
         self.debug = bool(payload.get('debug', self.debug))
+        self._use_generated_dungeon = bool(payload.get('use_generated_dungeon', False))
+        self._generated_dungeon = None
+        if self.world.dungeon_layout and (
+            self._use_generated_dungeon or self.world.mode == 'book_dungeon'
+        ):
+            self._generated_dungeon = GeneratedDungeon.from_dict(self.world.dungeon_layout)
+            set_active_dungeon(self._generated_dungeon)
+        elif self.world.mode == 'facility':
+            set_active_dungeon(None)
 
 
 def _json_default(obj):

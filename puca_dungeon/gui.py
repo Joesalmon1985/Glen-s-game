@@ -98,7 +98,7 @@ class DeathtrapGui:
         self.poll_id = self.master.after(40, self._poll)
 
     def _build(self, text_only):
-        self.master.title('Deathtrap Dungeon')
+        self.master.title('Puca')
         self.master.tk.call('tk', 'scaling', 96 / 72)
         self.master.geometry('2560x1440')
         self.master.minsize(780, 680)
@@ -120,8 +120,8 @@ class DeathtrapGui:
 
         header = ttk.Frame(outer)
         header.grid(row=0, column=0, sticky='ew')
-        ttk.Label(header, text='DEATHTRAP DUNGEON', font=('Georgia', 32, 'bold'), foreground=ACCENT).pack(side='left')
-        ttk.Label(header, text='Trial of Champions — Fang', foreground=MUTED).pack(side='left', padx=16)
+        ttk.Label(header, text='PUCA', font=('Georgia', 32, 'bold'), foreground=ACCENT).pack(side='left')
+        ttk.Label(header, text='Level 1 — the cell', foreground=MUTED).pack(side='left', padx=16)
         # Intentionally no Skill / Stamina / Luck / spirit meters
 
         self.setup = ttk.Frame(outer)
@@ -140,7 +140,7 @@ class DeathtrapGui:
             state='readonly',
         )
         potion.pack(side='left', padx=8)
-        self.play_button = ttk.Button(self.setup, text='Enter the dungeon', command=self.begin)
+        self.play_button = ttk.Button(self.setup, text='Wake up', command=self.begin)
         self.play_button.pack(side='left', padx=4)
         self.resume_button = ttk.Button(self.setup, text='Resume', command=self.resume)
         self.resume_button.pack(side='left', padx=4)
@@ -168,7 +168,7 @@ class DeathtrapGui:
         self.art_panel.pack_propagate(False)
         self.image_label = tk.Label(
             self.art_panel,
-            text='The dungeon will take shape here.\n\nIllustrations are optional.\nType freely — no meters, no menus of numbers.',
+            text='The room will take shape here.\n\nIllustrations are optional.\nType freely — no meters, no menus of numbers.',
             bg=PANEL, fg=MUTED, font=('Georgia', 16), wraplength=760,
         )
         self.image_label.pack(fill='both', expand=True, padx=10, pady=10)
@@ -179,11 +179,11 @@ class DeathtrapGui:
         )
         self.story.grid(row=0, column=1, sticky='nsew')
         self._append(
-            'Welcome to Deathtrap Dungeon.\n\n'
-            'Enter your name, pick a potion, and step into Baron Sukumvit\'s trial.\n\n'
-            'Type what you do in your own words. There are no on-screen Skill, Stamina, or Luck meters — '
-            'the Adventure Sheet is tracked quietly for you.\n\n'
-            'Ollama interprets your words locally. Illustrations use the same image stack as Puca.'
+            'Welcome to Puca.\n\n'
+            'Enter your name and wake in the cell.\n\n'
+            'Type what you intend in your own words. There are no on-screen Skill, Stamina, or Luck meters — '
+            'only what you can see, feel, and try.\n\n'
+            'Illustrations stay on unless you turn them off. Ollama interprets your words locally.'
         )
 
         examples_row = ttk.Frame(outer)
@@ -310,8 +310,13 @@ class DeathtrapGui:
             if world.sheet.provisions > 0:
                 labels.append('Eat a provision')
             return labels
-        passage = get_passage(world.passage_id)
-        return [c.get('label') or c.get('id') for c in (passage.choices or []) if isinstance(c, dict)]
+        passage = self.session.current_passage()
+        choices = passage.get('choices') if isinstance(passage, dict) else getattr(passage, 'choices', None)
+        return [
+            c.get('label') or c.get('id')
+            for c in (choices or [])
+            if isinstance(c, dict)
+        ]
 
     def _refresh_choices(self):
         for button in self.choice_buttons:
@@ -353,6 +358,7 @@ class DeathtrapGui:
             generate_images=False,  # GUI drives generation so we can cancel / toggle
             image_generator=self.images,
             image_cache_dir=self.cache_dir,
+            start_mode='facility',
         )
 
     def begin(self):
@@ -363,12 +369,12 @@ class DeathtrapGui:
         try:
             self.session = self._make_session(name, potion)
         except InterpreterUnavailable as exc:
-            messagebox.showerror('Deathtrap Dungeon', str(exc))
+            messagebox.showerror('Puca', str(exc))
             return
         self._clear_story()
-        self._append(get_passage(1).text)
+        self._append(self.session.opening_text)
         self._refresh_choices()
-        self.status_var.set('You have entered the dungeon.')
+        self.status_var.set('You wake in the cell.')
         self._controls(active=True)
         self.action_entry.focus_set()
         if self.images_var.get():
@@ -380,7 +386,7 @@ class DeathtrapGui:
         if self.turn_busy or self.image_busy:
             return
         if not self.save_path.is_file():
-            messagebox.showinfo('Deathtrap Dungeon', 'No saved run found.')
+            messagebox.showinfo('Puca', 'No saved run found.')
             return
         name = (self.name_var.get() or 'Adventurer').strip()[:40] or 'Adventurer'
         potion = self.potion_var.get() or 'potion_skill'
@@ -388,14 +394,17 @@ class DeathtrapGui:
             self.session = self._make_session(name, potion)
             self.session.load(self.save_path)
         except Exception as exc:
-            messagebox.showerror('Deathtrap Dungeon', f'Could not load save: {exc}')
+            messagebox.showerror('Puca', f'Could not load save: {exc}')
             return
         self._clear_story()
-        passage = get_passage(self.session.world.passage_id)
-        self._append(passage.text)
+        passage = self.session.current_passage()
+        text = passage.get('text') if isinstance(passage, dict) else getattr(passage, 'text', '')
+        self._append(text or self.session.opening_text)
         self._refresh_choices()
         self.status_var.set('Saved run restored.')
         alive = self.session.world.sheet.alive and not self.session.world.victory
+        if self.session.world.facility and self.session.world.facility.slept:
+            alive = False
         self._controls(active=alive)
         if self.images_var.get() and alive:
             self._launch_image_only()
@@ -407,7 +416,7 @@ class DeathtrapGui:
         self.session = None
         self._clear_story()
         self._append(
-            'New run ready.\n\nEnter your name, choose a potion, and enter the dungeon again.'
+            'New run ready.\n\nEnter your name and wake in the cell again.'
         )
         for button in self.choice_buttons:
             button.destroy()
@@ -415,7 +424,7 @@ class DeathtrapGui:
         self._pixel_image = None
         self.image_label.configure(
             image='',
-            text='The dungeon will take shape here.\n\nIllustrations are optional.',
+            text='The room will take shape here.\n\nIllustrations are optional.',
         )
         self.status_var.set('Ready for a new run.')
         self._controls(active=False)
@@ -509,7 +518,7 @@ class DeathtrapGui:
         try:
             from puca_dungeon.image_prompt import build_image_prompt
 
-            prompt = build_image_prompt(self.session.world, get_passage(self.session.world.passage_id))
+            prompt = build_image_prompt(self.session.world, self.session.current_passage())
             if self.cancel_image.is_set():
                 self.messages.put(('image_done', None))
                 return
@@ -537,7 +546,7 @@ class DeathtrapGui:
         prompt = (trace.image or {}).get('full_prompt') or ''
         if not prompt:
             from puca_dungeon.image_prompt import build_image_prompt
-            prompt = build_image_prompt(self.session.world, get_passage(self.session.world.passage_id))
+            prompt = build_image_prompt(self.session.world, self.session.current_passage())
         decision = (trace.image or {}).get('decision')
         if decision == 'REUSE' and self.session.last_image_path and Path(self.session.last_image_path).is_file():
             self.messages.put(('image', str(self.session.last_image_path)))
@@ -638,11 +647,11 @@ class DeathtrapGui:
             self.progress.configure(mode='indeterminate', value=0)
             self.turn_busy = False
             self.image_busy = False
-            messagebox.showerror('Deathtrap Dungeon', event[1])
+            messagebox.showerror('Puca', event[1])
             self._controls(active=self.session is not None and self._alive())
         elif kind == 'ended':
             if event[1] == 'victory':
-                self.status_var.set('Victory. You have conquered Deathtrap Dungeon.')
+                self.status_var.set('Victory.')
                 self._append('[You emerge victorious.]')
             else:
                 self.status_var.set('Your adventure ends here.')

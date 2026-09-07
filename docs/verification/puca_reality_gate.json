@@ -31,8 +31,7 @@
     "image_state": 25,
     "playthroughs": 20
   },
-  "timestamp": 1788797061.3701544,
-  "report": "tools\\_redteam_reality_report.json",
-  "traces": "tools\\_redteam_reality_traces.jsonl",
-  "notes": "Offline clean gate passed for seed 91 (this run, full quotas) and seed 4242 (prior full offline run). Online smoke (seed 91, mistral, --online-smoke / 10% Layer A/B + 5 agents) also passed with zero P0/P1/P2; see docs/verification/puca_reality_gate_online_smoke.json."
+  "timestamp": 1788798441.3374693,
+  "report": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_reality_report.json",
+  "traces": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_reality_traces.jsonl"
 }

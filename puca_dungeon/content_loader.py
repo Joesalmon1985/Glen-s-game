@@ -104,7 +104,17 @@ def load_passage(passage_id: int, pack_dir: Path = PACK_DIR) -> Passage:
 
 
 def get_passage(passage_id: int, pack_dir: Path = PACK_DIR) -> Passage:
-    """Load a single passage by id (alias for load_passage)."""
+    """Load a single passage by id (alias for load_passage).
+
+    When a generated book dungeon is active, prefer its materialised passages.
+    """
+    try:
+        from puca_dungeon.dungeon_gen import get_generated_passage
+        generated = get_generated_passage(int(passage_id))
+        if generated is not None:
+            return _passage_from_data(generated)
+    except Exception:
+        pass
     return load_passage(passage_id, pack_dir)
 
 

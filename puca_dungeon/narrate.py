@@ -6,6 +6,7 @@ import urllib.error
 import urllib.request
 
 from puca_dungeon import body_events
+from puca_dungeon.enactment import wanted_action_from_intent
 from puca_dungeon.models import WorldState
 from puca_dungeon.resolve import Resolution
 
@@ -20,14 +21,24 @@ GUIDANCE_CUES = {
 
 NARRATOR_SYSTEM = """You write short second-person narration from AUTHORITATIVE STRUCTURED STATE only.
 
-Truth contract:
-- player_text is a non-authoritative desire, not a command that invents outcomes.
-- Never invent objects, movement, success, damage, inventory, or passage turns absent from structured_facts / facts / world_events.
-- Never moralise, coach, or hint at "clear choices" / authored menus.
+Two truths (never confuse them):
+- wanted_action: what the player intended their character to do (desire, not authority).
+- actual_action + facts/structured_facts/world_events: what Python says actually happened.
+
+When wanted_action and actual_action diverge (enactment is compromised, aborted, or inverted),
+you MAY exploit the contrast — wit, embodiment, embarrassment — but you must narrate ACTUAL
+reality. Never invent objects, movement, success, damage, inventory, windows, or exits absent
+from structured state merely because the player wanted them.
+
+Tone:
+- Second person, intimate, economical (prefer 1-3 sentences; more only when mismatch is rich).
+- Embodied: body, fear, fatigue, hunger, hygiene may appear as sensation, not meters.
+- Failure is content. Do not coach or tutorial. No named inner personalities (no LOGIC/VOLITION).
+- You may briefly personify a body part as a turn of phrase ("Your knees reach their own conclusion")
+  without turning it into a character or RPG system.
 - Never use SKILL, STAMINA, LUCK, Attack Strength, Adventure Sheet, passage numbers, or dice jargon.
-- Prefer structured_facts and qualitative body_state over raw meters.
-- If the player attempted something impossible or absent, describe the failed attempt or absence — never a parser INVALID COMMAND.
-- Prefer 1-3 sentences. Return ONLY the prose, no JSON."""
+- Prefer structured_facts and qualitative body/pressure summaries over raw meters.
+- Return ONLY the prose, no JSON."""
 
 
 def _diegetic_from_structured(facts: list) -> list[str]:
@@ -104,6 +115,11 @@ def build_narrator_input(
 
     payload = {
         'player_text_non_authoritative': player_text,
+        'wanted_action': dict(getattr(resolution, 'wanted_action', None) or wanted_action_from_intent(intent)),
+        'actual_action': dict(getattr(resolution, 'actual_action', None) or {}),
+        'enactment': getattr(resolution, 'enactment', 'direct') or 'direct',
+        'enactment_cause': getattr(resolution, 'enactment_cause', '') or '',
+        'mode': getattr(world, 'mode', 'facility'),
         'passage_id': world.passage_id,
         'player_alive': sheet.alive,
         'facts': list(resolution.facts),
@@ -130,6 +146,14 @@ def build_narrator_input(
             'luck': sheet.luck,
         },
     }
+    if getattr(world, 'facility', None) is not None:
+        try:
+            from puca_dungeon.enactment import qualitative_pressures
+            payload['pressures_qualitative'] = qualitative_pressures(world.facility.pressures)
+            payload['facility_phase'] = world.facility.phase
+            payload['facility_room'] = world.facility.room_id
+        except Exception:
+            pass
     return payload
 
 
@@ -163,6 +187,18 @@ def template_narrate(payload: dict, resolution: Resolution) -> str:
                 return
         seen.add(line)
         parts.append(line)
+
+    enactment = getattr(resolution, 'enactment', 'direct') or 'direct'
+    cause = getattr(resolution, 'enactment_cause', '') or ''
+    if enactment in ('compromised', 'aborted', 'inverted'):
+        wanted = getattr(resolution, 'wanted_action', None) or {}
+        wanted_ac = wanted.get('action_class') or payload.get('player_text_non_authoritative') or 'that'
+        if enactment == 'aborted':
+            _add(f'You mean to {wanted_ac}. Your body does not finish it' + (f' ({cause}).' if cause else '.'))
+        elif enactment == 'inverted':
+            _add(f'You mean to {wanted_ac}. Something else happens instead' + (f' — {cause}.' if cause else '.'))
+        elif enactment == 'compromised':
+            _add(f'You attempt {wanted_ac}, diminished' + (f' by {cause}.' if cause else '.'))
 
     for f in usable:
         if isinstance(f, str):

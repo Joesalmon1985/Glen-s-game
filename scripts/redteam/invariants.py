@@ -385,4 +385,16 @@ def check_turn(
                     f'Interpreter invented turn_to={invented!r} without authored match',
                 )
 
+    # Character resistance must be justified
+    enactment = str(res.get('enactment') or 'direct')
+    cause = str(res.get('enactment_cause') or '')
+    if enactment in ('compromised', 'aborted', 'inverted') and not cause:
+        none_reason = str(res.get('none_reason') or '')
+        if none_reason not in ('entity_absent', 'impossible_here', 'world_constraint'):
+            add(
+                'P1',
+                'unjustified_enactment',
+                f'enactment={enactment!r} without enactment_cause',
+            )
+
     return findings
