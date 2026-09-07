@@ -11,7 +11,7 @@ from puca_dungeon.models import WorldState
 from puca_dungeon.resolve import Resolution
 from puca_dungeon.rng import GameRNG
 from puca_dungeon.scene_compose import build_visual_spec, compose_facility_scene
-from puca_dungeon.visual_catalog import iter_sprite_jobs, load_catalog
+from puca_dungeon.visual_catalog import dump_facility_draft, iter_sprite_jobs, jobs_for_room, load_catalog
 
 
 class SpriteCatalogTests(unittest.TestCase):
@@ -30,6 +30,22 @@ class SpriteCatalogTests(unittest.TestCase):
         self.assertGreaterEqual(len(jobs), 30)
         kinds = {job['kind'] for job in jobs}
         self.assertEqual(kinds, {'background', 'prop', 'character'})
+
+    def test_dump_draft_matches_facility_rooms(self):
+        draft = dump_facility_draft()
+        room_ids = {row['id'] for row in draft['rooms']}
+        self.assertIn('cell', room_ids)
+        self.assertIn('hell', room_ids)
+        entity_ids = {row['id'] for row in draft['entities']}
+        self.assertIn('cup', entity_ids)
+        self.assertIn('door', entity_ids)
+
+    def test_jobs_for_room_cell(self):
+        jobs = jobs_for_room('cell')
+        ids = {job['id'] for job in jobs}
+        self.assertIn('cell', ids)
+        self.assertTrue(any(i.startswith('cup_') for i in ids))
+        self.assertTrue(any(i.startswith('player_') for i in ids))
 
 
 class SceneComposeTests(unittest.TestCase):
@@ -88,6 +104,17 @@ class SceneComposeTests(unittest.TestCase):
             spec2, path2 = compose_facility_scene(world, Path(folder), allow_placeholder=True)
             self.assertEqual(spec.key, spec2.key)
             self.assertEqual(path, path2)
+
+    def test_debug_overlay_composes(self):
+        world = self._world()
+        with tempfile.TemporaryDirectory() as folder:
+            _spec, path = compose_facility_scene(
+                world, Path(folder), allow_placeholder=True, debug_layers=True,
+            )
+            self.assertTrue(path.name.endswith('_dbg.png'))
+            from PIL import Image
+            with Image.open(path) as image:
+                self.assertEqual(image.size, (512, 512))
 
     def test_image_decision_uses_sprite_renderer(self):
         from puca_dungeon.image_prompt import image_decision

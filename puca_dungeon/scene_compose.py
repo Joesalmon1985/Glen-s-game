@@ -318,11 +318,31 @@ def load_sprite_rgba(
     return _placeholder_image(sprite_id, kind, size)
 
 
+def _draw_debug_overlay(image, spec: SceneVisualSpec):
+    """List layer sprite ids in the corner for layout tuning (PUCA_SPRITE_DEBUG=1)."""
+    from PIL import ImageDraw
+
+    draw = ImageDraw.Draw(image)
+    lines = [f'{spec.room_id}  {spec.key[:8]}']
+    for layer in spec.layers:
+        if layer.kind == 'background':
+            lines.append(f'bg:{layer.sprite_id}')
+        else:
+            lines.append(f'{layer.sprite_id}@{layer.xy[0]},{layer.xy[1]}')
+    y = 6
+    for line in lines[:18]:
+        draw.text((7, y + 1), line, fill=(0, 0, 0))
+        draw.text((6, y), line, fill=(240, 230, 200))
+        y += 12
+    return image
+
+
 def compose_image(
     spec: SceneVisualSpec,
     catalog: Optional[dict] = None,
     root: Optional[Path] = None,
     allow_placeholder: bool = True,
+    debug_layers: bool = False,
 ):
     from PIL import Image
 
@@ -344,7 +364,10 @@ def compose_image(
             out.alpha_composite(sprite, (0, 0))
         else:
             out.alpha_composite(sprite, (int(layer.xy[0]), int(layer.xy[1])))
-    return out.convert('RGB')
+    rgb = out.convert('RGB')
+    if debug_layers:
+        _draw_debug_overlay(rgb, spec)
+    return rgb
 
 
 def compose_facility_scene(
@@ -353,14 +376,22 @@ def compose_facility_scene(
     catalog: Optional[dict] = None,
     root: Optional[Path] = None,
     allow_placeholder: bool = True,
+    debug_layers: Optional[bool] = None,
 ) -> tuple[SceneVisualSpec, Path]:
     """Compose and cache a 512×512 PNG for the current facility view."""
+    import os
+
+    if debug_layers is None:
+        debug_layers = str(os.environ.get('PUCA_SPRITE_DEBUG') or '').strip().lower() in (
+            '1', 'true', 'yes', 'on',
+        )
     cat = catalog or load_catalog()
     spec = build_visual_spec(world, cat)
     cache_dir = Path(cache_dir)
     cache_dir.mkdir(parents=True, exist_ok=True)
-    destination = cache_dir / f'sprite_{spec.key[:24]}.png'
-    if destination.is_file():
+    suffix = '_dbg' if debug_layers else ''
+    destination = cache_dir / f'sprite_{spec.key[:24]}{suffix}.png'
+    if destination.is_file() and not debug_layers:
         try:
             from PIL import Image
             with Image.open(destination) as existing:
@@ -368,7 +399,13 @@ def compose_facility_scene(
                     return spec, destination
         except OSError:
             destination.unlink(missing_ok=True)
-    image = compose_image(spec, cat, root=root or DEFAULT_ASSETS_ROOT, allow_placeholder=allow_placeholder)
+    image = compose_image(
+        spec,
+        cat,
+        root=root or DEFAULT_ASSETS_ROOT,
+        allow_placeholder=allow_placeholder,
+        debug_layers=bool(debug_layers),
+    )
     tmp = destination.with_suffix('.tmp.png')
     image.save(tmp, format='PNG')
     tmp.replace(destination)

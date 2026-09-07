@@ -61,3 +61,71 @@ def iter_sprite_jobs(catalog: Optional[dict] = None) -> list[dict[str, Any]]:
 
 def clear_catalog_cache() -> None:
     load_catalog.cache_clear()
+
+
+def dump_facility_draft() -> dict[str, Any]:
+    """Draft inventory from facility_models + cast ids for catalog review.
+
+    Does not invent art prompts — lists rooms, entities/state keys, and cast
+    roles the authored catalog should cover.
+    """
+    from puca_dungeon.characters import STAFF_IDS, SUBJECT_IDS
+    from puca_dungeon.facility_models import _default_entities, _default_rooms
+
+    rooms = _default_rooms()
+    entities = _default_entities()
+    entity_rows = []
+    for eid, raw in entities.items():
+        state = dict((raw or {}).get('state') or {})
+        entity_rows.append({
+            'id': eid,
+            'name': (raw or {}).get('name'),
+            'location': (raw or {}).get('location'),
+            'movable': bool((raw or {}).get('movable', True)),
+            'state_keys': sorted(state.keys()),
+            'default_state': state,
+        })
+    return {
+        'source': 'facility_models + characters',
+        'rooms': [
+            {'id': rid, 'name': (raw or {}).get('name'), 'description': (raw or {}).get('description')}
+            for rid, raw in rooms.items()
+        ],
+        'entities': entity_rows,
+        'cast_roles': {
+            'player': 'sarel',
+            'staff_ids': list(STAFF_IDS),
+            'subject_ids': list(SUBJECT_IDS),
+            'player_pose_hints': ['wary', 'wounded', 'fallen', 'triumphant'],
+            'staff_sprite_hints': ['staff_orderly', 'staff_anxious', 'staff_senior'],
+        },
+        'note': (
+            'Review against assets/sprites/catalog.json. '
+            'Use scripts/generate_sprites.py --dump-draft to print this JSON.'
+        ),
+    }
+
+
+def jobs_for_room(room_id: str, catalog: Optional[dict] = None) -> list[dict[str, Any]]:
+    """Sprite jobs needed to paint one room (background + layout-referenced assets)."""
+    cat = catalog or load_catalog()
+    layout = dict((cat.get('layouts') or {}).get(room_id) or {})
+    if not layout:
+        return []
+    needed: set[str] = set()
+    bg = str(layout.get('background') or room_id)
+    needed.add(bg)
+    # Props/characters that can appear in this room's slots
+    slot_names = set((layout.get('slots') or {}).keys())
+    for prop_id in (cat.get('props') or {}):
+        base = prop_id.split('_')[0]
+        if prop_id in slot_names or base in slot_names or any(
+            prop_id.startswith(f'{slot}_') or prop_id == slot for slot in slot_names
+        ):
+            needed.add(prop_id)
+    for char_id in (cat.get('characters') or {}):
+        if 'player' in slot_names and char_id.startswith('player_'):
+            needed.add(char_id)
+        if any(s.startswith('staff_') for s in slot_names) and char_id.startswith('staff_'):
+            needed.add(char_id)
+    return [job for job in iter_sprite_jobs(cat) if job['id'] in needed]
