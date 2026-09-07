@@ -1,0 +1,84 @@
+{
+  "passages": {
+    "1": {
+      "id": 1,
+      "ending": null,
+      "edges": [
+        {"kind": "choice_to", "id": "open_named_box", "to": 270},
+        {"kind": "choice_to", "id": "continue_north", "to": 66}
+      ],
+      "combat": false
+    },
+    "20": {
+      "id": 20,
+      "ending": null,
+      "edges": [
+        {"kind": "choice_to", "id": "return_to_junction", "to": 66}
+      ],
+      "combat": false
+    },
+    "37": {
+      "id": 37,
+      "ending": null,
+      "edges": [
+        {"kind": "combat_win_to", "to": 400},
+        {"kind": "combat_lose_to", "to": 399},
+        {"kind": "combat_flee_to", "to": 66}
+      ],
+      "combat": true
+    },
+    "66": {
+      "id": 66,
+      "ending": null,
+      "edges": [
+        {"kind": "choice_to", "id": "go_west", "to": 101},
+        {"kind": "choice_to", "id": "go_east", "to": 20},
+        {"kind": "choice_to", "id": "inspect_tracks", "to": 80}
+      ],
+      "combat": false
+    },
+    "80": {
+      "id": 80,
+      "ending": null,
+      "edges": [
+        {"kind": "choice_to", "id": "return_to_junction", "to": 66}
+      ],
+      "combat": false
+    },
+    "101": {
+      "id": 101,
+      "ending": null,
+      "edges": [
+        {"kind": "choice_to", "id": "fight_on", "to": 37},
+        {"kind": "choice_to", "id": "return_east", "to": 66}
+      ],
+      "combat": false
+    },
+    "270": {
+      "id": 270,
+      "ending": null,
+      "edges": [
+        {"kind": "choice_to", "id": "continue_after_box", "to": 66}
+      ],
+      "combat": false
+    },
+    "399": {
+      "id": 399,
+      "ending": "death",
+      "edges": [],
+      "combat": false
+    },
+    "400": {
+      "id": 400,
+      "ending": "victory",
+      "edges": [],
+      "combat": false
+    }
+  },
+  "meta": {
+    "pack": "puca_trial",
+    "spine": [1, 20, 37, 66, 80, 101, 270, 399, 400],
+    "range": [1, 400],
+    "notes": "Minimal gold edges for the early playable spine only."
+  }
+}

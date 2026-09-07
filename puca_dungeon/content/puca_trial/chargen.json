@@ -1,0 +1,14 @@
+{
+  "skill": {"dice": 1, "sides": 6, "add": 6},
+  "stamina": {"dice": 2, "sides": 6, "add": 12},
+  "luck": {"dice": 1, "sides": 6, "add": 6},
+  "starting_equipment": ["sword", "leather_armour", "backpack", "iron_key"],
+  "gold_pieces": {"dice": 1, "sides": 6, "add": 0},
+  "provisions": 10,
+  "potions": [
+    {"id": "potion_skill", "name": "Potion of Skill", "restores": "skill"},
+    {"id": "potion_strength", "name": "Potion of Strength", "restores": "stamina"},
+    {"id": "potion_fortune", "name": "Potion of Fortune", "restores": "luck"}
+  ],
+  "notes": "Puca Trial chargen: FF-style dice formulas plus iron_key in starting inventory."
+}

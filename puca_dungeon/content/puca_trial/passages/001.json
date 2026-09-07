@@ -1,0 +1,39 @@
+{
+  "id": 1,
+  "text": "Torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your name, cut cleanly into the wood as if the carver knew you would come. The air here is still; farther ahead the tunnel continues into deeper dark.",
+  "choices": [
+    {
+      "id": "open_named_box",
+      "label": "Open the casket marked with your name",
+      "aliases": [
+        "open the box",
+        "open my box",
+        "open named box",
+        "open lid"
+      ],
+      "to": 270
+    },
+    {
+      "id": "continue_north",
+      "label": "Leave the alcove and press deeper into the tunnel",
+      "aliases": [
+        "continue",
+        "go north",
+        "walk north",
+        "keep walking",
+        "leave the boxes"
+      ],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond",
+  "needs_review": false,
+  "hazards": [],
+  "entities": ["six_caskets", "named_casket", "stone_table"],
+  "exposure": {"time_sensitive": false},
+  "pressures": []
+}

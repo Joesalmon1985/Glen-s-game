@@ -1,0 +1,135 @@
+{
+  "timestamp": 1788797052.4025571,
+  "offline": false,
+  "online_smoke": true,
+  "quota_scale": 0.1,
+  "gate_name": "puca_reality_gate_online_smoke",
+  "model": "mistral",
+  "seed": 91,
+  "finding_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "clean_gate_passed": true,
+  "clean_gate_rationale": "Clean gate passed: zero P0/P1/P2 findings.",
+  "findings": [],
+  "sections": {
+    "regressions": {
+      "count": 5
+    },
+    "layer_a": {
+      "families": {
+        "perceive": {
+          "count": 10,
+          "ok": 10
+        },
+        "move": {
+          "count": 10,
+          "ok": 10
+        },
+        "use": {
+          "count": 10,
+          "ok": 10
+        },
+        "attack": {
+          "count": 10,
+          "ok": 10
+        },
+        "social": {
+          "count": 10,
+          "ok": 10
+        },
+        "open": {
+          "count": 10,
+          "ok": 10
+        },
+        "impossible": {
+          "count": 10,
+          "ok": 10
+        }
+      },
+      "compound": 5,
+      "ambiguity": 5,
+      "discourse": 5
+    },
+    "layer_b": {
+      "count": 5
+    },
+    "layer_c": {
+      "note": "prosecutor+image checks run inline on every Layer A/B turn"
+    },
+    "agents": {
+      "ImpossiblePower": {
+        "turns": 6,
+        "ended": ""
+      },
+      "CombatStaller": {
+        "turns": 6,
+        "ended": ""
+      },
+      "AmbiguousReply": {
+        "turns": 6,
+        "ended": ""
+      },
+      "FoolishPhysical": {
+        "turns": 6,
+        "ended": ""
+      },
+      "SensibleCautious": {
+        "turns": 6,
+        "ended": ""
+      }
+    }
+  },
+  "quotas_required": {
+    "semantic_per_family": 10,
+    "compound": 5,
+    "stale_nonexistent": 5,
+    "discourse": 5,
+    "ambiguity": 5,
+    "combat_stall": 2,
+    "pacifist": 2,
+    "narrator_truth": 2,
+    "image_state": 2,
+    "playthroughs": 2
+  },
+  "quotas_achieved": {
+    "semantic_per_family": {
+      "perceive": 10,
+      "move": 10,
+      "use": 10,
+      "attack": 10,
+      "social": 10,
+      "open": 10,
+      "impossible": 10
+    },
+    "compound": 5,
+    "ambiguity": 5,
+    "discourse": 5,
+    "stale_nonexistent": 5,
+    "combat_stall": 0,
+    "pacifist": 0,
+    "narrator_truth": 0,
+    "image_state": 0,
+    "playthroughs": 0
+  },
+  "gold": {
+    "ok": true,
+    "mismatches": [],
+    "mismatch_count": 0,
+    "missing_gold": [],
+    "stub_bridged": [],
+    "needs_review": [],
+    "judgement_inferred_count": 0
+  },
+  "report_path": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_online_smoke_report.json",
+  "traces": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_online_smoke_traces.jsonl",
+  "agents": [
+    "CombatStaller",
+    "ImpossiblePower",
+    "FoolishPhysical",
+    "SensibleCautious",
+    "AmbiguousReply"
+  ]
+}

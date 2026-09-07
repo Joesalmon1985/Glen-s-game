@@ -7,13 +7,33 @@ from typing import Any, Optional
 
 CLASSIFICATIONS = (
     'MATCH_AUTHORED_ACTION',
-    'GENERAL_WORLD_ACTION',
+    'SYSTEMIC_ACTION',
+    'AUTHORED_CANDIDATE',
+    'IMPOSSIBLE_ATTEMPT',
+    'UNGROUNDED_ENTITY',
+    'META_INPUT',
+    'META_REQUEST',  # compat alias of META_INPUT
     'PERCEPTION_QUERY',
-    'META_REQUEST',
-    'SILLY_BUT_VALID',
-    'UNINTERPRETABLE',
+    'SOCIAL_ACTION',
+    'COMPOUND_ACTION',
     'NEEDS_CLARIFICATION',
+    'NO_ACTIONABLE_INTENT',
+    'GENERAL_WORLD_ACTION',  # compat
+    'UNINTERPRETABLE',
 )
+
+# META_REQUEST is kept as a classification string for older callers;
+# treat it as equivalent to META_INPUT in validation / routing.
+META_CLASSIFICATIONS = frozenset({'META_INPUT', 'META_REQUEST'})
+
+
+def _default_body_state() -> dict:
+    return {
+        'locomotion': 'normal',
+        'pain': 'none',
+        'bleeding': 'none',
+        'grip': 'firm',
+    }
 
 
 @dataclass
@@ -37,7 +57,7 @@ class Intent:
     confidence: Optional[float] = None
     ambiguities: list = field(default_factory=list)
     needs_clarification: bool = False
-    query_focus: Optional[str] = None  # for PERCEPTION_QUERY / META_REQUEST
+    query_focus: Optional[str] = None  # for PERCEPTION_QUERY / META_INPUT
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -60,6 +80,8 @@ class AdventureSheet:
     knowledge: list = field(default_factory=list)
     flags: dict = field(default_factory=dict)
     alive: bool = True
+    injuries: list = field(default_factory=list)
+    body_state: dict = field(default_factory=_default_body_state)
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -93,6 +115,11 @@ class WorldState:
     ending: str = ''  # '', 'death', 'victory', or pack ending label
     pending_intents: list = field(default_factory=list)
     turn_index: int = 0
+    world_time_seconds: int = 0
+    pending_discourse: Optional[dict] = None
+    # pending_discourse: {shape:'binary'|'exclusive_choice', prompt, options:[{id,label}], antecedent}
+    visible_entities: list = field(default_factory=list)
+    aftermath: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return world_to_dict(self)
@@ -113,12 +140,70 @@ def world_to_dict(world: WorldState) -> dict:
         'ending': world.ending,
         'pending_intents': list(world.pending_intents),
         'turn_index': world.turn_index,
+        'world_time_seconds': int(world.world_time_seconds or 0),
+        'pending_discourse': (
+            dict(world.pending_discourse) if isinstance(world.pending_discourse, dict) else None
+        ),
+        'visible_entities': list(world.visible_entities or []),
+        'aftermath': dict(world.aftermath or {}),
+    }
+
+
+def _inventory_names(inventory: list) -> list[str]:
+    names: list[str] = []
+    for item in inventory or []:
+        if isinstance(item, dict):
+            name = item.get('name') or item.get('id') or item.get('label') or ''
+            if name:
+                names.append(str(name))
+        elif item is not None:
+            names.append(str(item))
+    return names
+
+
+def _qualitative_body(sheet: AdventureSheet) -> dict:
+    body = dict(sheet.body_state or {})
+    for key in ('locomotion', 'pain', 'bleeding', 'grip'):
+        body.setdefault(key, _default_body_state()[key])
+    return {
+        'locomotion': body.get('locomotion', 'normal'),
+        'pain': body.get('pain', 'none'),
+        'bleeding': body.get('bleeding', 'none'),
+        'grip': body.get('grip', 'firm'),
+        'injury_count': len(sheet.injuries or []),
+    }
+
+
+def _discourse_summary(pending: Optional[dict]) -> Optional[dict]:
+    if not isinstance(pending, dict):
+        return None
+    shape = str(pending.get('shape') or '')
+    options = pending.get('options') or []
+    labels = []
+    for opt in options:
+        if isinstance(opt, dict):
+            label = opt.get('label') or opt.get('id') or ''
+            if label:
+                labels.append(str(label))
+        elif opt:
+            labels.append(str(opt))
+    return {
+        'shape': shape,
+        'prompt': str(pending.get('prompt') or ''),
+        'option_labels': labels,
+        'awaiting_reply': True,
     }
 
 
 def world_from_dict(data: dict) -> WorldState:
     sheet_data = data.get('sheet') or {}
     combat_data = data.get('combat') or {}
+    body_raw = sheet_data.get('body_state')
+    if isinstance(body_raw, dict) and body_raw:
+        body_state = dict(_default_body_state())
+        body_state.update(body_raw)
+    else:
+        body_state = _default_body_state()
     sheet = AdventureSheet(
         name=sheet_data.get('name', 'Adventurer'),
         skill=int(sheet_data.get('skill', 0) or 0),
@@ -135,6 +220,8 @@ def world_from_dict(data: dict) -> WorldState:
         knowledge=list(sheet_data.get('knowledge') or []),
         flags=dict(sheet_data.get('flags') or {}),
         alive=bool(sheet_data.get('alive', True)),
+        injuries=list(sheet_data.get('injuries') or []),
+        body_state=body_state,
     )
     combat = CombatState(
         active=bool(combat_data.get('active', False)),
@@ -147,6 +234,9 @@ def world_from_dict(data: dict) -> WorldState:
         flee_to=combat_data.get('flee_to'),
         round=int(combat_data.get('round', 0) or 0),
     )
+    pending = data.get('pending_discourse')
+    if pending is not None and not isinstance(pending, dict):
+        pending = None
     return WorldState(
         passage_id=int(data.get('passage_id', 1) or 1),
         sheet=sheet,
@@ -158,17 +248,49 @@ def world_from_dict(data: dict) -> WorldState:
         ending=str(data.get('ending') or ''),
         pending_intents=list(data.get('pending_intents') or []),
         turn_index=int(data.get('turn_index', 0) or 0),
+        world_time_seconds=int(data.get('world_time_seconds', 0) or 0),
+        pending_discourse=dict(pending) if isinstance(pending, dict) else None,
+        visible_entities=list(data.get('visible_entities') or []),
+        aftermath=dict(data.get('aftermath') or {}),
     )
 
 
-def public_perception(world: WorldState, passage: Any = None) -> dict:
-    """What the interpreter may see — no hidden effects, private flags, or secret branches."""
+def public_perception(
+    world: WorldState,
+    passage: Any = None,
+    stage: str = 'full',
+) -> dict:
+    """What the interpreter may see.
+
+    stage 'neutral' / 'A': no authored menu cues, no sheet combat numbers.
+    stage 'full' (default): debug-oriented; sheet numbers allowed, combat still qualitative.
+    """
+    stage_key = (stage or 'full').strip().lower()
+    neutral = stage_key in ('neutral', 'a', 'stage_a', 'stage-a')
     sheet = world.sheet
+    inventory_names = _inventory_names(sheet.inventory)
+
     perception: dict = {
         'passage_id': world.passage_id,
         'ending': world.ending or None,
         'victory': world.victory,
-        'sheet': {
+        'world_time_seconds': int(world.world_time_seconds or 0),
+        'visible_entities': list(world.visible_entities or []),
+        'body_state': _qualitative_body(sheet),
+        'combat': None,
+        'discourse': _discourse_summary(world.pending_discourse),
+    }
+
+    if neutral:
+        perception['sheet'] = {
+            'name': sheet.name,
+            'inventory': inventory_names,
+            'potion_available': bool(sheet.potion and not sheet.potion_used),
+            'alive': sheet.alive,
+            'body_state': _qualitative_body(sheet),
+        }
+    else:
+        perception['sheet'] = {
             'name': sheet.name,
             'skill': sheet.skill,
             'stamina': sheet.stamina,
@@ -177,22 +299,29 @@ def public_perception(world: WorldState, passage: Any = None) -> dict:
             'gold': sheet.gold,
             'provisions': sheet.provisions,
             'inventory': list(sheet.inventory),
+            'inventory_names': inventory_names,
             'potion': sheet.potion if not sheet.potion_used else None,
             'potion_available': bool(sheet.potion and not sheet.potion_used),
             'knowledge': list(sheet.knowledge),
             'alive': sheet.alive,
-        },
-        'combat': None,
-    }
+            'body_state': _qualitative_body(sheet),
+            'injuries': list(sheet.injuries or []),
+        }
+
     if world.combat.active:
         c = world.combat
+        # Prefer qualitative combat even in full/debug; never expose SKILL/STAMINA here for stage A.
         perception['combat'] = {
             'enemy_name': c.enemy_name,
-            'enemy_skill': c.enemy_skill,
-            'enemy_stamina': c.enemy_stamina,
-            'round': c.round,
+            'active': True,
             'can_flee': c.flee_to is not None,
         }
+        if not neutral:
+            perception['combat']['round'] = c.round
+            perception['combat']['enemy_hurt'] = (
+                int(c.enemy_stamina_initial or 0) > 0
+                and int(c.enemy_stamina or 0) < int(c.enemy_stamina_initial or 0)
+            )
 
     if passage is not None:
         text = passage.get('text') if isinstance(passage, dict) else getattr(passage, 'text', '')
@@ -201,27 +330,41 @@ def public_perception(world: WorldState, passage: Any = None) -> dict:
             passage.get('image_seed') if isinstance(passage, dict)
             else getattr(passage, 'image_seed', '')
         )
-        perception['passage'] = {
+        atmosphere = (
+            passage.get('atmosphere') if isinstance(passage, dict)
+            else getattr(passage, 'atmosphere', None)
+        )
+        if atmosphere is None:
+            atmosphere = image_seed or ''
+        passage_block: dict = {
             'id': (
                 passage.get('id') if isinstance(passage, dict)
                 else getattr(passage, 'id', world.passage_id)
             ),
             'text': text or '',
-            'image_seed': image_seed or '',
-            'choice_labels': [
+            'atmosphere': atmosphere or '',
+            'visible_atmosphere': atmosphere or '',
+        }
+        if not neutral:
+            passage_block['image_seed'] = image_seed or ''
+            passage_block['choice_labels'] = [
                 (c.get('label') if isinstance(c, dict) else getattr(c, 'label', ''))
                 for c in (choices or [])
-            ],
-            # Choice destination numbers are authoring graph — omit from public perception
-            'choice_ids': [
+            ]
+            passage_block['choice_ids'] = [
                 (c.get('id') if isinstance(c, dict) else getattr(c, 'id', ''))
                 for c in (choices or [])
-            ],
-            'has_tests': bool(
+            ]
+            passage_block['has_tests'] = bool(
                 passage.get('tests') if isinstance(passage, dict)
                 else getattr(passage, 'tests', None)
-            ),
-        }
+            )
+        perception['passage'] = passage_block
+
+    if world.aftermath:
+        # Aftermath may inform image/narrator; keep values qualitative-facing.
+        perception['aftermath_keys'] = sorted(str(k) for k in world.aftermath.keys())
+
     return perception
 
 

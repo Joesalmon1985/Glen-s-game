@@ -80,7 +80,7 @@ def build_authored_actions(world: WorldState, passage: PassageLike) -> list[dict
     if sheet.provisions > 0 and sheet.alive:
         actions.append({
             'id': 'item.eat_provision',
-            'description': 'Eat a provision to restore Stamina.',
+            'description': 'Eat a provision to recover strength.',
             'entities': ['provisions'],
             'tools': [],
             'operation': 'eat_provision',

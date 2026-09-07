@@ -15,24 +15,32 @@ def load_gold(pack_dir: Path = PACK_DIR) -> dict:
 
 
 def verify_gold(pack_dir: Path = PACK_DIR) -> dict:
+    """Verify pack passages against gold_graph.json.
+
+    Sparse packs (e.g. ``puca_trial``) only list spine nodes in gold_graph;
+    those entries are checked, not a forced 1..400 range.
+    """
     gold = load_gold(pack_dir)
     passages = load_all_passages(pack_dir)
+    gold_passages = gold.get('passages') or {}
     mismatches = []
     missing_gold = []
     stub_bridged = []
     needs_review = []
 
-    for pid in range(1, 401):
-        g = (gold.get('passages') or {}).get(str(pid))
-        if not g:
-            missing_gold.append(pid)
+    # Gold-listed ids that lack a passage file
+    for key, g in sorted(gold_passages.items(), key=lambda kv: int(kv[0]) if str(kv[0]).isdigit() else 0):
+        try:
+            pid = int(key)
+        except (TypeError, ValueError):
+            mismatches.append({'id': key, 'reason': 'non_integer_gold_id'})
             continue
         p = passages.get(pid)
         if p is None:
+            missing_gold.append(pid)
             mismatches.append({'id': pid, 'reason': 'missing_passage'})
             continue
         data = _as_dict(p)
-        # Also load raw flags
         raw_path = pack_dir / 'passages' / f'{pid:03d}.json'
         raw = json.loads(raw_path.read_text(encoding='utf-8'))
         if raw.get('stub_bridged'):
@@ -40,7 +48,7 @@ def verify_gold(pack_dir: Path = PACK_DIR) -> dict:
         if raw.get('needs_review'):
             needs_review.append(pid)
 
-        gold_tos = sorted({int(e['to']) for e in g.get('edges') or [] if 'to' in e})
+        gold_tos = sorted({int(e['to']) for e in (g.get('edges') or []) if 'to' in e})
         pack_tos = sorted(set(_collect_outgoing(data)))
         if gold_tos != pack_tos:
             mismatches.append({
@@ -65,7 +73,7 @@ def verify_gold(pack_dir: Path = PACK_DIR) -> dict:
         'stub_bridged': stub_bridged,
         'needs_review': needs_review,
         'judgement_inferred_count': sum(
-            1 for g in (gold.get('passages') or {}).values()
+            1 for g in gold_passages.values()
             if g.get('judgement_inferred')
         ),
     }

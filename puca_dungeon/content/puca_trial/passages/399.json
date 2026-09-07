@@ -1,0 +1,17 @@
+{
+  "id": 399,
+  "text": "The tunnel-hound's jaws close on your throat. Strength drains; the stone ceiling swims and goes dark. Your trial ends here.",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [
+    {"op": "death"}
+  ],
+  "ending": "death",
+  "image_seed": "original fallen adventurer in tunnel gloom, gaunt hound silhouette, defeat",
+  "needs_review": false,
+  "hazards": [],
+  "entities": [],
+  "exposure": {"time_sensitive": false},
+  "pressures": []
+}

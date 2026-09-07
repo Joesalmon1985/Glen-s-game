@@ -1,0 +1,49 @@
+{
+  "id": 66,
+  "text": "The tunnel widens into a rough junction. Long claw marks rake the floor toward the western mouth, where a warm animal musk drifts out on still air. The eastern tunnel runs colder; water ticks steadily from its ceiling into the dark. Both ways are open. Neither is marked.",
+  "choices": [
+    {
+      "id": "go_west",
+      "label": "Take the western mouth",
+      "aliases": [
+        "go west",
+        "west",
+        "follow the musk",
+        "take the west path"
+      ],
+      "to": 101
+    },
+    {
+      "id": "go_east",
+      "label": "Take the eastern tunnel",
+      "aliases": [
+        "go east",
+        "east",
+        "cold tunnel",
+        "right path"
+      ],
+      "to": 20
+    },
+    {
+      "id": "inspect_tracks",
+      "label": "Study the claw marks on the floor",
+      "aliases": [
+        "look at tracks",
+        "examine floor",
+        "search",
+        "inspect"
+      ],
+      "to": 80
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "original dungeon junction, claw-scratched floor, warm western mouth, colder dripping eastern tunnel",
+  "needs_review": false,
+  "hazards": [],
+  "entities": ["claw_marks", "western_mouth", "eastern_tunnel"],
+  "exposure": {"time_sensitive": false},
+  "pressures": []
+}

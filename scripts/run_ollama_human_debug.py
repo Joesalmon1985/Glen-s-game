@@ -84,7 +84,7 @@ def main() -> int:
     assert by_input['hit the box']['clarification'] is True
     assert by_input['how many boxes are there?']['classification'] == 'PERCEPTION_QUERY'
     assert by_input['grab the box with my name on it and open it']['matched_action_id'] == 'box.unlock.player'
-    assert by_input['do a cartwheel']['classification'] in ('SILLY_BUT_VALID', 'GENERAL_WORLD_ACTION')
+    assert by_input['do a cartwheel']['classification'] in ('SYSTEMIC_ACTION', 'GENERAL_WORLD_ACTION')
     assert by_input['asdfgh']['classification'] == 'UNINTERPRETABLE'
     assert by_input['asdfgh']['stall_delta'] == 0
     assert 'dungeon accepts the attempt' not in OUT.read_text().lower()

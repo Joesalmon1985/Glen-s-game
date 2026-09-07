@@ -1,4 +1,7 @@
-"""Guidance pressure only (no pursuer / Grimnak stall clock)."""
+"""Guidance pressure only (no pursuer / Grimnak stall clock).
+
+Does not escalate toward choice menus. Narrator must not receive choice-hint cues.
+"""
 from __future__ import annotations
 
 from puca_dungeon.models import WorldState
@@ -6,19 +9,18 @@ from puca_dungeon.resolve import Resolution
 
 
 def apply_guidance(world: WorldState, resolution: Resolution) -> dict:
-    """Clamp guidance_level from resolution.guidance_delta."""
+    """Keep guidance_level at 0 — track wasted turns optionally without narrator hints."""
     before = world.guidance_level
-    delta = int(resolution.guidance_delta or 0)
-
-    if resolution.productive_for_guidance or delta == -999:
+    # Productive actions clear any residual pressure.
+    if resolution.productive_for_guidance or int(resolution.guidance_delta or 0) == -999:
         world.guidance_level = 0
-    elif delta > 0:
-        world.guidance_level = min(4, world.guidance_level + delta)
-    elif delta < 0:
-        world.guidance_level = max(0, world.guidance_level + delta)
+    else:
+        # Never escalate into choice-menu coaching; stay at 0.
+        world.guidance_level = 0
 
     return {
         'guidance_before': before,
         'guidance_after': world.guidance_level,
         'guidance_delta_applied': world.guidance_level - before,
+        'choice_hints_suppressed': True,
     }

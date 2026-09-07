@@ -1,0 +1,46 @@
+{
+  "name": "puca_reality_gate_online_smoke",
+  "rule": "ANY P0, P1, or P2 finding fails the clean gate",
+  "passed": true,
+  "finding_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "offline": false,
+  "online_smoke": true,
+  "seed": 91,
+  "quota_scale": 0.1,
+  "model": "mistral",
+  "agents": [
+    "CombatStaller",
+    "ImpossiblePower",
+    "FoolishPhysical",
+    "SensibleCautious",
+    "AmbiguousReply"
+  ],
+  "quotas": {
+    "semantic_per_family": {
+      "perceive": 10,
+      "move": 10,
+      "use": 10,
+      "attack": 10,
+      "social": 10,
+      "open": 10,
+      "impossible": 10
+    },
+    "compound": 5,
+    "ambiguity": 5,
+    "discourse": 5,
+    "stale_nonexistent": 5,
+    "combat_stall": 0,
+    "pacifist": 0,
+    "narrator_truth": 0,
+    "image_state": 0,
+    "playthroughs": 0
+  },
+  "timestamp": 1788797052.4025571,
+  "report": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_online_smoke_report.json",
+  "traces": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\_redteam_online_smoke_traces.jsonl",
+  "notes": "Online smoke passed clean on first run (zero P0/P1/P2). Layer A/B at 10% quotas with inline Layer C prosecutor/image checks; short runs of five black-box agents. No root-cause code fixes required from this smoke. Companion offline seeds 91 and 4242 also clean — see puca_reality_gate.json."
+}

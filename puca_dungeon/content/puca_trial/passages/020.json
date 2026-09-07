@@ -1,0 +1,28 @@
+{
+  "id": 20,
+  "text": "The eastern mouth soon pinches shut. Cold water beads along the ceiling and drips into a shallow pool that covers the floor. Beyond the pool the rock is unbroken—no door, no crawlspace, only a dead end that smells of wet mineral. The junction waits behind you.",
+  "choices": [
+    {
+      "id": "return_to_junction",
+      "label": "Return to the junction",
+      "aliases": [
+        "go back",
+        "return",
+        "back",
+        "west",
+        "leave"
+      ],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "original damp dead-end tunnel, pooled water, unbroken rock wall, cold drip",
+  "needs_review": false,
+  "hazards": [],
+  "entities": ["pool", "dead_end_wall"],
+  "exposure": {"time_sensitive": false},
+  "pressures": []
+}

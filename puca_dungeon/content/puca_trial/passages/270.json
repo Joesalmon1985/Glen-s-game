@@ -1,0 +1,45 @@
+{
+  "id": 270,
+  "text": "The latch on the named casket lifts with a dry click. Inside, nestled in coarse cloth, sits a small oil phial sealed with wax and a scarred token of dark metal—worn smooth at the edges, as if carried for years. Nothing else. The other five caskets remain sealed and silent.",
+  "choices": [
+    {
+      "id": "continue_after_box",
+      "label": "Leave the alcove and press deeper into the tunnel",
+      "aliases": [
+        "continue",
+        "go north",
+        "leave",
+        "walk on",
+        "press on",
+        "head north",
+        "move on",
+        "proceed"
+      ],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [
+    {
+      "op": "add_item",
+      "item": "oil_phial"
+    },
+    {
+      "op": "add_item",
+      "item": "scarred_token"
+    },
+    {
+      "op": "set_flag",
+      "flag": "opened_named_casket",
+      "value": true
+    }
+  ],
+  "ending": null,
+  "image_seed": "original open named casket on stone table, oil phial and scarred metal token in coarse cloth",
+  "needs_review": false,
+  "hazards": [],
+  "entities": ["named_casket", "oil_phial", "scarred_token"],
+  "exposure": {"time_sensitive": false},
+  "pressures": []
+}

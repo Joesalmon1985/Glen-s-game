@@ -1,0 +1,22 @@
+{
+  "id": 37,
+  "text": "The lair opens under a low ceiling. Torn strips of leather hang from a niche in the wall. Something growls from the dark—a gaunt tunnel-hound, ribs sharp under patchy hide, jaws wet with saliva. It plants its paws and waits for you to move. There is no quiet way past.",
+  "choices": [],
+  "combat": {
+    "enemy_name": "gaunt tunnel-hound",
+    "enemy_skill": 5,
+    "enemy_stamina": 6,
+    "win_to": 400,
+    "lose_to": 399,
+    "flee_to": 66
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "original gaunt tunnel-hound in a low stone lair, torn leather scraps, growling with wet jaws, adventurer facing it",
+  "needs_review": false,
+  "hazards": [],
+  "entities": ["gaunt_tunnel_hound", "torn_leather"],
+  "exposure": {"active_threat": true, "time_sensitive": true},
+  "pressures": []
+}

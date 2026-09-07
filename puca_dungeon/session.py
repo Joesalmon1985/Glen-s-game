@@ -1,4 +1,4 @@
-"""Game session: interpret → ground → resolve → guidance → narrate → image."""
+"""Game session: discourse → interpret → ground → resolve → world_react → narrate → image."""
 from __future__ import annotations
 
 import json
@@ -6,16 +6,17 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
 
+from puca_dungeon import discourse, engine_leak, world_react
 from puca_dungeon.authored_actions import build_authored_actions
 from puca_dungeon.content_loader import get_passage
 from puca_dungeon.ff_rules import make_adventure_sheet
 from puca_dungeon.ground import ground_intent
 from puca_dungeon.image_prompt import image_decision
-from puca_dungeon.interpret import HeuristicInterpreter, InterpreterUnavailable, OllamaInterpreter
-from puca_dungeon.models import public_perception, state_diff, world_from_dict, WorldState
+from puca_dungeon.interpret import HeuristicInterpreter, InterpreterUnavailable, OllamaInterpreter, normalize_intent
+from puca_dungeon.models import Intent, public_perception, state_diff, world_from_dict, WorldState
 from puca_dungeon.narrate import TemplateNarrator, narrate
 from puca_dungeon.pressure import apply_guidance
-from puca_dungeon.resolve import resolve
+from puca_dungeon.resolve import Resolution, resolve
 from puca_dungeon.rng import GameRNG
 
 
@@ -42,6 +43,8 @@ class TurnTrace:
     narrator_output: str = ''
     image: dict = field(default_factory=dict)
     visual_backend_calls: int = 0
+    engine_leaks: list = field(default_factory=list)
+    compound_steps: list = field(default_factory=list)
     error: Optional[str] = None
 
     def to_dict(self) -> dict:
@@ -61,6 +64,8 @@ class TurnTrace:
             'narrator_output': self.narrator_output,
             'image': self.image,
             'visual_backend_calls': self.visual_backend_calls,
+            'engine_leaks': list(self.engine_leaks),
+            'compound_steps': list(self.compound_steps),
             'error': self.error,
         }
 
@@ -106,6 +111,9 @@ class TurnTrace:
             '--- J. NARRATOR OUTPUT ---',
             self.narrator_output,
             '',
+            '--- ENGINE LEAKS ---',
+            json.dumps(self.engine_leaks, indent=2, ensure_ascii=False),
+            '',
             '--- K/L. IMAGE ---',
             f"IMAGE DECISION: {self.image.get('decision')}",
             f"REASON: {self.image.get('reason')}",
@@ -117,6 +125,14 @@ class TurnTrace:
         if self.error:
             lines.append(f'ERROR: {self.error}')
         return '\n'.join(lines)
+
+
+def _intent_from_dict(data: dict, authored_actions: Optional[list] = None) -> Intent:
+    """Build Intent from a confirmed discourse / sequence step dict."""
+    if not isinstance(data, dict):
+        return Intent(action_class='UNINTERPRETABLE', classification='UNINTERPRETABLE', understood=False)
+    # Prefer full normalize when action/classification present
+    return normalize_intent(data, authored_actions=authored_actions or [])
 
 
 class GameSession:
@@ -174,7 +190,7 @@ class GameSession:
 
     @property
     def opening_text(self) -> str:
-        """Player-facing opener — Adventure Sheet meters stay hidden (§14)."""
+        """Player-facing opener from puca_trial passage 1."""
         passage = get_passage(1)
         return (passage.text or '').strip()
 
@@ -203,6 +219,8 @@ class GameSession:
                 'flags': dict(s.flags),
                 'knowledge': list(s.knowledge),
                 'alive': s.alive,
+                'body_state': dict(s.body_state or {}),
+                'injuries': list(s.injuries or []),
             },
             'combat': {
                 'active': c.active,
@@ -218,6 +236,8 @@ class GameSession:
             'last_image_prompt': w.last_image_prompt,
             'rng_seed': self.rng.seed,
             'turn_index': w.turn_index,
+            'world_time_seconds': w.world_time_seconds,
+            'pending_discourse': w.pending_discourse,
         }
 
     def full_state(self) -> dict:
@@ -239,7 +259,7 @@ class GameSession:
             return json.dumps(self.full_state(), indent=2, default=str, ensure_ascii=False)
         if cmd == '/perception':
             return json.dumps(
-                public_perception(self.world, self.current_passage()),
+                public_perception(self.world, self.current_passage(), stage='A'),
                 indent=2,
                 ensure_ascii=False,
             )
@@ -269,49 +289,49 @@ class GameSession:
         if resolution.show_passage_text and resolution.passage_entered is not None:
             new_passage = get_passage(resolution.passage_entered)
             body = (new_passage.text or '').strip()
-            # Prepend/append interstitial narration for combat-on-enter or effect facts
             extras = [
                 f for f in combat_or_dismiss_facts
-                if f and not f.startswith('You gain ')  # effects often re-stated by pack text
+                if f and not (isinstance(f, str) and f.startswith('You gain '))
             ]
             if resolution.combat_round or (extras and self.world.combat.active):
                 narrator_in, interstitial = narrate(
                     self.world, resolution, player_text,
                     intent=intent_dict, narrator=self.narrator,
                 )
-                # Prefer pack text; keep interstitial only if it adds combat detail
                 if resolution.combat_round and interstitial and interstitial not in body:
                     prose = f'{interstitial}\n\n{body}' if body else interstitial
                 elif extras and not resolution.combat_round:
-                    # Enter effects already applied; pack text is primary
                     prose = body
                     narrator_in = {
-                        'player_text': player_text,
+                        'player_text_non_authoritative': player_text,
                         'passage_id': resolution.passage_entered,
                         'facts': list(resolution.facts),
+                        'structured_facts': list(getattr(resolution, 'structured_facts', []) or []),
                         'mode': 'passage_text',
                     }
                 else:
                     prose = body
                     narrator_in = {
-                        'player_text': player_text,
+                        'player_text_non_authoritative': player_text,
                         'passage_id': resolution.passage_entered,
                         'facts': list(resolution.facts),
+                        'structured_facts': list(getattr(resolution, 'structured_facts', []) or []),
                         'mode': 'passage_text',
                     }
                 return narrator_in, prose
 
             narrator_in = {
-                'player_text': player_text,
+                'player_text_non_authoritative': player_text,
                 'passage_id': resolution.passage_entered,
                 'facts': list(resolution.facts),
+                'structured_facts': list(getattr(resolution, 'structured_facts', []) or []),
                 'mode': 'passage_text',
             }
             return narrator_in, body
 
         if resolution.needs_clarification and resolution.clarification_prompt:
             narrator_in = {
-                'player_text': player_text,
+                'player_text_non_authoritative': player_text,
                 'facts': list(resolution.facts),
                 'mode': 'clarification',
             }
@@ -358,12 +378,143 @@ class GameSession:
             img['suppressed'] = True
             img['path'] = None
 
+    def _build_perception_and_authored(self) -> tuple[Any, dict, list]:
+        passage = self.current_passage()
+        perception = public_perception(self.world, passage, stage='A')
+        authored = build_authored_actions(self.world, passage)
+        return passage, perception, authored
+
+    def _resolve_one(
+        self,
+        intent: Intent,
+        passage,
+        authored: list,
+    ) -> tuple[Any, Resolution]:
+        grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
+        resolution = resolve(self.world, intent, grounding, self.rng, passage)
+        world_react.after_player_action(self.world, intent, resolution, self.rng)
+        return grounding, resolution
+
+    def _run_compound(
+        self,
+        intent: Intent,
+        player_text: str,
+        trace: TurnTrace,
+    ) -> Resolution:
+        """Execute sequence steps transactionally; stop on fail/death/combat interrupt."""
+        steps = list(intent.sequence or [])
+        if not steps:
+            passage, _perception, authored = self._build_perception_and_authored()
+            grounding, resolution = self._resolve_one(intent, passage, authored)
+            trace.grounding = grounding.to_dict()
+            return resolution
+
+        snapshot = self.world.clone()
+        rng_snap = self.rng.snapshot()
+        performed: list[Resolution] = []
+        narrations: list[str] = []
+        last_resolution: Optional[Resolution] = None
+        combat_was_active = self.world.combat.active
+
+        try:
+            for i, step in enumerate(steps):
+                step_dict = step if isinstance(step, dict) else {}
+                # Rebuild authored/perception each step
+                passage, _perception, authored = self._build_perception_and_authored()
+                step_intent = _intent_from_dict(step_dict, authored_actions=authored)
+                if not step_intent.utterance:
+                    step_intent.utterance = player_text
+
+                # If combat newly started mid-compound and this isn't an attack/flee, interrupt
+                if self.world.combat.active and not combat_was_active and i > 0:
+                    if (step_intent.action_class or '').upper() not in (
+                        'ATTACK', 'FIGHT', 'STRIKE', 'FLEE',
+                    ):
+                        trace.compound_steps.append({'stopped': 'combat_interrupt', 'index': i})
+                        break
+
+                grounding, resolution = self._resolve_one(step_intent, passage, authored)
+                performed.append(resolution)
+                last_resolution = resolution
+                trace.compound_steps.append({
+                    'index': i,
+                    'intent': step_intent.to_dict(),
+                    'grounding': grounding.to_dict(),
+                    'resolution': resolution.to_dict(),
+                })
+
+                # Compose per-step narration for steps actually performed
+                _nin, prose = self._compose_output(
+                    resolution, player_text, step_intent.to_dict(), passage,
+                )
+                if prose:
+                    narrations.append(prose)
+
+                failed = (
+                    resolution.success is False
+                    and not resolution.attempted
+                    and resolution.rejection_reason in (
+                        'intent_not_understood', 'entity_absent', 'player_dead',
+                    )
+                )
+                if resolution.rejection_reason == 'player_dead' or not self.world.sheet.alive:
+                    break
+                if failed and resolution.none_reason in ('entity_absent', 'intent_not_understood'):
+                    break
+                if self.world.ending in ('death', 'victory'):
+                    break
+                # Hard fail on blocked movement/consume with fidelity
+                if resolution.none_reason == 'intent_fidelity_blocked':
+                    break
+
+                combat_was_active = self.world.combat.active
+        except Exception:
+            # Roll back on unexpected error
+            self.world = snapshot
+            self.rng = GameRNG.restore(rng_snap)
+            raise
+
+        if last_resolution is None:
+            last_resolution = Resolution(
+                intent_understood=True,
+                success=False,
+                facts=['Nothing happens.'],
+                advance_time=False,
+            )
+
+        # Merge facts from performed steps into last resolution for guidance/narrate fallback
+        if len(performed) > 1:
+            merged_facts: list = []
+            merged_structured: list = []
+            merged_events: list = []
+            for r in performed:
+                merged_facts.extend(r.facts or [])
+                merged_structured.extend(getattr(r, 'structured_facts', None) or [])
+                merged_events.extend(getattr(r, 'world_events', None) or [])
+            last_resolution.facts = merged_facts
+            last_resolution.structured_facts = merged_structured
+            last_resolution.world_events = merged_events
+
+        # Stash composed compound narration on resolution for _compose_output override
+        if narrations:
+            last_resolution.facts = list(last_resolution.facts or [])
+            # Prefer joined step prose via a dedicated attribute on trace
+            trace.narrator_output = '\n\n'.join(narrations)
+
+        if not trace.grounding and performed:
+            # Use last step grounding from compound_steps
+            if trace.compound_steps:
+                last_g = trace.compound_steps[-1].get('grounding')
+                if isinstance(last_g, dict):
+                    trace.grounding = last_g
+
+        return last_resolution
+
     def submit(self, text: str) -> TurnTrace:
         text = (text or '').strip()
         trace = TurnTrace(raw_input=text)
 
         if text.startswith('/'):
-            # Debug commands work even outside debug mode for /quit /save /load /help
             allowed = text.split()[0].lower() in DEBUG_COMMANDS
             if self.debug or allowed:
                 trace.debug_command = text.split()[0].lower()
@@ -374,43 +525,149 @@ class GameSession:
                 return trace
 
         before = self.concise_state()
-        passage = self.current_passage()
-        perception = public_perception(self.world, passage)
-        authored = build_authored_actions(self.world, passage)
-        trace.interpreter_input = {
-            'player_text': text,
-            'perception': perception,
-            'authored_actions': authored,
-        }
+        passage, perception, authored = self._build_perception_and_authored()
 
-        try:
-            raw_out, intent = self.interpreter.interpret(text, perception, authored_actions=authored)
-        except InterpreterUnavailable as exc:
-            if self.allow_heuristic_fallback:
-                raw_out, intent = HeuristicInterpreter().interpret(
+        # 1) Discourse short-circuit for pending yes/no / exclusive
+        discourse_intent: Optional[Intent] = None
+        if self.world.pending_discourse:
+            kind, payload = discourse.resolve_affirmative(text, self.world)
+            if kind == 'confirm' and isinstance(payload, dict):
+                discourse_intent = _intent_from_dict(payload, authored_actions=authored)
+                trace.raw_interpreter_output = {
+                    'from_discourse': True,
+                    'confirm': payload,
+                }
+                trace.validated_intent = discourse_intent.to_dict()
+            elif kind == 'reject':
+                res = Resolution(
+                    intent_understood=True,
+                    grounded=True,
+                    feasible=True,
+                    success=False,
+                    attempted=False,
+                    facts=['You let that go.'],
+                    advance_time=False,
+                )
+                trace.resolution = res.to_dict()
+                narrator_in, prose = self._compose_output(res, text, {}, passage)
+                trace.narrator_input = narrator_in
+                trace.narrator_output = prose
+                self.world.turn_index += 1
+                after = self.concise_state()
+                trace.before_state = before
+                trace.after_state = after
+                trace.state_diff = state_diff(before, after)
+                self.last_trace = trace
+                self.traces.append(trace)
+                return trace
+            elif kind == 'ambiguous':
+                prompt = str(payload or 'Please clarify.')
+                res = Resolution(
+                    intent_understood=True,
+                    grounded=False,
+                    needs_clarification=True,
+                    clarification_prompt=prompt,
+                    facts=[prompt],
+                    advance_time=False,
+                )
+                trace.resolution = res.to_dict()
+                narrator_in, prose = self._compose_output(res, text, {}, passage)
+                trace.narrator_input = narrator_in
+                trace.narrator_output = prose
+                self.world.turn_index += 1
+                after = self.concise_state()
+                trace.before_state = before
+                trace.after_state = after
+                trace.state_diff = state_diff(before, after)
+                self.last_trace = trace
+                self.traces.append(trace)
+                return trace
+            # kind == 'not_reply' → fall through to interpret
+
+        if discourse_intent is None:
+            trace.interpreter_input = {
+                'player_text': text,
+                'perception': perception,
+                'authored_actions': authored,
+            }
+            try:
+                raw_out, intent = self.interpreter.interpret(
                     text, perception, authored_actions=authored,
                 )
-                trace.error = f'ollama_unavailable_fallback_heuristic: {exc}'
+            except InterpreterUnavailable as exc:
+                if self.allow_heuristic_fallback:
+                    raw_out, intent = HeuristicInterpreter().interpret(
+                        text, perception, authored_actions=authored,
+                    )
+                    trace.error = f'ollama_unavailable_fallback_heuristic: {exc}'
+                else:
+                    raise
+            trace.raw_interpreter_output = raw_out
+            trace.validated_intent = intent.to_dict()
+        else:
+            intent = discourse_intent
+            trace.interpreter_input = {
+                'player_text': text,
+                'perception': perception,
+                'authored_actions': authored,
+                'from_discourse': True,
+            }
+
+        # Exclusive clarification → set pending discourse when resolve asks for it
+        # (resolve may call discourse.set_pending_exclusive itself)
+
+        # 4–5) Compound vs single
+        classification = (intent.classification or '').upper()
+        if intent.sequence and (
+            classification == 'COMPOUND_ACTION' or len(intent.sequence) > 0
+        ):
+            # Only treat as compound when classification says so OR sequence non-empty with COMPOUND
+            if classification == 'COMPOUND_ACTION' or (
+                isinstance(intent.sequence, list) and len(intent.sequence) > 1
+            ):
+                resolution = self._run_compound(intent, text, trace)
             else:
-                raise
+                grounding, resolution = self._resolve_one(intent, passage, authored)
+                trace.grounding = grounding.to_dict()
+        else:
+            grounding, resolution = self._resolve_one(intent, passage, authored)
+            trace.grounding = grounding.to_dict()
 
-        trace.raw_interpreter_output = raw_out
-        trace.validated_intent = intent.to_dict()
+        # Clarification with exclusive options: ensure discourse pending if needed
+        if (
+            resolution.needs_clarification
+            and resolution.clarification_prompt
+            and not self.world.pending_discourse
+        ):
+            ambs = (intent.ambiguities or [])
+            if ambs and len(ambs) <= 6:
+                discourse.set_pending_exclusive(
+                    self.world,
+                    resolution.clarification_prompt,
+                    [{'id': str(a), 'label': str(a)} for a in ambs],
+                )
 
-        grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
-        trace.grounding = grounding.to_dict()
-
-        resolution = resolve(self.world, intent, grounding, self.rng, passage)
         pressure = apply_guidance(self.world, resolution)
         trace.pressure = pressure
         trace.resolution = resolution.to_dict()
 
-        narrator_in, prose = self._compose_output(
-            resolution, text, trace.validated_intent, passage,
-        )
+        # 6) Narrate — compound may have pre-filled narrator_output
+        if trace.narrator_output and trace.compound_steps:
+            narrator_in = {
+                'player_text_non_authoritative': text,
+                'facts': list(resolution.facts),
+                'structured_facts': list(getattr(resolution, 'structured_facts', []) or []),
+                'mode': 'compound',
+            }
+            prose = trace.narrator_output
+        else:
+            narrator_in, prose = self._compose_output(
+                resolution, text, trace.validated_intent, passage,
+            )
         trace.narrator_input = narrator_in
         trace.narrator_output = prose
 
+        # 7) Image from final visible state
         colour = (not self.debug) and not isinstance(self.narrator, TemplateNarrator)
         img = image_decision(
             self.world,
@@ -431,6 +688,11 @@ class GameSession:
             self._maybe_generate_image(img)
         trace.image = img
         trace.visual_backend_calls = self.visual_backend_calls
+
+        # 8) Engine leak scan on player-facing text (debug traces)
+        if self.debug:
+            leaks = engine_leak.scan_player_facing_text(prose or '')
+            trace.engine_leaks = leaks
 
         self.world.turn_index += 1
         after = self.concise_state()

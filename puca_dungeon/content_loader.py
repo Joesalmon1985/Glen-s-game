@@ -1,4 +1,8 @@
-﻿"""Load Deathtrap FF content pack (manifest, chargen, passages)."""
+﻿"""Load Puca content packs (manifest, chargen, passages).
+
+Default pack is ``content/puca_trial``. The Fighting Fantasy
+``deathtrap_ff`` pack remains on disk for reference only.
+"""
 from __future__ import annotations
 
 import json
@@ -7,7 +11,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 
-PACK_DIR = Path(__file__).resolve().parent / "content" / "deathtrap_ff"
+PACK_DIR = Path(__file__).resolve().parent / "content" / "puca_trial"
 PASSAGES_DIR = PACK_DIR / "passages"
 
 
@@ -24,6 +28,10 @@ class Passage:
     needs_review: bool = False
     ocr_source: bool = False
     raw_text: str = ""
+    hazards: list = field(default_factory=list)
+    entities: list = field(default_factory=list)
+    exposure: dict = field(default_factory=dict)
+    pressures: list = field(default_factory=list)
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -32,6 +40,14 @@ class Passage:
             d.pop("raw_text", None)
         if not d.get("ocr_source"):
             d.pop("ocr_source", None)
+        if not d.get("hazards"):
+            d.pop("hazards", None)
+        if not d.get("entities"):
+            d.pop("entities", None)
+        if not d.get("exposure"):
+            d.pop("exposure", None)
+        if not d.get("pressures"):
+            d.pop("pressures", None)
         return d
 
 
@@ -56,6 +72,11 @@ def passage_path(passage_id: int, pack_dir: Path = PACK_DIR) -> Path:
 
 
 def _passage_from_data(data: dict) -> Passage:
+    exposure = data.get("exposure")
+    if exposure is None:
+        exposure = {}
+    elif not isinstance(exposure, dict):
+        exposure = {}
     return Passage(
         id=int(data["id"]),
         text=str(data.get("text") or ""),
@@ -68,6 +89,10 @@ def _passage_from_data(data: dict) -> Passage:
         needs_review=bool(data.get("needs_review", False)),
         ocr_source=bool(data.get("ocr_source", False)),
         raw_text=str(data.get("raw_text") or ""),
+        hazards=list(data.get("hazards") or []),
+        entities=list(data.get("entities") or []),
+        exposure=dict(exposure),
+        pressures=list(data.get("pressures") or []),
     )
 
 

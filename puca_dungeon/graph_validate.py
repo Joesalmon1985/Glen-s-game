@@ -1,4 +1,4 @@
-﻿"""Validate Deathtrap FF passage graph integrity."""
+﻿"""Validate content-pack passage graph integrity."""
 from __future__ import annotations
 
 import argparse
@@ -110,7 +110,11 @@ def validate_pack(pack_dir: Path = PACK_DIR) -> dict:
     passages = load_all_passages(pack_dir)
     prange = manifest.get('passage_range') or [1, 400]
     lo, hi = int(prange[0]), int(prange[1])
-    start_id = int(manifest.get('start_id', 1) or 1)
+    start_id = int(
+        manifest.get('start_id')
+        or manifest.get('start_passage')
+        or 1
+    )
     expected_ids = set(range(lo, hi + 1))
     present_ids = set(passages.keys())
 

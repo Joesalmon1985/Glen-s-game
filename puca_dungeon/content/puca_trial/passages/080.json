@@ -1,0 +1,38 @@
+{
+  "id": 80,
+  "text": "You kneel and trace the scratches. They are fresh enough that grit still sits loose in the grooves, and they lead firmly into the western mouth. Whatever made them was heavy and moving with purpose—likely the source of the warm musk. You have learned what the floor can tell you.",
+  "choices": [
+    {
+      "id": "return_to_junction",
+      "label": "Rise and face the junction again",
+      "aliases": [
+        "go back",
+        "return",
+        "stand up",
+        "continue",
+        "back"
+      ],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [
+    {
+      "op": "add_knowledge",
+      "fact": "claw_tracks_lead_west"
+    },
+    {
+      "op": "set_flag",
+      "flag": "inspected_junction_tracks",
+      "value": true
+    }
+  ],
+  "ending": null,
+  "image_seed": "original close study of claw marks on stone floor at a dungeon junction",
+  "needs_review": false,
+  "hazards": [],
+  "entities": ["claw_marks"],
+  "exposure": {"time_sensitive": false},
+  "pressures": []
+}

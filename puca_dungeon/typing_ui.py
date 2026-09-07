@@ -51,19 +51,21 @@ def run_cli(session: GameSession) -> int:
         print(trace.narrator_output)
         print()
         if session.debug:
-            # Debug dump carries sheet meters; keep the live prompt line diegetic
+            # Debug-only: passage id and combat meters (engine terms).
             print(f"— Passage {session.world.passage_id} —")
-        else:
-            print(f"— Passage {session.world.passage_id} —")
-        if session.world.combat.active:
-            c = session.world.combat
-            print(
-                f"— Fighting {c.enemy_name}: "
-                f"SKILL {c.enemy_skill}  STAMINA {c.enemy_stamina}/{c.enemy_stamina_initial} —"
-            )
-        print()
-        if session.debug:
+            if session.world.combat.active:
+                c = session.world.combat
+                print(
+                    f"— Fighting {c.enemy_name}: "
+                    f"SKILL {c.enemy_skill}  STAMINA {c.enemy_stamina}/{c.enemy_stamina_initial} —"
+                )
             print(trace.format_debug())
+            print()
+        elif session.world.combat.active:
+            # Player-facing: enemy presence only — no SKILL/STAMINA banners.
+            print(f"— Fighting {session.world.combat.enemy_name} —")
+            print()
+        else:
             print()
         if session.world.victory or session.world.ending == 'victory':
             print('[Victory! You have conquered Deathtrap Dungeon.]')

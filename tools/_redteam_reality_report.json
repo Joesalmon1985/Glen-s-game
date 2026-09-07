@@ -1,0 +1,201 @@
+{
+  "timestamp": 1788797061.3701544,
+  "offline": true,
+  "online_smoke": false,
+  "quota_scale": 1.0,
+  "gate_name": "puca_reality_gate",
+  "model": "HeuristicInterpreter+TemplateNarrator",
+  "seed": 91,
+  "finding_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "clean_gate_passed": true,
+  "clean_gate_rationale": "Clean gate passed: zero P0/P1/P2 findings.",
+  "findings": [],
+  "sections": {
+    "regressions": {
+      "count": 5
+    },
+    "layer_a": {
+      "families": {
+        "perceive": {
+          "count": 100,
+          "ok": 100
+        },
+        "move": {
+          "count": 100,
+          "ok": 100
+        },
+        "use": {
+          "count": 100,
+          "ok": 100
+        },
+        "attack": {
+          "count": 100,
+          "ok": 100
+        },
+        "social": {
+          "count": 100,
+          "ok": 100
+        },
+        "open": {
+          "count": 100,
+          "ok": 100
+        },
+        "impossible": {
+          "count": 100,
+          "ok": 100
+        }
+      },
+      "compound": 50,
+      "ambiguity": 50,
+      "discourse": 50
+    },
+    "layer_b": {
+      "count": 50
+    },
+    "combat": {
+      "combat_stall": 25,
+      "pacifist": 25
+    },
+    "layer_c": {
+      "narrator_truth": 25,
+      "image_state": 25
+    },
+    "playthroughs": {
+      "count": 20
+    },
+    "agents": {
+      "SemanticParaphraser": {
+        "turns": 12,
+        "ended": ""
+      },
+      "CompoundAbuser": {
+        "turns": 12,
+        "ended": ""
+      },
+      "PronounDiscourse": {
+        "turns": 12,
+        "ended": ""
+      },
+      "InventoryHallucinator": {
+        "turns": 12,
+        "ended": ""
+      },
+      "RemoteObject": {
+        "turns": 12,
+        "ended": ""
+      },
+      "ImpossiblePower": {
+        "turns": 12,
+        "ended": ""
+      },
+      "Backtracking": {
+        "turns": 12,
+        "ended": ""
+      },
+      "Contrarian": {
+        "turns": 12,
+        "ended": ""
+      },
+      "CombatStaller": {
+        "turns": 12,
+        "ended": ""
+      },
+      "CombatPacifist": {
+        "turns": 12,
+        "ended": ""
+      },
+      "Violent": {
+        "turns": 12,
+        "ended": ""
+      },
+      "AmbiguousReply": {
+        "turns": 12,
+        "ended": ""
+      },
+      "OutcomeDictating": {
+        "turns": 12,
+        "ended": ""
+      },
+      "NarratorHallucinationHunter": {
+        "turns": 12,
+        "ended": ""
+      },
+      "ImageAffordanceHunter": {
+        "turns": 12,
+        "ended": ""
+      },
+      "SaveLoadSaboteur": {
+        "turns": 12,
+        "ended": ""
+      },
+      "NaiveFirstTime": {
+        "turns": 12,
+        "ended": ""
+      },
+      "FoolishPhysical": {
+        "turns": 12,
+        "ended": ""
+      },
+      "MetaNonsense": {
+        "turns": 12,
+        "ended": ""
+      },
+      "RecklessExplorer": {
+        "turns": 12,
+        "ended": ""
+      },
+      "SensibleCautious": {
+        "turns": 12,
+        "ended": ""
+      }
+    }
+  },
+  "quotas_required": {
+    "semantic_per_family": 100,
+    "compound": 50,
+    "stale_nonexistent": 50,
+    "discourse": 50,
+    "ambiguity": 50,
+    "combat_stall": 25,
+    "pacifist": 25,
+    "narrator_truth": 25,
+    "image_state": 25,
+    "playthroughs": 20
+  },
+  "quotas_achieved": {
+    "semantic_per_family": {
+      "perceive": 100,
+      "move": 100,
+      "use": 100,
+      "attack": 100,
+      "social": 100,
+      "open": 100,
+      "impossible": 100
+    },
+    "compound": 50,
+    "ambiguity": 50,
+    "discourse": 50,
+    "stale_nonexistent": 50,
+    "combat_stall": 25,
+    "pacifist": 25,
+    "narrator_truth": 25,
+    "image_state": 25,
+    "playthroughs": 20
+  },
+  "gold": {
+    "ok": true,
+    "mismatches": [],
+    "mismatch_count": 0,
+    "missing_gold": [],
+    "stub_bridged": [],
+    "needs_review": [],
+    "judgement_inferred_count": 0
+  },
+  "report_path": "tools\\_redteam_reality_report.json",
+  "traces": "tools\\_redteam_reality_traces.jsonl",
+  "agents": null
+}

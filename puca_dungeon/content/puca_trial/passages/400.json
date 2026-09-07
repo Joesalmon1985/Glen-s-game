@@ -1,0 +1,15 @@
+{
+  "id": 400,
+  "text": "The tunnel-hound collapses. Silence returns to the low chamber. Beyond a narrow cleft in the far wall, cooler air and a thin seam of daylight wait. You push through and step out of the trial—alive, and finished with this stretch of stone.",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "victory",
+  "image_seed": "original exit from stone trial into daylight through a narrow cleft, defeated lair behind",
+  "needs_review": false,
+  "hazards": [],
+  "entities": [],
+  "exposure": {"time_sensitive": false},
+  "pressures": []
+}

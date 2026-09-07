@@ -1,0 +1,38 @@
+{
+  "name": "puca_reality_gate",
+  "rule": "ANY P0, P1, or P2 finding fails the clean gate",
+  "passed": true,
+  "finding_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "offline": true,
+  "online_smoke": false,
+  "seed": 91,
+  "quota_scale": 1.0,
+  "quotas": {
+    "semantic_per_family": {
+      "perceive": 100,
+      "move": 100,
+      "use": 100,
+      "attack": 100,
+      "social": 100,
+      "open": 100,
+      "impossible": 100
+    },
+    "compound": 50,
+    "ambiguity": 50,
+    "discourse": 50,
+    "stale_nonexistent": 50,
+    "combat_stall": 25,
+    "pacifist": 25,
+    "narrator_truth": 25,
+    "image_state": 25,
+    "playthroughs": 20
+  },
+  "timestamp": 1788797061.3701544,
+  "report": "tools\\_redteam_reality_report.json",
+  "traces": "tools\\_redteam_reality_traces.jsonl",
+  "notes": "Offline clean gate passed for seed 91 (this run, full quotas) and seed 4242 (prior full offline run). Online smoke (seed 91, mistral, --online-smoke / 10% Layer A/B + 5 agents) also passed with zero P0/P1/P2; see docs/verification/puca_reality_gate_online_smoke.json."
+}

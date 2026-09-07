@@ -1,0 +1,7 @@
+{
+  "id": "puca_trial",
+  "title": "Puca Trial Dungeon",
+  "start_passage": 1,
+  "passage_range": [1, 400],
+  "notes": "Original Puca situations using deathtrap-style hazard grammar"
+}

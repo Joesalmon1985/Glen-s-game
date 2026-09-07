@@ -1,56 +1,44 @@
-# Deathtrap Dungeon — Fighting Fantasy gamebook
+# Deathtrap / Puca Trial POC
 
-Playable source is the **Fighting Fantasy** numbered gamebook (passages 1–400), not the d20 PDF conversion. The d20 PDF may exist in the repo for reference only; it is **not** loaded by the engine.
+Default playable pack is **`puca_dungeon/content/puca_trial/`** (original spine prose). The Fighting Fantasy `deathtrap_ff` dump remains on disk for OCR/reference only and is **not** the default `PACK_DIR`. See `docs/PUCA_TRIAL.md`.
 
 ## Architecture
 
-Content pack: `puca_dungeon/content/deathtrap_ff/`
+- `manifest.json` / `chargen.json` / `passages/NNN.json` / `gold_graph.json` — pack layout
+- Runtime: free text → **two-stage interpret** (Stage A neutral intent, Stage B authored match) → ground → resolve → **world autonomy** (`world_react`: time, enemy opportunity, hazards) → narrate → optional image
+- Python owns dice, sheet, passage turns, and whether attempts succeed; the narrator must not invent outcomes
 
-- `manifest.json` — start id, passage range
-- `chargen.json` — Skill / Stamina / Luck rolls, gold, provisions, potions
-- `passages/NNN.json` — one file per paragraph (text, choices, combat, tests, enter effects, ending)
-- `gold_graph.json` — machine-checkable expected edges (OCR-recovered or `judgement_inferred`)
+### Interpretation (interactive play)
 
-Runtime is a **passage graph**: player free text → interpreter maps to an authored choice, combat action, item use, perception query, or dismiss → Python owns dice, sheet changes, and `turn to` navigation.
+Ollama (or offline `HeuristicInterpreter`) produces intent JSON. Hard validation remaps forced authored matches, ungrounded vehicles, impossible powers, social-vs-combat, and key-vs-potion confusions. Compound actions keep an ordered `sequence[]`.
 
-### Three-step LLM interpretation (interactive play)
+Then **Python resolve** + **world_react** own reality. Pack passage text is authoritative on enter; combat/dismiss/social use the narrator from structured facts. Image prompts optional (`--images`; suppressed in `--debug`).
 
-The Ollama interpreter follows an ordered procedure (one JSON call):
-
-1. **Authored** — match free text to a current passage choice / combat / potion / provision action → `MATCH_AUTHORED_ACTION`.
-2. **World** — else map a clear attempt (perception, use item, attack) → `GENERAL_WORLD_ACTION` / `PERCEPTION_QUERY`; Python may no-op.
-3. **Dismiss** — else `SILLY_BUT_VALID` / `META_REQUEST` / `UNINTERPRETABLE` / clarification; stay on the same passage.
-
-Then **Python resolve** owns dice, sheet changes, and `turn to` navigation. **Narrate:** pack passage text is authoritative on enter; combat/dismiss use the narrator. Image prompts optional (`--images`; suppressed in `--debug`).
-
-Offline / CI uses `--heuristic` (deterministic `HeuristicInterpreter` + template narrator). Red-team waves require Ollama and **must not** use the heuristic path.
+Offline / CI: `--heuristic` + template narrator. Red-team waves require Ollama (no heuristic).
 
 ### Adventure Sheet
 
-Classic Fighting Fantasy scores from chargen (Skill / Stamina / Luck, gold, provisions, potion). Player-facing UI and CLI openers **hide** these meters; they influence facts fed to narration when relevant. Debug `/sheet` remains available.
+FF-style Skill / Stamina / Luck from chargen. Player-facing UI hides meters; debug `/sheet` remains. Engine-leak scanning rejects SKILL/STAMINA/LUCK jargon in player-facing prose.
 
-## Puca compliance (Deathtrap FF)
+## Puca compliance
 
-| Principle | How Deathtrap implements it |
-|-----------|-----------------------------|
-| Free text in; LLM interprets | `OllamaInterpreter` three-step JSON intent |
-| Python owns reality | `resolve.py` + `ff_rules.py` own dice, sheet, `turn to` |
-| Narration from facts | Pack text on enter; narrator from resolution facts otherwise |
-| Images from visible state | `image_prompt.py` from final world + passage seed |
-| Optional examples, not menus | GUI example chips fill the entry only |
-| Understood but prevented | Dismiss / failure facts — never a fixed INVALID COMMAND |
+| Principle | Implementation |
+|-----------|----------------|
+| Free text in; LLM interprets | Two-stage interpret + hard validation |
+| Python owns reality | `resolve.py` + `ff_rules.py` + `world_react.py` |
+| Narration from facts | Pack text on enter; narrator from structured facts otherwise |
+| Images from visible state | `image_prompt.py` |
+| Understood but prevented | Failure / absence facts — never INVALID COMMAND |
 | Hidden embodied state | No on-screen Skill/Stamina/Luck |
-| World autonomy / systemic physics / NPC schedules | **Not** modelled — FF authored graph only |
+| World autonomy | Modelled: time advance, enemy opportunity attacks, hazards |
 
-## Opening path
+## Opening path (puca_trial spine)
 
-Hand-authored early nodes remain protected:
-
-- **1** — six boxes; open named box → **270** or continue north → **66**
+- **1** — six caskets; open named → **270** or continue → **66**
 - **66** — junction (west / east / inspect tracks)
-- West combat: **101** → **37** (Giant Rat) → win **400** / lose **399** / flee **66**
+- West: **101** → **37** (tunnel-hound) → win **400** / lose **399** / flee **66**
 
-Full pack fidelity: see `docs/DEATHTRAP_FF_FIDELITY.md` and `gold_graph.json`. Unclear OCR gaps use editorial judgement (`judgement_inferred`).
+QA helpers: `narrator_prosecutor`, `source_contamination`, `prose_lint`; regressions in `tests/test_adversarial_reality_regressions.py`.
 
 ## GUI turn feel
 
@@ -84,6 +72,7 @@ Play Deathtrap Dungeon GUI.bat --text-only
 ## Tests
 
 ```bash
-python -m unittest tests.test_deathtrap_ff tests.test_deathtrap_gold -v
+python -m unittest tests.test_adversarial_reality_regressions tests.test_engine_leak tests.test_deathtrap_ff tests.test_deathtrap_gold -v
 python -m puca_dungeon.graph_validate
+python -m puca_dungeon.source_contamination
 ```

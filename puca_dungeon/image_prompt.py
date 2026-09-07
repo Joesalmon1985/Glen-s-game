@@ -13,8 +13,9 @@ STYLE = 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no 
 
 PassageLike = Union[dict, Any]
 
-IMAGE_PROMPT_SYSTEM = """You write a short image-generation prompt for a Fighting Fantasy dungeon scene.
-Use ONLY the visible facts and image_seed provided. Do not invent enemies, loot, or locations.
+IMAGE_PROMPT_SYSTEM = """You write a short image-generation prompt for a dungeon scene.
+Use ONLY the visible facts and image_seed provided.
+Do NOT invent tanks, helicopters, forests, enemies, loot, or locations not in image_seed / state.
 Include the style prefix if missing. No lettering, no gore. One line only.
 Return ONLY the prompt text."""
 
@@ -37,15 +38,38 @@ def build_image_prompt(world: WorldState, passage: Optional[PassageLike] = None)
     if seed:
         parts.append(str(seed))
     else:
-        parts.append(f'dark dungeon passage {world.passage_id}')
+        parts.append(f'dark stone passage {world.passage_id}')
 
-    if world.combat.active:
-        parts.append(f'fighting {world.combat.enemy_name}')
+    if world.combat.active and world.combat.enemy_name:
+        parts.append(f'facing {world.combat.enemy_name}')
+
+    body = dict(sheet.body_state or {})
+    injuries = list(sheet.injuries or [])
     if not sheet.alive or world.ending == 'death':
         parts.append('fallen adventurer')
     elif world.victory or world.ending == 'victory':
-        parts.append('triumphant adventurer emerging from dungeon')
+        parts.append('triumphant adventurer emerging')
+    else:
+        pain = str(body.get('pain') or 'none')
+        bleeding = str(body.get('bleeding') or 'none')
+        if injuries or pain not in ('', 'none') or bleeding not in ('', 'none'):
+            parts.append('wounded adventurer')
+            if bleeding not in ('', 'none'):
+                parts.append(f'{bleeding} bleeding')
+        else:
+            parts.append('wary adventurer')
 
+    # Drawn sword only if equipment / flag says so
+    flags = sheet.flags or {}
+    drawn = bool(flags.get('sword_drawn') or flags.get('weapon_drawn'))
+    inv_blob = ' '.join(
+        str(i.get('name') if isinstance(i, dict) else i).lower()
+        for i in (sheet.inventory or [])
+    )
+    if drawn and 'sword' in inv_blob:
+        parts.append('sword drawn')
+
+    # Never add tank/helicopter/forest unless already in seed/state
     detail = ', '.join(p for p in parts if p)
     return f'{STYLE}, {detail}'
 
@@ -63,6 +87,8 @@ def llm_colour_image_prompt(
         'combat': world.combat.enemy_name if world.combat.active else None,
         'alive': world.sheet.alive,
         'victory': world.victory,
+        'body_state': dict(world.sheet.body_state or {}),
+        'reminder': 'Do not invent tank, helicopter, or forest.',
     }
     body = {
         'model': model,
@@ -116,7 +142,7 @@ def image_decision(
         'decision': decision,
         'reason': reason,
         'full_prompt': prompt,
-        'negative_prompt': 'photorealistic, blurry, text, watermark, explicit, gore',
+        'negative_prompt': 'photorealistic, blurry, text, watermark, explicit, gore, tank, helicopter',
         'suppressed': True,
         'note': 'IMAGE GENERATION SUPPRESSED',
     }

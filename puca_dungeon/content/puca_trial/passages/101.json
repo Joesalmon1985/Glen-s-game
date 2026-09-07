@@ -1,0 +1,40 @@
+{
+  "id": 101,
+  "text": "The western passage slopes down a short way. The musk thickens. Ahead, the stone opens into a low chamber—bones and scraps litter the threshold. A low growl answers your approach. You can press in and meet whatever waits, or fall back to the junction.",
+  "choices": [
+    {
+      "id": "fight_on",
+      "label": "Advance into the lair",
+      "aliases": [
+        "continue",
+        "go on",
+        "press on",
+        "fight",
+        "enter",
+        "onward"
+      ],
+      "to": 37
+    },
+    {
+      "id": "return_east",
+      "label": "Return east to the junction",
+      "aliases": [
+        "go back",
+        "return",
+        "east",
+        "back to junction"
+      ],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "original sloping tunnel toward a low lair threshold, bone scraps, thick animal musk",
+  "needs_review": false,
+  "hazards": [],
+  "entities": ["lair_threshold", "bone_scraps"],
+  "exposure": {"time_sensitive": false},
+  "pressures": []
+}
