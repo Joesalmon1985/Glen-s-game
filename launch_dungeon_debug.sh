@@ -8,4 +8,5 @@ if [[ -x .venv/bin/python ]]; then
 else
   PY=python3
 fi
+"$PY" scripts/ensure_story.py
 exec "$PY" -m puca_dungeon --debug --seed 91 "$@"

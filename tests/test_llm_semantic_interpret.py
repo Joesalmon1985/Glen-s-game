@@ -9,8 +9,57 @@ import os
 import unittest
 from typing import Optional
 
-from puca_dungeon.interpret import HeuristicInterpreter, normalize_intent, ollama_reachable
+from puca_dungeon.interpret import HeuristicInterpreter, normalize_intent, ollama_model_ready, ollama_reachable
 from puca_dungeon.session import GameSession
+
+
+class _TagsResponse:
+    def __init__(self, payload, status=200):
+        self.status = status
+        self._payload = payload
+
+    def read(self):
+        import json as _json
+        return _json.dumps(self._payload).encode('utf-8')
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        return False
+
+
+class OllamaModelReadyTests(unittest.TestCase):
+    def test_ready_when_mistral_latest_listed(self):
+        from unittest import mock
+        from puca_dungeon import interpret as interpret_mod
+
+        def fake_urlopen(_request, timeout=2.0):
+            return _TagsResponse({'models': [{'name': 'mistral:latest'}]})
+
+        with mock.patch.object(interpret_mod.urllib.request, 'urlopen', fake_urlopen):
+            self.assertTrue(ollama_model_ready('mistral'))
+
+    def test_not_ready_when_tags_empty(self):
+        from unittest import mock
+        from puca_dungeon import interpret as interpret_mod
+
+        def fake_urlopen(_request, timeout=2.0):
+            return _TagsResponse({'models': []})
+
+        with mock.patch.object(interpret_mod.urllib.request, 'urlopen', fake_urlopen):
+            self.assertFalse(ollama_model_ready('mistral'))
+            self.assertTrue(ollama_reachable())
+
+    def test_session_rejects_empty_models_without_fallback(self):
+        from unittest import mock
+        from puca_dungeon.interpret import InterpreterUnavailable, OllamaInterpreter
+
+        with mock.patch.object(OllamaInterpreter, 'ping', return_value=False):
+            with self.assertRaises(InterpreterUnavailable) as ctx:
+                GameSession(interpreter=OllamaInterpreter(), allow_heuristic_fallback=False)
+            self.assertIn('mistral', str(ctx.exception).lower())
+            self.assertIn('pull', str(ctx.exception).lower())
 
 
 class FixtureInterpreter:
@@ -522,8 +571,8 @@ class SemanticPipelineTests(unittest.TestCase):
 
 
 @unittest.skipUnless(
-    os.environ.get('PUCA_LIVE_OLLAMA') == '1' and ollama_reachable(),
-    'Set PUCA_LIVE_OLLAMA=1 with Ollama running for live smoke',
+    os.environ.get('PUCA_LIVE_OLLAMA') == '1' and ollama_model_ready(),
+    'Set PUCA_LIVE_OLLAMA=1 with Ollama running and mistral installed for live smoke',
 )
 class LiveOllamaSmokeTests(unittest.TestCase):
     def test_ollama_interprets_key_use(self):

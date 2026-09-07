@@ -1,9 +1,16 @@
 @echo off
-REM Deathtrap Dungeon POC — debug play (no image generation)
+setlocal
 cd /d "%~dp0"
-if exist .venv\Scripts\python.exe (
-  .venv\Scripts\python.exe -m puca_dungeon --debug --seed 91 %*
-) else (
-  python -m puca_dungeon --debug --seed 91 %*
+REM Same Spirit adventure as Play Puca.bat, with the turn debug panel.
+if not exist ".venv\Scripts\python.exe" (
+  echo Run install.bat first. The original EXE is unchanged.
+  pause
+  exit /b 1
 )
-pause
+.venv\Scripts\python.exe scripts\ensure_story.py
+if errorlevel 1 (
+  pause
+  exit /b 1
+)
+call launch.bat --debug %*
+if errorlevel 1 pause

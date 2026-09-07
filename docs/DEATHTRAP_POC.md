@@ -36,8 +36,12 @@ Derived from the supplied *Deathtrap Dungeon* opening:
 ./launch_dungeon_debug.sh
 # or
 python -m puca_dungeon --debug --seed 91
+# Windows:
+#   Play Deathtrap Dungeon.bat
 # offline / tests:
 python -m puca_dungeon --heuristic
 ```
+
+`Play Puca Dungeon Debug.bat` launches the Spirit adventure with `--debug`, not this POC.
 
 Requires local Ollama with `mistral` (or `--model`). Fails clearly if Ollama is down unless `--heuristic` / `--allow-heuristic-fallback`.

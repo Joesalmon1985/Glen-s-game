@@ -138,10 +138,11 @@ class GameSession:
                     self.interpreter = HeuristicInterpreter()
                 else:
                     raise InterpreterUnavailable(
-                        'Ollama is required for interactive dungeon play but is not reachable at '
-                        'http://127.0.0.1:11434. Start Ollama (e.g. `ollama serve` and '
-                        f'`ollama pull {ollama_model}`), or pass interpreter=HeuristicInterpreter() '
-                        'for tests, or --heuristic / --allow-heuristic-fallback for offline use.'
+                        'Ollama is required for interactive dungeon play but is not ready at '
+                        'http://127.0.0.1:11434 (service down or model '
+                        f'{ollama_model!r} missing). Start Ollama, run `ollama pull {ollama_model}`, '
+                        'or pass interpreter=HeuristicInterpreter() for tests, or '
+                        '--heuristic / --allow-heuristic-fallback for offline use.'
                     )
         self.narrator = narrator or TemplateNarrator()
         self.visual_backend_calls = 0

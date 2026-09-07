@@ -1,21 +1,23 @@
 # Puca: repaired local adventure
 
+## Play on this machine (Spirit adventure)
+
+Double-click **Puca - Play** on your desktop, or **START PUCA** in this folder. Both use **Play Puca.bat**, which checks the local narrator, starts the project's Ollama runtime if needed, and launches the verified build. No account or paid API is needed.
+
+For the same Spirit adventure with the turn debug panel, use **Play Puca Dungeon Debug.bat** (runs `launch.bat --debug`).
+
 ## Deathtrap Dungeon POC (typing-first)
 
-On branch `wip/typing-first-dungeon`, play Encounter 1 in debug mode (no image generation):
+Separate console POC for Encounter 1 (boxes/traps; image generation suppressed):
 
 ```bash
 ./launch_dungeon_debug.sh
 # or: python -m puca_dungeon --debug --seed 91
 ```
 
-Windows: **Play Puca Dungeon Debug.bat**
+Windows: **Play Deathtrap Dungeon.bat**
 
 See [docs/DEATHTRAP_POC.md](docs/DEATHTRAP_POC.md) for source vs POC additions. Automated tests: `python -m unittest tests.test_dungeon_encounter1`. Traces: `tests/traces/`.
-
-## Play on this machine (legacy Spirit adventure)
-
-Double-click **Puca - Play** on your desktop, or **START PUCA** in this folder. Both use **Play Puca.bat**, which checks the local narrator, starts the project's Ollama runtime if needed, and launches the verified build. No account or paid API is needed.
 
 The game opens at **2560 x 1440** with larger story text and up to **768 x 768** displayed pixel artwork. You can resize the window; artwork fits the available space. AI illustrations still generate at **512 x 512**, so the larger window does not request more expensive AI images. Close an older open version and use the shortcut again to pick up the update.
 

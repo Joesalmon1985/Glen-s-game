@@ -76,12 +76,43 @@ class InterpreterUnavailable(RuntimeError):
 
 
 def ollama_reachable(url: str = 'http://127.0.0.1:11434/api/tags', timeout: float = 2.0) -> bool:
+    """True when the tags endpoint responds with HTTP success (model list may still be empty)."""
     try:
         request = urllib.request.Request(url, method='GET')
         with urllib.request.urlopen(request, timeout=timeout) as response:
             return 200 <= response.status < 300
     except Exception:
         return False
+
+
+def ollama_list_models(url: str = 'http://127.0.0.1:11434/api/tags', timeout: float = 2.0) -> Optional[list[str]]:
+    """Return installed model names, or None if the service is unreachable / invalid."""
+    try:
+        request = urllib.request.Request(url, method='GET')
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            if not (200 <= response.status < 300):
+                return None
+            payload = json.loads(response.read().decode('utf-8'))
+        raw_models = payload.get('models', []) if isinstance(payload, dict) else []
+        return [
+            str(item.get('name'))
+            for item in raw_models
+            if isinstance(item, dict) and item.get('name')
+        ]
+    except Exception:
+        return None
+
+
+def ollama_model_ready(
+    model: str = 'mistral',
+    url: str = 'http://127.0.0.1:11434/api/tags',
+    timeout: float = 2.0,
+) -> bool:
+    """True when Ollama is reachable and the requested model tag is installed."""
+    models = ollama_list_models(url=url, timeout=timeout)
+    if models is None:
+        return False
+    return any(name == model or name.startswith(model + ':') for name in models)
 
 
 # Methods that must never be forced into these authored ops
@@ -286,7 +317,7 @@ class OllamaInterpreter:
 
     def ping(self) -> bool:
         base = self.url.rsplit('/api/', 1)[0]
-        return ollama_reachable(f'{base}/api/tags')
+        return ollama_model_ready(self.model, f'{base}/api/tags')
 
     def interpret(self, text: str, perception: dict, authored_actions: list | None = None) -> tuple[dict, Intent]:
         authored_actions = authored_actions or []
