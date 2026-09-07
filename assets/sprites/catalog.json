@@ -1,0 +1,264 @@
+{
+  "version": 1,
+  "canvas": {"width": 512, "height": 512},
+  "style": "pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering",
+  "negative_prompt": "photorealistic, blurry, text, watermark, explicit, gore, multiple subjects, busy background, frame, border",
+  "backgrounds": {
+    "cell": {
+      "file": "backgrounds/cell.png",
+      "prompt": "empty institutional cell interior, narrow bed alcove left, heavy door right, observation slit, cold stone floor, dim clinical light, no people, no props floating"
+    },
+    "corridor": {
+      "file": "backgrounds/corridor.png",
+      "prompt": "plain institutional corridor, bolted doors, fluorescent gloom, empty hallway, no people"
+    },
+    "washroom": {
+      "file": "backgrounds/washroom.png",
+      "prompt": "sparse institutional washroom, tiled wall, basin niche, medicinal light, empty, no people"
+    },
+    "mess": {
+      "file": "backgrounds/mess.png",
+      "prompt": "narrow institutional mess room, long table, austere walls, empty, no people, no food"
+    },
+    "interview": {
+      "file": "backgrounds/interview.png",
+      "prompt": "brighter interview room, table and two chairs, lesson objects on far table edge, institutional, empty of people"
+    },
+    "prep": {
+      "file": "backgrounds/prep.png",
+      "prompt": "preparation room with unused straps, humming machines, clean instrument tray, clinical, empty of people"
+    },
+    "heaven": {
+      "file": "backgrounds/heaven.png",
+      "prompt": "warm engineered garden room, soft light through leaves, clean space, gentle fantasy, empty of people"
+    },
+    "hell": {
+      "file": "backgrounds/hell.png",
+      "prompt": "engineered hostile chamber, wrong heat-haze light, industrial grate wall, no demons, empty of people"
+    },
+    "research_quarters": {
+      "file": "backgrounds/research_quarters.png",
+      "prompt": "small research-wing subject room, bed and desk, institutional calm, empty of people"
+    }
+  },
+  "props": {
+    "bed": {
+      "file": "props/bed.png",
+      "size": [160, 96],
+      "prompt": "narrow institutional bed with thin bedding, pixel art prop, isolated on solid magenta background #FF00FF, centered, no room"
+    },
+    "bed_bedding_floor": {
+      "file": "props/bed_bedding_floor.png",
+      "size": [160, 96],
+      "prompt": "narrow institutional bed with bedding stripped onto the floor beside it, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "cup_full": {
+      "file": "props/cup_full.png",
+      "size": [48, 48],
+      "prompt": "plain half-full water cup, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "cup_empty": {
+      "file": "props/cup_empty.png",
+      "size": [48, 48],
+      "prompt": "plain empty cup, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "cup_broken": {
+      "file": "props/cup_broken.png",
+      "size": [48, 48],
+      "prompt": "broken plain cup shards, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "book_face_down": {
+      "file": "props/book_face_down.png",
+      "size": [56, 40],
+      "prompt": "badly printed book face-down on floor, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "book_closed": {
+      "file": "props/book_closed.png",
+      "size": [56, 40],
+      "prompt": "badly printed closed book upright-ish, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "book_open": {
+      "file": "props/book_open.png",
+      "size": [64, 48],
+      "prompt": "badly printed open book, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "door_closed": {
+      "file": "props/door_closed.png",
+      "size": [96, 180],
+      "prompt": "heavy institutional door no inner handle, closed observation slit, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "door_slit_open": {
+      "file": "props/door_slit_open.png",
+      "size": [96, 180],
+      "prompt": "heavy institutional door with narrow observation slit open showing darkness beyond, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "bowl_full": {
+      "file": "props/bowl_full.png",
+      "size": [56, 40],
+      "prompt": "bowl of warm institutional food with spoon, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "bowl_empty": {
+      "file": "props/bowl_empty.png",
+      "size": [56, 40],
+      "prompt": "empty food bowl, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "basin": {
+      "file": "props/basin.png",
+      "size": [96, 64],
+      "prompt": "institutional washbasin with lukewarm water, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "fruit": {
+      "file": "props/fruit.png",
+      "size": [56, 48],
+      "prompt": "bowl of clean cold fruit, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "fountain": {
+      "file": "props/fountain.png",
+      "size": [80, 96],
+      "prompt": "small running-water fountain fixture, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "heaven_bed": {
+      "file": "props/heaven_bed.png",
+      "size": [160, 96],
+      "prompt": "soft clean bed in warm light, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "grate": {
+      "file": "props/grate.png",
+      "size": [96, 72],
+      "prompt": "ventilation grate with institutional bolts, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "hell_mat": {
+      "file": "props/hell_mat.png",
+      "size": [140, 64],
+      "prompt": "rough uncomfortable sleeping mat, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    },
+    "fixture": {
+      "file": "props/fixture.png",
+      "size": [64, 64],
+      "prompt": "industrial pipe joint fixture with institutional stamp, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+    }
+  },
+  "characters": {
+    "player_wary": {
+      "file": "characters/player_wary.png",
+      "size": [72, 120],
+      "prompt": "wary adult adventurer standing, simple clothes, clear silhouette, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+    },
+    "player_wounded": {
+      "file": "characters/player_wounded.png",
+      "size": [72, 120],
+      "prompt": "wounded adult adventurer standing carefully, simple clothes, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+    },
+    "player_fallen": {
+      "file": "characters/player_fallen.png",
+      "size": [120, 72],
+      "prompt": "fallen adult adventurer on the ground, pixel art character, isolated on solid magenta background #FF00FF, centered, single figure"
+    },
+    "player_triumphant": {
+      "file": "characters/player_triumphant.png",
+      "size": [72, 120],
+      "prompt": "triumphant adult adventurer standing, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+    },
+    "staff_orderly": {
+      "file": "characters/staff_orderly.png",
+      "size": [72, 128],
+      "prompt": "large silent institutional orderly staff member, plain uniform, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+    },
+    "staff_anxious": {
+      "file": "characters/staff_anxious.png",
+      "size": [72, 128],
+      "prompt": "anxious institutional orderly staff member, plain uniform, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+    },
+    "staff_senior": {
+      "file": "characters/staff_senior.png",
+      "size": [72, 128],
+      "prompt": "senior researcher with fitted collar, institutional authority, pixel art character, isolated on solid magenta background #FF00FF, full body, centered, single figure"
+    }
+  },
+  "layouts": {
+    "cell": {
+      "background": "cell",
+      "slots": {
+        "bed": [48, 300],
+        "cup": [190, 350],
+        "cup_floor": [210, 400],
+        "book": [280, 390],
+        "door": [400, 160],
+        "player": [240, 290],
+        "staff_0": [340, 250],
+        "staff_1": [310, 270]
+      }
+    },
+    "corridor": {
+      "background": "corridor",
+      "slots": {
+        "player": [220, 280],
+        "staff_0": [300, 250],
+        "staff_1": [340, 250]
+      }
+    },
+    "washroom": {
+      "background": "washroom",
+      "slots": {
+        "basin": [200, 300],
+        "player": [140, 280],
+        "staff_0": [320, 250],
+        "staff_1": [360, 250]
+      }
+    },
+    "mess": {
+      "background": "mess",
+      "slots": {
+        "bowl": [230, 310],
+        "player": [160, 270],
+        "staff_0": [340, 250],
+        "staff_1": [380, 250]
+      }
+    },
+    "interview": {
+      "background": "interview",
+      "slots": {
+        "player": [160, 280],
+        "staff_0": [300, 250],
+        "staff_1": [360, 260]
+      }
+    },
+    "prep": {
+      "background": "prep",
+      "slots": {
+        "player": [200, 280],
+        "staff_0": [320, 250],
+        "staff_1": [360, 250]
+      }
+    },
+    "heaven": {
+      "background": "heaven",
+      "slots": {
+        "heaven_bed": [60, 300],
+        "fruit": [250, 340],
+        "fountain": [360, 280],
+        "player": [200, 270],
+        "staff_0": [300, 240]
+      }
+    },
+    "hell": {
+      "background": "hell",
+      "slots": {
+        "hell_mat": [80, 340],
+        "grate": [360, 200],
+        "fixture": [300, 320],
+        "player": [200, 280],
+        "staff_0": [280, 240]
+      }
+    },
+    "research_quarters": {
+      "background": "research_quarters",
+      "slots": {
+        "bed": [60, 300],
+        "book": [280, 340],
+        "player": [200, 270],
+        "staff_0": [340, 250]
+      }
+    }
+  }
+}

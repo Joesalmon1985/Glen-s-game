@@ -122,6 +122,39 @@ def image_decision(
     colour_with_llm: bool = False,
     ollama_model: str = 'mistral',
 ) -> dict:
+    # Facility mode: compose from pre-generated sprites (no per-turn diffusion).
+    try:
+        from puca_dungeon.scene_compose import build_visual_spec, facility_mode_active
+    except Exception:
+        facility_mode_active = None  # type: ignore
+        build_visual_spec = None  # type: ignore
+
+    if facility_mode_active is not None and facility_mode_active(world) and build_visual_spec is not None:
+        spec = build_visual_spec(world)
+        fingerprint = f'sprite:{spec.key}'
+        visible_dirty = bool(resolution.image_dirty)
+        reuse = bool(world.last_image_prompt) and world.last_image_prompt == fingerprint and not visible_dirty
+        if not world.last_image_prompt:
+            decision = 'REGENERATE'
+            reason = 'first sprite scene'
+        elif reuse:
+            decision = 'REUSE'
+            reason = 'visible sprite state unchanged'
+        else:
+            decision = 'REGENERATE'
+            reason = 'sprite visual state changed'
+        world.last_image_prompt = fingerprint
+        return {
+            'decision': decision,
+            'reason': reason,
+            'full_prompt': fingerprint,
+            'renderer': 'sprites',
+            'visual_spec': spec.to_dict(),
+            'negative_prompt': '',
+            'suppressed': True,
+            'note': 'SPRITE COMPOSITION PENDING',
+        }
+
     prompt = build_image_prompt(world, passage=passage)
     if colour_with_llm:
         prompt = llm_colour_image_prompt(prompt, world, model=ollama_model)
@@ -142,6 +175,7 @@ def image_decision(
         'decision': decision,
         'reason': reason,
         'full_prompt': prompt,
+        'renderer': 'diffusion',
         'negative_prompt': 'photorealistic, blurry, text, watermark, explicit, gore, tank, helicopter',
         'suppressed': True,
         'note': 'IMAGE GENERATION SUPPRESSED',

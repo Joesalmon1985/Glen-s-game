@@ -588,6 +588,22 @@ class GameSession:
             return
         if img.get('decision') != 'REGENERATE':
             return
+        # Facility sprite compositor (no per-turn diffusion).
+        if img.get('renderer') == 'sprites':
+            try:
+                from puca_dungeon.scene_compose import compose_facility_scene
+                self._image_cache_dir.mkdir(parents=True, exist_ok=True)
+                _spec, path = compose_facility_scene(self.world, self._image_cache_dir)
+                self.visual_backend_calls += 1
+                self.last_image_path = Path(path)
+                img['path'] = str(path)
+                img['note'] = 'sprite scene composed'
+                img['suppressed'] = False
+            except Exception as exc:
+                img['note'] = f'sprite composition failed: {exc}'
+                img['suppressed'] = True
+                img['path'] = None
+            return
         prompt = img.get('full_prompt') or ''
         if not prompt:
             return

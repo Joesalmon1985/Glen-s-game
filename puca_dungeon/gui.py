@@ -512,26 +512,48 @@ class DeathtrapGui:
             logging.exception('Deathtrap turn failed')
             self.messages.put(('error', str(exc)))
 
+    def _compose_or_generate_image(self, trace=None):
+        """Facility uses sprite composition; other modes keep full-scene diffusion."""
+        assert self.session is not None
+        img_meta = (trace.image if trace is not None else None) or {}
+        renderer = img_meta.get('renderer')
+        if renderer is None:
+            try:
+                from puca_dungeon.scene_compose import facility_mode_active
+                if facility_mode_active(self.session.world):
+                    renderer = 'sprites'
+            except Exception:
+                renderer = 'diffusion'
+        if renderer == 'sprites':
+            from puca_dungeon.scene_compose import compose_facility_scene
+            _spec, path = compose_facility_scene(self.session.world, self.cache_dir)
+            self.session.last_image_path = Path(path)
+            self.session.world.last_image_prompt = f'sprite:{_spec.key}'
+            return path
+        from puca_dungeon.image_prompt import build_image_prompt
+        prompt = img_meta.get('full_prompt') or build_image_prompt(
+            self.session.world, self.session.current_passage()
+        )
+        self.images.use_lora = self.lora_var.get() and (
+            resource_path('pixel_style_lora_style_only') / 'adapter_model.safetensors'
+        ).is_file()
+        _key, path = self.images.generate(
+            f'passage_{self.session.world.passage_id}',
+            prompt,
+            cancel=self.cancel_image,
+            progress=lambda step, total: self.messages.put(('progress', step, total)),
+        )
+        self.session.last_image_path = Path(path)
+        self.session.world.last_image_prompt = prompt
+        return path
+
     def _work_image_only(self):
         assert self.session is not None
         try:
-            from puca_dungeon.image_prompt import build_image_prompt
-
-            prompt = build_image_prompt(self.session.world, self.session.current_passage())
             if self.cancel_image.is_set():
                 self.messages.put(('image_done', None))
                 return
-            self.images.use_lora = self.lora_var.get() and (
-                resource_path('pixel_style_lora_style_only') / 'adapter_model.safetensors'
-            ).is_file()
-            _key, path = self.images.generate(
-                f'passage_{self.session.world.passage_id}',
-                prompt,
-                cancel=self.cancel_image,
-                progress=lambda step, total: self.messages.put(('progress', step, total)),
-            )
-            self.session.last_image_path = Path(path)
-            self.session.world.last_image_prompt = prompt
+            path = self._compose_or_generate_image()
             self.messages.put(('image', str(path)))
             self._autosave()
             self.messages.put(('image_done', None))
@@ -542,27 +564,14 @@ class DeathtrapGui:
 
     def _generate_current_image(self, trace):
         assert self.session is not None
-        prompt = (trace.image or {}).get('full_prompt') or ''
-        if not prompt:
-            from puca_dungeon.image_prompt import build_image_prompt
-            prompt = build_image_prompt(self.session.world, self.session.current_passage())
         decision = (trace.image or {}).get('decision')
         if decision == 'REUSE' and self.session.last_image_path and Path(self.session.last_image_path).is_file():
             self.messages.put(('image', str(self.session.last_image_path)))
             return
         if self.cancel_image.is_set():
             return
-        self.images.use_lora = self.lora_var.get() and (
-            resource_path('pixel_style_lora_style_only') / 'adapter_model.safetensors'
-        ).is_file()
         try:
-            _key, path = self.images.generate(
-                f'passage_{self.session.world.passage_id}',
-                prompt,
-                cancel=self.cancel_image,
-                progress=lambda step, total: self.messages.put(('progress', step, total)),
-            )
-            self.session.last_image_path = Path(path)
+            path = self._compose_or_generate_image(trace)
             self.messages.put(('image', str(path)))
         except RuntimeError as exc:
             if 'cancelled' in str(exc).lower():
