@@ -109,7 +109,7 @@ def salient_sensations(p: BodyPressures) -> list[str]:
     if p.physical_restraint >= 40:
         out.append('Hands or bindings limit what you can move.')
     if p.language_ability < 40:
-        out.append('Words come out thinner than you intend.')
+        out.append('Words come out thin and broken.')
     return out
 
 

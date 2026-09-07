@@ -706,8 +706,44 @@ class GameSession:
             )
             if interrupted:
                 prose = self.exit_book(interrupted=True)
-                resolution.facts.append(prose)
+                bookish = (
+                    'casket', 'torchlight', 'tunnel opens', 'alcove', 'you notice:',
+                    'iron straps', 'you turn to the book', 'by the third, you are',
+                    'printed', 'damp stone',
+                )
+                cleaned: list = []
+                for f in list(resolution.facts or []):
+                    if isinstance(f, str) and any(b in f.lower() for b in bookish):
+                        continue
+                    cleaned.append(f)
+                lead = [
+                    'The printed corridor breaks. A knock comes from the real room — the cell.',
+                ]
+                if prose:
+                    lead.append(prose)
+                scene_bits = [
+                    f for f in cleaned
+                    if isinstance(f, str) and (
+                        'slit' in f.lower()
+                        or 'step away' in f.lower()
+                        or 'door procedure' in f.lower()
+                    )
+                ]
+                rest = [f for f in cleaned if f not in scene_bits]
+                resolution.facts = lead + scene_bits + rest
                 resolution.situation_changed = True
+                resolution.image_dirty = True
+                try:
+                    from puca_dungeon.narrative_context import refresh_scene_for_phase
+                    if self.world.facility is not None:
+                        refresh_scene_for_phase(
+                            self.world.facility,
+                            new_scene=True,
+                            what_changed=lead[0],
+                            ask=getattr(self.world.facility.arc, 'last_ask', '') or '',
+                        )
+                except Exception:
+                    pass
         return grounding, resolution
 
     def _run_compound(

@@ -33,7 +33,19 @@ _STAMINA_NUM = re.compile(
 
 _ENGINE_LEAK = re.compile(
     r'\b(?:structured\s+state|facility\s+phase|debug_metrics|'
-    r'sated|quenched|hygiene\s+aware|adventure\s+sheet)\b',
+    r'sated|quenched|hygiene\s+aware|adventure\s+sheet|'
+    r'wanted_action|actual_action|enactment|direct\s+action)\b',
+    re.I,
+)
+
+_INTENTION_META = re.compile(
+    r'despite\s+your\s+intention|'
+    r'despite\s+your\s+(?:desire|want)|'
+    r'\byou\s+mean(?:t)?\s+to\b|'
+    r'words\s+you\s+meant\s+to\b|'
+    r'unvoiced\s+desire|'
+    r'contrast\s+to\s+your\s+desires|'
+    r'align(?:s|ed)?\s+with\s+(?:your\s+)?desire',
     re.I,
 )
 
@@ -343,6 +355,12 @@ def prosecute(prose: str, resolution: Any = None, world: Any = None) -> list[dic
             'proposition': 'engine_vocab_leak',
             'label': CONTRADICTS_STATE,
             'reason': 'engine_vocab',
+        })
+    if _INTENTION_META.search(body):
+        failures.append({
+            'proposition': 'intention_meta',
+            'label': CONTRADICTS_STATE,
+            'reason': 'intention_meta',
         })
 
     # Outcome negation: washed in facts but prose claims water untouched / successful resist

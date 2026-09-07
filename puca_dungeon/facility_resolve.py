@@ -595,7 +595,10 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
             if compromised or facility.pressures.physical_restraint >= 50:
                 facility.washed = True
                 facility.pressures.hygiene_discomfort = 15
-                res.facts.append('Refusal fails. The washing happens anyway.')
+                res.facts.append(
+                    'You brace and refuse. Their grip does not argue — it simply continues. '
+                    'Water and soap arrive anyway; washing you appears to be routine to them, not punishment.'
+                )
                 res.structured_facts.append({'type': 'washed', 'forced': True})
                 res.enactment = ENACTMENT_COMPROMISED
                 res.enactment_cause = res.enactment_cause or 'physical_restraint'
@@ -692,7 +695,13 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
 
     # Wait
     if ac in ('wait',) or text.strip() in ('wait', 'wait.', '…'):
-        res.facts.append('Time passes. The room does not hurry.')
+        ask = getattr(getattr(facility, 'arc', None), 'last_ask', '') or ''
+        if ask and facility.staff_present:
+            res.facts.append(f'You wait. They are still waiting: {ask}')
+        elif facility.staff_present:
+            res.facts.append('You wait. The staff do not fill the silence for you.')
+        else:
+            res.facts.append('You wait. The cell keeps its quiet.')
         res.actual_action = {'action_class': 'wait', 'performed': True}
         res.intended_effect_achieved = True
         res.time_cost = 60
@@ -721,8 +730,14 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
     if text.strip() in ('no', 'n', 'nope', 'nah') or ac == 'refuse':
         return _refuse_instruction(facility, intent, res)
 
-    # Default: honest non-achievement
-    res.facts.append('You do something minor. The room remains the room.')
+    # Default: honest non-achievement — stay in-scene, not meta
+    ask = getattr(getattr(facility, 'arc', None), 'last_ask', '') or ''
+    if ask and facility.staff_present:
+        res.facts.append(f'That does not change what they want. They are still waiting: {ask}')
+    elif facility.staff_present:
+        res.facts.append('Nothing useful comes of it. The staff watch without helping.')
+    else:
+        res.facts.append('Nothing useful comes of that. The cell is unchanged.')
     res.intended_effect_achieved = False
     res.meaningful_effort = False
     res.time_cost = 45
@@ -758,7 +773,18 @@ def _stand_firm_door(facility, res) -> Resolution:
     facility.door_escalation += 1
     facility.pressures.physical_restraint = min(100, facility.pressures.physical_restraint + 15)
     facility.pressures.fear = min(100, facility.pressures.fear + 5)
-    res.facts.append('You hold your ground. You do not give the door space.')
+    present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
+    speaker = facility.character_name(present[0]) if present else 'Someone beyond the door'
+    if facility.door_escalation <= 1:
+        res.facts.append(
+            f'You hold your ground. You do not give the door space. '
+            f'{speaker} stops repeating the gesture for a moment, watching you, then turns as if to call for help.'
+        )
+    else:
+        res.facts.append(
+            'You hold your ground. You do not give the door space. '
+            'They have stopped hoping repetition will work.'
+        )
     res.structured_facts.append({'type': 'stand_firm', 'refused': 'back_away'})
     res.actual_action = {'action_class': 'stand_firm', 'performed': True}
     res.intended_effect_achieved = True

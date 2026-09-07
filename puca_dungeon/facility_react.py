@@ -193,7 +193,11 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             events.append({
                 'type': 'door_escalate',
                 'staff_count': facility.staff_count,
-                'text': 'The instruction repeats. Gestures sharpen. Another figure arrives.',
+                'text': (
+                    'The person at the door abandons the hope that another gesture will work. '
+                    'A short call carries into the corridor. Footsteps answer. '
+                    'Another figure arrives — larger, ready to enter whether you move or not.'
+                ),
             })
         if facility.cooperated_door or elapsed >= (DOOR_FORCE_AT - SLIT_AT) or facility.door_escalation >= 2:
             _enter_phase(facility, PHASE_REMOVAL, t)
@@ -288,19 +292,29 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
                 door.state['slit_open'] = False
                 facility.set_entity(door)
             facility.arc.scene_id = 'return'
+            facility.staff_present = False
+            facility.staff_count = 0
+            facility.arc.present_ids = subjects_for_window(
+                facility.arc.encounter_schedule, 'return_escort',
+            )
+            company = ''
+            if facility.arc.present_ids:
+                names = [facility.character_name(cid) for cid in facility.arc.present_ids]
+                company = (
+                    f' Another subject is already here: {", ".join(names)}. '
+                    'They watch you without explaining anything.'
+                )
             _lead(
                 resolution, facility,
                 (
                     'They take you back to the same cell. Whatever you moved is still moved. '
                     'You are cleaner, and much more tired.'
                     + (' You are less hungry.' if facility.fed else '')
+                    + company
                 ),
                 room='cell',
                 kind='return_cell',
             )
-            facility.staff_present = False
-            facility.staff_count = 0
-            facility.arc.present_ids = subjects_for_window(facility.arc.encounter_schedule, 'return_escort')
             events.append({'type': 'return_cell', 'text': resolution.facts[0] if resolution.facts else ''})
 
     elif phase == PHASE_RETURN:
@@ -488,8 +502,8 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
         events.append({
             'type': 'book_interrupt',
             'text': (
-                'Something knocks. Not in the corridor you were imagining. '
-                'Again. The page is still under your thumb.'
+                'The printed corridor breaks. A knock comes from the real room — the cell. '
+                'Again. The page is still under your thumb, but the cell is where you are.'
             ),
         })
 
@@ -503,9 +517,53 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
         ):
             resolution.image_dirty = True
             resolution.state_changed = True
+    # On room change, drop stale same-room furniture dumps that fight the new scene
+    room_changed = any(
+        isinstance(ev, dict) and ev.get('type') == 'scene_change'
+        and ev.get('from_room') and ev.get('to_room')
+        and ev.get('from_room') != ev.get('to_room')
+        for ev in (resolution.world_events or [])
+    )
+    if room_changed:
+        stale = (
+            'a narrow table', 'bowl of something warm', 'soap that smells medicinal',
+            'water. a basin', 'plain corridor',
+        )
+        kept = []
+        for f in list(resolution.facts or []):
+            if not isinstance(f, str):
+                kept.append(f)
+                continue
+            fl = f.lower().strip()
+            # Keep must-lead scene_change texts and action outcomes
+            if any(
+                isinstance(ev, dict) and ev.get('text') == f and ev.get('must_lead')
+                for ev in (resolution.world_events or [])
+            ):
+                kept.append(f)
+                continue
+            if fl in stale or fl.startswith('water. a basin'):
+                continue
+            kept.append(f)
+        resolution.facts = kept
     facility.arc.situation_line = situation_for_phase(
         facility.phase, facility.room_id, facility.arc.last_ask,
     )
+    try:
+        from puca_dungeon.narrative_context import update_after_turn
+        flipped = any(
+            ev.get('type') in (
+                'slit_opens', 'door_procedure', 'forced_removal', 'arrive_wash',
+                'washed', 'fed', 'retrieval', 'arrive_interview', 'day2_wake',
+                'contract_offer', 'heaven_expires',
+            )
+            or ev.get('type') == 'scene_change'
+            for ev in events
+            if isinstance(ev, dict)
+        )
+        update_after_turn(facility, resolution, scene_flipped=flipped)
+    except Exception:
+        pass
     world.facility = facility
     if getattr(world, 'mode', 'facility') == 'facility' and not book_turn:
         world.visible_entities = [e.id for e in facility.entities_in_room()]

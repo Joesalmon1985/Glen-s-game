@@ -21,25 +21,32 @@ GUIDANCE_CUES = {
 
 NARRATOR_SYSTEM = """You write short second-person narration from authoritative Python facts only.
 
-Two truths (never confuse them):
-- wanted_action: what the player intended (desire, not authority).
-- actual_action + facts/structured_facts/world_events: what actually happened.
+You receive:
+- scene_context: the continuing dramatic situation (where you are, who is present, what each
+  visibly appears to want, unresolved tension, recent beats, what just changed).
+- facts / structured_facts / world_events: what actually happened this turn (authoritative).
+- body_sensations: optional sensory evidence — use sparingly when salient.
 
-When wanted_action and actual_action diverge (enactment is compromised, aborted, or inverted),
-you MAY exploit the contrast — wit, embodiment, embarrassment — but you must narrate ACTUAL
-reality. Never invent objects, movement, success, damage, inventory, windows, or exits absent
-from the facts merely because the player wanted them.
+Your job is to narrate this turn as part of the continuing scene, not as an isolated
+action result. Prefer clear causal sequence over abstraction.
 
 Hard rules:
-- Never negate, replace, or invent physical outcomes that contradict facts.
-  If facts say you were washed, do not say the water remained untouched.
-- Never quote or paraphrase engine labels: do not write "Structured State", "facility phase",
-  "sated", "quenched", "alert", "hygiene aware", "restrained", SKILL, STAMINA, LUCK, or meter numbers.
-- Bodily evidence arrives as sensory sentences in body_sensations (if present). Use them sparingly
-  and only when salient; do not list status words.
-- If world_events or structured_facts contain type scene_change (must_lead), the FIRST paragraph
-  MUST announce that change (room left, slit opened, what they are asking). Then narrate the action.
-  Scene changes may use 4-8 sentences. Other turns stay economical (1-3 sentences).
+- Narrate ACTUAL reality from facts/world_events. Never invent objects, movement, success,
+  damage, inventory, windows, or exits absent from the facts.
+- Never mention or paraphrase: intention, enactment, direct action, wanted_action,
+  actual_action, "despite your intention", "you meant to", "Structured State",
+  "facility phase", "sated", "quenched", "alert", "hygiene aware", "restrained",
+  SKILL, STAMINA, LUCK, or meter numbers.
+- If the player wanted something that did not happen, show the physical contrast in
+  sensory terms (planted feet, hands that do not open, water that arrives anyway) —
+  do not comment on intention vs outcome as meta.
+- Use scene_context to keep place, people, and stakes clear. If this_is_a_new_scene or
+  world_events contain type scene_change (must_lead), the FIRST paragraph MUST announce
+  the change (room left, slit opened, what they are asking). Then narrate the action.
+  Scene changes may use 4-8 sentences. Continuations stay economical (1-3 sentences)
+  unless several facts demand weight.
+- NPC behaviour should read as people with immediate goals from scene_context, not as
+  machine phases. Mystery about the institution is fine; the physical sequence must be clear.
 - Failure is content. Do not coach. No named inner personalities.
 - Return ONLY the prose, no JSON."""
 
@@ -152,6 +159,12 @@ def build_narrator_input(
                 payload['body_sensations'] = sensations
         except Exception:
             pass
+        try:
+            from puca_dungeon.narrative_context import get_scene_context, ensure_initial_context
+            ensure_initial_context(world.facility)
+            payload['scene_context'] = get_scene_context(world.facility).narrator_packet()
+        except Exception:
+            pass
     return payload
 
 
@@ -195,14 +208,25 @@ def template_narrate(payload: dict, resolution: Resolution) -> str:
     enactment = getattr(resolution, 'enactment', 'direct') or 'direct'
     cause = getattr(resolution, 'enactment_cause', '') or ''
     if enactment in ('compromised', 'aborted', 'inverted'):
-        wanted = getattr(resolution, 'wanted_action', None) or {}
-        wanted_ac = wanted.get('action_class') or payload.get('player_text_non_authoritative') or 'that'
+        # Sensory contrast — never "you meant to" meta
         if enactment == 'aborted':
-            _add(f'You mean to {wanted_ac}. Your body does not finish it' + (f' ({cause}).' if cause else '.'))
+            if cause == 'institutional_force':
+                _add('Your body does not finish the motion. Other hands decide the rest.')
+            else:
+                _add('The motion dies unfinished.')
         elif enactment == 'inverted':
-            _add(f'You mean to {wanted_ac}. Something else happens instead' + (f' — {cause}.' if cause else '.'))
+            _add('Something else happens instead of what you reached for.')
         elif enactment == 'compromised':
-            _add(f'You attempt {wanted_ac}, diminished' + (f' by {cause}.' if cause else '.'))
+            if 'force' in cause or cause == 'institutional_force':
+                _add('You cannot stop what follows.')
+            else:
+                _add('You only manage part of it.')
+
+    scene = payload.get('scene_context') if isinstance(payload, dict) else None
+    if isinstance(scene, dict) and scene.get('this_is_a_new_scene') and scene.get('immediate_situation'):
+        # Soft anchor when no scene_change lead text was emitted
+        if not lead and scene.get('where'):
+            _add(f'You are in the {scene["where"]}.')
 
     for f in usable:
         if isinstance(f, str):
@@ -220,8 +244,10 @@ def template_narrate(payload: dict, resolution: Resolution) -> str:
     if parts:
         return ' '.join(parts)
     if getattr(resolution, 'attempted', False) and not getattr(resolution, 'state_changed', False):
-        return 'You act, but nothing in the world shifts for it.'
-    return 'Nothing of note follows from that.'
+        if isinstance(scene, dict) and scene.get('unresolved_immediate_tension'):
+            return str(scene['unresolved_immediate_tension'])
+        return 'Nothing around you answers that.'
+    return 'A moment passes without a clear change.'
 
 
 class TemplateNarrator:
@@ -242,10 +268,20 @@ class OllamaNarrator:
         payload = build_narrator_input(world, resolution, player_text, intent)
         if resolution.needs_clarification:
             return payload, template_narrate(payload, resolution)
+        # Strip dual-truth field names from the LLM prompt — they invite meta commentary.
+        # Full payload (with wanted_action/enactment) is retained for debugging/prosecutor.
+        llm_payload = {
+            k: v for k, v in payload.items()
+            if k not in (
+                'wanted_action', 'actual_action', 'enactment', 'enactment_cause',
+                'intended_effect_achieved', 'success', 'attempted', 'state_changed',
+                'classification', 'guidance_level', 'guidance_cue', 'body_qualitative',
+            )
+        }
         body = {
             'model': self.model,
             'system': NARRATOR_SYSTEM,
-            'prompt': json.dumps(payload, ensure_ascii=False),
+            'prompt': json.dumps(llm_payload, ensure_ascii=False),
             'stream': False,
             'keep_alive': 0,
             'options': {'temperature': 0.7, 'num_predict': 220, 'num_ctx': 4096},

@@ -341,7 +341,7 @@ def make_initial_facility(rng: Any = None, claimed_name: str = '') -> FacilitySt
         situation_line='You wake in a small room. Nothing is happening yet.',
         body_marks=['a faint bruise on the forearm'],
     )
-    return FacilityState(
+    facility = FacilityState(
         phase=PHASE_CELL_IDLE,
         room_id='cell',
         rooms=_default_rooms(),
@@ -350,6 +350,12 @@ def make_initial_facility(rng: Any = None, claimed_name: str = '') -> FacilitySt
         cast=cast,
         arc=arc,
     )
+    try:
+        from puca_dungeon.narrative_context import ensure_initial_context
+        ensure_initial_context(facility)
+    except Exception:
+        pass
+    return facility
 
 
 OPENING_TEXT = (

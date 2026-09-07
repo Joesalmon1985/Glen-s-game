@@ -51,6 +51,19 @@ def emit_scene_change(
         arc.situation_line = situation_for_phase(facility.phase, facility.room_id, ask)
         arc.last_ask = ask
         facility.arc = arc
+    try:
+        from puca_dungeon.narrative_context import refresh_scene_for_phase
+        room_changed = bool(to_room and to_room != (from_room or ''))
+        refresh_scene_for_phase(
+            facility,
+            new_scene=True,
+            what_changed=text,
+            ask=ask,
+        )
+        if room_changed:
+            pass  # already new_scene
+    except Exception:
+        pass
     return event
 
 

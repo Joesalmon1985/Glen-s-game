@@ -32,6 +32,11 @@ _STOCK_PHRASES = (
     'nothing of note follows from that',
     'your words hang in the air unanswered',
     'what do you do?',
+    'the room remains the room',
+    'the room does not hurry',
+    'despite your intention',
+    'wanted_action',
+    'facility phase',
 )
 
 
