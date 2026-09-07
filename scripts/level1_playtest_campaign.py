@@ -296,6 +296,15 @@ def _run_persona(
         session.opening_text,
         '',
     ]
+    short_lines: list[str] = [
+        f'# Short playtest: {pid}',
+        f'seed={seed}',
+        '',
+        '## OPENING',
+        session.opening_text,
+        '',
+    ]
+    short_jsonl_path = run_dir / 'short.jsonl'
     traces_path = run_dir / 'traces.jsonl'
     enactment_counts: Counter = Counter()
     mode_switches: list[str] = []
@@ -304,7 +313,7 @@ def _run_persona(
     prev_mode = session.world.mode
 
     actions = list(persona['actions'])[:max_turns]
-    with traces_path.open('w', encoding='utf-8') as tf:
+    with traces_path.open('w', encoding='utf-8') as tf, short_jsonl_path.open('w', encoding='utf-8') as sf:
         for i, action in enumerate(actions, 1):
             t0 = time.time()
             tr = session.submit(action)
@@ -337,6 +346,10 @@ def _run_persona(
             if enactment in ('aborted', 'inverted', 'compromised') and not cause:
                 softlocks += 1
 
+            image_prompt = ''
+            if isinstance(tr.image, dict):
+                image_prompt = tr.image.get('full_prompt') or ''
+
             record = {
                 'turn': i,
                 'input': action,
@@ -349,6 +362,12 @@ def _run_persona(
                 'trace': tr.to_dict(),
             }
             tf.write(json.dumps(record, ensure_ascii=False, default=str) + '\n')
+            sf.write(json.dumps({
+                'turn': i,
+                'input': action,
+                'response': tr.narrator_output or '',
+                'image_prompt': image_prompt,
+            }, ensure_ascii=False) + '\n')
 
             transcript.append(f'## Turn {i}')
             transcript.append(f'> {action}')
@@ -359,15 +378,25 @@ def _run_persona(
             transcript.append(tr.format_debug())
             transcript.append('')
 
+            short_lines.append(f'## Turn {i}')
+            short_lines.append(f'> {action}')
+            short_lines.append('')
+            short_lines.append(tr.narrator_output or '')
+            short_lines.append('')
+            short_lines.append(f'IMAGE: {image_prompt or "(none)"}')
+            short_lines.append('')
+
             fac = session.world.facility
             if fac and fac.slept:
                 transcript.append('_(character slept — ending run)_')
+                short_lines.append('_(character slept — ending run)_')
                 break
             if session.world.ending in ('death', 'victory') and session.world.mode == 'book_dungeon':
                 # Continue outer if possible
                 pass
 
     (run_dir / 'transcript.txt').write_text('\n'.join(transcript), encoding='utf-8')
+    (run_dir / 'short_transcript.txt').write_text('\n'.join(short_lines), encoding='utf-8')
     summary = {
         'persona': pid,
         'seed': seed,

@@ -1,0 +1,18 @@
+{
+  "persona": "absurd_surreal",
+  "seed": 106,
+  "turns": 16,
+  "enactment_histogram": {
+    "direct": 16
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 2,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "wash",
+  "slept": false,
+  "washed": false,
+  "fed": false,
+  "layout_seed": 106,
+  "layout_fingerprint": null
+}

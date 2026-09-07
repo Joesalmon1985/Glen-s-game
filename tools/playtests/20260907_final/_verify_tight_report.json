@@ -1,0 +1,94 @@
+{
+  "campaign_exit_code": 0,
+  "criteria": {
+    "1_zero_substitutions": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "2_book_dungeon_no_cell": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "3_cup_bowl_image_dirty": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "4_forced_not_direct_achieved": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "5_no_structured_state_leaks": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "6_him_no_discourse": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "A_book_diver_enters_on_read": {
+      "status": "PASS",
+      "events": [
+        {
+          "turn": 2,
+          "input": "read the book",
+          "mode": "book_dungeon",
+          "types": [
+            "book_enter"
+          ]
+        },
+        {
+          "turn": 14,
+          "input": "read the book",
+          "mode": "book_dungeon",
+          "types": [
+            "book_enter"
+          ]
+        }
+      ]
+    },
+    "B_no_book_exit_while_facility": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "C_short_artifacts_all_10": {
+      "status": "PASS",
+      "missing": []
+    },
+    "D_no_structured_dumps_in_short": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "E_throw_book_never_enters": {
+      "status": "PASS",
+      "count": 0,
+      "violations": []
+    },
+    "F_refuse_wash_compromised": {
+      "status": "PASS",
+      "count": 0,
+      "ok": [
+        {
+          "persona": "obstructive_seed103",
+          "turn": 11,
+          "input": "refuse to wash",
+          "enactment": "compromised",
+          "achieved": false,
+          "types": [
+            "enactment",
+            "washed"
+          ],
+          "facts": "Refusal fails. The washing happens anyway. Next: a table, a bowl, heat rising from food."
+        }
+      ],
+      "bad": []
+    }
+  }
+}

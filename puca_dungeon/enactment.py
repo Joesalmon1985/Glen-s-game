@@ -78,6 +78,41 @@ def qualitative_pressures(p: BodyPressures) -> dict:
     }
 
 
+def salient_sensations(p: BodyPressures) -> list[str]:
+    """Narrative-grade bodily evidence — only non-baseline pressures.
+
+    Never emit machine labels like sated/quenched/alert for the narrator to copy.
+    """
+    out: list[str] = []
+    if p.fatigue >= 60:
+        out.append('Your limbs feel heavy; staying upright takes work.')
+    elif p.fatigue >= 35:
+        out.append('A dull tiredness sits behind your eyes.')
+    if p.hunger >= 60:
+        out.append('Hunger sharpens every smell of food.')
+    elif p.hunger >= 35:
+        out.append('Your stomach complains quietly.')
+    if p.thirst >= 60:
+        out.append('Your mouth tastes dry and sticky.')
+    elif p.thirst >= 35:
+        out.append('Your tongue wants water.')
+    if p.hygiene_discomfort >= 55:
+        out.append('Your own smell is hard to ignore.')
+    elif p.hygiene_discomfort >= 35:
+        out.append('Skin feels unclean enough to notice.')
+    if p.fear >= 60:
+        out.append('Fear keeps your shoulders tight.')
+    elif p.fear >= 35:
+        out.append('Unease sits under the ribs.')
+    if p.pain >= 35:
+        out.append('Pain pulls at your attention.')
+    if p.physical_restraint >= 40:
+        out.append('Hands or bindings limit what you can move.')
+    if p.language_ability < 40:
+        out.append('Words come out thinner than you intend.')
+    return out
+
+
 def wanted_action_from_intent(intent: Any) -> dict:
     if intent is None:
         return {}
@@ -188,7 +223,9 @@ def decide_enactment(
         actual['modifier'] = 'body_overrode_refusal'
         return ENACTMENT_COMPROMISED, 'hunger', actual
 
-    if pressures.fatigue >= 95 and ac in ('wait', 'stay_awake', 'resist_sleep'):
+    if pressures.fatigue >= 95 and ac in (
+        'wait', 'stay_awake', 'resist_sleep', 'fight_sleep', 'remain_awake', 'keep_awake',
+    ):
         actual['action_class'] = 'sleep'
         actual['modifier'] = 'involuntary_sleep'
         return ENACTMENT_INVERTED, 'fatigue', actual

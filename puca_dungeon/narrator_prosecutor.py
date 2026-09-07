@@ -31,6 +31,23 @@ _STAMINA_NUM = re.compile(
     re.I,
 )
 
+_ENGINE_LEAK = re.compile(
+    r'\b(?:structured\s+state|facility\s+phase|debug_metrics|'
+    r'sated|quenched|hygiene\s+aware|adventure\s+sheet)\b',
+    re.I,
+)
+
+_WASHED_FACT = re.compile(
+    r'\b(?:wash(?:ed|ing)?|the\s+washing\s+happens|water\s+leaves)\b',
+    re.I,
+)
+_WASH_NEGATION = re.compile(
+    r'\b(?:water\s+remains?\s+untouched|remain(?:s|ed)?\s+untouched|'
+    r'resist(?:s|ed)?\s+the\s+basin|do\s+not\s+wash|don\'?t\s+wash|'
+    r'water\s+untouched)\b',
+    re.I,
+)
+
 _PROP_SPLIT = re.compile(r'(?<=[.!?])\s+|\n+')
 
 
@@ -320,4 +337,48 @@ def prosecute(prose: str, resolution: Any = None, world: Any = None) -> list[dic
                 'label': label,
             })
 
+    body = prose or ''
+    if _ENGINE_LEAK.search(body):
+        failures.append({
+            'proposition': 'engine_vocab_leak',
+            'label': CONTRADICTS_STATE,
+            'reason': 'engine_vocab',
+        })
+
+    # Outcome negation: washed in facts but prose claims water untouched / successful resist
+    fact_text = ' '.join(
+        str(f) for f in (
+            (getattr(resolution, 'facts', None) if resolution is not None and not isinstance(resolution, dict)
+             else (resolution or {}).get('facts') if isinstance(resolution, dict) else [])
+            or []
+        )
+        if isinstance(f, str)
+    )
+    struct_types = []
+    for f in structured:
+        if isinstance(f, dict) and f.get('type'):
+            struct_types.append(str(f.get('type')))
+    washed = (
+        'washed' in struct_types
+        or bool(_WASHED_FACT.search(fact_text))
+    )
+    if washed and _WASH_NEGATION.search(body):
+        failures.append({
+            'proposition': 'wash_outcome_negation',
+            'label': CONTRADICTS_STATE,
+            'reason': 'negates_wash_fact',
+        })
+
     return failures
+
+
+def has_blocking_failure(failures: list | None) -> bool:
+    """True when narrator prose must be replaced by template facts."""
+    for f in failures or []:
+        if not isinstance(f, dict):
+            continue
+        if f.get('label') == CONTRADICTS_STATE:
+            return True
+        if f.get('reason') in ('engine_vocab', 'negates_wash_fact', 'meter_leak'):
+            return True
+    return False

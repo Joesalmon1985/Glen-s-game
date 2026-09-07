@@ -115,7 +115,10 @@ def resolve_affirmative(text: str, world: WorldState) -> Reply:
             clear_pending(world)
             return ('confirm', dict(antecedent))
         if _REJECT.match(stripped):
+            reject_intent = pending.get('reject_intent')
             clear_pending(world)
+            if isinstance(reject_intent, dict) and reject_intent:
+                return ('confirm', dict(reject_intent))
             return ('reject', None)
         return ('not_reply', None)
 

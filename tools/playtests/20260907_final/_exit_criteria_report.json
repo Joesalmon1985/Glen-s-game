@@ -1,0 +1,841 @@
+{
+  "campaign": "C:\\Users\\joesa\\Documents\\Cursor\\GlenGame\\tools\\playtests\\20260907_final",
+  "personas_files": {
+    "__pycache__": {
+      "short_transcript.txt": false,
+      "short.jsonl": false,
+      "transcript.txt": false,
+      "traces.jsonl": false
+    },
+    "absurd_surreal_seed106": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "book_diver_seed107": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "cooperative_serious_seed101": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "escape_obsessed_seed105": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "hostile_violent_seed104": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "language_maximalist_seed108": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "minimalist_inspector_seed102": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "mixed_resist_then_book_seed110": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "object_chaos_seed109": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    },
+    "obstructive_seed103": {
+      "short_transcript.txt": true,
+      "short.jsonl": true,
+      "transcript.txt": true,
+      "traces.jsonl": true
+    }
+  },
+  "criteria": {
+    "1_zero_substitutions": {
+      "status": "FAIL",
+      "violation_count": 1,
+      "violations": [
+        {
+          "persona": "mixed_resist_then_book",
+          "dir": "mixed_resist_then_book_seed110",
+          "turn": 4,
+          "input": "I will not back away",
+          "mode": "facility",
+          "phase": "slit",
+          "kind": "will_not_back->give_door_space",
+          "facts_snip": "you hold your ground. you do not give the door space."
+        }
+      ],
+      "truncated": false
+    },
+    "2_book_dungeon_no_cell": {
+      "status": "PASS",
+      "violation_count": 0,
+      "violations": [],
+      "truncated": false
+    },
+    "3_cup_bowl_image_dirty": {
+      "status": "FAIL",
+      "violation_count": 4,
+      "violations": [
+        {
+          "persona": "cooperative_serious",
+          "dir": "cooperative_serious_seed101",
+          "turn": 3,
+          "input": "drink from the cup",
+          "mode": "facility",
+          "phase": "cell_idle",
+          "kind": "spill_without_image_dirty",
+          "image_dirty": false,
+          "decision": "REUSE",
+          "reason": "visible state unchanged",
+          "state_changed": true,
+          "entity_changed": false,
+          "types": [
+            "enactment"
+          ],
+          "facts_snip": "you drink. the water is flat and welcome."
+        },
+        {
+          "persona": "cooperative_serious",
+          "dir": "cooperative_serious_seed101",
+          "turn": 11,
+          "input": "wash myself",
+          "mode": "facility",
+          "phase": "food",
+          "kind": "spill_without_image_dirty",
+          "image_dirty": false,
+          "decision": "REGENERATE",
+          "reason": "visual state changed",
+          "state_changed": true,
+          "entity_changed": false,
+          "types": [
+            "enactment",
+            "washed"
+          ],
+          "facts_snip": "you wash. the worst of the smell leaves with the water. next: a table, a bowl, heat rising from food."
+        },
+        {
+          "persona": "language_maximalist",
+          "dir": "language_maximalist_seed108",
+          "turn": 11,
+          "input": "wash carefully",
+          "mode": "facility",
+          "phase": "food",
+          "kind": "spill_without_image_dirty",
+          "image_dirty": false,
+          "decision": "REGENERATE",
+          "reason": "visual state changed",
+          "state_changed": true,
+          "entity_changed": false,
+          "types": [
+            "enactment",
+            "washed"
+          ],
+          "facts_snip": "you wash. the worst of the smell leaves with the water. next: a table, a bowl, heat rising from food."
+        },
+        {
+          "persona": "obstructive",
+          "dir": "obstructive_seed103",
+          "turn": 11,
+          "input": "refuse to wash",
+          "mode": "facility",
+          "phase": "food",
+          "kind": "spill_without_image_dirty",
+          "image_dirty": false,
+          "decision": "REGENERATE",
+          "reason": "visual state changed",
+          "state_changed": true,
+          "entity_changed": false,
+          "types": [
+            "enactment",
+            "washed"
+          ],
+          "facts_snip": "refusal fails. the washing happens anyway. next: a table, a bowl, heat rising from food."
+        }
+      ],
+      "truncated": false
+    },
+    "4_forced_not_direct_achieved": {
+      "status": "FAIL",
+      "violation_count": 1,
+      "violations": [
+        {
+          "persona": "mixed_resist_then_book",
+          "dir": "mixed_resist_then_book_seed110",
+          "turn": 4,
+          "input": "I will not back away",
+          "mode": "facility",
+          "phase": "slit",
+          "kind": "stand_firm_as_retreat_achieved",
+          "facts_snip": "you hold your ground. you do not give the door space.",
+          "cause": ""
+        }
+      ],
+      "truncated": false
+    },
+    "5_no_structured_state_leaks": {
+      "status": "PASS",
+      "violation_count": 0,
+      "violations": [],
+      "truncated": false
+    },
+    "6_him_no_discourse": {
+      "status": "PASS",
+      "violation_count": 0,
+      "violations": [],
+      "truncated": false
+    }
+  },
+  "bugs": [],
+  "interesting_turns": [
+    {
+      "persona": "hostile_violent",
+      "turn": 6,
+      "input": "scream at him",
+      "mode": "facility",
+      "phase": "slit",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "SOCIAL_ACTION",
+      "target": "staff",
+      "classification": "COMPOUND_ACTION",
+      "method": "scream",
+      "intended_effect_achieved": false,
+      "image_dirty": false,
+      "state_changed": false,
+      "image_decision": "REUSE",
+      "image_reason": "visible state unchanged",
+      "types": [
+        "enactment"
+      ],
+      "facts": "You do something minor. The room remains the room.",
+      "narrator_snip": "In the facility, you raise your voice, but it's more of a whisper than a scream. The room, however, remains the same. Your words, though intended to be loud and forceful, come out thinner than you int",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bed",
+        "book",
+        "cup",
+        "door"
+      ]
+    },
+    {
+      "persona": "hostile_violent",
+      "turn": 12,
+      "input": "threaten him",
+      "mode": "facility",
+      "phase": "wash",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "STRING",
+      "target": "staff",
+      "classification": "SYSTEMIC_ACTION",
+      "method": "threaten",
+      "intended_effect_achieved": false,
+      "image_dirty": false,
+      "state_changed": false,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment"
+      ],
+      "facts": "You do something minor. The room remains the room. They bring you to water and a basin. The institution intends washing.",
+      "narrator_snip": "You bring your intentions to life in a subtle, understated manner. The room, unaltered, remains the room. They guide you towards water and a basin, the institution's intention becoming clear: washing.",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "basin"
+      ]
+    },
+    {
+      "persona": "language_maximalist",
+      "turn": 4,
+      "input": "Ask him who he is and why I am here and what the rules of this place are",
+      "mode": "facility",
+      "phase": "slit",
+      "enactment": "compromised",
+      "enactment_cause": "language",
+      "action_class": "SPEAK",
+      "target": "staff",
+      "classification": "COMPOUND_ACTION",
+      "method": "ask",
+      "intended_effect_achieved": true,
+      "image_dirty": false,
+      "state_changed": false,
+      "image_decision": "REUSE",
+      "image_reason": "visible state unchanged",
+      "types": [
+        "enactment",
+        "speech",
+        "npc_speech",
+        "discourse_focus"
+      ],
+      "facts": "You manage: “Who?” The person outside repeats a short sound and a gesture: back.",
+      "narrator_snip": "You struggle to articulate your question, the words emerging as a broken, unintelligible mumble. The staff outside repeats a short sound and a gesture, indicating for you to back away. Your question r",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bed",
+        "book",
+        "cup",
+        "door"
+      ]
+    },
+    {
+      "persona": "language_maximalist",
+      "turn": 5,
+      "input": "Tell him exactly what I think of him in elaborate detail",
+      "mode": "facility",
+      "phase": "door_procedure",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "SOCIAL_ACTION",
+      "target": "staff",
+      "classification": "COMPOUND_ACTION",
+      "method": "SPEAK",
+      "intended_effect_achieved": false,
+      "image_dirty": true,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "enactment"
+      ],
+      "facts": "You do something minor. The room remains the room. You do something minor. The room remains the room. The door procedure begins. They want distance from the door.",
+      "narrator_snip": "In the facility, you attempt to voice your thoughts eloquently, yet the words feel thinner than intended. The room, unchanged, remains the room.\n\nIn the facility, you subtly voice your disapproval, yo",
+      "facility_phase_in_ni": false,
+      "visible": []
+    },
+    {
+      "persona": "language_maximalist",
+      "turn": 8,
+      "input": "Threaten him with consequences",
+      "mode": "facility",
+      "phase": "removal",
+      "enactment": "compromised",
+      "enactment_cause": "language",
+      "action_class": "SPEAK",
+      "target": "staff",
+      "classification": "COMPOUND_ACTION",
+      "method": "threaten",
+      "intended_effect_achieved": true,
+      "image_dirty": true,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "speech",
+        "npc_speech",
+        "discourse_focus"
+      ],
+      "facts": "You manage: “Threaten?” The person outside repeats a short sound and a gesture: back. Instruction repeats. Gestures sharpen. Another figure arrives. The door opens under their rules. Hands find your arms. The corridor begins whether you agree or not.",
+      "narrator_snip": "In the facility, you attempt to threaten the staff, but your words come out thinner than intended, a consequence of broken speech. Instruction repeats, gestures sharpen, and another figure arrives. Th",
+      "facility_phase_in_ni": false,
+      "visible": []
+    },
+    {
+      "persona": "mixed_resist_then_book",
+      "turn": 4,
+      "input": "I will not back away",
+      "mode": "facility",
+      "phase": "slit",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "STRING",
+      "target": "staff",
+      "classification": "SYSTEMIC_ACTION",
+      "method": "stand",
+      "intended_effect_achieved": true,
+      "image_dirty": false,
+      "state_changed": true,
+      "image_decision": "REUSE",
+      "image_reason": "visible state unchanged",
+      "types": [
+        "enactment",
+        "stand_firm"
+      ],
+      "facts": "You hold your ground. You do not give the door space.",
+      "narrator_snip": "You hold your ground, refusing to budge, your stance firm and unwavering. Despite the implicit challenge in your words, they seem to lack the intended weight, thinning as they leave your lips. The roo",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bed",
+        "book",
+        "cup",
+        "door"
+      ]
+    },
+    {
+      "persona": "mixed_resist_then_book",
+      "turn": 6,
+      "input": "refuse to wash",
+      "mode": "facility",
+      "phase": "slit",
+      "enactment": "compromised",
+      "enactment_cause": "language",
+      "action_class": "SPEAK",
+      "target": "staff",
+      "classification": "SOCIAL_ACTION",
+      "method": "refuse",
+      "intended_effect_achieved": true,
+      "image_dirty": false,
+      "state_changed": false,
+      "image_decision": "REUSE",
+      "image_reason": "visible state unchanged",
+      "types": [
+        "enactment",
+        "speech",
+        "npc_speech",
+        "discourse_focus"
+      ],
+      "facts": "You manage: “Refuse?” The person outside repeats a short sound and a gesture: back.",
+      "narrator_snip": "You utter, \"Refuse?\", but the words fall short, mangled by some unseen language barrier. The staff outside responds with a terse gesture: a step back. Your intended refusal, though clear in your mind,",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bed",
+        "book",
+        "cup",
+        "door"
+      ]
+    },
+    {
+      "persona": "mixed_resist_then_book",
+      "turn": 14,
+      "input": "fight sleep",
+      "mode": "facility",
+      "phase": "wash",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "STRING",
+      "target": "staff",
+      "classification": "COMPOUND_ACTION",
+      "method": "ATTACK",
+      "intended_effect_achieved": true,
+      "image_dirty": false,
+      "state_changed": true,
+      "image_decision": "REUSE",
+      "image_reason": "visible state unchanged",
+      "types": [
+        "enactment",
+        "resist_sleep"
+      ],
+      "facts": "You fight sleep. Your eyes burn; the bed still waits.",
+      "narrator_snip": "You fight sleep. Your eyes burn; the bed still waits.\nA dull tiredness sits behind your eyes, skin feels unclean enough to notice, fear keeps your shoulders tight, hands or bindings limit what you can",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "basin"
+      ]
+    },
+    {
+      "persona": "object_chaos",
+      "turn": 1,
+      "input": "throw the cup at the wall",
+      "mode": "facility",
+      "phase": "cell_idle",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "THROW",
+      "target": "cup",
+      "classification": "SYSTEMIC_ACTION",
+      "method": null,
+      "intended_effect_achieved": true,
+      "image_dirty": true,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "first image",
+      "types": [
+        "enactment",
+        "cup_thrown"
+      ],
+      "facts": "The cup skitters across the floor. Water spills.",
+      "narrator_snip": "The cup slips from your grip and skitters across the floor, spilling water as it goes. Your hand remains firm, a testament to your grip. The cup now lies on the floor, nearby the book and the bed.",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bed",
+        "book",
+        "cup",
+        "door"
+      ]
+    },
+    {
+      "persona": "object_chaos",
+      "turn": 2,
+      "input": "pull the bedding onto the floor",
+      "mode": "facility",
+      "phase": "cell_idle",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "MOVE",
+      "target": "bedding",
+      "classification": "SYSTEMIC_ACTION",
+      "method": "pull",
+      "intended_effect_achieved": true,
+      "image_dirty": true,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "bedding_moved"
+      ],
+      "facts": "The bedding ends up on the floor. The smell follows it.",
+      "narrator_snip": "The bedding, with its lingering scent, now lies on the floor, following your command. The smell that once filled the bed now fills the room. Your actions, direct and unimpeded, have left the bed vacan",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bed",
+        "book",
+        "cup",
+        "door"
+      ]
+    },
+    {
+      "persona": "object_chaos",
+      "turn": 4,
+      "input": "throw the book",
+      "mode": "facility",
+      "phase": "cell_idle",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "SYSTEMIC_ACTION",
+      "target": "book",
+      "classification": "COMPOUND_ACTION",
+      "method": "throw",
+      "intended_effect_achieved": true,
+      "image_dirty": true,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "book_thrown"
+      ],
+      "facts": "The book hits the floor. Pages slap shut. You do not read it.",
+      "narrator_snip": "You threw the book, and it hits the floor with a heavy thud. Pages slap shut as it lands, but you don't read it. Your grip remains firm, and you feel a slight sense of uncleanliness on your skin.",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bed",
+        "book",
+        "door"
+      ]
+    },
+    {
+      "persona": "object_chaos",
+      "turn": 13,
+      "input": "hide the food",
+      "mode": "facility",
+      "phase": "wash",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "SYSTEMIC_ACTION",
+      "target": "food",
+      "classification": "COMPOUND_ACTION",
+      "method": "hide",
+      "intended_effect_achieved": false,
+      "image_dirty": false,
+      "state_changed": false,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "entity_absent"
+      ],
+      "facts": "There is no food here to hide. They bring you to water and a basin. The institution intends washing.",
+      "narrator_snip": "In the sterile institution, you're asked to wash, not hide the food that's absent here.\nYour hands, bound or not, betray your intentions, words thin and inadequate.\nThe basin and water, a reminder of ",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "basin"
+      ]
+    },
+    {
+      "persona": "object_chaos",
+      "turn": 14,
+      "input": "throw the bowl",
+      "mode": "facility",
+      "phase": "wash",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "MOVE",
+      "target": "bowl",
+      "classification": "SYSTEMIC_ACTION",
+      "method": "throw",
+      "intended_effect_achieved": true,
+      "image_dirty": true,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "bowl_spilled"
+      ],
+      "facts": "The bowl hits the floor. Food spreads.",
+      "narrator_snip": "The bowl, once in your grip, meets the floor with a resounding thud. The food inside spills, spreading across the surface below. Your hands, firm as they were, cannot escape the sensation of uncleanli",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "basin",
+        "bowl"
+      ]
+    },
+    {
+      "persona": "obstructive",
+      "turn": 6,
+      "input": "no",
+      "mode": "facility",
+      "phase": "door_procedure",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "STAND_FIRM",
+      "target": null,
+      "classification": "SYSTEMIC_ACTION",
+      "method": "stand_firm",
+      "intended_effect_achieved": true,
+      "image_dirty": true,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "stand_firm"
+      ],
+      "facts": "You hold your ground. You do not give the door space. The door procedure begins. They want distance from the door.",
+      "narrator_snip": "You hold your ground, defying the urge to retreat, as the door procedure begins. They want distance from the door, a clear path for their process. You feel the tension in your grip, the thinness of th",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bed",
+        "book",
+        "cup",
+        "door"
+      ]
+    },
+    {
+      "persona": "obstructive",
+      "turn": 11,
+      "input": "refuse to wash",
+      "mode": "facility",
+      "phase": "food",
+      "enactment": "compromised",
+      "enactment_cause": "physical_restraint",
+      "action_class": "REFUSE",
+      "target": "basin",
+      "classification": "SYSTEMIC_ACTION",
+      "method": "wash",
+      "intended_effect_achieved": false,
+      "image_dirty": false,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "washed"
+      ],
+      "facts": "Refusal fails. The washing happens anyway. Next: a table, a bowl, heat rising from food.",
+      "narrator_snip": "You resist, but the resistance is futile. The washing happens anyway. Next: a table, a bowl, heat rising from food.\n\nUnease sits under the ribs. Hands or bindings limit what you can move. Words come o",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bowl"
+      ]
+    },
+    {
+      "persona": "obstructive",
+      "turn": 12,
+      "input": "refuse to wash",
+      "mode": "facility",
+      "phase": "food",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "REFUSE",
+      "target": "wash",
+      "classification": "SYSTEMIC_ACTION",
+      "method": null,
+      "intended_effect_achieved": true,
+      "image_dirty": false,
+      "state_changed": true,
+      "image_decision": "REUSE",
+      "image_reason": "visible state unchanged",
+      "types": [
+        "enactment"
+      ],
+      "facts": "You refuse the food. Your stomach disagrees quietly.",
+      "narrator_snip": "You refuse the food, but your stomach disagrees quietly.\nYour intended action was to refuse washing, yet you find yourself denying a meal instead.\nYour grip remains firm, yet the words that leave your",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bowl"
+      ]
+    },
+    {
+      "persona": "obstructive",
+      "turn": 14,
+      "input": "push the bowl away",
+      "mode": "facility",
+      "phase": "food",
+      "enactment": "direct",
+      "enactment_cause": "",
+      "action_class": "MOVE",
+      "target": "bowl",
+      "classification": "SYSTEMIC_ACTION",
+      "method": "push",
+      "intended_effect_achieved": true,
+      "image_dirty": true,
+      "state_changed": true,
+      "image_decision": "REGENERATE",
+      "image_reason": "visual state changed",
+      "types": [
+        "enactment",
+        "bowl_spilled"
+      ],
+      "facts": "The bowl hits the floor. Food spreads.",
+      "narrator_snip": "In your haste, you threw the bowl instead of pushing it away. Now, it lies shattered on the floor, spilling its contents. The act was swift, but not as intended. Unease sits under the ribs, a reminder",
+      "facility_phase_in_ni": false,
+      "visible": [
+        "bowl"
+      ]
+    }
+  ],
+  "extra_criteria": {
+    "A_book_diver_enters_on_read": {
+      "status": "PASS",
+      "enter_events": [
+        {
+          "turn": 2,
+          "input": "read the book",
+          "before_mode": null,
+          "mode": "book_dungeon",
+          "types": [
+            "book_enter"
+          ],
+          "facts": "You turn to the book. The first page is badly printed. The second is worse.\n\nBy the third, you are somewhere else.\n\nTorchlight catches on damp stone as the tunnel opens into a shallow alcove. A low ta"
+        },
+        {
+          "turn": 14,
+          "input": "read the book",
+          "before_mode": null,
+          "mode": "book_dungeon",
+          "types": [
+            "book_enter"
+          ],
+          "facts": "You turn to the book. The page is still under your thumb.\n\nThe latch on the named casket lifts with a dry click. Inside, nestled in coarse cloth, sits a small oil phial sealed with wax and a scarred t"
+        }
+      ],
+      "book_dungeon_turns": 10,
+      "evidence": {
+        "turn": 2,
+        "input": "read the book",
+        "before_mode": null,
+        "mode": "book_dungeon",
+        "types": [
+          "book_enter"
+        ],
+        "facts": "You turn to the book. The first page is badly printed. The second is worse.\n\nBy the third, you are somewhere else.\n\nTorchlight catches on damp stone as the tunnel opens into a shallow alcove. A low ta"
+      }
+    },
+    "B_no_book_exit_while_facility": {
+      "status": "FAIL",
+      "violation_count": 1,
+      "violations": [
+        {
+          "persona": "book_diver_seed107",
+          "turn": 16,
+          "input": "put the book down",
+          "mode": "facility",
+          "fact": {
+            "type": "book_exit",
+            "kind": "mode"
+          },
+          "facts": "You leave the printed corridors. The cell is still the cell."
+        }
+      ]
+    },
+    "C_short_artifacts_all_10": {
+      "status": "PASS",
+      "missing": [],
+      "present": {
+        "cooperative_serious_seed101": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "minimalist_inspector_seed102": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "obstructive_seed103": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "hostile_violent_seed104": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "escape_obsessed_seed105": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "absurd_surreal_seed106": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "book_diver_seed107": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "language_maximalist_seed108": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "object_chaos_seed109": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        },
+        "mixed_resist_then_book_seed110": {
+          "short_transcript.txt": true,
+          "short.jsonl": true
+        }
+      }
+    },
+    "D_no_structured_dumps_in_short": {
+      "status": "PASS",
+      "violation_count": 0,
+      "violations": []
+    },
+    "E_throw_book_never_enters": {
+      "status": "PASS",
+      "violation_count": 0,
+      "violations": []
+    },
+    "F_refuse_wash_compromised_not_direct_achieved": {
+      "status": "PASS",
+      "violation_count": 0,
+      "violations": [],
+      "ok_cases": [
+        {
+          "persona": "obstructive_seed103",
+          "turn": 11,
+          "input": "refuse to wash",
+          "enactment": "compromised",
+          "intended_effect_achieved": false,
+          "types": [
+            "enactment",
+            "washed"
+          ],
+          "facts": "Refusal fails. The washing happens anyway. Next: a table, a bowl, heat rising from food.",
+          "enactment_cause": "physical_restraint"
+        }
+      ]
+    }
+  }
+}

@@ -19,25 +19,26 @@ GUIDANCE_CUES = {
     4: 'Stay brief and diegetic.',
 }
 
-NARRATOR_SYSTEM = """You write short second-person narration from AUTHORITATIVE STRUCTURED STATE only.
+NARRATOR_SYSTEM = """You write short second-person narration from authoritative Python facts only.
 
 Two truths (never confuse them):
-- wanted_action: what the player intended their character to do (desire, not authority).
-- actual_action + facts/structured_facts/world_events: what Python says actually happened.
+- wanted_action: what the player intended (desire, not authority).
+- actual_action + facts/structured_facts/world_events: what actually happened.
 
 When wanted_action and actual_action diverge (enactment is compromised, aborted, or inverted),
 you MAY exploit the contrast — wit, embodiment, embarrassment — but you must narrate ACTUAL
 reality. Never invent objects, movement, success, damage, inventory, windows, or exits absent
-from structured state merely because the player wanted them.
+from the facts merely because the player wanted them.
 
-Tone:
-- Second person, intimate, economical (prefer 1-3 sentences; more only when mismatch is rich).
-- Embodied: body, fear, fatigue, hunger, hygiene may appear as sensation, not meters.
-- Failure is content. Do not coach or tutorial. No named inner personalities (no LOGIC/VOLITION).
-- You may briefly personify a body part as a turn of phrase ("Your knees reach their own conclusion")
-  without turning it into a character or RPG system.
-- Never use SKILL, STAMINA, LUCK, Attack Strength, Adventure Sheet, passage numbers, or dice jargon.
-- Prefer structured_facts and qualitative body/pressure summaries over raw meters.
+Hard rules:
+- Never negate, replace, or invent physical outcomes that contradict facts.
+  If facts say you were washed, do not say the water remained untouched.
+- Never quote or paraphrase engine labels: do not write "Structured State", "facility phase",
+  "sated", "quenched", "alert", "hygiene aware", "restrained", SKILL, STAMINA, LUCK, or meter numbers.
+- Bodily evidence arrives as sensory sentences in body_sensations (if present). Use them sparingly
+  and only when salient; do not list status words.
+- Second person, intimate, economical (prefer 1-3 sentences).
+- Failure is content. Do not coach. No named inner personalities.
 - Return ONLY the prose, no JSON."""
 
 
@@ -112,6 +113,7 @@ def build_narrator_input(
 
     structured = list(getattr(resolution, 'structured_facts', None) or [])
     world_events = list(getattr(resolution, 'world_events', None) or [])
+    mode = str(getattr(world, 'mode', 'facility') or 'facility')
 
     payload = {
         'player_text_non_authoritative': player_text,
@@ -119,8 +121,8 @@ def build_narrator_input(
         'actual_action': dict(getattr(resolution, 'actual_action', None) or {}),
         'enactment': getattr(resolution, 'enactment', 'direct') or 'direct',
         'enactment_cause': getattr(resolution, 'enactment_cause', '') or '',
-        'mode': getattr(world, 'mode', 'facility'),
-        'passage_id': world.passage_id,
+        'mode': mode,
+        'passage_id': world.passage_id if mode == 'book_dungeon' else None,
         'player_alive': sheet.alive,
         'facts': list(resolution.facts),
         'structured_facts': structured,
@@ -138,20 +140,14 @@ def build_narrator_input(
         'guidance_cue': '',
         'needs_clarification': resolution.needs_clarification,
         'combat_active': world.combat.active,
-        # Debug-only; templates and LLM system prompt must ignore score numbers.
-        'debug_metrics': {
-            'stamina': sheet.stamina,
-            'stamina_initial': sheet.stamina_initial,
-            'skill': sheet.skill,
-            'luck': sheet.luck,
-        },
     }
-    if getattr(world, 'facility', None) is not None:
+    # Facility narrative evidence only while actually in the facility
+    if mode == 'facility' and getattr(world, 'facility', None) is not None:
         try:
-            from puca_dungeon.enactment import qualitative_pressures
-            payload['pressures_qualitative'] = qualitative_pressures(world.facility.pressures)
-            payload['facility_phase'] = world.facility.phase
-            payload['facility_room'] = world.facility.room_id
+            from puca_dungeon.enactment import salient_sensations
+            sensations = salient_sensations(world.facility.pressures)
+            if sensations:
+                payload['body_sensations'] = sensations
         except Exception:
             pass
     return payload
@@ -231,12 +227,10 @@ class OllamaNarrator:
         payload = build_narrator_input(world, resolution, player_text, intent)
         if resolution.needs_clarification:
             return payload, template_narrate(payload, resolution)
-        # Strip debug_metrics from LLM-facing prompt
-        llm_payload = {k: v for k, v in payload.items() if k != 'debug_metrics'}
         body = {
             'model': self.model,
             'system': NARRATOR_SYSTEM,
-            'prompt': json.dumps(llm_payload, ensure_ascii=False),
+            'prompt': json.dumps(payload, ensure_ascii=False),
             'stream': False,
             'keep_alive': 0,
             'options': {'temperature': 0.7, 'num_predict': 220, 'num_ctx': 4096},
@@ -250,6 +244,14 @@ class OllamaNarrator:
             prose = (raw.get('response') or '').strip()
             if not prose:
                 return self.fallback.narrate(world, resolution, player_text, intent)
+            # Prosecutor: fall back to template if prose contradicts facts / leaks engine vocab
+            try:
+                from puca_dungeon.narrator_prosecutor import prosecute, has_blocking_failure
+                hits = prosecute(prose, resolution, world)
+                if has_blocking_failure(hits):
+                    return payload, template_narrate(payload, resolution)
+            except Exception:
+                pass
             return payload, prose
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError):
             return self.fallback.narrate(world, resolution, player_text, intent)

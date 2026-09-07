@@ -1,0 +1,161 @@
+# Short playtest: minimalist_inspector
+seed=102
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> look at the bed
+
+You perceive the bed, its narrow frame and thin bedding clearly visible, the bedding resting upon it. The sensations are there, a faint hint of dirt on your skin, a slight thinness to your voice. The cup, book, and door remain in sight, the door perhaps a potential avenue for exploration.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> look at the cup
+
+You glance at the cup, half-full of water, nestled beside your bed. The water, untouched, still sits in it, a silent witness to your observation. The cup, plain and simple, is a constant presence in this room, sharing space with a book and a door. Your skin, ever sensitive, feels unclean enough to notice, and the words that leave your lips seem thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> look at the book
+
+You turned to a book, seeking to perceive its contents. Instead, you found yourself reading it.
+
+The first page was poorly printed, the second worse. By the third, you were transported.
+
+Torchlight flickers on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your name, cut cleanly into the wood as if the carver knew you would come. The air here is still; farther ahead the tunnel continues into deeper dark.
+
+Your name etched on a casket, you stand amidst six sealed mysteries.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 4
+> look at the door
+
+In the dimly lit tunnel, your gaze lingers on the door you just passed through. The torchlight catches on damp stone as it reveals an alcove, and within it, a low table of unfinished rock. Six sealed caskets rest on it, each bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your name.
+
+You notice: six caskets, a named casket, a stone table.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 5
+> look at the slit
+
+In the dimly lit passage, your gaze lingers on a slit, leading to a revelation. The torchlight catches on damp stone, illuminating an alcove. A simple stone table against the left wall hosts six sealed caskets, five plain and one adorned with your name. Your perception, sharp as ever, has delivered.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 6
+> examine myself
+
+Torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your... You notice: six caskets, named casket, stone table.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 7
+> wait
+
+You wait, but the world remains unyielding. Sixty seconds tick by, and still, nothing in the world shifts for that. The caskets and the stone table before you stand as they have for centuries, untouched and unyielding. Your grip is firm, your locomotion normal, and your body devoid of pain or bleeding. The passage of time marks another second on the clock, but the outcome of your wait remains elusive.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 8
+> wait
+
+You wait, but the world remains unmoved. A voice echoes from beyond a slit, speaking in fragments of a language you vaguely recognize. The speaker repeats, "back...away." Simultaneously, a knocking sound disrupts the silence, not from the corridor you anticipated. The book under your thumb remains untouched, a constant reminder of the unfulfilled action. Your skin feels unclean, and words seem thin on your lips.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 9
+> wait
+
+Time passes. The room does not hurry, as you intended to wait without haste. Your intention aligns with the actual outcome: you wait. Skin feels unclean enough to notice, a reminder that the room remains untouched by water or soap. Words come out thinner than you intend, a subtle reminder of your situation.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 10
+> wait
+
+Time passes. The room does not hurry, and you remain stationary as the door procedure begins. They want distance from the door, a distance you unintentionally provide. Skin feels unclean enough to notice, words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 11
+> look through the slit
+
+Through the slit, you glimpse a heavy door, its surface marred by time and wear. The door, devoid of an inner handle, is locked, its only opening a narrow slit that gapes wide. No handle is to be found on this side.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 12
+> step back
+
+You retreat, complying with the door's opening under its own rules. Hands find your arms, pulling you forward into the corridor. The corridor begins whether you agree or not. Your skin feels unclean, a sensation that lingers. Your words seem thinner than you intend, a reminder of the control beyond your grasp.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 13
+> look around
+
+In this confined space, your gaze roams the unadorned corridor, hands bound. The institution's rhythm pulses around you, moving at its own pace. A stark reminder of where you are.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 14
+> wait
+
+Time passes. The room does not hurry. They bring you to water and a basin. The institution intends washing.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 15
+> wait
+
+Time passes, and you wait in the room, much like the room itself does. Your skin feels unclean enough to notice, and unease sits under your ribs. Your hands or bindings limit what you can move, and words come out thinner than you intend. The basin remains visible, but time does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 16
+> wait
+
+In the face of resistance, you're still washed. The room remains unmoved by your protest, the air around you now carries a scent that's less yours.
+
+A table, a bowl, and heat rising from food await you next. The unease that lingers beneath your ribs is a reminder of your circumstances. Your hands, bound or not, limit your movement, and words slip through your fingers, thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 17
+> wait
+
+Time passes. The room does not hurry, despite your wish to hasten it. You remain in wait, as the seconds tick by. Unease sits under your ribs, hands or bindings limiting what you can move. Words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 18
+> wait
+
+In your cell, time passes as you wait. The room remains unmoved, a silent observer to your patience. A meal arrives, not left as a debate forever. You are returned to the same bed, cleaner, fed, and much more tired. A dull tiredness sits behind your eyes, unease under the ribs, and words come out thinner than intended. You waited, and you waited directly.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 19
+> examine the bed
+
+The bed, once bleak, now reveals itself to you. Its narrow frame, clad in thin bedding, stands as a silent witness. Yet, it seems to bear a whisper of an impending struggle.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 20
+> sleep
+
+You let the bed take your weight, sleep following. The bed, your anchor in the room, a cup and a book your silent companions. Your grip remains firm, your locomotion ceases. Unease lingers beneath your ribs, words thinning in their departure. Rest is found, unwilled but inevitable.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+_(character slept — ending run)_

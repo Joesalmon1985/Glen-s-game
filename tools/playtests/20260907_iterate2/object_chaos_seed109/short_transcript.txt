@@ -1,0 +1,130 @@
+# Short playtest: object_chaos
+seed=109
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> throw the cup at the wall
+
+The cup leaves your hand, skittering across the floor as water spills. It comes to rest on the floor, undamaged. Your skin feels unclean enough to notice.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup on floor spilled water on floor, book, door, wary adventurer
+
+## Turn 2
+> pull the bedding onto the floor
+
+The bedding now resides on the floor, the scent permeating the air around you. The movement, direct and straightforward, was in accordance with your desire.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, cup on floor spilled water on floor, book, door, wary adventurer
+
+## Turn 3
+> move the cup
+
+You picked up the cup, as intended. Yet, the feeling of your skin remains unclean, a sensation that lingers despite your action. Your words, though, seem thinner than you desired.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book, door, wary adventurer
+
+## Turn 4
+> throw the book
+
+The book leaves your grasp, arcing through the air before slamming into the floor. Pages scatter, but the book remains unopened. The weight of its silence is a tangible presence in the room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on floor, door, wary adventurer
+
+## Turn 5
+> pick up the book
+
+You picked up the book, yet it remains closed. The weight and texture of the tome in your grasp offers a sense of uncleanliness, while the words that leave your lips seem to dissipate.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, door, wary adventurer
+
+## Turn 6
+> put the book on the bed
+
+You place the book on the bed, but the action prompts a response. The slit opens, and a muffled voice from outside speaks in a language you don't quite understand. The words seem to repeat "back" or "away." Your skin feels unclean, and your words come out thinner than you intended. The book remains closed on the bed.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 7
+> kick the door
+
+You reach for the door, but it has no handle on this side. It remains closed, unyielding to your kick. The door, the bed, and the book remain untouched, and your words feel thinner than you intend. Skin feels unclean enough to notice.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 8
+> drink from the cup
+
+Your intention was to drink from the cup, but alas, the cup is empty. You grasp the cup firmly, but find nothing to quench your thirst. The dryness of the cup leaves your skin feeling unclean enough to notice, and your words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 9
+> wait
+
+Time passes, and as instructed, you wait. The door procedure begins, signaling a desire for distance from the door. Despite your attempts, the room remains unresponsive to your urgency. Your skin feels unclean, a reminder of the environment around you, and your words seem thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 10
+> wait
+
+Time passes. The room does not hurry. Your instincts urge you to act, but the clock ticks on. Instruction repeats. Gestures sharpen. Another figure arrives. You remain, unyielding, waiting. Skin feels unclean enough to notice, words come out thinner than you intend. Yet, you wait.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 11
+> wait
+
+Time passes, and you wait, as instructed.
+The room does not hurry, and the instruction repeats, gestures sharpening.
+Another figure arrives, and the door opens under their rules.
+Hands find your arms, and the corridor begins whether you agree or not.
+Your skin feels unclean enough to notice, and unease sits under your ribs.
+Your hands or bindings limit what you can move, and words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 12
+> throw water
+
+You can't throw water here, dear. Reality doesn't stretch that far. Your skin feels unclean, unease lingers, and your movements are restricted. Words seem to falter, but that's just the way it is.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 13
+> hide the food
+
+In the institution, you yearn to conceal the food, but there is no food here to hide. Instead, you're led to water and a basin—their intention is washing. Your body feels unclean enough to notice, and the unease sits under your ribs. Despite your desire, the food remains unmanipulated. Your words come out thinner than you intend, a testament to the circumstances.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 14
+> throw the bowl
+
+The bowl, once in your hand, now rests on the floor. The food inside has spread. Your actions, carried out as intended. Yet, the scent of spilled food lingers, a reminder of your actions' aftermath. Skin feels unclean, unease lurks beneath your ribs, and your movements are confined by hands or bindings.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer
+
+## Turn 15
+> look around
+
+In the sterile facility, you perceive a basin and a bowl. The soap, medicinal, hints at the institution's purpose. Your hands feel unclean, unease lingers, and you're aware of the bindings that restrict your movement. Your words, though, seem thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer
+
+## Turn 16
+> sleep
+
+In the quiet, you succumb to sleep, unprompted and unstirred. The room, untouched by your restlessness, remains as it was.
+
+Your actions, minimal and mundane, echo in the silence, a testament to your body's rhythm.
+
+You sleep, a simple act asserting its dominance over your wakeful intentions. Skin unclean, unease nestled under your ribs, hands or bindings limiting your movement, words thinning as they leave your lips - these are the sensory reminders of your slumber. The world around you, unchanged by your sleep, continues its own dance.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer

@@ -1,0 +1,155 @@
+# Short playtest: book_diver
+seed=107
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> pick up the book
+
+You picked up the book, but it remains closed.
+The book stays firmly in your grip, the words within yet untouched.
+Your skin feels unclean, a reminder of the day's passage.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, door, wary adventurer
+
+## Turn 2
+> read the book
+
+In the heart of the book dungeon, you intended to read the book.
+But as you turn its pages, the text becomes unreadable.
+Instead, you find yourself in a dimly lit alcove, the damp stone walls glowing softly under torchlight.
+A table with six sealed caskets catches your eye, one bearing your name.
+The tunnel ahead continues into darkness, but for now, you stand before your named casket.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 3
+> look around
+
+Torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your... You notice: six caskets, named casket, stone table.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 4
+> open the named casket
+
+The latch on the named casket lifts with a dry click. Inside, nestled in coarse cloth, sits a small oil phial sealed with wax and a scarred token of dark metal—worn smooth at the edges, as if carried for years. Nothing else. The other five caskets remain sealed and silent.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 5
+> continue
+
+In this moment, your words remain unanswered, a dance of words unresolved. The world, unyielding, does not heed your uninterpretable intent. The casket, the oil phial, and the scarred token remain untouched, your actions undefined. Your body, though, is steady, a testament to the normalcy of your locomotion. No pain or bleeding mar your presence. The combat, inactive, allows you to stand, unscathed and alive. Your journey continues, your intentions unfulfilled, within the book's dungeon passage 2.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 6
+> go west
+
+Pacing and turning, you find no new path westward from your current position.
+Despite your intention, your movement is not successful in this direction.
+The passage offers no opening to proceed further.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 7
+> look around
+
+You lift the latch on the named casket, and it clicks open silently. Inside, a small oil phial sealed with wax and a scarred token of dark metal rest. The other five caskets remain untouched and silent. You notice the named casket, the oil phial, and the scarred token.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 8
+> continue
+
+In the hushed silence, you gently lift the latch on the named casket, its dry click echoing in the confined space. Inside, you find a small oil phial sealed with wax and a worn, dark metal token—the only contents. The other caskets remain sealed, their silence unbroken. Your gaze lingers on the phial and token, your heart quickening with anticipation. You notice the casket, the oil phial, and the scarred token. A sense of discovery fills the air, as you stand amidst the enigma of the dungeon's mysteries.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 9
+> attack
+
+You strike at the named casket, but it remains unyielding. The world around you doesn't budge. A moment passes, and the clock ticks on, advancing by fifteen seconds. Your grip is firm, yet your attack fails. The casket stands as it was, unperturbed. The oil phial and the scarred token are still in their places, unaffected by your attempt.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 10
+> attack
+
+You swing your sword at the named casket, but the attack is unsuccessful. The casket remains intact, and the corridor remains silent. A knocking sound echoes, not from where you expected, and a voice outside the slit speaks in a language you don't understand. The page under your thumb stays put, as the knocking continues. Your skin feels unclean, and the words you speak seem thinner than intended.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, door slit open, wary adventurer
+
+## Turn 11
+> attack
+
+In the midst of your intended attack, the staff swiftly tightens their grip. The attempt is messy and short. Your skin feels unclean enough to notice, and words come out thinner than you intend. The enactment is compromised.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, door slit open, wary adventurer
+
+## Turn 12
+> put the book down
+
+You put the book down, just as you intended. The book stays closed, a testament to your action. Yet, your skin feels unclean, a sensation that seems out of place in this moment.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 13
+> look at the cup
+
+You perceive, but the cup, already half-full, remains unnoticed by your gaze. The water inside, untouched and still. It sits beside your bed, a constant companion in this shared space.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 14
+> read the book
+
+In your hands, a book, its page still under your thumb.
+The latch on the named casket lifts with a dry click. Inside, a small oil phial sealed with wax and a scarred token of dark metal—worn smooth at the edges, as if carried for years.
+
+Something knocks. Not in the corridor you were imagining. Again. The page is still under your thumb.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 15
+> look around
+
+You unlatch the named casket, its hinges whispering in the silence. Inside, you find a small oil phial sealed with wax and a worn token of dark metal. The other caskets remain closed, silent. Your gaze lingers on the objects, a testament to the passage of time. Your perception, unimpeded. The world around you, unchanged.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 16
+> put the book down
+
+You closed the book, not putting it down as you intended. The cell, still austere, remains your confined sanctuary. The sensation of uncleanliness lingers on your skin, a constant reminder of your circumstances. Your voice, though, feels thinner than you'd like it to be.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 17
+> wait
+
+Time passes. The room does not hurry, despite your urge to flee. Your gaze lingers on the door, the cup, the book – yet, you remain stationary, compelled to wait. Another figure arrives, instruction repeats, gestures sharpen. Your patience tested, you wait, adhering to the unspoken rules.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 18
+> wait
+
+Time passes. The room does not hurry. You wait, as instructed. Another figure arrives, and the instructions repeat, gestures sharpening. The door opens under their rules, and hands find your arms. The corridor begins whether you agree or not. Your skin feels unclean enough to notice, unease sits under your ribs, and hands or bindings limit what you can move. Words come out thinner than you intend, but you wait, as you were told.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 19
+> sleep
+
+In the stillness, you find yourself drawn to slumber. The room, untouched by your minor actions, remains unchanged. Yet, the institution guides you towards water and a basin, a prelude to washing.
+
+Your body, bound or not, senses the uncleanliness. The unease lingers beneath your ribs, a constant reminder of your surroundings. Yet, sleep claims you regardless, a direct enactment of your desires.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer

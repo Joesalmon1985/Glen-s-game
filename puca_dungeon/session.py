@@ -264,6 +264,23 @@ class GameSession:
             fac = self.world.facility
             room = fac.rooms.get(fac.room_id) or {}
             ents = [e.id for e in fac.entities_in_room()]
+            seed_parts = ['facility', fac.room_id or 'cell']
+            for e in fac.entities_in_room():
+                bit = e.id
+                pos = (e.state or {}).get('position')
+                if pos:
+                    bit += f' {str(pos).replace("_", " ")}'
+                if e.id == 'cup' and (e.state or {}).get('water_spilled'):
+                    bit += ' spilled water on floor'
+                if e.id == 'cup' and e.broken:
+                    bit += ' broken'
+                if e.id == 'bed' and (e.state or {}).get('bedding') == 'on_floor':
+                    bit += ' bedding on floor'
+                if e.id == 'bowl' and (e.state or {}).get('spilled'):
+                    bit += ' food spilled'
+                if e.id == 'door' and fac.slit_open:
+                    bit += ' slit open'
+                seed_parts.append(bit)
             return {
                 'id': 0,
                 'text': str(room.get('description') or ''),
@@ -273,7 +290,7 @@ class GameSession:
                 'hazards': [],
                 'effects_on_enter': [],
                 'ending': 'sleep' if fac.slept else None,
-                'image_seed': 'facility cell sparse bed cup book door',
+                'image_seed': ', '.join(seed_parts),
             }
         return get_passage(self.world.passage_id)
 
@@ -309,6 +326,7 @@ class GameSession:
             self.world.turn_index = turn_index
             self._ensure_dungeon_layout()
             passage = self.current_passage()
+            self._sync_book_visibles(passage)
             text = passage.get('text') if isinstance(passage, dict) else getattr(passage, 'text', '')
             return 'The page is still under your thumb.\n\n' + (text or '').strip()
         dungeon = self._ensure_dungeon_layout()
@@ -328,11 +346,24 @@ class GameSession:
         self.world.victory = False
         set_active_dungeon(dungeon)
         passage = dungeon.get_passage(dungeon.entry_id)
+        self._sync_book_visibles(passage)
         return (
             'The first page is badly printed. The second is worse.\n\n'
             'By the third, you are somewhere else.\n\n'
             + str(passage.get('text') or '').strip()
         )
+
+    def _sync_book_visibles(self, passage) -> None:
+        """Authoritative book-dungeon visibles from passage entities only."""
+        ents = []
+        if isinstance(passage, dict):
+            ents = list(passage.get('entities') or [])
+        else:
+            ents = list(getattr(passage, 'entities', None) or [])
+        self.world.visible_entities = [str(e) for e in ents]
+        # Clear facility discourse focus inside the book
+        self.world.last_npc_referent = None
+        self.world.pending_discourse = None
 
     def exit_book(self, *, interrupted: bool = False) -> str:
         """Leave book dungeon; bookmark state for resume."""
@@ -589,13 +620,19 @@ class GameSession:
         if self.world.mode == 'facility':
             grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
             resolution = resolve_facility(self.world, intent, grounding, self.rng, player_text)
+            # Persist discourse focus + last intent for again/him
+            if intent and intent.understood:
+                self.world.last_grounded_intent = intent.to_dict()
             for fact in list(resolution.structured_facts or []):
+                if isinstance(fact, dict) and fact.get('type') == 'discourse_focus':
+                    self.world.last_npc_referent = str(fact.get('referent') or 'staff')
                 if isinstance(fact, dict) and fact.get('type') == 'book_enter':
                     prose = self.enter_book()
                     resolution.facts.append(prose)
                     resolution.show_passage_text = False
                     resolution.state_changed = True
                     resolution.situation_changed = True
+                    resolution.image_dirty = True
                 elif isinstance(fact, dict) and fact.get('type') == 'book_exit':
                     prose = self.exit_book()
                     resolution.facts.append(prose)
@@ -603,6 +640,8 @@ class GameSession:
             return grounding, resolution
 
         grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
+        if intent and intent.understood:
+            self.world.last_grounded_intent = intent.to_dict()
         if wants_book_exit(player_text) and self.world.facility is not None:
             prose = self.exit_book()
             resolution = Resolution(
@@ -777,9 +816,17 @@ class GameSession:
         before = self.concise_state()
         passage, perception, authored = self._build_perception_and_authored()
 
+        # Bare "again" / "continue" replays last grounded intent when available
+        again_intent: Optional[Intent] = None
+        raw_l = text.lower().strip().rstrip('.!')
+        if raw_l in ('again', 'continue', 'same again', 'do it again') and self.world.last_grounded_intent:
+            again_intent = _intent_from_dict(self.world.last_grounded_intent, authored_actions=authored)
+            trace.raw_interpreter_output = {'from_again': True, 'replay': self.world.last_grounded_intent}
+            trace.validated_intent = again_intent.to_dict()
+
         # 1) Discourse short-circuit for pending yes/no / exclusive
-        discourse_intent: Optional[Intent] = None
-        if self.world.pending_discourse:
+        discourse_intent: Optional[Intent] = again_intent
+        if discourse_intent is None and self.world.pending_discourse:
             kind, payload = discourse.resolve_affirmative(text, self.world)
             if kind == 'confirm' and isinstance(payload, dict):
                 discourse_intent = _intent_from_dict(payload, authored_actions=authored)

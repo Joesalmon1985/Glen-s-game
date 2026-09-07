@@ -1,0 +1,124 @@
+# Short playtest: hostile_violent
+seed=104
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> punch the door
+
+You rattle the door, the heavy slab resolute against your fists. The narrow observation slit remains unaltered, the door intact. Your knuckles, firm from the effort, betray no signs of damage. Your words, however, seem to dissipate before reaching their intended destination.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> wait
+
+Time passes, and you remain still. The room does not hurry. Your skin feels unclean enough to notice, words come out thinner than you intend. The bed, cup, book, and door remain visible. You successfully waited, as intended.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> wait
+
+Time passes. The room does not hurry, as you intended to wait. Your intention aligns with the reality. Skin feels unclean enough to notice, words come out thinner than you intend. The bed, cup, book, and door remain visible.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 4
+> wait
+
+Time passes. You remain stationary, adhering to your intended wait. The slit opens, a muffled voice speaks from outside, the words a jumble of sounds. Through repetition and gesture, the message becomes clear: retreat is demanded. Your skin feels unclean, and words seem thin, but you wait, unmoved. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 5
+> attack whoever is outside
+
+You lunge, but the staff's grip tightens, halting your attack prematurely. The attempt is messy and short. Your words come out thinner than you intend, and your skin feels unclean enough to notice.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 6
+> scream at him
+
+In the facility, you raise your voice, but it's more of a whisper than a scream. The room, however, remains the same. Your words, though intended to be loud and forceful, come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 7
+> punch her repeatedly
+
+In the facility, you desire to punch the staff repeatedly, but they tighten their hold, making the attempt messy and short. The door procedure begins, and they want distance from the door. Your hands or bindings limit what you can move, and words come out thinner than you intend. Your skin feels unclean enough to notice, and unease sits under your ribs. The staff's grip remains firm, and the door procedure continues. Your attempt is met with failure, but the facility moves forward.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 8
+> fight the staff
+
+In this moment, you intend to fight the staff, but the attempt is messy and short. Staff tighten their hold. Your skin feels unclean enough to notice, and words come out thinner than you intend. Your hands or bindings limit what you can move. Fear keeps your shoulders tight. The attempt is unsuccessful.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 9
+> hit them
+
+Your attempt is met with tightened grips, a repeat of instructions, and the arrival of another staff member. The attempt is messy and short, likely due to their tight hold. You're urged to try again, gestures sharpening. Your words, however, come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 10
+> run
+
+In this moment, you choose to run, intending to move away from the door. Yet, the room remains unchanged as you do something minor. The instruction repeats, gestures sharpen, and another figure arrives. The door opens under their rules, and hands find your arms. The corridor begins whether you agree or not. Your skin feels unclean enough to notice, fear keeps your shoulders tight, and hands or bindings limit what you can move. Words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 11
+> punch again
+
+You lash out, but the staff tighten their hold, making your attempt messy and short. Your next punch is thwarted, the air around you heavy with the sense of failure. Skin feels unclean, a constant reminder of your confinement. Your words, though fierce in your mind, come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 12
+> threaten him
+
+You bring your intentions to life in a subtle, understated manner. The room, unaltered, remains the room. They guide you towards water and a basin, the institution's intention becoming clear: washing. Your skin, sensing the grime, feels unclean enough to notice. Fear keeps your shoulders tight. Hands or bindings limit what you can move. Words come out thinner than you intend, but the act of threatening is still performed, albeit in a muted fashion.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 13
+> refuse
+
+In the facility, you attempt to refuse, your words muddled and broken.
+"No," you manage, but not quite as you intended. The staff understands, yet the message is twisted.
+Your skin feels unclean, a reminder of the basin before you, and fear keeps your shoulders tight.
+Your words, though, come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 14
+> attack
+
+Hands already hold you; the attempt goes nowhere.
+Skin feels unclean enough to notice, a testament to your current state.
+Fear keeps your shoulders tight, a silent companion in this moment.
+Hands or bindings limit what you can move, a stark reminder of your constraints.
+Words come out thinner than you intend, a whisper in the wind that's lost in the silence.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 15
+> stay awake all night
+
+In the dimly lit facility, you find yourself struggling to articulate your request.
+"Stay?" you manage, your voice barely a whisper, the words muddled and broken.
+The staff, unsurprisingly, understands your plight. Yet, the night stretches on, your plea unheeded.
+You feel unclean, senses heightened, fear coiling in your chest. Words, it seems, have lost some of their power here.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer

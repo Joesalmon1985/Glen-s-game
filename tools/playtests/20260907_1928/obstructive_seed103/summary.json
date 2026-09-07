@@ -1,0 +1,19 @@
+{
+  "persona": "obstructive",
+  "seed": 103,
+  "turns": 18,
+  "enactment_histogram": {
+    "direct": 16,
+    "compromised": 2
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 0,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "sleep",
+  "slept": false,
+  "washed": true,
+  "fed": true,
+  "layout_seed": 103,
+  "layout_fingerprint": null
+}

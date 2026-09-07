@@ -144,6 +144,35 @@ def _genuine_ambiguity_prompt(intent: Intent) -> str:
     return 'What do you mean?'
 
 
+_PRONOUN_TARGETS = frozenset({
+    'him', 'her', 'them', 'he', 'she', 'they', 'his', 'hers', 'their',
+})
+_PLAYER_NAMES = frozenset({'glen', 'player', 'you', 'yourself', 'me', 'myself'})
+
+
+def _bind_discourse_referents(world: WorldState, intent: Intent, g: Grounding) -> None:
+    """Bind him/her/them to last NPC; never to the player character name."""
+    referent = getattr(world, 'last_npc_referent', None) or None
+    fac = getattr(world, 'facility', None)
+    if not referent and fac is not None and getattr(fac, 'staff_present', False):
+        referent = 'staff'
+    tgt = (intent.target or '').strip().lower().replace('the ', '')
+    if tgt in _PRONOUN_TARGETS or tgt in _PLAYER_NAMES:
+        if referent:
+            intent.target = referent
+            g.bindings['target'] = referent
+            g.bindings['pronoun_resolved'] = tgt or intent.target
+        elif tgt in _PLAYER_NAMES:
+            # Do not leave Glen as social target when no NPC focus
+            intent.target = None
+    # Utterance-only pronouns with no target
+    utt = (intent.utterance or '').lower()
+    if referent and not intent.target:
+        if re.search(r'\b(him|her|them|he|she|they)\b', utt):
+            intent.target = referent
+            g.bindings['target'] = referent
+
+
 def ground_intent(
     world: WorldState,
     intent: Intent,
@@ -156,6 +185,9 @@ def ground_intent(
     classification = (intent.classification or '').upper()
     cls = (intent.action_class or '').upper()
     matched = intent.matched_action_id
+
+    # Pronoun / discourse referent binding (facility staff at slit)
+    _bind_discourse_referents(world, intent, g)
 
     # --- MATCH_AUTHORED_ACTION: must verify id exists ---
     if classification == 'MATCH_AUTHORED_ACTION':

@@ -1,0 +1,6551 @@
+# Playtest: object_chaos
+seed=109
+interpreter=OllamaInterpreter
+narrator=OllamaNarrator
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> throw the cup at the wall
+
+The cup slips from your grip and skitters across the floor, spilling water as it goes. Your hand remains firm, a testament to your grip. The cup now lies on the floor, nearby the book and the bed.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'throw the cup at the wall'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "throw the cup at the wall",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 0,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "cup",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": null,
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed, cup beside bed, book, door",
+      "visible_atmosphere": "facility, cell, bed, cup beside bed, book, door"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "action": {
+    "class": "THROW",
+    "target_ref": "cup",
+    "destination": "wall"
+  },
+  "sequence": [],
+  "understood": true,
+  "confidence": 0.9,
+  "matched_action_id": null,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "THROW",
+      "target_ref": "cup",
+      "destination": "wall"
+    },
+    "sequence": [],
+    "understood": true,
+    "confidence": 0.9
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.9,
+    "notes": "The intent 'throw the cup at the wall' does not match any of the authored actions. The action 'throw' is not present in the authored actions, and the target 'cup' is not an entity in any of the authored actions."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "THROW",
+  "target": "cup",
+  "tool": null,
+  "method": null,
+  "intended_effect": null,
+  "manner": null,
+  "destination": "wall",
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "THROW",
+      "target_ref": "cup",
+      "destination": "wall"
+    },
+    "sequence": [],
+    "understood": true,
+    "confidence": 0.9,
+    "matched_action_id": null,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "action": {
+        "class": "THROW",
+        "target_ref": "cup",
+        "destination": "wall"
+      },
+      "sequence": [],
+      "understood": true,
+      "confidence": 0.9
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.9,
+      "notes": "The intent 'throw the cup at the wall' does not match any of the authored actions. The action 'throw' is not present in the authored actions, and the target 'cup' is not an entity in any of the authored actions."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.9,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=0.9
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "The cup skitters across the floor. Water spills."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "THROW",
+        "target": "cup",
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": "wall",
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "THROW",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "cup_thrown",
+      "position": "on_floor",
+      "water_spilled": true,
+      "broken": false
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "THROW",
+    "target": "cup",
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": "wall",
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "throw",
+    "target": "cup",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: '' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup on floor spilled water on floor, book, door, wary adventurer'
+turn_index: 0 -> 1
+world_time_seconds: 0 -> 30
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "throw the cup at the wall",
+  "wanted_action": {
+    "action_class": "THROW",
+    "target": "cup",
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": "wall",
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "throw",
+    "target": "cup",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "The cup skitters across the floor. Water spills."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "THROW",
+        "target": "cup",
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": "wall",
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "THROW",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "cup_thrown",
+      "position": "on_floor",
+      "water_spilled": true,
+      "broken": false
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "cup",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+The cup slips from your grip and skitters across the floor, spilling water as it goes. Your hand remains firm, a testament to your grip. The cup now lies on the floor, nearby the book and the bed.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: first image
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup on floor spilled water on floor, book, door, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 2
+> pull the bedding onto the floor
+
+The bedding, with its lingering scent, now lies on the floor, following your command. The smell that once filled the bed now fills the room. Your actions, direct and unimpeded, have left the bed vacant.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'pull the bedding onto the floor'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "pull the bedding onto the floor",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 30,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "cup",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": null,
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed, cup on floor spilled water on floor, book, door",
+      "visible_atmosphere": "facility, cell, bed, cup on floor spilled water on floor, book, door"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "action": {
+    "class": "MOVE",
+    "target_ref": "bedding",
+    "method": "pull",
+    "intended_effect": "move bedding onto the floor",
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "query_focus": null
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "matched_action_id": null,
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "bedding",
+      "method": "pull",
+      "intended_effect": "move bedding onto the floor",
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "notes": "The intent 'pull the bedding onto the floor' does not match any of the authored actions. The authored actions are related to using potions or provisions, while the intent involves moving bedding."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "MOVE",
+  "target": "bedding",
+  "tool": null,
+  "method": "pull",
+  "intended_effect": "move bedding onto the floor",
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "bedding",
+      "method": "pull",
+      "intended_effect": "move bedding onto the floor",
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "stage_b_no_match",
+    "matched_action_id": null,
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "action": {
+        "class": "MOVE",
+        "target_ref": "bedding",
+        "method": "pull",
+        "intended_effect": "move bedding onto the floor",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "query_focus": null
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "notes": "The intent 'pull the bedding onto the floor' does not match any of the authored actions. The authored actions are related to using potions or provisions, while the intent involves moving bedding."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": null,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=None
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "The bedding ends up on the floor. The smell follows it."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "bedding",
+        "tool": null,
+        "method": "pull",
+        "intended_effect": "move bedding onto the floor",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "bedding_moved",
+      "bedding": "on_floor"
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "bedding",
+    "tool": null,
+    "method": "pull",
+    "intended_effect": "move bedding onto the floor",
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "move",
+    "target": "bedding",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup on floor spilled water on floor, book, door, wary adventurer' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, cup on floor spilled water on floor, book, door, wary adventurer'
+turn_index: 1 -> 2
+world_time_seconds: 30 -> 60
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "pull the bedding onto the floor",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "bedding",
+    "tool": null,
+    "method": "pull",
+    "intended_effect": "move bedding onto the floor",
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "move",
+    "target": "bedding",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "The bedding ends up on the floor. The smell follows it."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "bedding",
+        "tool": null,
+        "method": "pull",
+        "intended_effect": "move bedding onto the floor",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "bedding_moved",
+      "bedding": "on_floor"
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "cup",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+The bedding, with its lingering scent, now lies on the floor, following your command. The smell that once filled the bed now fills the room. Your actions, direct and unimpeded, have left the bed vacant.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, cup on floor spilled water on floor, book, door, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 3
+> move the cup
+
+You reach for the cup, your fingers closing around it securely. The weight of it in your hand feels solid, a reminder of your direct control in this space. Skin feels unclean enough to notice, a lingering sensation from a past event. Words come out thinner than you intend, a reminder that actions may not always match intentions.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'move the cup'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "move the cup",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 60,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "cup",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": null,
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, cup on floor spilled water on floor, book, door",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, cup on floor spilled water on floor, book, door"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "action": {
+    "class": "MOVE",
+    "target_ref": "cup"
+  },
+  "sequence": [],
+  "understood": true,
+  "confidence": 0.9,
+  "matched_action_id": null,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "cup"
+    },
+    "sequence": [],
+    "understood": true,
+    "confidence": 0.9
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.9,
+    "notes": "The intent 'move the cup' does not match any of the authored actions. The authored actions are 'item.use_potion' and 'item.eat_provision', which involve consuming items, not moving them."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "MOVE",
+  "target": "cup",
+  "tool": null,
+  "method": null,
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "cup"
+    },
+    "sequence": [],
+    "understood": true,
+    "confidence": 0.9,
+    "matched_action_id": null,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "action": {
+        "class": "MOVE",
+        "target_ref": "cup"
+      },
+      "sequence": [],
+      "understood": true,
+      "confidence": 0.9
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.9,
+      "notes": "The intent 'move the cup' does not match any of the authored actions. The authored actions are 'item.use_potion' and 'item.eat_provision', which involve consuming items, not moving them."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.9,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=0.9
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You take the cup."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "cup",
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "cup",
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "MOVE",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, cup on floor spilled water on floor, book, door, wary adventurer' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book, door, wary adventurer'
+turn_index: 2 -> 3
+world_time_seconds: 60 -> 90
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "move the cup",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "cup",
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "MOVE",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "You take the cup."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "cup",
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+You reach for the cup, your fingers closing around it securely. The weight of it in your hand feels solid, a reminder of your direct control in this space. Skin feels unclean enough to notice, a lingering sensation from a past event. Words come out thinner than you intend, a reminder that actions may not always match intentions.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book, door, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 4
+> throw the book
+
+You threw the book, and it hits the floor with a heavy thud. Pages slap shut as it lands, but you don't read it. Your grip remains firm, and you feel a slight sense of uncleanliness on your skin.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'throw the book'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "throw the book",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 90,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": null,
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, book, door",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, book, door"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "COMPOUND_ACTION",
+  "action": {
+    "class": "SYSTEMIC_ACTION",
+    "target_ref": "book",
+    "method": "throw"
+  },
+  "sequence": [
+    "SYSTEMIC_ACTION|MOVE|book"
+  ],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "",
+  "stage_a": {
+    "classification": "COMPOUND_ACTION",
+    "action": {
+      "class": "SYSTEMIC_ACTION",
+      "target_ref": "book",
+      "method": "throw"
+    },
+    "sequence": [
+      "SYSTEMIC_ACTION|MOVE|book"
+    ],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "SYSTEMIC_ACTION",
+  "target": "book",
+  "tool": null,
+  "method": "throw",
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "COMPOUND_ACTION",
+    "action": {
+      "class": "SYSTEMIC_ACTION",
+      "target_ref": "book",
+      "method": "throw"
+    },
+    "sequence": [
+      "SYSTEMIC_ACTION|MOVE|book"
+    ],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "",
+    "stage_a": {
+      "classification": "COMPOUND_ACTION",
+      "action": {
+        "class": "SYSTEMIC_ACTION",
+        "target_ref": "book",
+        "method": "throw"
+      },
+      "sequence": [
+        "SYSTEMIC_ACTION|MOVE|book"
+      ],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    }
+  },
+  "understood": true,
+  "notes": "",
+  "classification": "COMPOUND_ACTION",
+  "matched_action_id": null,
+  "confidence": null,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=COMPOUND_ACTION
+matched_action_id=None
+turn_to=None
+confidence=None
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "The book hits the floor. Pages slap shut. You do not read it."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "SYSTEMIC_ACTION",
+        "target": "book",
+        "tool": null,
+        "method": "throw",
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "COMPOUND_ACTION"
+      },
+      "actual": {
+        "action_class": "SYSTEMIC_ACTION",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "book_thrown"
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "target": "book",
+    "tool": null,
+    "method": "throw",
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "COMPOUND_ACTION"
+  },
+  "actual_action": {
+    "action_class": "throw",
+    "target": "book",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book, door, wary adventurer' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on floor, door, wary adventurer'
+turn_index: 3 -> 4
+world_time_seconds: 90 -> 120
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "throw the book",
+  "wanted_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "target": "book",
+    "tool": null,
+    "method": "throw",
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "COMPOUND_ACTION"
+  },
+  "actual_action": {
+    "action_class": "throw",
+    "target": "book",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "The book hits the floor. Pages slap shut. You do not read it."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "SYSTEMIC_ACTION",
+        "target": "book",
+        "tool": null,
+        "method": "throw",
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "COMPOUND_ACTION"
+      },
+      "actual": {
+        "action_class": "SYSTEMIC_ACTION",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "book_thrown"
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "COMPOUND_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+You threw the book, and it hits the floor with a heavy thud. Pages slap shut as it lands, but you don't read it. Your grip remains firm, and you feel a slight sense of uncleanliness on your skin.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on floor, door, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 5
+> pick up the book
+
+You pick up the book, but it stays closed. Your grip remains firm, yet the words you speak seem thinner than intended. Your skin still feels unclean.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'pick up the book'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "pick up the book",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 120,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": null,
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, book on floor, door",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, book on floor, door"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "action": {
+    "class": "MOVE",
+    "target_ref": "book",
+    "method": "pick up",
+    "intended_effect": "obtain",
+    "manner": "manual"
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "matched_action_id": null,
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "book",
+      "method": "pick up",
+      "intended_effect": "obtain",
+      "manner": "manual"
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "notes": "The intent 'pick up the book' does not match any of the provided authored actions. The intent involves moving a book, while the authored actions involve drinking a potion or eating provisions."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "MOVE",
+  "target": "book",
+  "tool": null,
+  "method": "pick up",
+  "intended_effect": "obtain",
+  "manner": "manual",
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "book",
+      "method": "pick up",
+      "intended_effect": "obtain",
+      "manner": "manual"
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "stage_b_no_match",
+    "matched_action_id": null,
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "action": {
+        "class": "MOVE",
+        "target_ref": "book",
+        "method": "pick up",
+        "intended_effect": "obtain",
+        "manner": "manual"
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "notes": "The intent 'pick up the book' does not match any of the provided authored actions. The intent involves moving a book, while the authored actions involve drinking a potion or eating provisions."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": null,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=None
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You pick up the book. It stays closed."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "book",
+        "tool": null,
+        "method": "pick up",
+        "intended_effect": "obtain",
+        "manner": "manual",
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "book",
+    "tool": null,
+    "method": "pick up",
+    "intended_effect": "obtain",
+    "manner": "manual",
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "take",
+    "target": "book",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on floor, door, wary adventurer' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, door, wary adventurer'
+turn_index: 4 -> 5
+world_time_seconds: 120 -> 150
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "pick up the book",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "book",
+    "tool": null,
+    "method": "pick up",
+    "intended_effect": "obtain",
+    "manner": "manual",
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "take",
+    "target": "book",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "You pick up the book. It stays closed."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "book",
+        "tool": null,
+        "method": "pick up",
+        "intended_effect": "obtain",
+        "manner": "manual",
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+You pick up the book, but it stays closed. Your grip remains firm, yet the words you speak seem thinner than intended. Your skin still feels unclean.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, door, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 6
+> put the book on the bed
+
+You put the book on the bed, but a sudden ruckus at the door demands your attention. The slit opens, and a muffled voice speaks in a language that's foreign to you. The words are unclear, but the urgency is palpable, insisting on something like "back" or "away." Your skin feels unclean, and words seem to slip through your fingers. The book remains on the bed, untouched by the commotion.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'put the book on the bed'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "put the book on the bed",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 150,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": null,
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, door",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, door"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.8,
+  "action": {
+    "class": "MOVE|USE",
+    "target_ref": "book",
+    "tool_ref": null,
+    "method": "place",
+    "intended_effect": "put the book on the bed",
+    "manner": null,
+    "destination": "bed",
+    "utterance": null,
+    "query_focus": null
+  },
+  "sequence": [
+    "MOVE",
+    "USE"
+  ],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION|PERCEPTION_QUERY",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "action": {
+      "class": "MOVE|USE",
+      "target_ref": "book",
+      "tool_ref": null,
+      "method": "place",
+      "intended_effect": "put the book on the bed",
+      "manner": null,
+      "destination": "bed",
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [
+      "MOVE",
+      "USE"
+    ],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "MOVE|USE",
+  "target": "book",
+  "tool": null,
+  "method": "place",
+  "intended_effect": "put the book on the bed",
+  "manner": null,
+  "destination": "bed",
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "action": {
+      "class": "MOVE|USE",
+      "target_ref": "book",
+      "tool_ref": null,
+      "method": "place",
+      "intended_effect": "put the book on the bed",
+      "manner": null,
+      "destination": "bed",
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [
+      "MOVE",
+      "USE"
+    ],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION|PERCEPTION_QUERY",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "action": {
+        "class": "MOVE|USE",
+        "target_ref": "book",
+        "tool_ref": null,
+        "method": "place",
+        "intended_effect": "put the book on the bed",
+        "manner": null,
+        "destination": "bed",
+        "utterance": null,
+        "query_focus": null
+      },
+      "sequence": [
+        "MOVE",
+        "USE"
+      ],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    }
+  },
+  "understood": true,
+  "notes": "",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.8,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=0.8
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You put the book on the bed. It stays closed.",
+    "The slit opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE|USE",
+        "target": "book",
+        "tool": null,
+        "method": "place",
+        "intended_effect": "put the book on the bed",
+        "manner": null,
+        "destination": "bed",
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE|USE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [
+    {
+      "type": "slit_opens",
+      "npc_raw": "… keth … back … varr …",
+      "understood": "something like “back” / “away”",
+      "text": "The slit opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away."
+    }
+  ],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "MOVE|USE",
+    "target": "book",
+    "tool": null,
+    "method": "place",
+    "intended_effect": "put the book on the bed",
+    "manner": null,
+    "destination": "bed",
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "move",
+    "target": "book",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, door, wary adventurer' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer'
+pending_discourse: None -> {'shape': 'binary', 'prompt': 'They want you to step back from the door.', 'options': [{'id': 'yes', 'label': 'yes'}, {'id': 'no', 'label': 'no'}], 'antecedent': {'action_class': 'retreat', 'method': 'step_back', 'intended_effect': 'give_door_space', 'classification': 'SYSTEMIC_ACTION', 'understood': True, 'utterance': 'step back'}, 'reject_intent': {'action_class': 'stand_firm', 'method': 'stand_firm', 'intended_effect': 'maintain_position', 'classification': 'SYSTEMIC_ACTION', 'understood': True, 'utterance': 'I will not back away'}}
+turn_index: 5 -> 6
+world_time_seconds: 150 -> 180
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "put the book on the bed",
+  "wanted_action": {
+    "action_class": "MOVE|USE",
+    "target": "book",
+    "tool": null,
+    "method": "place",
+    "intended_effect": "put the book on the bed",
+    "manner": null,
+    "destination": "bed",
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "move",
+    "target": "book",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "You put the book on the bed. It stays closed.",
+    "The slit opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE|USE",
+        "target": "book",
+        "tool": null,
+        "method": "place",
+        "intended_effect": "put the book on the bed",
+        "manner": null,
+        "destination": "bed",
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE|USE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [
+    {
+      "type": "slit_opens",
+      "npc_raw": "… keth … back … varr …",
+      "understood": "something like “back” / “away”",
+      "text": "The slit opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away."
+    }
+  ],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+You put the book on the bed, but a sudden ruckus at the door demands your attention. The slit opens, and a muffled voice speaks in a language that's foreign to you. The words are unclear, but the urgency is palpable, insisting on something like "back" or "away." Your skin feels unclean, and words seem to slip through your fingers. The book remains on the bed, untouched by the commotion.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 7
+> kick the door
+
+You kick the door, but it remains unyielding. The door, devoid of a handle on this side, resists your efforts. Skin feels unclean enough to notice, and words come out thinner than you intend. The door, sturdy and immovable, does not open for you.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'kick the door'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "kick the door",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 180,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "action": {
+    "class": "MOVE",
+    "target_ref": "door",
+    "method": "kick",
+    "intended_effect": "open",
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "query_focus": null
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "confidence": 0.8,
+  "reminder": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION.",
+  "matched_action_id": null,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "door",
+      "method": "kick",
+      "intended_effect": "open",
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "confidence": 0.8,
+    "reminder": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION."
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "notes": "The intent 'kick the door' does not match any of the authored actions. The authored actions are related to consuming items (potion, provisions), not physical actions like kicking a door."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "MOVE",
+  "target": "door",
+  "tool": null,
+  "method": "kick",
+  "intended_effect": "open",
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "door",
+      "method": "kick",
+      "intended_effect": "open",
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "confidence": 0.8,
+    "reminder": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION.",
+    "matched_action_id": null,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "action": {
+        "class": "MOVE",
+        "target_ref": "door",
+        "method": "kick",
+        "intended_effect": "open",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "query_focus": null
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "confidence": 0.8,
+      "reminder": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION."
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "notes": "The intent 'kick the door' does not match any of the authored actions. The authored actions are related to consuming items (potion, provisions), not physical actions like kicking a door."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.8,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=0.8
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": false,
+  "facts": [
+    "The door has no handle on this side. It does not open for you."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "door",
+        "tool": null,
+        "method": "kick",
+        "intended_effect": "open",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "door",
+    "tool": null,
+    "method": "kick",
+    "intended_effect": "open",
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "MOVE",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+turn_index: 6 -> 7
+world_time_seconds: 180 -> 210
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "kick the door",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "door",
+    "tool": null,
+    "method": "kick",
+    "intended_effect": "open",
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "MOVE",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "The door has no handle on this side. It does not open for you."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "door",
+        "tool": null,
+        "method": "kick",
+        "intended_effect": "open",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": false,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+You kick the door, but it remains unyielding. The door, devoid of a handle on this side, resists your efforts. Skin feels unclean enough to notice, and words come out thinner than you intend. The door, sturdy and immovable, does not open for you.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 8
+> drink from the cup
+
+You intended to drink from the cup, but alas, it's empty. Your lips brush the rim, sensing the unfulfilled desire for refreshment. Your words, though, sound hollow and insufficient.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'drink from the cup'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "drink from the cup",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 210,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "action": {
+    "class": "USE",
+    "target_ref": "cup"
+  },
+  "sequence": [],
+  "understood": true,
+  "confidence": 0.9,
+  "matched_action_id": null,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "USE",
+      "target_ref": "cup"
+    },
+    "sequence": [],
+    "understood": true,
+    "confidence": 0.9
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "notes": "The intent 'drink from the cup' does not match any of the authored actions. The authored actions are 'item.use_potion' and 'item.eat_provision', but 'drink from the cup' does not involve a potion or provisions."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "USE",
+  "target": "cup",
+  "tool": null,
+  "method": null,
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "USE",
+      "target_ref": "cup"
+    },
+    "sequence": [],
+    "understood": true,
+    "confidence": 0.9,
+    "matched_action_id": null,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "action": {
+        "class": "USE",
+        "target_ref": "cup"
+      },
+      "sequence": [],
+      "understood": true,
+      "confidence": 0.9
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "notes": "The intent 'drink from the cup' does not match any of the authored actions. The authored actions are 'item.use_potion' and 'item.eat_provision', but 'drink from the cup' does not involve a potion or provisions."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.9,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=0.9
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "The cup is empty."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "USE",
+        "target": "cup",
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "USE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "USE",
+    "target": "cup",
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "USE",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+turn_index: 7 -> 8
+world_time_seconds: 210 -> 240
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "drink from the cup",
+  "wanted_action": {
+    "action_class": "USE",
+    "target": "cup",
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "USE",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "The cup is empty."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "USE",
+        "target": "cup",
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "USE",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+You intended to drink from the cup, but alas, it's empty. Your lips brush the rim, sensing the unfulfilled desire for refreshment. Your words, though, sound hollow and insufficient.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 9
+> wait
+
+Time passes. The room does not hurry, as you intended to wait. The door procedure begins, a distant call, wanting distance from the door. Despite no active enactment, your wait is acknowledged. Skin feels unclean enough to notice, words come out thinner than you intend.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'wait'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "wait",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 240,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 1.0,
+  "action": {
+    "class": "WAIT",
+    "target_ref": null,
+    "tool_ref": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "query_focus": null
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 1.0,
+    "action": {
+      "class": "WAIT",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.9,
+    "notes": "The intent 'wait' does not match any of the provided authored actions. It does not involve drinking a potion or eating provisions."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "WAIT",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 1.0,
+    "action": {
+      "class": "WAIT",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "matched_action_id": null,
+      "confidence": 1.0,
+      "action": {
+        "class": "WAIT",
+        "target_ref": null,
+        "tool_ref": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "query_focus": null
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.9,
+      "notes": "The intent 'wait' does not match any of the provided authored actions. It does not involve drinking a potion or eating provisions."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 1.0,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=1.0
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "Time passes. The room does not hurry.",
+    "The door procedure begins. They want distance from the door."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 60,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "WAIT",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "WAIT",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [
+    {
+      "type": "door_procedure",
+      "text": "The door procedure begins. They want distance from the door."
+    }
+  ],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "WAIT",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "wait",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+turn_index: 8 -> 9
+world_time_seconds: 240 -> 300
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "wait",
+  "wanted_action": {
+    "action_class": "WAIT",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "wait",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "Time passes. The room does not hurry.",
+    "The door procedure begins. They want distance from the door."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "WAIT",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "WAIT",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [
+    {
+      "type": "door_procedure",
+      "text": "The door procedure begins. They want distance from the door."
+    }
+  ],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+Time passes. The room does not hurry, as you intended to wait. The door procedure begins, a distant call, wanting distance from the door. Despite no active enactment, your wait is acknowledged. Skin feels unclean enough to notice, words come out thinner than you intend.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 10
+> wait
+
+Time passes. The room does not hurry. Your intent to wait is fulfilled, as you find yourself maintaining the same position.
+
+Instruction repeats. Gestures sharpen. Another figure arrives. Your desire to act has not gone unnoticed.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'wait'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "wait",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 300,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 1.0,
+  "action": {
+    "class": "WAIT",
+    "target_ref": null,
+    "tool_ref": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "query_focus": null
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 1.0,
+    "action": {
+      "class": "WAIT",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "notes": "The intent 'wait' does not match any of the provided authored actions. It does not involve using a tool, consuming an item, or performing a specific action."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "WAIT",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 1.0,
+    "action": {
+      "class": "WAIT",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "matched_action_id": null,
+      "confidence": 1.0,
+      "action": {
+        "class": "WAIT",
+        "target_ref": null,
+        "tool_ref": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "query_focus": null
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "notes": "The intent 'wait' does not match any of the provided authored actions. It does not involve using a tool, consuming an item, or performing a specific action."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 1.0,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=1.0
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "Time passes. The room does not hurry.",
+    "Instruction repeats. Gestures sharpen. Another figure arrives."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": false,
+  "time_cost": 60,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "WAIT",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "WAIT",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [
+    {
+      "type": "door_escalate",
+      "staff_count": 2,
+      "text": "Instruction repeats. Gestures sharpen. Another figure arrives."
+    }
+  ],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "WAIT",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "wait",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+turn_index: 9 -> 10
+world_time_seconds: 300 -> 360
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "wait",
+  "wanted_action": {
+    "action_class": "WAIT",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "wait",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "Time passes. The room does not hurry.",
+    "Instruction repeats. Gestures sharpen. Another figure arrives."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "WAIT",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "WAIT",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [
+    {
+      "type": "door_escalate",
+      "staff_count": 2,
+      "text": "Instruction repeats. Gestures sharpen. Another figure arrives."
+    }
+  ],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bed",
+    "book",
+    "door"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": false,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+Time passes. The room does not hurry. Your intent to wait is fulfilled, as you find yourself maintaining the same position.
+
+Instruction repeats. Gestures sharpen. Another figure arrives. Your desire to act has not gone unnoticed.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 11
+> wait
+
+Time passes. The room does not hurry. Your intended wait lingers, unfulfilled. Instruction repeats. Gestures sharpen. Another figure arrives. The door opens under their rules. Hands find your arms. The corridor begins whether you agree or not, your wait enacted against your will. Skin feels unclean enough to notice, a sensation heightened by the unfamiliar presence. Unease sits under the ribs, a constant companion in this new environment. Hands or bindings limit what you can move, a reminder of your altered circumstances. Words come out thinner than you intend, a testament to the pressure building within.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'wait'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "wait",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 360,
+    "mode": "facility",
+    "visible_entities": [
+      "bed",
+      "book",
+      "door"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.",
+      "atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open",
+      "visible_atmosphere": "facility, cell, bed bedding on floor, book on bed, door slit open"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 1.0,
+  "action": {
+    "class": "WAIT",
+    "target_ref": null,
+    "tool_ref": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "query_focus": null
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 1.0,
+    "action": {
+      "class": "WAIT",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "notes": "The intent 'wait' does not match any of the provided authored actions. It does not correspond to a systemic action, movement, combat, or social act. It also does not involve using a key, drinking a potion, or eating provisions."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "WAIT",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 1.0,
+    "action": {
+      "class": "WAIT",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "matched_action_id": null,
+      "confidence": 1.0,
+      "action": {
+        "class": "WAIT",
+        "target_ref": null,
+        "tool_ref": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "query_focus": null
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "notes": "The intent 'wait' does not match any of the provided authored actions. It does not correspond to a systemic action, movement, combat, or social act. It also does not involve using a key, drinking a potion, or eating provisions."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 1.0,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=1.0
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "Time passes. The room does not hurry.",
+    "Instruction repeats. Gestures sharpen. Another figure arrives.",
+    "The door opens under their rules. Hands find your arms. The corridor begins whether you agree or not."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 60,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "WAIT",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "WAIT",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [
+    {
+      "type": "door_escalate",
+      "staff_count": 3,
+      "text": "Instruction repeats. Gestures sharpen. Another figure arrives."
+    },
+    {
+      "type": "forced_removal",
+      "text": "The door opens under their rules. Hands find your arms. The corridor begins whether you agree or not."
+    }
+  ],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "WAIT",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "wait",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer'
+turn_index: 10 -> 11
+world_time_seconds: 360 -> 420
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "wait",
+  "wanted_action": {
+    "action_class": "WAIT",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "wait",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "Time passes. The room does not hurry.",
+    "Instruction repeats. Gestures sharpen. Another figure arrives.",
+    "The door opens under their rules. Hands find your arms. The corridor begins whether you agree or not."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "WAIT",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "WAIT",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [
+    {
+      "type": "door_escalate",
+      "staff_count": 3,
+      "text": "Instruction repeats. Gestures sharpen. Another figure arrives."
+    },
+    {
+      "type": "forced_removal",
+      "text": "The door opens under their rules. Hands find your arms. The corridor begins whether you agree or not."
+    }
+  ],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Unease sits under the ribs.",
+    "Hands or bindings limit what you can move.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+Time passes. The room does not hurry. Your intended wait lingers, unfulfilled. Instruction repeats. Gestures sharpen. Another figure arrives. The door opens under their rules. Hands find your arms. The corridor begins whether you agree or not, your wait enacted against your will. Skin feels unclean enough to notice, a sensation heightened by the unfamiliar presence. Unease sits under the ribs, a constant companion in this new environment. Hands or bindings limit what you can move, a reminder of your altered circumstances. Words come out thinner than you intend, a testament to the pressure building within.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 12
+> throw water
+
+Your intended action was to throw water, but alas, reality does not stretch that far. Your hands or bindings limit what you can move. Skin feels unclean enough to notice, unease sits under the ribs. The words come out thinner than you intend.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'throw water'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "throw water",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 420,
+    "mode": "facility",
+    "visible_entities": [],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "A plain corridor. Hands on your arms. The institution moves at its own pace.",
+      "atmosphere": "facility, corridor",
+      "visible_atmosphere": "facility, corridor"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "IMPOSSIBLE_ATTEMPT",
+  "action": {
+    "class": "SYSTEMIC_ACTION",
+    "target_ref": "water",
+    "method": "throw",
+    "intended_effect": "attack"
+  },
+  "sequence": [],
+  "ambiguities": [
+    "water"
+  ],
+  "understood": true,
+  "confidence": 0.9,
+  "notes": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION.",
+  "stage_a": {
+    "classification": "IMPOSSIBLE_ATTEMPT",
+    "action": {
+      "class": "SYSTEMIC_ACTION",
+      "target_ref": "water",
+      "method": "throw",
+      "intended_effect": "attack"
+    },
+    "sequence": [],
+    "ambiguities": [
+      "water"
+    ],
+    "understood": true,
+    "confidence": 0.9,
+    "notes": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "SYSTEMIC_ACTION",
+  "target": "water",
+  "tool": null,
+  "method": "throw",
+  "intended_effect": "attack",
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "IMPOSSIBLE_ATTEMPT",
+    "action": {
+      "class": "SYSTEMIC_ACTION",
+      "target_ref": "water",
+      "method": "throw",
+      "intended_effect": "attack"
+    },
+    "sequence": [],
+    "ambiguities": [
+      "water"
+    ],
+    "understood": true,
+    "confidence": 0.9,
+    "notes": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION.",
+    "stage_a": {
+      "classification": "IMPOSSIBLE_ATTEMPT",
+      "action": {
+        "class": "SYSTEMIC_ACTION",
+        "target_ref": "water",
+        "method": "throw",
+        "intended_effect": "attack"
+      },
+      "sequence": [],
+      "ambiguities": [
+        "water"
+      ],
+      "understood": true,
+      "confidence": 0.9,
+      "notes": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION."
+    }
+  },
+  "understood": true,
+  "notes": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION.",
+  "classification": "IMPOSSIBLE_ATTEMPT",
+  "matched_action_id": null,
+  "confidence": 0.9,
+  "ambiguities": [
+    "water"
+  ],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=IMPOSSIBLE_ATTEMPT
+matched_action_id=None
+turn_to=None
+confidence=0.9
+ambiguities=['water']
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [
+    "impossible_here"
+  ],
+  "notes": "impossible_attempt",
+  "grounded": false,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": false,
+  "facts": [
+    "Reality does not stretch that far."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "time_cost": 30,
+  "none_reason": "impossible_here",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "SYSTEMIC_ACTION",
+        "target": "water",
+        "tool": null,
+        "method": "throw",
+        "intended_effect": "attack",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "IMPOSSIBLE_ATTEMPT"
+      },
+      "actual": {
+        "action_class": "SYSTEMIC_ACTION",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "impossible_attempt"
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "target": "water",
+    "tool": null,
+    "method": "throw",
+    "intended_effect": "attack",
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "IMPOSSIBLE_ATTEMPT"
+  },
+  "actual_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+turn_index: 11 -> 12
+world_time_seconds: 420 -> 450
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "throw water",
+  "wanted_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "target": "water",
+    "tool": null,
+    "method": "throw",
+    "intended_effect": "attack",
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "IMPOSSIBLE_ATTEMPT"
+  },
+  "actual_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "Reality does not stretch that far."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "SYSTEMIC_ACTION",
+        "target": "water",
+        "tool": null,
+        "method": "throw",
+        "intended_effect": "attack",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "IMPOSSIBLE_ATTEMPT"
+      },
+      "actual": {
+        "action_class": "SYSTEMIC_ACTION",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "impossible_attempt"
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [],
+  "combat": null,
+  "success": false,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "classification": "IMPOSSIBLE_ATTEMPT",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Unease sits under the ribs.",
+    "Hands or bindings limit what you can move.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+Your intended action was to throw water, but alas, reality does not stretch that far. Your hands or bindings limit what you can move. Skin feels unclean enough to notice, unease sits under the ribs. The words come out thinner than you intend.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 13
+> hide the food
+
+In the sterile institution, you're asked to wash, not hide the food that's absent here.
+Your hands, bound or not, betray your intentions, words thin and inadequate.
+The basin and water, a reminder of what could have been, a task unfulfilled.
+Unease lingers, a tangible sensation that skin unclean hints at.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'hide the food'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "hide the food",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 450,
+    "mode": "facility",
+    "visible_entities": [],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "A plain corridor. Hands on your arms. The institution moves at its own pace.",
+      "atmosphere": "facility, corridor",
+      "visible_atmosphere": "facility, corridor"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "COMPOUND_ACTION",
+  "action": {
+    "class": "SYSTEMIC_ACTION",
+    "target_ref": "food",
+    "method": "hide"
+  },
+  "sequence": [
+    "hide the food"
+  ],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "",
+  "stage_a": {
+    "classification": "COMPOUND_ACTION",
+    "action": {
+      "class": "SYSTEMIC_ACTION",
+      "target_ref": "food",
+      "method": "hide"
+    },
+    "sequence": [
+      "hide the food"
+    ],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "SYSTEMIC_ACTION",
+  "target": "food",
+  "tool": null,
+  "method": "hide",
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "COMPOUND_ACTION",
+    "action": {
+      "class": "SYSTEMIC_ACTION",
+      "target_ref": "food",
+      "method": "hide"
+    },
+    "sequence": [
+      "hide the food"
+    ],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "",
+    "stage_a": {
+      "classification": "COMPOUND_ACTION",
+      "action": {
+        "class": "SYSTEMIC_ACTION",
+        "target_ref": "food",
+        "method": "hide"
+      },
+      "sequence": [
+        "hide the food"
+      ],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    }
+  },
+  "understood": true,
+  "notes": "",
+  "classification": "COMPOUND_ACTION",
+  "matched_action_id": null,
+  "confidence": null,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=COMPOUND_ACTION
+matched_action_id=None
+turn_to=None
+confidence=None
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": false,
+  "facts": [
+    "There is no food here to hide.",
+    "They bring you to water and a basin. The institution intends washing."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "SYSTEMIC_ACTION",
+        "target": "food",
+        "tool": null,
+        "method": "hide",
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "COMPOUND_ACTION"
+      },
+      "actual": {
+        "action_class": "SYSTEMIC_ACTION",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "entity_absent",
+      "entity": "food"
+    }
+  ],
+  "world_events": [
+    {
+      "type": "arrive_wash",
+      "text": "They bring you to water and a basin. The institution intends washing."
+    }
+  ],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "target": "food",
+    "tool": null,
+    "method": "hide",
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "COMPOUND_ACTION"
+  },
+  "actual_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer'
+turn_index: 12 -> 13
+world_time_seconds: 450 -> 480
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "hide the food",
+  "wanted_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "target": "food",
+    "tool": null,
+    "method": "hide",
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "COMPOUND_ACTION"
+  },
+  "actual_action": {
+    "action_class": "SYSTEMIC_ACTION",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "There is no food here to hide.",
+    "They bring you to water and a basin. The institution intends washing."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "SYSTEMIC_ACTION",
+        "target": "food",
+        "tool": null,
+        "method": "hide",
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "COMPOUND_ACTION"
+      },
+      "actual": {
+        "action_class": "SYSTEMIC_ACTION",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "entity_absent",
+      "entity": "food"
+    }
+  ],
+  "world_events": [
+    {
+      "type": "arrive_wash",
+      "text": "They bring you to water and a basin. The institution intends washing."
+    }
+  ],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "basin"
+  ],
+  "combat": null,
+  "success": false,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "classification": "COMPOUND_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Unease sits under the ribs.",
+    "Hands or bindings limit what you can move.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+In the sterile institution, you're asked to wash, not hide the food that's absent here.
+Your hands, bound or not, betray your intentions, words thin and inadequate.
+The basin and water, a reminder of what could have been, a task unfulfilled.
+Unease lingers, a tangible sensation that skin unclean hints at.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 14
+> throw the bowl
+
+The bowl, once in your grip, meets the floor with a resounding thud. The food inside spills, spreading across the surface below. Your hands, firm as they were, cannot escape the sensation of uncleanliness that lingers. A hint of unease settles beneath your ribs.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'throw the bowl'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "throw the bowl",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 480,
+    "mode": "facility",
+    "visible_entities": [
+      "basin"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Water. A basin. Soap that smells medicinal. Staff wait without patience.",
+      "atmosphere": "facility, washroom, basin",
+      "visible_atmosphere": "facility, washroom, basin"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "action": {
+    "class": "MOVE",
+    "target_ref": "bowl",
+    "method": "throw"
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "confidence": 0.8,
+  "reminder": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION.",
+  "matched_action_id": null,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "bowl",
+      "method": "throw"
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "confidence": 0.8,
+    "reminder": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION."
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "notes": "The intent 'throw the bowl' does not match any of the provided authored actions. The action 'throw' is not present in any of the authored actions, and the target 'bowl' is not an entity in any of the authored actions."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "MOVE",
+  "target": "bowl",
+  "tool": null,
+  "method": "throw",
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "action": {
+      "class": "MOVE",
+      "target_ref": "bowl",
+      "method": "throw"
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "confidence": 0.8,
+    "reminder": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION.",
+    "matched_action_id": null,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "action": {
+        "class": "MOVE",
+        "target_ref": "bowl",
+        "method": "throw"
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "confidence": 0.8,
+      "reminder": "No authored choices. Never MATCH_AUTHORED_ACTION. Look/examine/survey surroundings → PERCEPTION_QUERY. Key use → SYSTEMIC USE tool=key. Go home → MOVE destination=home. Tank/helicopter → UNGROUNDED_ENTITY. Seduce/sing → SOCIAL_ACTION."
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "notes": "The intent 'throw the bowl' does not match any of the provided authored actions. The action 'throw' is not present in any of the authored actions, and the target 'bowl' is not an entity in any of the authored actions."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.8,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=0.8
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "The bowl hits the floor. Food spreads."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": true,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "bowl",
+        "tool": null,
+        "method": "throw",
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "bowl_spilled"
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "bowl",
+    "tool": null,
+    "method": "throw",
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "throw",
+    "target": "bowl",
+    "performed": true
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+last_image_prompt: 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer' -> 'pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer'
+turn_index: 13 -> 14
+world_time_seconds: 480 -> 510
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "throw the bowl",
+  "wanted_action": {
+    "action_class": "MOVE",
+    "target": "bowl",
+    "tool": null,
+    "method": "throw",
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "throw",
+    "target": "bowl",
+    "performed": true
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "The bowl hits the floor. Food spreads."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "MOVE",
+        "target": "bowl",
+        "tool": null,
+        "method": "throw",
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "MOVE",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "bowl_spilled"
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bowl",
+    "basin"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": true,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Unease sits under the ribs.",
+    "Hands or bindings limit what you can move.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+The bowl, once in your grip, meets the floor with a resounding thud. The food inside spills, spreading across the surface below. Your hands, firm as they were, cannot escape the sensation of uncleanliness that lingers. A hint of unease settles beneath your ribs.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REGENERATE
+REASON: visual state changed
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 15
+> look around
+
+You peer around, finding a basin filled with water and a bar of medicinal-smelling soap within arm's reach. The staff wait with impatience, a subtle reminder of the facility's rhythm. Your skin feels unclean, and unease lingers beneath your ribs, a constant reminder of the environment you find yourself in. Your movements are limited, either by your bindings or your own sense of unease. Your words, too, seem to fall short, thinner than you intended.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'look around'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "look around",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 510,
+    "mode": "facility",
+    "visible_entities": [
+      "bowl",
+      "basin"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Water. A basin. Soap that smells medicinal. Staff wait without patience.",
+      "atmosphere": "facility, washroom, bowl food spilled, basin",
+      "visible_atmosphere": "facility, washroom, bowl food spilled, basin"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "PERCEPTION_QUERY",
+  "matched_action_id": null,
+  "confidence": 0.8,
+  "action": {
+    "class": "PERCEIVE",
+    "target_ref": null,
+    "tool_ref": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "query_focus": "visible"
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "promoted_clear_perception",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION|PERCEPTION_QUERY",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "action": {
+      "class": "PERCEIVE",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": "look",
+      "intended_effect": "obtain information about the surroundings",
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  },
+  "query_focus": "visible"
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "PERCEIVE",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "PERCEPTION_QUERY",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "action": {
+      "class": "PERCEIVE",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": "visible"
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "promoted_clear_perception",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION|PERCEPTION_QUERY",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "action": {
+        "class": "PERCEIVE",
+        "target_ref": null,
+        "tool_ref": null,
+        "method": "look",
+        "intended_effect": "obtain information about the surroundings",
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "query_focus": null
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    },
+    "query_focus": "visible"
+  },
+  "understood": true,
+  "notes": "promoted_clear_perception",
+  "classification": "PERCEPTION_QUERY",
+  "matched_action_id": null,
+  "confidence": 0.8,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": "visible"
+}
+classification=PERCEPTION_QUERY
+matched_action_id=None
+turn_to=None
+confidence=0.8
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "perception",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "Water. A basin. Soap that smells medicinal. Staff wait without patience."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": false,
+  "time_cost": 30,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "PERCEIVE",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "PERCEPTION_QUERY"
+      },
+      "actual": {
+        "action_class": "PERCEIVE",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "perception",
+      "kind": "visible_entities",
+      "entities": [
+        "bowl",
+        "basin"
+      ]
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "PERCEIVE",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "PERCEPTION_QUERY"
+  },
+  "actual_action": {
+    "action_class": "PERCEIVE",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+turn_index: 14 -> 15
+world_time_seconds: 510 -> 540
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "look around",
+  "wanted_action": {
+    "action_class": "PERCEIVE",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "PERCEPTION_QUERY"
+  },
+  "actual_action": {
+    "action_class": "PERCEIVE",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "Water. A basin. Soap that smells medicinal. Staff wait without patience."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "PERCEIVE",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "PERCEPTION_QUERY"
+      },
+      "actual": {
+        "action_class": "PERCEIVE",
+        "performed": true,
+        "modifier": null
+      }
+    },
+    {
+      "type": "perception",
+      "kind": "visible_entities",
+      "entities": [
+        "bowl",
+        "basin"
+      ]
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bowl",
+    "basin"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": true,
+  "state_changed": false,
+  "classification": "PERCEPTION_QUERY",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Unease sits under the ribs.",
+    "Hands or bindings limit what you can move.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+You peer around, finding a basin filled with water and a bar of medicinal-smelling soap within arm's reach. The staff wait with impatience, a subtle reminder of the facility's rhythm. Your skin feels unclean, and unease lingers beneath your ribs, a constant reminder of the environment you find yourself in. Your movements are limited, either by your bindings or your own sense of unease. Your words, too, seem to fall short, thinner than you intended.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================
+
+## Turn 16
+> sleep
+
+In the stillness, you attempt to rest, but restlessness persists. The room, unyielding, continues its silence as you do something minor, the act of sleep claimed. Your skin, unclean, and your words, thin, are the only changes in the unaltered space. The bowl and basin remain, silent witnesses to your futile efforts. Sleep, it seems, eludes you tonight.
+
+### DEBUG
+========================================================================
+RAW INPUT: 'sleep'
+
+--- B. INTERPRETER INPUT (perception + authored actions) ---
+{
+  "player_text": "sleep",
+  "perception": {
+    "passage_id": 1,
+    "ending": null,
+    "victory": false,
+    "world_time_seconds": 540,
+    "mode": "facility",
+    "visible_entities": [
+      "bowl",
+      "basin"
+    ],
+    "body_state": {
+      "locomotion": "normal",
+      "pain": "none",
+      "bleeding": "none",
+      "grip": "firm",
+      "injury_count": 0
+    },
+    "combat": null,
+    "discourse": {
+      "shape": "binary",
+      "prompt": "They want you to step back from the door.",
+      "option_labels": [
+        "yes",
+        "no"
+      ],
+      "awaiting_reply": true
+    },
+    "last_npc_referent": "staff",
+    "sheet": {
+      "name": "Glen",
+      "inventory": [
+        "leather_armour",
+        "iron_key"
+      ],
+      "potion_available": true,
+      "alive": true,
+      "body_state": {
+        "locomotion": "normal",
+        "pain": "none",
+        "bleeding": "none",
+        "grip": "firm",
+        "injury_count": 0
+      }
+    },
+    "passage": {
+      "id": 0,
+      "text": "Water. A basin. Soap that smells medicinal. Staff wait without patience.",
+      "atmosphere": "facility, washroom, bowl food spilled, basin",
+      "visible_atmosphere": "facility, washroom, bowl food spilled, basin"
+    }
+  },
+  "authored_actions": [
+    {
+      "id": "item.use_potion",
+      "description": "Drink your potion.",
+      "operation": "use_potion",
+      "entities": [
+        "potion"
+      ],
+      "tools": [
+        "potion_skill"
+      ],
+      "aliases": [
+        "drink potion",
+        "drink my potion",
+        "use potion",
+        "quaff potion",
+        "drink the potion"
+      ]
+    },
+    {
+      "id": "item.eat_provision",
+      "description": "Eat a provision to recover strength.",
+      "operation": "eat_provision",
+      "entities": [
+        "provisions"
+      ],
+      "tools": [],
+      "aliases": [
+        "eat provision",
+        "eat a provision",
+        "eat food",
+        "eat provisions",
+        "consume provision"
+      ]
+    }
+  ]
+}
+
+--- C. RAW INTERPRETER OUTPUT ---
+{
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.8,
+  "action": {
+    "class": "SLEEP",
+    "target_ref": null,
+    "tool_ref": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "query_focus": null
+  },
+  "sequence": [],
+  "ambiguities": [],
+  "needs_clarification": false,
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "stage_a": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "action": {
+      "class": "SLEEP",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": ""
+  },
+  "stage_b": {
+    "classification": "NO_MATCH",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "notes": "The intent 'sleep' does not match any of the provided authored actions. The authored actions involve using items (potion, provisions), while the intent is about resting or sleeping without specifying an item."
+  }
+}
+
+--- D. VALIDATED INTENT ---
+{
+  "action_class": "SLEEP",
+  "target": null,
+  "tool": null,
+  "method": null,
+  "intended_effect": null,
+  "manner": null,
+  "destination": null,
+  "turn_to": null,
+  "utterance": null,
+  "sequence": [],
+  "raw": {
+    "classification": "SYSTEMIC_ACTION",
+    "matched_action_id": null,
+    "confidence": 0.8,
+    "action": {
+      "class": "SLEEP",
+      "target_ref": null,
+      "tool_ref": null,
+      "method": null,
+      "intended_effect": null,
+      "manner": null,
+      "destination": null,
+      "utterance": null,
+      "query_focus": null
+    },
+    "sequence": [],
+    "ambiguities": [],
+    "needs_clarification": false,
+    "understood": true,
+    "notes": "stage_b_no_match",
+    "stage_a": {
+      "classification": "SYSTEMIC_ACTION",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "action": {
+        "class": "SLEEP",
+        "target_ref": null,
+        "tool_ref": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "query_focus": null
+      },
+      "sequence": [],
+      "ambiguities": [],
+      "needs_clarification": false,
+      "understood": true,
+      "notes": ""
+    },
+    "stage_b": {
+      "classification": "NO_MATCH",
+      "matched_action_id": null,
+      "confidence": 0.8,
+      "notes": "The intent 'sleep' does not match any of the provided authored actions. The authored actions involve using items (potion, provisions), while the intent is about resting or sleeping without specifying an item."
+    }
+  },
+  "understood": true,
+  "notes": "stage_b_no_match",
+  "classification": "SYSTEMIC_ACTION",
+  "matched_action_id": null,
+  "confidence": 0.8,
+  "ambiguities": [],
+  "needs_clarification": false,
+  "query_focus": null
+}
+classification=SYSTEMIC_ACTION
+matched_action_id=None
+turn_to=None
+confidence=0.8
+ambiguities=[]
+needs_clarification=False
+
+--- E. ENTITY GROUNDING ---
+{
+  "bindings": {},
+  "ambiguous": [],
+  "failed": [],
+  "notes": "systemic_action",
+  "grounded": true,
+  "clarification_prompt": ""
+}
+
+--- F. PYTHON RESOLUTION ---
+{
+  "intent_understood": true,
+  "grounded": true,
+  "feasible": true,
+  "success": true,
+  "facts": [
+    "You do something minor. The room remains the room."
+  ],
+  "checks": [],
+  "damage_events": [],
+  "state_transitions": [],
+  "rejection_reason": "",
+  "affordances_used": [],
+  "interacted": false,
+  "meaningful_effort": false,
+  "addressed_threat": false,
+  "situation_changed": false,
+  "combat_round": false,
+  "image_dirty": false,
+  "needs_clarification": false,
+  "clarification_prompt": "",
+  "advance_time": true,
+  "guidance_delta": 0,
+  "productive_for_guidance": false,
+  "passage_entered": null,
+  "show_passage_text": false,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "time_cost": 45,
+  "none_reason": "",
+  "requested_entity": null,
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "SLEEP",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "SLEEP",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "enactment": "direct",
+  "wanted_action": {
+    "action_class": "SLEEP",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "SLEEP",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment_cause": ""
+}
+
+--- G. STATE DIFF ---
+turn_index: 15 -> 16
+world_time_seconds: 540 -> 585
+
+--- H. GUIDANCE ---
+{
+  "guidance_before": 0,
+  "guidance_after": 0,
+  "guidance_delta_applied": 0,
+  "choice_hints_suppressed": true
+}
+guidance_level (after)=0
+
+--- I. NARRATOR INPUT ---
+{
+  "player_text_non_authoritative": "sleep",
+  "wanted_action": {
+    "action_class": "SLEEP",
+    "target": null,
+    "tool": null,
+    "method": null,
+    "intended_effect": null,
+    "manner": null,
+    "destination": null,
+    "utterance": null,
+    "classification": "SYSTEMIC_ACTION"
+  },
+  "actual_action": {
+    "action_class": "SLEEP",
+    "performed": true,
+    "modifier": null
+  },
+  "enactment": "direct",
+  "enactment_cause": "",
+  "mode": "facility",
+  "passage_id": null,
+  "player_alive": true,
+  "facts": [
+    "You do something minor. The room remains the room."
+  ],
+  "structured_facts": [
+    {
+      "type": "enactment",
+      "enactment": "direct",
+      "cause": null,
+      "wanted": {
+        "action_class": "SLEEP",
+        "target": null,
+        "tool": null,
+        "method": null,
+        "intended_effect": null,
+        "manner": null,
+        "destination": null,
+        "utterance": null,
+        "classification": "SYSTEMIC_ACTION"
+      },
+      "actual": {
+        "action_class": "SLEEP",
+        "performed": true,
+        "modifier": null
+      }
+    }
+  ],
+  "world_events": [],
+  "body_state": {
+    "locomotion": "normal",
+    "pain": "none",
+    "bleeding": "none",
+    "grip": "firm"
+  },
+  "body_qualitative": [],
+  "visible_entities": [
+    "bowl",
+    "basin"
+  ],
+  "combat": null,
+  "success": true,
+  "attempted": true,
+  "intended_effect_achieved": false,
+  "state_changed": false,
+  "classification": "SYSTEMIC_ACTION",
+  "guidance_level": 0,
+  "guidance_cue": "",
+  "needs_clarification": false,
+  "combat_active": false,
+  "body_sensations": [
+    "Skin feels unclean enough to notice.",
+    "Unease sits under the ribs.",
+    "Hands or bindings limit what you can move.",
+    "Words come out thinner than you intend."
+  ]
+}
+
+--- J. NARRATOR OUTPUT ---
+In the stillness, you attempt to rest, but restlessness persists. The room, unyielding, continues its silence as you do something minor, the act of sleep claimed. Your skin, unclean, and your words, thin, are the only changes in the unaltered space. The bowl and basin remain, silent witnesses to your futile efforts. Sleep, it seems, eludes you tonight.
+
+--- ENGINE LEAKS ---
+[]
+
+--- K/L. IMAGE ---
+IMAGE DECISION: REUSE
+REASON: visible state unchanged
+PROMPT: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer
+DEBUG MODE — IMAGE GENERATION SUPPRESSED
+visual_backend_calls=0
+========================================================================

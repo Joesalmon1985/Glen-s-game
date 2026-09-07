@@ -371,6 +371,10 @@ def goto_passage(world: WorldState, to_id: int, rng: GameRNG, res: Resolution) -
 
     world.passage_id = int(passage.id)
 
+    # Authoritative visibles for this passage (book/dungeon)
+    ents = list(_passage_field(passage, 'entities') or [])
+    world.visible_entities = [str(e) for e in ents]
+
     if passage.combat:
         world.combat = _combat_from_passage(passage.combat)
         res.state_transitions.append(f'combat={world.combat.enemy_name}')

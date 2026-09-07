@@ -126,6 +126,9 @@ class WorldState:
     dungeon_layout: Optional[dict] = None
     book_bookmark: Optional[dict] = None  # {world, layout} snapshot while reading
     layout_seed: Optional[int] = None
+    # Discourse focus for pronouns / again
+    last_npc_referent: Optional[str] = None  # e.g. 'staff'
+    last_grounded_intent: Optional[dict] = None
 
     def to_dict(self) -> dict:
         return world_to_dict(self)
@@ -161,6 +164,10 @@ def world_to_dict(world: WorldState) -> dict:
         'dungeon_layout': dict(world.dungeon_layout) if world.dungeon_layout else None,
         'book_bookmark': dict(world.book_bookmark) if world.book_bookmark else None,
         'layout_seed': world.layout_seed,
+        'last_npc_referent': world.last_npc_referent,
+        'last_grounded_intent': (
+            dict(world.last_grounded_intent) if isinstance(world.last_grounded_intent, dict) else None
+        ),
     }
 
 
@@ -277,6 +284,11 @@ def world_from_dict(data: dict) -> WorldState:
         dungeon_layout=dict(data['dungeon_layout']) if isinstance(data.get('dungeon_layout'), dict) else None,
         book_bookmark=dict(data['book_bookmark']) if isinstance(data.get('book_bookmark'), dict) else None,
         layout_seed=int(data['layout_seed']) if data.get('layout_seed') is not None else None,
+        last_npc_referent=str(data['last_npc_referent']) if data.get('last_npc_referent') else None,
+        last_grounded_intent=(
+            dict(data['last_grounded_intent'])
+            if isinstance(data.get('last_grounded_intent'), dict) else None
+        ),
     )
 
 
@@ -294,17 +306,49 @@ def public_perception(
     neutral = stage_key in ('neutral', 'a', 'stage_a', 'stage-a')
     sheet = world.sheet
     inventory_names = _inventory_names(sheet.inventory)
+    mode = str(getattr(world, 'mode', 'facility') or 'facility')
+
+    # Mode-scoped visibles: never hand cell props to book_dungeon interpreter
+    if mode == 'book_dungeon':
+        visibles = list(world.visible_entities or [])
+        cell_noise = {'bed', 'cup', 'book', 'door', 'bowl', 'basin', 'slit'}
+        # If list still looks like the cell, prefer passage entities when available
+        if passage is not None:
+            pent = (
+                passage.get('entities') if isinstance(passage, dict)
+                else getattr(passage, 'entities', None)
+            )
+            if pent:
+                visibles = [str(e) for e in pent]
+            elif set(str(v).lower() for v in visibles) & cell_noise and len(visibles) <= 6:
+                # Stale cell list with no passage entities — clear rather than lie
+                visibles = [v for v in visibles if str(v).lower() not in cell_noise]
+    else:
+        visibles = list(world.visible_entities or [])
 
     perception: dict = {
         'passage_id': world.passage_id,
         'ending': world.ending or None,
         'victory': world.victory,
         'world_time_seconds': int(world.world_time_seconds or 0),
-        'visible_entities': list(world.visible_entities or []),
+        'mode': mode,
+        'visible_entities': visibles,
         'body_state': _qualitative_body(sheet),
         'combat': None,
         'discourse': _discourse_summary(world.pending_discourse),
     }
+    if getattr(world, 'last_npc_referent', None) and mode == 'facility':
+        perception['last_npc_referent'] = world.last_npc_referent
+
+    # Facility mode: strip FF adventurer gear from interpreter perception
+    if mode == 'facility':
+        inventory_names = [
+            n for n in inventory_names
+            if str(n).lower() not in {
+                'sword', 'leather armour', 'leather armor', 'backpack',
+                'iron key', 'potion', 'potion of skill', 'potion of stamina', 'potion of luck',
+            }
+        ]
 
     if neutral:
         perception['sheet'] = {

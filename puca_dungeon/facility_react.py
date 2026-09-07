@@ -70,6 +70,35 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             facility.set_entity(door)
         facility.last_npc_utterance = '… keth … back … varr …'
         facility.last_understood = 'back'
+        # Discourse: staff is the referent; binary instruction for bare yes/no
+        try:
+            from puca_dungeon import discourse as _discourse
+            world.last_npc_referent = 'staff'
+            _discourse.set_pending_binary(
+                world,
+                'They want you to step back from the door.',
+                {
+                    'action_class': 'retreat',
+                    'method': 'step_back',
+                    'intended_effect': 'give_door_space',
+                    'classification': 'SYSTEMIC_ACTION',
+                    'understood': True,
+                    'utterance': 'step back',
+                },
+            )
+            # Reject path is handled by resolve_affirmative → reject;
+            # also stash stand-firm intent for reject rewriting in session.
+            if isinstance(world.pending_discourse, dict):
+                world.pending_discourse['reject_intent'] = {
+                    'action_class': 'stand_firm',
+                    'method': 'stand_firm',
+                    'intended_effect': 'maintain_position',
+                    'classification': 'SYSTEMIC_ACTION',
+                    'understood': True,
+                    'utterance': 'I will not back away',
+                }
+        except Exception:
+            pass
         events.append({
             'type': 'slit_opens',
             'npc_raw': facility.last_npc_utterance,
@@ -134,6 +163,17 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
                     'forced': True,
                     'text': 'Resistance fails. You are washed anyway. The air smells less like you.',
                 })
+                # Forced opposite of refuse → compromised, not direct success
+                resolution.enactment = 'compromised'
+                resolution.enactment_cause = resolution.enactment_cause or 'institutional_force'
+                resolution.intended_effect_achieved = False
+                resolution.actual_action = {
+                    **(dict(getattr(resolution, 'actual_action', None) or {})),
+                    'action_class': 'wash',
+                    'performed': True,
+                    'modifier': 'forced',
+                }
+                resolution.state_changed = True
             _enter_phase(facility, PHASE_FOOD, t)
             facility.room_id = 'mess'
             events.append({
@@ -214,9 +254,13 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
     for ev in events:
         if ev.get('text'):
             resolution.facts.append(ev['text'])
+        if ev.get('type') in ('slit_opens', 'door_procedure', 'forced_removal', 'washed', 'fed'):
+            resolution.image_dirty = True
+            resolution.state_changed = True
     world.facility = facility
-    # Sync visible entities
-    world.visible_entities = [e.id for e in facility.entities_in_room()]
+    # Sync visible entities only in facility mode — never overwrite book_dungeon perception
+    if getattr(world, 'mode', 'facility') == 'facility' and not book_turn:
+        world.visible_entities = [e.id for e in facility.entities_in_room()]
     return events
 
 

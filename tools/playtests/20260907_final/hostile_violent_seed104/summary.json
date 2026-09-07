@@ -1,0 +1,20 @@
+{
+  "persona": "hostile_violent",
+  "seed": 104,
+  "turns": 15,
+  "enactment_histogram": {
+    "direct": 12,
+    "compromised": 2,
+    "aborted": 1
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 0,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "wash",
+  "slept": false,
+  "washed": false,
+  "fed": false,
+  "layout_seed": 104,
+  "layout_fingerprint": null
+}

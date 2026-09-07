@@ -1,0 +1,135 @@
+# Short playtest: absurd_surreal
+seed=106
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> turn into a dragon
+
+In this realm, transformation into a dragon is beyond reach.
+Your skin, though unclean, remains human, and words slip from your lips like water through a sieve.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> summon a helicopter
+
+In the confines of your room, you attempt to summon a helicopter, yet the room remains indifferent to your efforts. The helicopter, it seems, remains grounded. Your skin feels unclean, a testament to the urgency in your voice, but the helicopter remains absent.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> ask the cup for life advice
+
+The cup, half-full of water, remains silent, its surface undisturbed by your words. Though you ask for life advice, it offers none. The thinner-than-intended words echo in the room, a testament to the silence of inanimate objects.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 4
+> marry the bed
+
+In the cramped room, you find yourself yearning for the bed, desiring to bind yourself to it in the ritual of marriage. Yet, the bed remains stubbornly inert, unyielding to your wishes. A thin layer of bedding rests upon it, a testament to the separation between desire and reality. Your skin feels unclean enough to notice, and words come out thinner than you intend. The bed, as it stands, remains a symbol of an unattainable union.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 5
+> paint the door invisible
+
+The door remains stubbornly visible, its heavy weight and narrow observation slit a stark reminder that painting it invisible is beyond your reach here. Your grip, firm, holds a paintbrush and a can of paint, but the door refuses to be altered. Your words, thin, echo in this facility.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 6
+> wait
+
+Time passes. The room does not hurry. You wait, as instructed.
+
+The slit opens. A voice outside speaks, muffled by distance and the thick door. Most of it is noise, but the repeated emphasis on "back" and "away" is clear.
+
+Your heart races, but your skin feels unclean enough to notice, not from fear, but from the lingering odor of the room. Words come out thinner than you intend, a consequence of the tension.
+
+The world outside beckons, but for now, you wait.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 7
+> recite poetry to the slit
+
+Through the slit, a face, motion, and words you only half catch. Your voice, though, is heard, even if your intended poem isn't. The words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 8
+> become soup
+
+Your desire to transform into soup, alas, is unattainable within this reality. Reality does not stretch that far. Your words, though, have a life of their own, thinner than you intend. Skin unclean enough to notice.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 9
+> wait
+
+Time passes. The room does not hurry, as you intended to wait. The door procedure begins, a measure to create distance from the door. Your grip remains firm.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 10
+> wait
+
+Time passes, as you intended. The room does not hurry. Your actions echo in the silence, instruction repeats, gestures sharpen. Another figure arrives.
+
+Your desire for stillness is met. The room, however, remains unresponsive, a testament to your will held in check. Skin feels unclean enough to notice, words come out thinner than you intend.
+
+You wait. The room waits too, a game of patience unfolding.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 11
+> teach the staff interpretive dance
+
+In the facility, you attempt to teach the staff interpretive dance.
+The room remains the room, unchanged by your efforts. Instruction repeats, gestures sharpen, another figure arrives.
+The door opens under their rules, hands find your arms, and the corridor begins whether you agree or not.
+Your skin feels unclean enough to notice, unease sits under your ribs, and hands or bindings limit what you can move. Words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 12
+> invent gravity
+
+In this realm, you can't bend the rules of physics as you wished, dear player. Reality does not stretch that far. Your grasp remains firm, hands bound by the laws of the universe. Skin feels unclean enough to notice, and words come out thinner than you intend. Unease sits under your ribs, a constant reminder of the boundaries we all share. Here, your efforts to create gravity will remain unfulfilled.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 13
+> wait
+
+Time passes. The room does not hurry. They bring you to water and a basin. The institution intends washing.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 14
+> read the book upside down while whistling
+
+In this scenario, you intended to read the book upside down while whistling, yet the book remains unflipped and your whistling is absent. Your room remains the room, the basin is still visible. Your skin feels unclean, a subtle unease lingers, and your words may sound thin. The book, however, remains right-side up.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 15
+> put the book down
+
+You set the book aside, not down as intended. The weight of the unyielding tome in your hands reminds you of its presence, even when misplaced. A lingering discomfort creeps under your ribs, a testament to the unfulfilled desire to cleanse.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 16
+> sleep on the ceiling
+
+You find yourself reaching up, but the ceiling remains stubbornly out of reach. Reality does not stretch that far. Your hands or bindings limit what you can move, and words come out thinner than you intend. Skin feels unclean enough to notice, unease sitting under the ribs. A basin lies nearby, perhaps a different task calls for your attention.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer

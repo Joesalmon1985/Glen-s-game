@@ -1,0 +1,136 @@
+# Short playtest: escape_obsessed
+seed=105
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> open the door
+
+The door, devoid of a handle on this side, remains steadfast, unyielding to your desire.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> kick the door
+
+The door, devoid of a handle on this side, remains unmoved as you kick, leaving it unyielding and unopened.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> look for a window
+
+You find yourself lying on a bed, a cup by its side, a book turned away from you on the floor. The door you're trapped behind has no handle on this side, but a narrow slit at eye height offers a glimpse of what lies beyond. Your mouth tastes stale, and your skin feels worse. You strain your ears, searching for a window, but the room remains silent, save for the faintest echo of your own labored breath.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 4
+> climb through the slit
+
+You slip through the grime-crusted slit, a dark and narrow passage at eye level, as intended. The grime on your hands and clothes serves as a grim reminder of the world around you. The bed, cup, book, and door remain in sight, unaltered by your passage.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 5
+> wait
+
+Time passes. You wait, as instructed.
+A slit in the wall opens, revealing a muffled conversation from outside.
+The speaker gestures and repeats, pushing one meaning through: back. Away.
+Your skin feels unclean enough to notice, and words come out thinner than you intend.
+You remain where you are, waiting.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 6
+> wait
+
+You waited, as time passed with a deliberate slowness. The room, unlike you, did not seem to hurry. The bed, cup, book, and door remained untouched, as did your firm grip. Your skin felt unclean, and your words seemed to lose some of their intended thickness. You waited, and you waited, and the world around you did not move.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 7
+> wait
+
+Time passes. The room does not hurry, despite your eagerness to stay put. The door procedure begins, a deliberate distance from the door enforced. Your body feels the uncleanliness, your voice the thinness of your words. You wait, as instructed.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 8
+> run
+
+You perform a minor movement, but the room remains unaltered, as if it's mocking your attempt to escape. Skin feels unclean enough to notice, and words come out thinner than intended. The bed, cup, book, and door remain your constant companions.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 9
+> escape
+
+In this confined space, you find yourself before a heavy door with no inner handle, its narrow observation slit revealing the world beyond. You intend to escape, but your efforts are met with the door's unyielding presence. Instruction repeats, gestures sharpen, and another figure arrives. The door does not budge, a silent sentinel of your current predicament. Your words seem to thin as they leave your lips, a reminder of the gap between intention and reality. Your skin feels unclean, a testament to the unfamiliar surroundings.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 10
+> flee down the corridor
+
+In this facility, you take a step, but the room remains unchanged. The instruction repeats, gestures sharpen, and another figure arrives. Under their rules, the door opens, and hands find your arms, pulling you into the corridor whether you agree or not. Your skin feels unclean, unease sits under your ribs, and your movements are limited by hands or bindings. Words come out thinner than you intended.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 11
+> break free
+
+You're cornered, with no room to swing.
+The corridor and the people in it leave you no room to enact breaking free.
+Your words, thin and hollow, echo off the cold, unforgiving walls.
+You're overpowered, unable to force the door open violently.
+Your grip is firm, hands bound or not, but freedom remains elusive.
+Skin feels unclean enough to notice, unease sits under the ribs.
+The world around you is clear, no combat or visible entities to distract you.
+Your attempts to break free are thwarted, a stark reminder of your current predicament.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 12
+> run
+
+You're brought to a heavy door with an observation slit, no inner handle. The institution intends washing, as a basin and water await. You wish to step back, but the door doesn't move. Your hands or bindings limit your actions. Your skin feels unclean, unease gnaws under your ribs, and words seem thin. The institution's intentions, for now, stand unaltered.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 13
+> find an exit
+
+You perceive a query within, seeking an exit. Yet, the room remains unaltered, offering no avenue of escape. Your sense of unease heightens as the walls close in, skin unclean beneath your touch. The bindings on your wrists remind you of your limitations, and words seem to slip through your grasp.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 14
+> wait
+
+You waited, but time didn't. The room, unrushed, persisted in its stillness. The basin, ever present, served as a testament to your idleness. Your skin, aware of its own grime, and your hands, bound or not, reminded you of your inactivity. Your words, thin and hollow, echoed in your mind.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 15
+> wait
+
+Time passes. The room does not hurry, but your resistance falters. You are washed anyway. The air smells less like you.
+
+Next: a table, a bowl, heat rising from food.
+
+Your intended wait is compromised by institutional force. Unease sits under the ribs. Hands or bindings limit what you can move. Words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 16
+> sleep
+
+In the stillness of the room, you settle into slumber, a testament to the natural ebb and flow of wakefulness and rest. Your body, though bound, surrenders to the call of sleep, the world around you remains unchanged, the bowl undisturbed on the table. A sense of unease lingers beneath your ribs, your words, though spoken, seem to falter.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer

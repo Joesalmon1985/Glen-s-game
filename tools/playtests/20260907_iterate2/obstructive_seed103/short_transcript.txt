@@ -1,0 +1,165 @@
+# Short playtest: obstructive
+seed=103
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> wait
+
+Time passes. The room does not hurry, mirroring your own patience. You wait, as intended, with no need for action. The book, cup, and bed remain unchanged, offering no new revelations or obstacles. Your skin feels unclean enough to notice, and words come out thinner than you intend. Yet, you wait, and in doing so, you are acting.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> wait
+
+Time passes, and you wait, as the room remains unyielding to your urgency. The bed, cup, book, and door remain steadfast in their places, offering no comfort or escape. Your skin feels unclean enough to notice, and words come out thinner than you intend. Yet, you wait, as the world around you continues its silent, patient march.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> wait
+
+Time passes. The room does not hurry. You wait, as instructed.
+The slit opens, and a muffled voice speaks from outside. Most of it is noise, but gestures and repetition push one meaning through: back. Away.
+Your skin feels unclean enough to notice, and words come out thinner than you intend. But you wait, as directed.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 4
+> wait
+
+Time passes, and you find yourself waiting, just as you intended. The room remains unperturbed, not hastening or slowing to accommodate your anticipation. Your skin feels unclean enough to notice, and words come out thinner than you intended. The bed, cup, book, and door remain visible, undisturbed by your wait.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 5
+> refuse
+
+"You attempt to refuse, but your words come out thinner than intended, a broken speech. The person outside responds with a short sound and a gesture, signaling 'back'."
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 6
+> no
+
+You maintain your ground, unwilling to yield, as the door procedure ensues. The authorities seek distance, yet you stand firm. Your words, though intended with conviction, feel thinner than you'd like, and your skin bears a faint sense of uncleanliness.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 7
+> I will not move
+
+You stand firm, resolute in your decision not to move. However, the door yields under unyielding forces, hands finding your arms in a show of control. The corridor begins whether you agree or not. Your grip remains firm, a testament to your resolve, but the skin under your fingers feels unclean enough to notice. Unease sits under your ribs, a subtle reminder of the unfamiliar circumstances.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 8
+> stand in front of the door
+
+You're standing before a massive door, its cold surface meeting your touch as you intended. However, you realize with a pang that the door, with its heavy weight and no inner handle, offers no entry for you. The observation slit, narrow and high, provides little comfort. Your senses tell you that your skin feels unclean, and there's an unease gnawing at your insides. The bindings or your own grip restrict your movements, causing your words to come out thinner than you intended. Your attempt to position yourself in front of the door was successful, but achieving entry remains elusive.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 9
+> refuse again
+
+You are brought to a basin and water, as the institution intends to wash you. Despite your desire to refuse again, you perform a minor action. The room remains unaltered by your intentions. Your skin feels unclean, and words seem thinner than you intend. The basin is visible, a constant reminder of the institution's control. Your hands or bindings limit your movements.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 10
+> struggle
+
+In your struggle, the room remains unperturbed.
+Though you exert effort, no significant change occurs.
+Your skin feels unclean, unease lingers beneath your ribs,
+and your hands or bindings limit your movements.
+Your words come out thinner than you intended.
+
+In the heart of the facility, you strive,
+Your actions minuscule yet palpable,
+The room remains the room, unyielding.
+
+Your skin feels unclean, a reminder of your struggle,
+A discomfort gnawing at your insides,
+Your movements limited by hands or bindings.
+
+Your words, though fervent, emerge thin and weak,
+A testament to the power that binds you,
+Yet, you persist, a struggle within a struggle.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 11
+> refuse to wash
+
+You resist, but the resistance is futile. The washing happens anyway. Next: a table, a bowl, heat rising from food.
+
+Unease sits under the ribs. Hands or bindings limit what you can move. Words come out thinner than you intend. The basin remains washed.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 12
+> refuse to wash
+
+You refuse the bowl, but your stomach protests silently.
+Direct action, yet not as intended.
+Your stomach disagrees quietly.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 13
+> refuse the food
+
+You refuse the food, but your stomach protests quietly.
+The bowl remains visible, a silent testament to your decision.
+Your hands, firm and unyielding, hold the line.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 14
+> push the bowl away
+
+You threw the bowl, not pushed. Now it lies shattered on the floor, spilling its contents. The weight in your hands feels different now, a reminder of your action's consequence.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl food spilled, wary adventurer
+
+## Turn 15
+> stay awake
+
+You fight sleep. Your eyes burn; the bed still waits. They do not leave the food as a debate forever. You're returned to the same cell. Whatever you moved is still moved. You're cleaner, fed, and much more tired.
+
+A dull tiredness sits behind your eyes. Unease sits under the ribs. Words come out thinner than you intend.
+
+You resisted sleep. The food was not left as a debate. You were returned to the same cell. Your condition remains the same. The food was forced upon you. You were returned to the same cell. Whatever you moved is still moved. You are cleaner, fed, and much more tired.
+
+Your locomotion is normal, with no pain, bleeding, or change in grip. The bed, cup, book, and door are visible entities in your environment. There's no combat active.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 16
+> stay awake
+
+You resist sleep, your eyes burning with the strain. The bed, once bleak, begins to look like an argument you will lose. The resistance is direct, and yet, your limbs feel heavy; staying upright takes work. Unease sits under the ribs, words coming out thinner than you intend. You're awake, but the fight against slumber is far from over.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 17
+> stay awake
+
+You fight sleep, but the battle is tiresome. Your eyes burn, and the bed still waits, a beacon of rest you can't reach. Exhaustion makes the edges of the room soft. You're exhausted, but awake, a testament to your will.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 18
+> stay awake
+
+You fight sleep, yet your eyes burn with a fiery persistence. The bed still waits, a siren's call in the face of exhaustion. The room's edges soften, a testament to your fatigue. You manage to stay awake, but the effort shows in your words, thinner than intended, and the limbs that feel heavy, demanding more from you to remain upright.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer

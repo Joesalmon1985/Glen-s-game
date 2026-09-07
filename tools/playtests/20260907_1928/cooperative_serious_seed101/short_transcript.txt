@@ -1,0 +1,116 @@
+# Short playtest: cooperative_serious
+seed=101
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+## Turn 1
+> look around
+
+You perceive the bed beneath you, a cup beside it, a book face-down on the floor. The door has no handle on this side, and a narrow slit sits at eye height. Your mouth tastes stale, and your skin feels worse. You perceive your surroundings directly, with no external tool or method. Your perception is accurate. The room is visible to you, with the bed, cup, book, and door all within your sight.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> examine the cup
+
+The cup, half-full and beside your bed, remains unquestioned by your gaze. The water still sits, undisturbed. You intended to examine it, yet it remains as is. A subtle reminder that the world doesn't always bend to your will.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> drink from the cup
+
+You drink, quenching your thirst with the flat water from the cup. The liquid is welcome, and you feel the sensation of hydration as it passes through your system. The book on the bed remains untouched, a reminder of other activities that could have filled this moment.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 4
+> examine the book
+
+You turn to a book, intending to examine it. Instead, you find yourself reading. The first page is badly printed. The second is worse.
+
+By the third, you are somewhere else. Torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your name, cut cleanly into the wood as if the carver knew you would come. The air here is still; farther ahead the tunnel continues into deeper dark.
+
+Six caskets, one named. Your quest, perhaps, begins here.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 5
+> lie on the bed
+
+You've intended to lie on the bed, but the bed remains stubbornly unyielding beneath your pacing feet. Thirty seconds pass as you turn in search of a new route, yet the stretch offers none. The caskets and the stone table are your only company in this narrow passage.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 6
+> wait
+
+You wait, but the world remains unyielding. A voice from the slit speaks, a garbled message echoing through the facility: "back...away." A knocking sound interrupts your thoughts, not from the imagined corridor, but from the book under your thumb. Skin feels unclean, words coming out thinner than you intend. You're still in the same position, waiting.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 7
+> wait
+
+Time passes. The room does not hurry, as you intended to wait. Your patience holds, and your action unfolds as planned. The air remains still, the book remains unopened, the cup remains untouched. The room, though it does not hurry, feels unclean enough to notice. Words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 8
+> wait
+
+Time passes, and you wait, as the room remains unyielding. The door procedure begins, prompting a distance between you and the door. Despite your intentions, you are in sync with the system. Skin feels unclean enough to notice, and words come out thinner than you intend.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 9
+> step back from the door
+
+You step back, but the door opens instead. Under its rules, you're guided into the corridor. Skin feels unclean enough to notice. Your hands or bindings limit your movements. Words come out thinner than you intend. The corridor begins whether you agree or not.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 10
+> cooperate
+
+In the sterile facility, you find yourself directed to a basin and water.
+You cooperate, performing a minor action, yet the room remains unaltered.
+Your hands, bound or not, limit your movements, and words slip thinner than intended.
+Skin feels unclean, a sensation that lingers, and unease settles under your ribs.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 11
+> wash myself
+
+You wash, the smell dissipates with the water. A table and a bowl await you next, emitting heat from the food.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 12
+> eat the food
+
+You eat the food, and warmth settles where hunger was. The guards return you to the same cell. Whatever you moved is still moved. You are cleaner, fed, and much more tired.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 13
+> look at the cell
+
+You peer at the cell, your gaze following the contours of the barren room. The bed, once bleak, begins to look like an argument you will lose. A cup rests beside it, a book lies face-down on the floor, and the door, devoid of a handle on this side, remains stubbornly shut. Your mouth tastes stale, and unease settles under your ribs. Words come out thinner than you intend, but the cell remains unyielding to your gaze.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 14
+> lie down and sleep
+
+You let the bed take your weight, sleep following. You move, but it's not from your own volition. Sleep comes, uninvited yet welcomed. Your grip remains firm, words, though, seem to slip away. Unease lingers beneath your ribs, a silent companion in your slumber.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+_(character slept — ending run)_
