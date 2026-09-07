@@ -131,6 +131,7 @@ def main(argv: list[str] | None = None) -> int:
     started = time.time()
     made = 0
     skipped = 0
+    failed = 0
     for index, job in enumerate(jobs, start=1):
         dest = args.assets / job['file']
         size = (int(job['size'][0]), int(job['size'][1]))
@@ -142,7 +143,30 @@ def main(argv: list[str] | None = None) -> int:
         prompt = job['prompt']
         full = prompt if not style else f'{style}, {prompt}'
         print(f'[{index}/{len(jobs)}] generate {job["id"]} ...')
-        _key, raw_path = gen.generate(f'sprite_{job["kind"]}_{job["id"]}', full)
+        raw_path = None
+        last_err: Exception | None = None
+        for attempt in range(1, 4):
+            loc = f'sprite_{job["kind"]}_{job["id"]}'
+            if attempt > 1:
+                loc = f'{loc}_retry{attempt}'
+                full_try = f'{full}, safe for work, furniture only, no people, no nudity'
+            else:
+                full_try = full
+            try:
+                _key, raw_path = gen.generate(loc, full_try)
+                last_err = None
+                break
+            except RuntimeError as exc:
+                last_err = exc
+                msg = str(exc).lower()
+                if 'filtered' in msg or 'cancelled' in msg:
+                    print(f'  attempt {attempt} failed: {exc}')
+                    continue
+                raise
+        if last_err is not None or raw_path is None:
+            print(f'  FAILED {job["id"]}: {last_err}')
+            failed += 1
+            continue
         _chroma_key_and_fit(
             Path(raw_path),
             dest,
@@ -153,8 +177,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f'  wrote {dest}')
 
     elapsed = time.time() - started
-    print(f'Done. generated={made} skipped={skipped} elapsed_sec={elapsed:.1f}')
-    return 0
+    print(f'Done. generated={made} skipped={skipped} failed={failed} elapsed_sec={elapsed:.1f}')
+    return 1 if failed else 0
 
 
 if __name__ == '__main__':

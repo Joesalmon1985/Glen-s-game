@@ -50,7 +50,7 @@
     "bed_bedding_floor": {
       "file": "props/bed_bedding_floor.png",
       "size": [160, 96],
-      "prompt": "narrow institutional bed with bedding stripped onto the floor beside it, pixel art prop, isolated on solid magenta background #FF00FF, centered"
+      "prompt": "narrow institutional bed with folded blanket and sheet piled neatly on the floor beside it, pixel art furniture prop, isolated on solid magenta background #FF00FF, centered, no people"
     },
     "cup_full": {
       "file": "props/cup_full.png",

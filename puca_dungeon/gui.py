@@ -98,7 +98,8 @@ class DeathtrapGui:
         self.poll_id = self.master.after(40, self._poll)
 
     def _build(self, text_only):
-        self.master.title('Puca')
+        self.sprite_mode = str(os.environ.get('PUCA_IMAGE_MODE') or '').strip().lower() == 'sprites'
+        self.master.title('Puca — sprite scenes' if self.sprite_mode else 'Puca')
         self.master.tk.call('tk', 'scaling', 96 / 72)
         self.master.geometry('2560x1440')
         self.master.minsize(780, 680)
@@ -152,7 +153,11 @@ class DeathtrapGui:
         self.image_toggle = ttk.Checkbutton(tools, text='Illustrations', variable=self.images_var)
         self.image_toggle.pack(side='left')
         self.lora_toggle = ttk.Checkbutton(tools, text='Pixel adapter', variable=self.lora_var)
-        self.lora_toggle.pack(side='left', padx=10)
+        if self.sprite_mode:
+            # Facility scenes use disk sprites; LoRA only matters for book-mode diffusion.
+            self.lora_toggle.pack_forget()
+        else:
+            self.lora_toggle.pack(side='left', padx=10)
         ttk.Button(tools, text='A-', width=3, command=lambda: self.font(-1)).pack(side='right')
         ttk.Button(tools, text='A+', width=3, command=lambda: self.font(1)).pack(side='right', padx=5)
         self.new_button = ttk.Button(tools, text='New run', command=self.new_run)
@@ -166,9 +171,17 @@ class DeathtrapGui:
         self.art_panel.grid(row=0, column=0, sticky='nsew', padx=(0, 18))
         self.art_panel.grid_propagate(False)
         self.art_panel.pack_propagate(False)
+        art_intro = (
+            'Sprite scenes compose here from the kit in assets/sprites.\n\n'
+            'Facility rooms update when objects or people change.\n'
+            'Type freely — no meters, no menus of numbers.'
+            if self.sprite_mode else
+            'The room will take shape here.\n\nIllustrations are optional.\n'
+            'Type freely — no meters, no menus of numbers.'
+        )
         self.image_label = tk.Label(
             self.art_panel,
-            text='The room will take shape here.\n\nIllustrations are optional.\nType freely — no meters, no menus of numbers.',
+            text=art_intro,
             bg=PANEL, fg=MUTED, font=('Georgia', 16), wraplength=760,
         )
         self.image_label.pack(fill='both', expand=True, padx=10, pady=10)
