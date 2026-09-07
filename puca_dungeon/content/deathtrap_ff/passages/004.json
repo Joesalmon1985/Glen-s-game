@@ -1,0 +1,12 @@
+{
+  "id": 4,
+  "text": "In the total darkness you do not see the pipe's downward turn. You slip and, unable to get a grip on the slimypipe, slide over the edge. Yourscreams echo down the pipeasyou fall thefiftymehes tothe bottom. You have failed the 1 rial of Champions.",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

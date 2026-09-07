@@ -1,0 +1,31 @@
+{
+  "id": 216,
+  "text": "The fist retracts and prepares to strike again. With your frge hand you draw youi sword and hy to cut the handle of the door. Although you do not recognize it, you a re being attacked by the fluid form ofan I\\4TTATOR. IMITATOR As soon as you win your first Attack Round, turn to ]a4. -t/The tunlel rnakes a sudden left turn and continues north for as far as you can see, You soon a ive at a closed wooden door in the left-hand wall. lf you wish to open the door, turn to 12. I{ you would rather keep BoinB north, turn to 100. 21E As you fall, you manage to grab the rope with your hands. Slowly you haul youmelfover to the far side and scramble up on to the floor. You lift the helmet off the pole and put it on your head. It has been made by a highly skilled ironsmith. Add r sxrrr point. Not vr'ishing to risk walking back across the tighhope, you decide to crawl along it. Safely back on firm dround, you step through the archway and head north up the tunnel. turn to 291. s(rLL 9 STAMINA 8",
+  "choices": [
+    {
+      "id": "to_12",
+      "label": "lf you wish to open the door",
+      "aliases": [],
+      "to": 12
+    },
+    {
+      "id": "to_100",
+      "label": "I{ you would rather keep BoinB north",
+      "aliases": [],
+      "to": 100
+    },
+    {
+      "id": "to_291",
+      "label": "Turn to 291",
+      "aliases": [],
+      "to": 291
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

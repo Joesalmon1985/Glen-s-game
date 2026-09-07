@@ -1,0 +1,31 @@
+{
+  "id": 199,
+  "text": "MANTICORE s(ILL 11 I{ you win, turn to j64. STAMINA 11",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "MANTICORE s(ILL 11 I{ you win",
+      "aliases": [],
+      "to": 164
+    }
+  ],
+  "combat": {
+    "enemy_name": "Manticore",
+    "enemy_skill": 11,
+    "enemy_stamina": 11,
+    "win_to": 164,
+    "enemies": [
+      {
+        "name": "Manticore",
+        "skill": 11,
+        "stamina": 11
+      }
+    ]
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

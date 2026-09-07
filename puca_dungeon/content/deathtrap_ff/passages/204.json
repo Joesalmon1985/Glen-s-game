@@ -1,0 +1,39 @@
+{
+  "id": 204,
+  "text": "You search through the cupboards and boxes in Ivy's room, but you find nothing except for an old bone. A door lies in the edrt r alloflhechamberdnd you decide to leave, taking the old bone with you if you wish. You now find yourself standing at the end of another tunnel. turn to 305. There is an unseen pressure plate on top of the plinth, and as soon as the skull is put back on it, the device is sprung. Immediately the crossbows release a shower of bolts across the room Tesl yo,r' lrck. If you are Lucky, turn to 131. lI you are Unlucky, turn to 199.",
+  "choices": [
+    {
+      "id": "to_305",
+      "label": "Turn to 305",
+      "aliases": [],
+      "to": 305
+    },
+    {
+      "id": "to_131",
+      "label": "If you are Lucky",
+      "aliases": [],
+      "to": 131
+    },
+    {
+      "id": "to_199",
+      "label": "lI you are Unlucky",
+      "aliases": [],
+      "to": 199
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": 131,
+      "failure_to": null,
+      "lucky_to": 131,
+      "unlucky_to": null
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

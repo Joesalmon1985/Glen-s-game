@@ -1,0 +1,25 @@
+{
+  "id": 324,
+  "text": "Have you talked to the crippled servant of the Trialmasters? If you have, turn to 256 lf you have not, turn to 79",
+  "choices": [
+    {
+      "id": "to_256",
+      "label": "If you have",
+      "aliases": [],
+      "to": 256
+    },
+    {
+      "id": "to_79",
+      "label": "If you have, turn to 256 lf you have not",
+      "aliases": [],
+      "to": 79
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

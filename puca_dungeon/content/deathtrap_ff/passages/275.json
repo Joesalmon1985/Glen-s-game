@@ -1,0 +1,19 @@
+{
+  "id": 275,
+  "text": "Thick smoke rises up from the floor where the acid has fallen irom the brnken jug. Yor,r crawlalung the'l,x'r dc\\perriely trUng to frnd drinldble wdtcr in lhe shallow pools of rhe dnppints iunnel. ft.,r -y(.r//ft41. ll vorr are Lucly. turn tL,2?r. lf you are Unlur ky. lLrrn to lo9.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 21
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

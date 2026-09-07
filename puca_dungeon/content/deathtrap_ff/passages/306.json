@@ -1,0 +1,19 @@
+{
+  "id": 306,
+  "text": "Before you can take a sin8le step towards the Leprechauns, one of them throws some sparkling dust at you. You are immediately ftozen to the spot, unable to move a muscle You watch helplessly as the Leprechauns rummage through your backpack and run of{ with all your possessions, leaving your backpack empty. Lose 2 Luc( points. About an hourlater the fueezingeffectof the dustwears off and feeling reiurns to your limbs. You are angry at your loss and stomp oif norlh, determined to have your revenge- turn to 29 1o7-1ao",
+  "choices": [
+    {
+      "id": "to_29",
+      "label": "You are angry at your loss and stomp oif norlh, determined to have your revenge",
+      "aliases": [],
+      "to": 29
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

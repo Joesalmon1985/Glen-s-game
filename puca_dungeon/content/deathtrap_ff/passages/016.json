@@ -1,0 +1,43 @@
+{
+  "id": 16,
+  "text": "\\ ou iu't have lime to hedr the Cnome sdy, 'Thrce 'lullc' before a rvhite boll o( energy shoots out from the lock into your chest, knocking you unconscious Roll one die, add 1 to the number and reduce your srAMrNAby the total. lfyou are still alive, you come to and are t;ld by theGnome to try again. Youchose the wrong gems last time, so you won't try that combination again. AB Emerald Diamond Diamond Sapphire Sapphire Emerald Emerald Sapphire Diamond Emerald Sapphire Diamond c Sapphire turn to 16 Emenld turn to 392 Dlamond Tutn to 177 Diamond turn to 287 Sapphire Tutn to 132 Emerald turn to 249 a7 You are not shong enough to force open the heavy door. The water is now waist-high ajrd you are\n\nLuckily for you, the cobra's fangs sink into you! leathe! wristband. The snake recoils quickly, ready to strike again, as the Dwarf tells you to have another try. Roll two dice. If the total is the same as or less than your S(ILL. tuln to 55. If the total is gleate! than your 9(rLL, turn to 202",
+  "choices": [
+    {
+      "id": "to_16",
+      "label": "AB Emerald Diamond Diamond Sapphire Sapphire Emerald Emerald Sapphire Diamond Emerald Sapphire Diamond c Sapphire",
+      "aliases": [],
+      "to": 16
+    },
+    {
+      "id": "to_392",
+      "label": "Diamond Diamond Sapphire Sapphire Emerald Emerald Sapphire Diamond Emerald Sapphire Diamond c Sapphire turn to 16 Emenld",
+      "aliases": [],
+      "to": 392
+    },
+    {
+      "id": "to_287",
+      "label": "d Emerald Sapphire Diamond Emerald Sapphire Diamond c Sapphire turn to 16 Emenld turn to 392 Dlamond Tutn to 177 Diamond",
+      "aliases": [],
+      "to": 287
+    },
+    {
+      "id": "to_249",
+      "label": "re Diamond c Sapphire turn to 16 Emenld turn to 392 Dlamond Tutn to 177 Diamond turn to 287 Sapphire Tutn to 132 Emerald",
+      "aliases": [],
+      "to": 249
+    },
+    {
+      "id": "to_202",
+      "label": "than your 9(rLL",
+      "aliases": [],
+      "to": 202
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

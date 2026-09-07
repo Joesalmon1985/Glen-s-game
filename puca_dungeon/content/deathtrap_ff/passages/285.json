@@ -1,0 +1,19 @@
+{
+  "id": 285,
+  "text": "You land heavily on your back, but luckily your backpack cushions vour fall. Lose I sI(rLL point and 2 STAMINA points. The darkness is almost pitch black at the bottom of the pit, and you crawl along the floor, groping in front of you. Suddenly your hand touches something cold, hard and smooth The object is smallandround, butyou cannotfigure out what it is. You place it in your backpack, hoping to see what jt is once out of the pit You conhnue to crawl forward and soon reach the pit wall. lt is too smooth to clihb, and you have to cut hand- and toe-holds in it with your sword. This takes a long time, but finally you cLmb out ofthe pit on the east side. You immediately check out the object in your backpack, and discover that you have found an orb of blood-red ruby You are absolutely delighted and head off east in high spirits, rn/histhnB softly under your breath Turr. to 217.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "and discover that you have found an orb of blood-red ruby You are absolutely...",
+      "aliases": [],
+      "to": 217
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

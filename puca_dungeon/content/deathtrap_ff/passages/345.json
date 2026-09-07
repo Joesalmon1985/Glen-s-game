@@ -1,0 +1,43 @@
+{
+  "id": 345,
+  "text": "The funnel veers sharply to the left and comes to an end at a high wall in which there is a door. You hear a ferocious roar from the other side o{ the wall and you wonder what gargantuan beast could make such a noise. If you have a coil o{ rope and a glapplingiron, turn to 129. Ifyou do nothave these items, turn to 245. 3a6 The tunnelcontinues forquite a dlstancebefore you reach a junction If you wish to head west into the new tunnel, turn to 295. If you would lather continue nofth, furn to 241. Tappin8 the side of the borehole with your sword, you tread your way b)indly through the sticky slime. You followits twisting and turning course for what seems an age and begin to wonder where it might lead. Suddenly you hear a slithedng sound up ahead. You freeze with fear, your eyes desperately trying to pierce the pitch-black darkness Before you realize whatis happening, youare gipped round the neck by the powerful mandibles of another Rock Grub. It is the mate of the Rock Grub you killed and has been attracted by the smell of blood on your sword. lt squeezes harder until your neck snaps like a small twig. Your adventure ends here, tag-32o 31E After crossing the bridge, you run across the cavern floor. At last you see a tunnel in the far wall, which you race down until you reach its end at a hea\\,y wooden door. The door is locked. lf you have an iron key, turn to 86. If you do not have a key, turn to 276.",
+  "choices": [
+    {
+      "id": "to_129",
+      "label": "If you have a coil o{ rope and a glapplingiron",
+      "aliases": [],
+      "to": 129
+    },
+    {
+      "id": "to_245",
+      "label": "Ifyou do nothave these items",
+      "aliases": [],
+      "to": 245
+    },
+    {
+      "id": "to_295",
+      "label": "3a6 The tunnelcontinues forquite a dlstancebefore you reach a junction If you wish to head west into the new tunnel",
+      "aliases": [],
+      "to": 295
+    },
+    {
+      "id": "to_86",
+      "label": "lf you have an iron key",
+      "aliases": [],
+      "to": 86
+    },
+    {
+      "id": "to_276",
+      "label": "If you do not have a key",
+      "aliases": [],
+      "to": 276
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

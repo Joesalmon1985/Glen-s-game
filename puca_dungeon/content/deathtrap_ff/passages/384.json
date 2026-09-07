@@ -1,0 +1,19 @@
+{
+  "id": 384,
+  "text": "The fourth step suddenly gives way under your weight. Your leg sinks into a deep hole, and before you have time to pull it out, you feel a pain in your foot as unseen sharp teeth sink into it. The highpitched squeakingyouhearbelowisbeingmadeby rats. They are staNed, and dp into your foot, hungry for your flesh. Lose 2 STAMINA points. You regainyour balance and manage to pull your leg out of the hole. Three rats are sLill hanging on to your {oot with theirteeth. Kicking frantrcally, you smash their heads against the banister until they let go. You then wrap crude bandages torn fromyour shirt around your bleeding foot and climb the steps to set offnorth again. turn to 277.",
+  "choices": [
+    {
+      "id": "to_277",
+      "label": "Turn to 277",
+      "aliases": [],
+      "to": 277
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

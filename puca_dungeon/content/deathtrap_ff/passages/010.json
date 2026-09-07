@@ -1,0 +1,67 @@
+{
+  "id": 10,
+  "text": "Strll mnning as fast as you can, you reach into your backpackandpullout thewoodentube. Yoriplanto lie under the surface of the water, breathing through the tube With luck, the Troglodytes will assume that you will be swept to youI death downriver as the torent disappearsinto the depths of the mountain. You seize the tube between your teeth and lower yourself into the water Holding on to one of the underwater bridge pillars, you keep perfectly still for ten minutes. When you finally think the Troglodytes have gone, you nse to the 1()-11 surface and look around. There is nobody to be seen/ so you climb out of the river and cross the bridge to the northern bank Any remaining Provisions you may have are now sodden and inedible. Cross them off your Adpenture Sheet. \\ot) co li^!e to walk through the vast cavern until at lastyou see a tunnel in the far wall. You walk down it until you come to a heary wooden door, which is locked. If you have an ironkey, turn to 86. Ifyou do not have a key, turn to 276. aa You look down and see the crumpled bodies of the Flying Guardians lying motionless on the floor. You start to p se out the idol's emerald eye with the tip of vour sword At last it comes free, arld you are surpdsed by its iveight. Hoping thatitmaybe o{ use later, you put it in your backpack. If you now wish to pdse out the ght eye, turn to 140. If you would rather dimb down the idol, turn to 46.\n\na2-43 a2 The door opens into a large, candle lit room filled rvith the most extraordinadly lifelike statues of knights and waffiors. A white-haired old man dressed in Lattered rags suddenly jumps out from behind one oi Lhe \\t\"tues dnd.tarts to giggle. Though he looks like a {ool, the sparkle in his eyes nakes you think there is more to him than is apparent. In a high-pitched vorce he says, 'Oh 8ood, another stone for my garden. I'm glad you have come to join your friends Now, I'mafahmanand so I'll ask you a question. lfyou answer correctly, I'll let you go free -butilyour answer is wron8, l'll turn you to stonel'He slarts to chuckle again, obviously pleased with your allival. Will you: Wait for his question? Attack him with youl sword? Make a run for the door? Turn to j82 turn to 195 turn to 250 The tunnel makes a sudden turn to the left and heads north for as far as you can see. The footp nts you are following start to peter out as the tunnel becomes gradually dder. Soon you are beyond the drippingroof and the pools on the floor. You notice the atu becoming hotter and you find youNelfpant in8 even though you are walkin8 quite slowly. In a small recess on the left-hand wall you see a section of bamboo standing on 1ts end. Li{tingit down, you see it is filled wlth a clear liquid. Your throat is\n\na4-a5 L4 The tunnel leads into a dark chamber coveled in thick cobwebs. Clawing your wa-Y through them, you t p over a wooden casket. lf youwishtotryto open tire casket, turn to 157. If you would mther continue north, turn to 310. rt good fortune, you set off west once again turn to 74. ab'47",
+  "choices": [
+    {
+      "id": "to_86",
+      "label": "If you have an ironkey",
+      "aliases": [],
+      "to": 86
+    },
+    {
+      "id": "to_276",
+      "label": "Ifyou do not have a key",
+      "aliases": [],
+      "to": 276
+    },
+    {
+      "id": "to_140",
+      "label": "If you now wish to pdse out the ght eye",
+      "aliases": [],
+      "to": 140
+    },
+    {
+      "id": "to_46",
+      "label": "If you would rather dimb down the idol",
+      "aliases": [],
+      "to": 46
+    },
+    {
+      "id": "to_195",
+      "label": "Turn to j82",
+      "aliases": [],
+      "to": 195
+    },
+    {
+      "id": "to_250",
+      "label": "Turn to j82 turn to 195",
+      "aliases": [],
+      "to": 250
+    },
+    {
+      "id": "to_157",
+      "label": "lf youwishtotryto open tire casket",
+      "aliases": [],
+      "to": 157
+    },
+    {
+      "id": "to_310",
+      "label": "If you would mther continue north",
+      "aliases": [],
+      "to": 310
+    },
+    {
+      "id": "to_74",
+      "label": "rt good fortune, you set off west once again",
+      "aliases": [],
+      "to": 74
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

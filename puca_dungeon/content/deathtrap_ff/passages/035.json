@@ -1,0 +1,25 @@
+{
+  "id": 35,
+  "text": "You run faster than you have ever run in your life before, but still th€ boulder is catching up on you. Roll two dice- If the total is the same as or less than both your srrl-I- and STAMINA scores, turn to 340. lf the total is greater than either your SKILL or STAMINA SCOteS/ turn to 7.",
+  "choices": [
+    {
+      "id": "to_340",
+      "label": "Roll two dice- If the total is the same as or less than both your srrl-I- and STAMINA scores",
+      "aliases": [],
+      "to": 340
+    },
+    {
+      "id": "to_7",
+      "label": "lf the total is greater than either your SKILL or STAMINA SCOteS/",
+      "aliases": [],
+      "to": 7
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,0 +1,61 @@
+{
+  "id": 138,
+  "text": "The book s pages arc sealed together, but a small hole has been cut out in the middle of them, iust large enough lo hold a smallcorked bot e contain. ing a clear liquid. You show it to Throm, who holds up his hand, indicating that he does not wantyou to come anywhere near him with itj his distrust of things unknown is strongly evidenf, Will you: Drink the liquid? Tuln to 397 Rub the liquid into your wounds? turn to 25 Open the red book (if you have not done so already)? Turn to 52Leave the bottle and book to continue north with Throm? turn to ?6q\n\na4t a4J You call out to the Dwart telling him to send in the SCORPIONbecause you are ready to fight. Slowly the wooden door rises, and a huge, grotesque black Scorpion squeezes underneath it and enters the room. You draw your sword in readiness and prepare to flght the sinister creature with its huge pincers and deadly sting GIANT SCORPION SKILL 10 STAMINA 1O The Scorpion attacks you with both pincerc, and you must treat each pincer as a separate creature as though you were fighting two creatures. Both pincers have a sKILL of 10 and will attackyou separately in each Attack Round, but you must choose which of the two voLr will fi8hL. ALtdcl one pincer d5 in a normal battle. Against the other pincer you must throw {or your Attack Strength in the nolmal way, but you will not wound it even i{ your Attack Strength is greater; you must count this as though you have just fended off its blow Of course, if its Attack Strengthis greater, itwill have \\4ounded you in the normal way. If, during any of the Attack Rounds, the Scorpion's Attack Strength totals 22, turn to 2. If you manage to kill the Scorpionwithout it scoring anAttack Strength of 22, turn to 163.\n\nDWARF SKILL 8 444 Still smiling, the old man looks at you and says quietly, 'Wrong.' turn to 85. r{t The Dwa is expecting your move. Furthermore, you arc not as fast as you should be because of your recent ordeal, so he easily evades your Punch, sayin& 'I could kifl you now if I wished, but I yearn fora hand-to-hand fight.'Then he throws down his crossbow and draws an ax€ ftom his belt. DesPite your fatigue, you think only ofvenSeance. STAMINA 6 a46-147 1,!6 The pain in your lungs forces you to riie to the surface forair. Fortunately, noneof the Troglodytes see you and they all disp€rse. You dimb out oI the river and aoss the bridge to the northem bank. Any rcmaining Provisions you may have are now inedible- You continue to walk through the vast cavern until at last you see a tunnel in the far wall. You walk down it until you come to a hea\\,y wooden door which is locked. Ifyou have an iron key, turn to 86. Ifyou do nothave a key, t.utn to 276. t47 The waler in the bamboo pipe is welcomingly refreshing. Add t sr.rurrr. poittt. ll also conlains a maBical solution which will enable you to be exPosed to melting-point temperatures without harm. Discarding the bamboo, you start off north again in good spi ts. Turn to 1E2. During each Attack Round you must reduce your Attack Strength by 2 because of your condition. If you win, turn to 28.\n\nFirst GUARD DOG Second GUARD DOG a4a-a49 q6 There is nowhere to go exceFt down the steps towards the barking dogs. You reach the bottom and, with your sword drawn, face Lhe two huge black GUARD DOGS, which leap at you one at a trme",
+  "choices": [
+    {
+      "id": "to_25",
+      "label": "Turn to 25",
+      "aliases": [],
+      "to": 25
+    },
+    {
+      "id": "to_2",
+      "label": "If, during any of the Attack Rounds, the Scorpion's Attack Strength totals 22",
+      "aliases": [],
+      "to": 2
+    },
+    {
+      "id": "to_163",
+      "label": "If you manage to kill the Scorpionwithout it scoring anAttack Strength of 22",
+      "aliases": [],
+      "to": 163
+    },
+    {
+      "id": "to_85",
+      "label": "DWARF SKILL 8 444 Still smiling, the old man looks at you and says quietly, 'Wrong.'",
+      "aliases": [],
+      "to": 85
+    },
+    {
+      "id": "to_86",
+      "label": "Ifyou have an iron key",
+      "aliases": [],
+      "to": 86
+    },
+    {
+      "id": "to_28",
+      "label": "If you win",
+      "aliases": [],
+      "to": 28
+    }
+  ],
+  "combat": {
+    "enemy_name": "e pincers and deadly sting GIANT SCORPION",
+    "enemy_skill": 10,
+    "enemy_stamina": 1,
+    "win_to": 28,
+    "enemies": [
+      {
+        "name": "e pincers and deadly sting GIANT SCORPION",
+        "skill": 10,
+        "stamina": 1
+      }
+    ]
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": 398,
+  "text": "otherwise, you must continue north with Throm tuln to 369.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "otherwise, you must continue north with Throm",
+      "aliases": [],
+      "to": 369
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

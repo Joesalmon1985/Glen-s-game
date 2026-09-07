@@ -1,0 +1,25 @@
+{
+  "id": 354,
+  "text": "Thepillmakesyou feelas though thewhole world is against l'6L| Lose 2 l-uck points. The Dwarf tells you that you can nor4 go on to the second stage of the test He reaches for a wicker bas,ket rvhich, he informs you, containsa snake- He tipsupthebaskei and the snake clrops out on to the floor. It is a cobra and it rears up in the air, ready to strike The Dwarf tells you that he wishes to test your reactions You must grasp the cobra bare-handed below its head, avoiding its deadly fangs. You crouch down on the floor, tensin8 yourself lor the moment at which to seize it. Roll two dicc l{ the total is the same as or less than your s(rr.r , turn to 55. lf the total is grelter thanyour s(lLI, tun) to zoz, You creep Ltp behind the fighting Hobgoblins .rnct, ieaping out of the shadoivs, push theminto the wall as you rtrn by. You look back to see them sprarvled on the floor and chu(klc to yourselfas you hurry on north, turn to 110",
+  "choices": [
+    {
+      "id": "to_55",
+      "label": "Roll two dicc l{ the total is the same as or less than your s(rr.r",
+      "aliases": [],
+      "to": 55
+    },
+    {
+      "id": "to_110",
+      "label": "You look back to see them sprarvled on the floor and chu(klc to yourselfas you hurry on north",
+      "aliases": [],
+      "to": 110
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

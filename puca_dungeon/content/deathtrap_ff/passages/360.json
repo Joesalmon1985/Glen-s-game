@@ -1,0 +1,43 @@
+{
+  "id": 360,
+  "text": "After paying off the old man, you climb into the wicker basket and watch as he hlts his head back and shouts, 'Pull it up, Ivy!' The rope goes taut arrd the basket ris€s jerkily off the 8lound. As you are hauled higher and higher, the old man calls out to you, saying, 'You'll like Ivy, she's anice girl. We call her Poison I!yl' He stafts to laugh unconhollably and you wonder somewhat apprehensively just who is haulingyou up. The basket goes through the ceiling and you find youFelf in a small chamber, face to face with an ugly old fernale TROLL. Her face is hairy and covered with warts. With a huge hand she reaches forward and hauls you out of the basket, which she then lets fall to the floor below. She grabs you round the throat and says in a husky voice, 'I want paying too!'Will you: Offer her something from your backpack? Try to talk your way out of givin8 he! anything? Attack herwith your sword? turn lo 29t turn to 328 turn to 211 36a-36j 36r The lit Fiend's iaws snapat the monkey charm and pluck it oul of the air. Suddenly its jaws spring open again, forced apa by the charm, which has expanded to fill its mouth. While the prr Fiend with its massrve body. T.ft your Luck. lf you are Lucky, turn to 82, Ifyou are Unlucky, turn to 32. 362Thelun-nel veers sharply to the right and (ontinues norlh ior ds far as you cdn see, You hear a tremendous commotion in the distance, growling and snarling and howling. You draw your sworJ and set off in the direction of the noise. turn to 264",
+  "choices": [
+    {
+      "id": "to_328",
+      "label": "turn lo 29t",
+      "aliases": [],
+      "to": 328
+    },
+    {
+      "id": "to_211",
+      "label": "turn lo 29t turn to 328",
+      "aliases": [],
+      "to": 211
+    },
+    {
+      "id": "to_82",
+      "label": "lf you are Lucky",
+      "aliases": [],
+      "to": 82
+    },
+    {
+      "id": "to_32",
+      "label": "lf you are Lucky, turn to 82, Ifyou are Unlucky",
+      "aliases": [],
+      "to": 32
+    },
+    {
+      "id": "to_264",
+      "label": "Turn to 264",
+      "aliases": [],
+      "to": 264
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

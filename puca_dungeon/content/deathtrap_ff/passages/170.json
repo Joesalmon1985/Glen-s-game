@@ -1,0 +1,25 @@
+{
+  "id": 170,
+  "text": "J70 As you run round the side of the pool, the Bloodbeast flicks out its long tongue once again. Roll two dice. If the total is the same as or less than yout SKILL score, tuln to 1o4. lf the total is greater than your sKILL score/ tuin to 342, STAMINA I1 37a",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If the total is the same as or less than yout SKILL score",
+      "aliases": [],
+      "to": 104
+    },
+    {
+      "id": "choice_2",
+      "label": "lf the total is greater than your sKILL score/",
+      "aliases": [],
+      "to": 342
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

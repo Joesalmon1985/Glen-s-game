@@ -1,0 +1,19 @@
+{
+  "id": 261,
+  "text": "26r-26j 26r :lorthern lvall and L'nter the tunnel turn fu 2j9_",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "26r-26j 26r :lorthern lvall and L'nter the tunnel",
+      "aliases": [],
+      "to": 219
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

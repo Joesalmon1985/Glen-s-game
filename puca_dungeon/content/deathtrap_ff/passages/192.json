@@ -1,0 +1,43 @@
+{
+  "id": 192,
+  "text": "Walking along the tunnel, you notice an iron grilie in the floor. Ifyou $'ish io stop andllftit up, turn to 120 If you prefer to keep walking, turn to 292. 493 The acid burns through your stomach wall, eahng rts way into your vltal organs You collapse unconScious, never to recover Your adventure ends hete. 494 On a stone led8e in the tunnel wali you see two dusty Jeather-bound books Throm grunts his contempt for the written word, urging you to leave the books and hurry on. Will you: Open the red leatherbook? turn to 52 Open the black leather book? turn to 138 Continue north along the tunnel? turn to 369",
+  "choices": [
+    {
+      "id": "to_120",
+      "label": "Ifyou $'ish io stop andllftit up",
+      "aliases": [],
+      "to": 120
+    },
+    {
+      "id": "to_292",
+      "label": "Ifyou $'ish io stop andllftit up, turn to 120 If you prefer to keep walking",
+      "aliases": [],
+      "to": 292
+    },
+    {
+      "id": "to_52",
+      "label": "Turn to 52",
+      "aliases": [],
+      "to": 52
+    },
+    {
+      "id": "to_138",
+      "label": "Turn to 138",
+      "aliases": [],
+      "to": 138
+    },
+    {
+      "id": "to_369",
+      "label": "Turn to 369",
+      "aliases": [],
+      "to": 369
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

@@ -1,0 +1,19 @@
+{
+  "id": 361,
+  "text": "353The food and drinkare excellent, andyou feelmuch better. Add 2 sraMrNA points. Fully satis{ied, you sit down and await the Dwarf s retum. Tur.n to 3oz.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 302
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

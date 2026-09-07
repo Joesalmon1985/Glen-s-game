@@ -1,0 +1,31 @@
+{
+  "id": 388,
+  "text": "The tunnel soon comes to a dead end. A piece ol paper, brown and curled with age, is pinned to the end wall, lf you wish to pull it ofl the wall to see whethcr there is a message r\\rritten on it, turn to 23. If you would rather hurry back down the tunnel to join the Barba an, turn to 154389 Without your weapons you are more vulnerable, and the loss ofyoursword leaves you feelingalmost naked. Losc 4 SKILL points. Wondering whether you have made the right decision, you follo$' the iunnel north. turn to 181. t90 You crotrch don'n beside the plinth below thecrossborvs'line o[fire. You reach LLp and pullthe skul] off the plinth, expecting your action to trig8er off the crossbows Much to vour surPrise, nothing happens. Add 1 LUCK point Still croLrching, you pluck the jewelled eyes out ofthe skull. You recognize the yellow stunes a5 lopaz. dnd place thcm in your backpack. Looking at the row of crossbows, you wonder whether a trap still awaits you in this room. Will you: Crawl out of the room holding the skull? Turn lo 15 Replace the skull on the plinth before crawling out of the toom? turn to 204",
+  "choices": [
+    {
+      "id": "to_23",
+      "label": "th age, is pinned to the end wall, lf you wish to pull it ofl the wall to see whethcr there is a message r\\rritten on it",
+      "aliases": [],
+      "to": 23
+    },
+    {
+      "id": "to_181",
+      "label": "Turn to 181",
+      "aliases": [],
+      "to": 181
+    },
+    {
+      "id": "to_204",
+      "label": "Turn to 204",
+      "aliases": [],
+      "to": 204
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

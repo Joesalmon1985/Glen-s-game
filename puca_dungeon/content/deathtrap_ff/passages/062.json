@@ -1,0 +1,49 @@
+{
+  "id": 62,
+  "text": "The Gnome jumps in the air, yelling, 'Well done - nobody has ever managed to find all three gems beforel Now get ready for the final test, which I will explain onceand once only. As you can see, thelock on this door has three slots, labelled A, B and C, each of which is built to accept a specific gem. You have to put one of your three gems in each of the slots in the conect order. If you manage this at the first attempt, fine. Hor/ever, ifyou put the gems in the rvrong slots, you will be blasted by a bolt of energy from the lock, causin8 you injury. Anyway, as I said, I am allowed to help you a little. lf you place one gem in its correct slot but Bet the other two wrong, I shall shout, \"One crown and two skulls.\" If you place all three gems incorrectly, I shall shout, \"Three skulls.\" You will be allowed totry again and again until you either succeed or die. Are you ready?'You signal your readiness with a nod of the head, and walk forward to place the three gemc in the slots. Decide which gems you will place in the labelled slots on the nextpage: Emerald Damond Sapphire Emerald Diamond Sapphire B Diamond Sapphire En/erald Sapphire Emerald Diamond C Sapphire Emerald Diamond D€mond Sapphire Emerald 6t turn to 16 turn to 392 turn to 177 turn to 287 turn to 132 turn to 249",
+  "choices": [
+    {
+      "id": "to_16",
+      "label": "mond Sapphire B Diamond Sapphire En/erald Sapphire Emerald Diamond C Sapphire Emerald Diamond D€mond Sapphire Emerald 6t",
+      "aliases": [],
+      "to": 16
+    },
+    {
+      "id": "to_392",
+      "label": "re B Diamond Sapphire En/erald Sapphire Emerald Diamond C Sapphire Emerald Diamond D€mond Sapphire Emerald 6t turn to 16",
+      "aliases": [],
+      "to": 392
+    },
+    {
+      "id": "to_177",
+      "label": " Sapphire En/erald Sapphire Emerald Diamond C Sapphire Emerald Diamond D€mond Sapphire Emerald 6t turn to 16 turn to 392",
+      "aliases": [],
+      "to": 177
+    },
+    {
+      "id": "to_287",
+      "label": "/erald Sapphire Emerald Diamond C Sapphire Emerald Diamond D€mond Sapphire Emerald 6t turn to 16 turn to 392 turn to 177",
+      "aliases": [],
+      "to": 287
+    },
+    {
+      "id": "to_132",
+      "label": "ire Emerald Diamond C Sapphire Emerald Diamond D€mond Sapphire Emerald 6t turn to 16 turn to 392 turn to 177 turn to 287",
+      "aliases": [],
+      "to": 132
+    },
+    {
+      "id": "to_249",
+      "label": "Diamond C Sapphire Emerald Diamond D€mond Sapphire Emerald 6t turn to 16 turn to 392 turn to 177 turn to 287 turn to 132",
+      "aliases": [],
+      "to": 249
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

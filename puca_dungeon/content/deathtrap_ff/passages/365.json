@@ -1,0 +1,19 @@
+{
+  "id": 365,
+  "text": "If you do not possess an emerald, turn to3",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you do not possess an emerald",
+      "aliases": [],
+      "to": 3
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

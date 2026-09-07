@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Deathtrap Dungeon POC — debug play (images suppressed)
+# Deathtrap Dungeon — Fighting Fantasy gamebook (heuristic offline default)
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
@@ -8,5 +8,4 @@ if [[ -x .venv/bin/python ]]; then
 else
   PY=python3
 fi
-"$PY" scripts/ensure_story.py
-exec "$PY" -m puca_dungeon --debug --seed 91 "$@"
+exec "$PY" -m puca_dungeon --heuristic --seed 91 "$@"

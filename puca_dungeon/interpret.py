@@ -15,46 +15,48 @@ from puca_dungeon.authored_actions import apply_authored_match
 from puca_dungeon.models import CLASSIFICATIONS, Intent
 
 
-INTERPRETER_SYSTEM = """You interpret player text for a dungeon game into structured intent JSON.
-You do NOT decide success, failure, damage, discoveries, movement outcomes, traps, NPC reactions, or any world state change.
+INTERPRETER_SYSTEM = """You interpret player text for a Fighting Fantasy gamebook into structured intent JSON.
+You do NOT decide success, failure, damage, which paragraph to turn to, inventory changes, or combat outcomes.
 
 You receive three inputs:
 1) exact raw player text
-2) public/perceptual world state (no hidden secrets)
-3) currently available AUTHORED ACTION DESCRIPTORS — internal semantic targets Python can resolve. These are NOT an exhaustive list of what the player may attempt, and NOT a menu for the player.
+2) public/perceptual world state (Adventure Sheet summary + current passage perception; no secret branch numbers beyond authored descriptors)
+3) currently available AUTHORED ACTION DESCRIPTORS — internal semantic targets (passage choices, combat actions, potion/provision). These are NOT a player menu.
 
-Procedure:
-A) First ask: does the player's intended action substantially correspond to one authored action?
-   If YES → classification = MATCH_AUTHORED_ACTION, set matched_action_id to that id, fill action fields.
-B) If NO → preserve the player's actual meaning. Do NOT force shake/lick/cartwheel/sing/etc. into search, break, open, or use-key.
+Follow this EXACT three-step procedure (stop at the first match):
 
-Classifications (pick exactly one):
-- MATCH_AUTHORED_ACTION — genuine match to an authored descriptor
-- GENERAL_WORLD_ACTION — understandable embodied/world action that is not an authored match
-- PERCEPTION_QUERY — question about visible/known state (how many boxes, what do I carry, what can I see/hear)
-- META_REQUEST — out-of-world / UI / inventory-menu / "press X" style requests
-- SILLY_BUT_VALID — physically legible but non-progressing silliness (cartwheel, dance) the character can attempt
-- UNINTERPRETABLE — nonsense / empty / no recoverable meaning
-- NEEDS_CLARIFICATION — meaning partly clear but required entity is ambiguous
+STEP 1 — AUTHORED PATH:
+Does the player's intent substantially match one authored action (a passage choice, attack/flee while fighting, drink potion, eat provision)?
+If YES → classification = MATCH_AUTHORED_ACTION, set matched_action_id to that id, action.class TURN_TO or ATTACK/FLEE/USE as appropriate.
+Do NOT force unrelated verbs into a choice.
+
+STEP 2 — WORLD / COMBAT ACTION:
+If no authored match: is there still a clear embodied attempt the rules engine might apply (attack when not offered, use an inventory item by name, ask about Skill/Stamina/Luck/inventory, look around)?
+If YES → GENERAL_WORLD_ACTION or PERCEPTION_QUERY. Preserve the player's meaning. Python may no-op.
+
+STEP 3 — DISMISS:
+Otherwise classify as SILLY_BUT_VALID, META_REQUEST, UNINTERPRETABLE, or NEEDS_CLARIFICATION.
+The narrator will dismiss without changing paragraph.
+
+Also set step_selected to 1, 2, or 3 for debugging.
 
 Rules:
-- Never invent a tool the player did not imply.
-- If multiple boxes exist and the player says "the box" / "a box" / "one of the boxes" without naming which, set needs_clarification=true and ambiguities including which box; do NOT pick the named box silently.
-- CRITICAL: shake, rattle, lick, cartwheel, sing, hug are NEVER matches for box.damage, box.unlock.*, box.search, or box.lock.pick. Preserve them as GENERAL_WORLD_ACTION / SILLY_BUT_VALID.
-- Example: "shake one of the boxes" → GENERAL_WORLD_ACTION or NEEDS_CLARIFICATION with method=shake. NOT box.damage.
-- Example: "lick the box" → GENERAL_WORLD_ACTION method=lick. NOT search/open/use.
-- Example: "do a cartwheel" → SILLY_BUT_VALID. NOT move.
-- For inspect/search, intended_effect should be "inspect" or "discover_information" unless the player explicitly mentions traps.
-- Do not claim interpreter failure for impossible requests (helicopter): use GENERAL_WORLD_ACTION or IMPOSSIBLE class with the intended attempt; Python rejects feasibility.
+- Never invent tools the player did not imply.
+- Never invent a matched_action_id that is not in the authored list.
+- "open the box" / "open my box" matches open_named_box when that action is listed.
+- "continue north" / "keep walking" matches continue_north when listed.
+- Cartwheel/dance/sing while choices exist → SILLY_BUT_VALID (step 3), not a turn_to.
+- "what are my stats" / "inventory" → PERCEPTION_QUERY (step 2).
 - Return ONLY JSON.
 
 JSON schema:
 {
-  "classification": "<one of the classifications above>",
+  "classification": "<one of MATCH_AUTHORED_ACTION|GENERAL_WORLD_ACTION|PERCEPTION_QUERY|META_REQUEST|SILLY_BUT_VALID|UNINTERPRETABLE|NEEDS_CLARIFICATION>",
   "matched_action_id": "<authored id or null>",
+  "step_selected": <1|2|3>,
   "confidence": <0.0-1.0>,
   "action": {
-    "class": "<e.g. USE, SEARCH, MOVE, WAIT, MANIPULATE, PERCEIVE, META, BODILY, STRIKE, ...>",
+    "class": "<e.g. TURN_TO, ATTACK, FLEE, USE, PERCEIVE, META, BODILY, ...>",
     "target_ref": "<string or null>",
     "tool_ref": "<string or null>",
     "method": "<string or null>",
@@ -62,7 +64,7 @@ JSON schema:
     "manner": "<string or null>",
     "destination": "<string or null>",
     "utterance": "<string or null>",
-    "query_focus": "<for questions: box_count|named_box|inventory|visible|passage|footsteps|... or null>"
+    "query_focus": "<inventory|sheet|passage|visible|... or null>"
   },
   "ambiguities": ["..."],
   "needs_clarification": <bool>,
@@ -168,7 +170,11 @@ def validate_authored_match(raw: dict, player_text: str = '') -> dict:
     return out
 
 
-def normalize_intent(raw: dict, player_text: str = '') -> Intent:
+def normalize_intent(
+    raw: dict,
+    player_text: str = '',
+    authored_actions: list | None = None,
+) -> Intent:
     if not isinstance(raw, dict):
         return Intent(
             action_class='UNINTERPRETABLE',
@@ -210,6 +216,13 @@ def normalize_intent(raw: dict, player_text: str = '') -> Intent:
     utterance = _str_or_none(action.get('utterance') or flat.get('utterance'))
     query_focus = _str_or_none(action.get('query_focus') or flat.get('query_focus'))
 
+    turn_to = action.get('turn_to') if 'turn_to' in action else flat.get('turn_to')
+    if turn_to is not None:
+        try:
+            turn_to = int(turn_to)
+        except (TypeError, ValueError):
+            turn_to = None
+
     ambiguities = raw.get('ambiguities') or []
     if not isinstance(ambiguities, list):
         ambiguities = [str(ambiguities)]
@@ -237,9 +250,17 @@ def normalize_intent(raw: dict, player_text: str = '') -> Intent:
         'manner': manner,
         'destination': destination,
         'utterance': utterance,
+        'turn_to': turn_to,
     }
     if classification == 'MATCH_AUTHORED_ACTION' and matched:
-        fields = apply_authored_match(fields, matched)
+        fields = apply_authored_match(fields, matched, authored_actions=authored_actions)
+
+    turn_to = fields.get('turn_to', turn_to)
+    if turn_to is not None:
+        try:
+            turn_to = int(turn_to)
+        except (TypeError, ValueError):
+            turn_to = None
 
     confidence = raw.get('confidence')
     try:
@@ -259,8 +280,9 @@ def normalize_intent(raw: dict, player_text: str = '') -> Intent:
         intended_effect=fields.get('intended_effect'),
         manner=fields.get('manner'),
         destination=fields.get('destination'),
+        turn_to=turn_to,
         utterance=fields.get('utterance'),
-        sequence=[normalize_intent(x).to_dict() for x in seq if isinstance(x, dict)],
+        sequence=[normalize_intent(x, authored_actions=authored_actions).to_dict() for x in seq if isinstance(x, dict)],
         raw=raw,
         understood=understood,
         notes=str(raw.get('notes') or ''),
@@ -302,12 +324,85 @@ def _str_or_none(value) -> Optional[str]:
     return text or None
 
 
+def match_authored_heuristic(text: str, authored_actions: list | None) -> Optional[dict]:
+    """Match player text to an authored action by id / label / aliases (tests/offline)."""
+    if not authored_actions:
+        return None
+    t = ' '.join((text or '').lower().strip().split())
+    if not t:
+        return None
+
+    scored: list[tuple[int, dict]] = []
+    for action in authored_actions:
+        if not isinstance(action, dict) or not action.get('id'):
+            continue
+        phrases: list[str] = []
+        aid = str(action.get('id') or '')
+        phrases.append(aid.replace('_', ' ').replace('.', ' '))
+        desc = str(action.get('description') or '')
+        label = desc.split(' (also:')[0].strip()
+        if label:
+            phrases.append(label)
+        for alias in action.get('aliases') or []:
+            if alias:
+                phrases.append(str(alias))
+        # Also use label field if present on compact payload
+        if action.get('label'):
+            phrases.append(str(action['label']))
+
+        best_len = 0
+        for phrase in phrases:
+            p = ' '.join(phrase.lower().strip().split())
+            if not p:
+                continue
+            if t == p or p in t or t in p:
+                best_len = max(best_len, len(p))
+                continue
+            # Token containment: "continue north" vs alias "go north"
+            t_tokens = set(t.split())
+            p_tokens = set(p.split())
+            if p_tokens and p_tokens <= t_tokens:
+                best_len = max(best_len, len(p))
+        if best_len:
+            scored.append((best_len, action))
+
+    if not scored:
+        return None
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return scored[0][1]
+
+
 class HeuristicInterpreter:
     """Deterministic NL→intent for tests and offline debug. Not the normal play path."""
 
     def interpret(self, text: str, perception: dict, authored_actions: list | None = None) -> tuple[dict, Intent]:
+        matched = match_authored_heuristic(text, authored_actions)
+        if matched:
+            op = matched.get('operation') or ''
+            action_class = 'TURN_TO'
+            if op == 'combat_attack':
+                action_class = 'ATTACK'
+            elif op == 'combat_flee':
+                action_class = 'FLEE'
+            elif op in ('use_potion', 'eat_provision'):
+                action_class = 'USE'
+            raw = {
+                'classification': 'MATCH_AUTHORED_ACTION',
+                'matched_action_id': matched.get('id'),
+                'understood': True,
+                'confidence': 0.95,
+                'action': {
+                    'class': action_class,
+                    'turn_to': matched.get('turn_to'),
+                    'utterance': text,
+                },
+                'needs_clarification': False,
+                'notes': 'heuristic_authored_match',
+            }
+            return raw, normalize_intent(raw, player_text=text, authored_actions=authored_actions)
+
         raw = heuristic_raw(text, perception)
-        return raw, normalize_intent(raw, player_text=text)
+        return raw, normalize_intent(raw, player_text=text, authored_actions=authored_actions)
 
 
 class OllamaInterpreter:
@@ -363,7 +458,7 @@ class OllamaInterpreter:
                 'notes': 'malformed_llm_json',
                 'llm_response_text': response_text[:2000],
             }
-        return raw, normalize_intent(raw, player_text=text)
+        return raw, normalize_intent(raw, player_text=text, authored_actions=authored_actions)
 
 
 def heuristic_raw(text: str, perception: dict) -> dict:
@@ -371,6 +466,60 @@ def heuristic_raw(text: str, perception: dict) -> dict:
     t = ' '.join(text.lower().strip().split())
     if not t:
         return {'action_class': 'OTHER', 'notes': 'empty', 'classification': 'UNINTERPRETABLE', 'understood': False}
+
+    # Sheet / inventory perception (FF Adventure Sheet)
+    if re.search(
+        r'\b(inventory|possessions|what am i carrying|what am i holding|'
+        r'what is my inventory|what\'?s in my (pack|bag|backpack)|'
+        r'my (stats|scores|sheet)|adventure sheet|'
+        r'what (is|are) my (skill|stamina|luck|stats|scores))\b',
+        t,
+    ):
+        focus = 'inventory'
+        if re.search(r'\b(skill|stamina|luck|stats|scores|sheet)\b', t) and 'inventory' not in t:
+            focus = 'sheet'
+        return {
+            'action_class': 'QUERY',
+            'classification': 'PERCEPTION_QUERY',
+            'query_focus': focus,
+            'intended_effect': 'observe',
+            'utterance': text,
+            'understood': True,
+        }
+
+    # Silly embodied dismissals
+    if re.search(r'\b(cartwheel|somersault|pirouette|backflip)\b', t):
+        return {
+            'action_class': 'BODILY',
+            'classification': 'SILLY_BUT_VALID',
+            'method': 'cartwheel',
+            'utterance': text,
+            'intended_effect': 'flourish',
+            'understood': True,
+        }
+
+    # Potion / provisions (even if authored list omitted them after use)
+    if re.search(r'\b(drink|quaff|use)\b.*\bpotion\b|\bpotion\b.*\b(drink|quaff)\b', t):
+        return {
+            'action_class': 'USE',
+            'classification': 'GENERAL_WORLD_ACTION',
+            'matched_action_id': 'item.use_potion',
+            'target': 'potion',
+            'tool': 'potion',
+            'intended_effect': 'restore',
+            'utterance': text,
+            'understood': True,
+        }
+    if re.search(r'\b(eat|consume)\b.*\bprovisions?\b|\beat\b.*\bfood\b', t):
+        return {
+            'action_class': 'USE',
+            'classification': 'GENERAL_WORLD_ACTION',
+            'matched_action_id': 'item.eat_provision',
+            'target': 'provision',
+            'intended_effect': 'restore_stamina',
+            'utterance': text,
+            'understood': True,
+        }
 
     # Waiting / sitting / resting
     if re.fullmatch(r'(wait|wait again|i wait|just wait)(\.|!)?', t) or t in ('...', '…'):

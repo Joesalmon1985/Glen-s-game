@@ -1,0 +1,19 @@
+{
+  "id": 357,
+  "text": "The Bloodbeast flops around awku,ardlyinits pool, and the smell of the poisonous fumes makes you retch as gas bubbles break the surface and conta inate the atmosphere Will yout Run round the side ofits pool towards the tunnel? turn to 255 Throw a gem into its pool (ifyou have one)? Turn to 332Attack it with your sword? turn io 18o",
+  "choices": [
+    {
+      "id": "to_255",
+      "label": "Turn to 255",
+      "aliases": [],
+      "to": 255
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

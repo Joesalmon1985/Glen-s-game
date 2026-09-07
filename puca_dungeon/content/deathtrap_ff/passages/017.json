@@ -1,0 +1,12 @@
+{
+  "id": 17,
+  "text": "a9 You cannot resisL the Medusa's beguiling gaze as she looks into your eyes. You feel your limbs begin to stiffen and you panic helplessly as you turn to stone. Your adventure ends here.",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

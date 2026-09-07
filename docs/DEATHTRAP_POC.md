@@ -1,47 +1,82 @@
-# Deathtrap Dungeon POC notes
+# Deathtrap Dungeon — Fighting Fantasy gamebook
 
-## Faithful source material
-
-Derived from the supplied *Deathtrap Dungeon* opening:
-
-- The player enters after other contestants and receives one key.
-- After roughly five minutes they reach a stone table with six locked boxes; one bears the player's name.
-- Wrong key or lock-picking without disabling the trap fires a poison dart.
-- Trap Search DC 25; Disable Device DC 25; Open Lock DC 35 on another box.
-- Boxes: Hardness 10, 10 hp.
-- The player's key opens only the named box.
-- Named box contents: 2 gp and Sukumvit's clue note.
-- Encounter 2 junction: white arrow pointing west; closer inspection can reveal tracks (three west, one right).
-
-## Puca POC additions
-
-- **Approaching challenger (anti-stall pressure).** Inspired by the Knight, Elf, two Barbarians and Ninja who entered immediately before the player, but **not** taken from canonical encounter text. Fictional-time progression may bring a Barbarian contestant (`Grimnak`) into Encounter 1 if the player continually waits or performs non-productive actions. This is a POC world-pressure device so Encounter 1 does not freeze forever.
-- Typing-first intent interpretation (AI or heuristic) with Python owning authoritative resolution.
-- Debug play mode that never calls the visual generator but still builds the would-be image request.
-- Deterministic seeded RNG with save/load of RNG state.
+Playable source is the **Fighting Fantasy** numbered gamebook (passages 1–400), not the d20 PDF conversion. The d20 PDF may exist in the repo for reference only; it is **not** loaded by the engine.
 
 ## Architecture
 
-1. Player free text
-2. **Ollama interpreter** (default) receives raw text + public perception + authored action descriptors → hierarchical classification / intent (no outcomes). HeuristicInterpreter is tests/offline only.
-3. Entity grounding (ambiguity → clarification; no silent named-box pick)
-4. Python resolution (checks, traps, damage, movement, perception/meta answers)
-5. Fictional time + Encounter-1 world pressure (separate from hidden `guidance_level`)
-6. Narrator from resolved facts (+ optional humorous re-anchor from guidance)
-7. Image decision + prompt (suppressed in debug; auditory-only → REUSE)
+Content pack: `puca_dungeon/content/deathtrap_ff/`
+
+- `manifest.json` — start id, passage range
+- `chargen.json` — Skill / Stamina / Luck rolls, gold, provisions, potions
+- `passages/NNN.json` — one file per paragraph (text, choices, combat, tests, enter effects, ending)
+
+Runtime is a **passage graph**: player free text → interpreter maps to an authored choice, combat action, item use, perception query, or dismiss → Python owns dice, sheet changes, and `turn to` navigation.
+
+### Three-step LLM interpretation (interactive play)
+
+The Ollama interpreter follows an ordered procedure (one JSON call):
+
+1. **Authored** — match free text to a current passage choice / combat / potion / provision action → `MATCH_AUTHORED_ACTION`.
+2. **World** — else map a clear attempt (perception, use item, attack) → `GENERAL_WORLD_ACTION` / `PERCEPTION_QUERY`; Python may no-op.
+3. **Dismiss** — else `SILLY_BUT_VALID` / `META_REQUEST` / `UNINTERPRETABLE` / clarification; stay on the same passage.
+
+Then **Python resolve** owns dice, sheet changes, and `turn to` navigation. **Narrate:** pack passage text is authoritative on enter; combat/dismiss use the narrator. Image prompts optional (`--images`; suppressed in `--debug`).
+
+Offline / CI uses `--heuristic` (deterministic `HeuristicInterpreter` + template narrator).
+
+### Adventure Sheet
+
+Classic Fighting Fantasy scores from chargen:
+
+| Score | Typical formula |
+|-------|-----------------|
+| Skill | 1d6+6 |
+| Stamina | 2d6+12 |
+| Luck | 1d6+6 |
+
+Also: gold, provisions, inventory, one starting potion (`potion_skill` / `potion_strength` / `potion_fortune`), knowledge/flags.
+
+## Opening demo path
+
+Hand-authored early nodes:
+
+- **1** — six boxes; open named box → **270** (gold + clue) or continue north → **66**
+- **66** — junction (west / east / inspect tracks)
+- West demo combat: **101** → **37** (Giant Rat) → win **400** / lose **399** / flee **66**
+
+Bulk OCR passages still need editorial review; see `docs/DEATHTRAP_FF_FIDELITY.md`.
 
 ## Launch
 
 ```bash
-./launch_dungeon_debug.sh
-# or
-python -m puca_dungeon --debug --seed 91
-# Windows:
-#   Play Deathtrap Dungeon.bat
-# offline / tests:
-python -m puca_dungeon --heuristic
+# Offline / tests (no Ollama)
+python -m puca_dungeon --heuristic --seed 91
+
+# Player-facing with optional images (Ollama required unless --allow-heuristic-fallback)
+python -m puca_dungeon --no-debug --images --seed 91 --potion potion_skill --name Glen
+
+# Debug pipeline dump (default when not --no-debug)
+python -m puca_dungeon --seed 91
 ```
 
-`Play Puca Dungeon Debug.bat` launches the Spirit adventure with `--debug`, not this POC.
+Windows: **Play Deathtrap Dungeon.bat** (CLI, heuristic) or **Play Deathtrap Dungeon GUI.bat** (Tk GUI with illustrations, no on-screen Skill/Stamina/Luck meters).
 
-Requires local Ollama with `mistral` (or `--model`). Fails clearly if Ollama is down unless `--heuristic` / `--allow-heuristic-fallback`.
+GUI launch:
+
+```bash
+python -m puca_dungeon.gui
+# or
+Play Deathtrap Dungeon GUI.bat
+# text only:
+Play Deathtrap Dungeon GUI.bat --text-only
+```
+
+Chargen potion ids: `potion_skill`, `potion_strength`, `potion_fortune` (`--potion` on CLI; potion dropdown in the GUI).
+
+## Tests
+
+```bash
+python -m unittest tests.test_deathtrap_ff -v
+```
+
+Graph check: `python -m puca_dungeon.graph_validate`.

@@ -1,0 +1,13 @@
+{
+  "id": 399,
+  "text": "The Giant Rat's bite finds your throat. Darkness closes in as your strength fails. Your adventure ends here in Deathtrap Dungeon.",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [
+    {"op": "death"}
+  ],
+  "ending": "death",
+  "image_seed": "fallen adventurer in dungeon gloom, giant rat silhouette, tragic defeat",
+  "needs_review": false
+}

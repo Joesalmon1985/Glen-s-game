@@ -1,0 +1,31 @@
+{
+  "id": 309,
+  "text": "You scramble frantrcally around the floor in search of a pool oI water, but do not find one. The acid burns with a searingpain deep downinyour throat Lose J STAMINA points. II you are shll alive, Iesl rlour Luck Il you are Lucky, turn to 231. I{you are Unlucky, turn to 193. 3ao You reach the far wall oI the chamber and see two doors Ifyou wish to open the door tovoLLr leit, turn to fj9- If you wish to open the door to your right, turn to 262",
+  "choices": [
+    {
+      "id": "to_231",
+      "label": "II you are shll alive, Iesl rlour Luck Il you are Lucky",
+      "aliases": [],
+      "to": 231
+    },
+    {
+      "id": "to_193",
+      "label": "I{you are Unlucky",
+      "aliases": [],
+      "to": 193
+    },
+    {
+      "id": "to_262",
+      "label": "mber and see two doors Ifyou wish to open the door tovoLLr leit, turn to fj9- If you wish to open the door to your right",
+      "aliases": [],
+      "to": 262
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

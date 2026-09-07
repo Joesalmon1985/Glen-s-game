@@ -1,0 +1,25 @@
+{
+  "id": 260,
+  "text": "You just manage to gmb the idol's earlobe and regain vour footinB. You scramble over jts face and sit down on the bridge of its nose You draw your sword and consider which jewelled eye to prise out first Ifyou wish toprise out the lefteye, turn to 166 If ),ou wish to prise out the right eye, turn to 140",
+  "choices": [
+    {
+      "id": "to_166",
+      "label": "ge of its nose You draw your sword and consider which jewelled eye to prise out first Ifyou wish toprise out the lefteye",
+      "aliases": [],
+      "to": 166
+    },
+    {
+      "id": "to_140",
+      "label": " jewelled eye to prise out first Ifyou wish toprise out the lefteye, turn to 166 If ),ou wish to prise out the right eye",
+      "aliases": [],
+      "to": 140
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

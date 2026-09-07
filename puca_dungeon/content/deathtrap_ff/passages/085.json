@@ -1,0 +1,19 @@
+{
+  "id": 85,
+  "text": "The key turns in the lock and the door opens into a four way intersection of the tunnel. There is nothing to be seen either to east or to west apart from the now familiar ceiling crystals giving off their dim lght. Suddenly you hear a voice calJing you, 'Ihis !vay, this way You are on the dght tmck.' It seems to be coming from somewhere directly ahead of you. Your curiosrty gets the better of you and you decide to walk towards the beckoning voice. turn to 67",
+  "choices": [
+    {
+      "id": "to_67",
+      "label": "Turn to 67",
+      "aliases": [],
+      "to": 67
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

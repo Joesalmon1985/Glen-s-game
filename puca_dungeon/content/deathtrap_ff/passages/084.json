@@ -1,0 +1,19 @@
+{
+  "id": 84,
+  "text": "Roll two dice. lf the total is more than eight, turn ro 152. lfthe total is eight or less, turn to 12185 Before you are able to do anvthing else, the old man mumbles a few stmnge words into the air. You feel your muscles harden and your skin go taut. You start to panic, but there is nothlng you can do to stop the petrifaction ofyour body. Your adventure ends here,",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "lf the total is more than eight",
+      "aliases": [],
+      "to": 152
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

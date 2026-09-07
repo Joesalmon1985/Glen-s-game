@@ -1,0 +1,19 @@
+{
+  "id": 366,
+  "text": "The tempelature continues to rise steadily, far beyond the limits ofhuman tolerance. Lying on the near-molten floor of the funnel, you fail to regain consciousness. Your advenfure ends here. j67-j68 te7He looks at you warily when you tell him you are a contestant in the Tlial of Champions. You ask him what he is doing in the tunnels, and he replies rather reluctarltly that he is a servant of one oi the Trialmasters, Baron Sukumvit's appointed controllers of sections of his dungeon. After chatting for a while, he admits thathewouldlike toescape, butno treasure is hidden. If you wish to pay for the old man's adyice, iurn to 244. lf you would rather just wish him weJl and continue west, turn to to9.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you wish to pay for the old man's adyice, iurn to 244. lf you would rather...",
+      "aliases": [],
+      "to": 109
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

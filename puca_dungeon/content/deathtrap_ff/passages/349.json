@@ -1,0 +1,19 @@
+{
+  "id": 349,
+  "text": "Your armour and sword weigh you downmore than you think. In mid-air you realize with horror that you are not going to reach the other side of the pit. You crash into the side of the pit, some two mekes below the rim, and fumble head over heels to the bottom. turn to 285. You lower yourself down the rcpe into the pit with one hand, using the other to grip your sword- The Pit Fiend is one of the most fearsome beasts you have ever seen, and you know this is to be one ofthe hardest fights of yourlife. PIT FIEND 9KILI- J2 STAMINA 15 If you win, turll to 258. J50",
+  "choices": [
+    {
+      "id": "to_285",
+      "label": "Turn to 285",
+      "aliases": [],
+      "to": 285
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

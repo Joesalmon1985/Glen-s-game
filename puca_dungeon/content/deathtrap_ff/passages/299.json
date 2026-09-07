@@ -1,0 +1,37 @@
+{
+  "id": 299,
+  "text": "The dooropens into a large chamber, where you are shocked toseeone of your vals, whohasobviously meta sudden gory death.Itis one of the Barbarians, and he is impaled on several long lron spikes which are fixed to a frame that has sprung out of the floor A lot of rubbish and debris litters the floor, concealing a hidden trip wire which he must have stepped on and thus released the spiked frame. ln the far wall is an alcove, rn whichyoucan see a silver goblet standing on a small wooden table. Will you: turn to 126 turn to 41 turn to 83 Joo You swing your sword against the miffor with all youl might, but to no ef{ect. the mirror does not break, and the MiIIor Demon keeps advancing. If you wish to try and smash the minor again, turn to 4",
+  "choices": [
+    {
+      "id": "to_126",
+      "label": "Will you",
+      "aliases": [],
+      "to": 126
+    },
+    {
+      "id": "to_41",
+      "label": "Will you: turn to 126",
+      "aliases": [],
+      "to": 41
+    },
+    {
+      "id": "to_83",
+      "label": "Will you: turn to 126 turn to 41",
+      "aliases": [],
+      "to": 83
+    },
+    {
+      "id": "to_4",
+      "label": "If you wish to try and smash the minor again",
+      "aliases": [],
+      "to": 4
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

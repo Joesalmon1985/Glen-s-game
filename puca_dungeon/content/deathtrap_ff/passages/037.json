@@ -1,0 +1,18 @@
+{
+  "id": 37,
+  "text": "The corridor opens into a low chamber littered with gnawed bones and scraps of leather. From the shadows a GIANT RAT bursts forward, eyes gleaming, yellow teeth bared. There is no way past without a fight.",
+  "choices": [],
+  "combat": {
+    "enemy_name": "Giant Rat",
+    "skill": 5,
+    "stamina": 4,
+    "win_to": 400,
+    "lose_to": 399,
+    "flee_to": 66
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "giant rat in a low crystal-lit dungeon chamber, bones on floor, adventurer drawing sword",
+  "needs_review": false
+}

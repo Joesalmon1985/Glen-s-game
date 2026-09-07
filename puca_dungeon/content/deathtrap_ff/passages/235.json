@@ -1,0 +1,19 @@
+{
+  "id": 235,
+  "text": "You have no time to reactbefore the dart thuds into your thigh Lose z sr,r.wrNe. points. lf you are still alive, turn to 73. .>;;",
+  "choices": [
+    {
+      "id": "to_73",
+      "label": "lf you are still alive",
+      "aliases": [],
+      "to": 73
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

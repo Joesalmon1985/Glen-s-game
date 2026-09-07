@@ -1,0 +1,33 @@
+{
+  "id": 98,
+  "text": "Lifting the goblet releases a sprungcatch, anda dart shoots out of the wooden table leg Test your Luck.If you are Lucky, turn to 105. If you are Unluckv, turn to 235",
+  "choices": [
+    {
+      "id": "to_105",
+      "label": "Lifting the goblet releases a sprungcatch, anda dart shoots out of the wooden table leg Test your Luck.If you are Lucky",
+      "aliases": [],
+      "to": 105
+    },
+    {
+      "id": "to_235",
+      "label": "If you are Unluckv",
+      "aliases": [],
+      "to": 235
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": 105,
+      "failure_to": null,
+      "lucky_to": 105,
+      "unlucky_to": null
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

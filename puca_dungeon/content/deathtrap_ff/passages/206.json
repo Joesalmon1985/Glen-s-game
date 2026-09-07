@@ -1,0 +1,19 @@
+{
+  "id": 206,
+  "text": "The stalactites continue to {a11 all around you, but you haven't enough stfength to do more than crawl towards the archway Suddenly you feel an arm around your waisL picking you up, and realize in Your semi-conscious state that Throm is carrying you. He lays you down in the safety of the tunnel and tends your wounds. You decide to eat some of your Provisions to help regain your strength, and you also &ive one porhon to Throm in gratitude for his rescuing you He apologizes {or starting the rock-fall and offers you his hand to shake. Desplte the pain, you manage a smile and shake his hand. When you have finally recovered, you stand up and head east, with Throm leading the way. turn to 60.",
+  "choices": [
+    {
+      "id": "to_60",
+      "label": "Turn to 60",
+      "aliases": [],
+      "to": 60
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

@@ -1,0 +1,19 @@
+{
+  "id": 75,
+  "text": "Otherwise, you must continue north with Throm - turn to j59",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Otherwise, you must continue north with Throm",
+      "aliases": [],
+      "to": 159
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

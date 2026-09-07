@@ -1,0 +1,25 @@
+{
+  "id": 115,
+  "text": "Yout body continues to vibrate intensely and you feel as if you are about topass out But your strength is great, and you mana8e to withstand the tremendous shockto your system. Finallyyou calm down and begin to feel the ng's beneficial powers working on you. Add I STAMINA points. You see Throm looking at you anxiously, so you reassure him thatyou aie fully recovered. He strides offeast and you follow him eagerly. turn to 221. aa6 You cannotbelieve that the Bloodbeast is unaf{ected by its new wound. You hesitate a moment too long and it lunges folward, cracking your skull with its jaws. Then it drags you into itspool, where you will be predigested and later consumed by the hrdeous creature\n\naa7-aaB aa7 head east, turn to 135.",
+  "choices": [
+    {
+      "id": "to_221",
+      "label": "Turn to 221",
+      "aliases": [],
+      "to": 221
+    },
+    {
+      "id": "to_135",
+      "label": "aa7-aaB aa7 head east",
+      "aliases": [],
+      "to": 135
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

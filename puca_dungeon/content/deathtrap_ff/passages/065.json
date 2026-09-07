@@ -1,0 +1,64 @@
+{
+  "id": 65,
+  "text": "Have you drunk a Potion {ound inside a black leather book? If you have, turn to 345. lf you have not drunk it, turn to 372.\n\nrit-415 Once again, the mysterio;; voice calls out, onlythis time its tone is full of contempt and derigion,'So, we have a snivelling weed in ourrnidst, do we?'sneers the voice. 'My master has a special gift for you, loathsome creep.' Suddenly water starts pouring into the room throu8h a hole in the ceiling. lt soon rises above your ankles, and there is no apparcnt way of escape. You wade back to the door. lt is firmly locked, but in desperation you try ramming it with your shoulder, Roll two dice. If the total is the same as or less than your SKILL score, turn to 178. lf the total is gieater than your s Kr L L score, tuln to 12. 434 The turnel leads into a large room, its ceiling supported by several marble pillars. As you enter the room? you suddenly see a skange beast to your right. lt has the body of a lion with dragon-like wings attached to it, butitsheadis like fhatofanold bearded man If you have read the ooem wlitten on the Skeleton Wirrior's oarchment', tuln to 222. If you have not read this p;em, turn to 242. 1J5 Passing the Rock Grub s borehole on your lelt, you soon arrive at the iunction, You take a quick look down the tunnel leading south, but do not see anybody approaching. Quickening your step, you hurry on east. Turn to 6E.\n\n417 Walkingalongthe tunnel, you are surpdsed to see a large iron bell hanging down from the ceiling.Ilyou wish to ring the bell, turn to 220.Ifyou would rather walk round it and continue west, turn to ?52. rJ6-L3'8 aJ6 The door opens into another tunnel, which rises gently into the distance. After walking uphill for a while, the tulnel levels outand you soon arrive ata door in the righfhand wall, to which a withered hand is nailed. lfyou wish to open the door, turn to 210 If you would mthercontinue north, fumto7g. 439 IVY SKILL 9 srAMtNA 9 If you win, turn to 20. 440 You try to Iorce the point of your sword under the emerald eye. Much fo your surprise, it shatters on a4a SKILL, turn to 96. 442 Tiere is anew branch in the tunnel on your left, and ahead you see two bodies lying on the floor. you",
+  "choices": [
+    {
+      "id": "to_345",
+      "label": "If you have",
+      "aliases": [],
+      "to": 345
+    },
+    {
+      "id": "to_372",
+      "label": "lf you have not drunk it",
+      "aliases": [],
+      "to": 372
+    },
+    {
+      "id": "to_178",
+      "label": "If the total is the same as or less than your SKILL score",
+      "aliases": [],
+      "to": 178
+    },
+    {
+      "id": "to_242",
+      "label": "If you have not read this p;em",
+      "aliases": [],
+      "to": 242
+    },
+    {
+      "id": "to_220",
+      "label": "kingalongthe tunnel, you are surpdsed to see a large iron bell hanging down from the ceiling.Ilyou wish to ring the bell",
+      "aliases": [],
+      "to": 220
+    },
+    {
+      "id": "to_210",
+      "label": "lfyou wish to open the door",
+      "aliases": [],
+      "to": 210
+    },
+    {
+      "id": "to_20",
+      "label": "439 IVY SKILL 9 srAMtNA 9 If you win",
+      "aliases": [],
+      "to": 20
+    },
+    {
+      "id": "to_96",
+      "label": "Much fo your surprise, it shatters on a4a SKILL",
+      "aliases": [],
+      "to": 96
+    }
+  ],
+  "combat": {
+    "enemies": [],
+    "win_to": 20
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

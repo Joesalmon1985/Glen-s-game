@@ -1,0 +1,19 @@
+{
+  "id": 321,
+  "text": "121-32) J21 You plrll thc cord and watch thc Llrapc as it rises up lhe 'ide' r,f.r r iron t age. Ihe\\^,,mrn r \\ oicc urFcyou to be cllrick, telling you thaL thc room is boobytrapped so that the floor will lall n$,ay in one minute because of voLlr extra \\\\'eight. lf you still lvrsh b helF her, turu k) 289. If you v!ould rather leave the room and head north up the tunnel, turn to J16",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you v!ould rather leave the room and head north up the tunnel",
+      "aliases": [],
+      "to": 116
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

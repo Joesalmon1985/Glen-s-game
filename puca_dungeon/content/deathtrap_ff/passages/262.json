@@ -1,0 +1,31 @@
+{
+  "id": 262,
+  "text": "The door opens into another tunnel running north. Ahead you see tw() stone fountains, one on either side oI the tunnel, carued in the shape of cherubs. Watei spouts fron their mouths and cascacles into :mall borvls at their feet Will \\'ou: Drink at the Iourltain on yoor left? Drink at the fountain on your nght? Conlinue your lvalk north? turn to 337 turn to 123 turn to 368",
+  "choices": [
+    {
+      "id": "to_337",
+      "label": "Turn to 337",
+      "aliases": [],
+      "to": 337
+    },
+    {
+      "id": "to_123",
+      "label": "turn to 337",
+      "aliases": [],
+      "to": 123
+    },
+    {
+      "id": "to_368",
+      "label": "turn to 337 turn to 123",
+      "aliases": [],
+      "to": 368
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

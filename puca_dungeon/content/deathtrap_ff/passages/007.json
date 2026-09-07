@@ -1,0 +1,12 @@
+{
+  "id": 7,
+  "text": "Before you have time to reach a doorway, the boulder is upon you. You cry out in pain and tedor as it crushes you to the floor. Youradventure ends here.",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

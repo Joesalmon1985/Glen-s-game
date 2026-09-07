@@ -1,0 +1,19 @@
+{
+  "id": 23,
+  "text": "The paper bears a simple waming written in dried blood: 'Beware the TriaLnasters' You replace the paper on its nail and run back down the tunnel to rejoin the Barbarlan turn to 154.",
+  "choices": [
+    {
+      "id": "to_154",
+      "label": " blood: 'Beware the TriaLnasters' You replace the paper on its nail and run back down the tunnel to rejoin the Barbarlan",
+      "aliases": [],
+      "to": 154
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

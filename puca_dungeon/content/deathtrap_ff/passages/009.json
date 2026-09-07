@@ -1,0 +1,19 @@
+{
+  "id": 9,
+  "text": "The Hobgoblins have nothing of any use to you on them, so you decide to open the bag on the floor. Inside you find a corked earthenware jug. You uncork it and sniff fhe liquid inside. lf smells sharp and acrid. If you wish to dnnk some of the liquid, turn to 15E. If you wish to dip a piece o{ cloth in it, turn to 375.",
+  "choices": [
+    {
+      "id": "to_375",
+      "label": "If you wish to dip a piece o{ cloth in it",
+      "aliases": [],
+      "to": 375
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

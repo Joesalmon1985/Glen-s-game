@@ -1,12 +1,14 @@
 # Puca TODO
 
-## Deathtrap Dungeon POC (`wip/typing-first-dungeon`)
-- [x] Encounter 1 boxes/traps/key/clue with typing-first intent → Python resolution.
-- [x] Encounter 2 junction stub after leaving the boxes.
-- [x] Fictional-time pursuer pressure (POC addition; see docs/DEATHTRAP_POC.md).
-- [x] Debug play mode with full pipeline dump; image generation suppressed.
-- [x] Deterministic tests + human-readable traces under tests/traces/.
-- [x] LLM-first semantic interpreter (Ollama default); authored action matching; guidance vs world pressure.
+## Deathtrap Dungeon FF (`puca_dungeon` gamebook)
+- [x] Passage pack skeleton: manifest, chargen, passages 001–400 JSON.
+- [x] FF rules: Skill/Stamina/Luck, combat rounds, luck/skill tests, potion once, provisions.
+- [x] Session pipeline: interpret → ground → resolve → guidance → narrate → image decision.
+- [x] Opening path + west combat demo (1 ↔ 270 ↔ 66; 101 → 37 → 400/399/flee 66).
+- [x] Graph validate + `tests.test_deathtrap_ff` (heuristic).
+- [ ] Editorial pass on OCR bulk passages (`needs_review` / fidelity notes).
+- [ ] Complete choice/combat/test graphs for remaining paragraphs beyond the demo spine.
+- [ ] Live Ollama playthrough of a full book path; optional `--images` polish.
 
 ## Current fix pass (legacy Spirit adventure)
 - [x] Preserve original source/installer and document the audit.
@@ -19,6 +21,5 @@
 ## Later
 - Evaluate adapter-on/off artwork before retraining the LoRA.
 - Compare smaller narrators and image settings using the same scenes.
-- Expand dungeon beyond Encounter 2 stub.
 
-Details: [audit](docs/AUDIT.md), [Deathtrap POC](docs/DEATHTRAP_POC.md).
+Details: [audit](docs/AUDIT.md), [Deathtrap FF](docs/DEATHTRAP_POC.md), [fidelity](docs/DEATHTRAP_FF_FIDELITY.md).

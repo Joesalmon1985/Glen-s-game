@@ -1,0 +1,31 @@
+{
+  "id": 46,
+  "text": "Yotr lower yourself carefully dor,r'n the idol and, wasting no mote time in the cavern, run torward to ihe tunnel in the northern wall, turn to 239.\n\nYou step round the great bulk of the dead Rock Grub and peer into the darkness of its borehole. You can only see a lew metres, but are able to make out that it inclines slightly and is wet from the secreted slime of the Rock Grub. If you wish to explore the borehole, turn to 312. Ifyou would ratherwalk west along the tunnel, turn to 117",
+  "choices": [
+    {
+      "id": "to_239",
+      "label": "rself carefully dor,r'n the idol and, wasting no mote time in the cavern, run torward to ihe tunnel in the northern wall",
+      "aliases": [],
+      "to": 239
+    },
+    {
+      "id": "to_312",
+      "label": "If you wish to explore the borehole",
+      "aliases": [],
+      "to": 312
+    },
+    {
+      "id": "to_117",
+      "label": "Ifyou would ratherwalk west along the tunnel",
+      "aliases": [],
+      "to": 117
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

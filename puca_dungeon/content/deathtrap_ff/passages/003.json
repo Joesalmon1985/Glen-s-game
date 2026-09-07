@@ -1,0 +1,12 @@
+{
+  "id": 3,
+  "text": "The Gnome shakes his head and says, 'I am afraid you have failed the Trial of Champions. Baron Sukumvit's Deathtrap Dungeon will keep its secrets for another year, as you will notbe allowed to leave here. You are appointed my servant for the rest of your days, to prepare and modify the dungeon for future contestants. Perhaps iri another life you will succeed . . .'",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

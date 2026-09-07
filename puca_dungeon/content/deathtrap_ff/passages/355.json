@@ -1,0 +1,25 @@
+{
+  "id": 355,
+  "text": "J56 There is an openinB on the leIt-hand stde of the funnel wall You are standin8 at the entrance of a large cavern, from which you hear a girl's voice crvrng for help You can just make out the shaPe oi a human figure rolling about on the floor at the back oI the cavern If you wish to enter lhe cavern and investigate, turt to 17o- lf you \\a ould rather con tinue north aloig the tunnel, furn to 192 tt/",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you wish to enter lhe cavern and investigate",
+      "aliases": [],
+      "to": 170
+    },
+    {
+      "id": "choice_2",
+      "label": "If you wish to enter lhe cavern and investigate, turt to 17o- lf you \\a ould...",
+      "aliases": [],
+      "to": 192
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

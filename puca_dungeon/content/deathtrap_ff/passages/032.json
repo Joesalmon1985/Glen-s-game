@@ -1,0 +1,25 @@
+{
+  "id": 32,
+  "text": "You soon come to another junction in the tunnel One branch leads east, but the wet footprints you have been following continue north and you decide to follow their tuail turn to 37. It was a mistake to reach into the hole with )toursword an-n. It is covered with round sucker marks and feels as if it has been crushed Lose 3 srtrr points. You peer into the hole and see the bleeding teRtacle stump hanging limply. You carefully pull out the grappling iron and leather pouch, rn which you find a tiny brass bell You pack away your new Possessions and head north. turn to 292.",
+  "choices": [
+    {
+      "id": "to_37",
+      "label": "ne branch leads east, but the wet footprints you have been following continue north and you decide to follow their tuail",
+      "aliases": [],
+      "to": 37
+    },
+    {
+      "id": "to_292",
+      "label": "Turn to 292",
+      "aliases": [],
+      "to": 292
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

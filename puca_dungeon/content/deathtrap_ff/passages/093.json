@@ -1,0 +1,19 @@
+{
+  "id": 93,
+  "text": "The door opens into a small dark room, which is empty apart from a sturdy wooden chest ]ying on a shel{ on the lar wall. The floor is thick with dust, and you can clearly see fresh footprints leadingfrom the door to the chest and back again. You wonder whether one of your rivals is stjll ahead of you on 'The Walk', or whether the chest has only recently been placed on the shelfby one of thb Trialmasterslf you wish to enter the room and open the chest, turn to 284 If you would rather keep walking down rho h,hnol h,.6 r^..^",
+  "choices": [
+    {
+      "id": "to_284",
+      "label": "est has only recently been placed on the shelfby one of thb Trialmasterslf you wish to enter the room and open the chest",
+      "aliases": [],
+      "to": 284
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

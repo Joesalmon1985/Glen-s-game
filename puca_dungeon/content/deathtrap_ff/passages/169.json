@@ -1,0 +1,22 @@
+{
+  "id": 169,
+  "text": "The tunnel turns sharply to the righr, contintring east for as far as you can see. Throm stops alrd tells you to halt as well. He tums his head slowly from side lo side, listening 'l hedr footsteps coming down the tunnel towards us,'he whispers. 'Draw your sword.' You both crouch down to hide in the shadows, and not a minute too soon, for a moment later you see the silhouette of two armed figures approaching. Throm jumps up and dashes forward, screaming a loud battle-cry There are two CAVE TROLLS in front ofyou, Throm attacks the first one with his battleaxe, and you run to his ard and attack the second Cave Troll. CAVE TROLL sKrr-L io If you win, turn to 288",
+  "choices": [
+    {
+      "id": "to_288",
+      "label": "CAVE TROLL sKrr-L io If you win",
+      "aliases": [],
+      "to": 288
+    }
+  ],
+  "combat": {
+    "enemies": [],
+    "win_to": 288
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

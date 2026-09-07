@@ -1,0 +1,25 @@
+{
+  "id": 290,
+  "text": "Roll two dice. lf the total is eight, turn to 152. If the total is any number other than eight, turn to 121",
+  "choices": [
+    {
+      "id": "to_152",
+      "label": "lf the total is eight",
+      "aliases": [],
+      "to": 152
+    },
+    {
+      "id": "to_121",
+      "label": "If the total is any number other than eight",
+      "aliases": [],
+      "to": 121
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

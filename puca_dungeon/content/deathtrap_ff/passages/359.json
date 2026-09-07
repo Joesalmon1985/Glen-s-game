@@ -1,0 +1,19 @@
+{
+  "id": 359,
+  "text": "lf you would rather keep walking north. turn to 2j4.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 214
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

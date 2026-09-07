@@ -1,0 +1,19 @@
+{
+  "id": 385,
+  "text": "You pour the contents of the glass phial into your mouth and swallow the dear hquid. Although you do not leel any immediate change, you hope that the potion will creaLe the illusion that you are a TROGLODYTE just like the ones in front of you. Taking a deep breath, you step boldly into the cavern The Troglodytes continue theirdbaldance, believing you tobe one o{them. Youwalk past Lhem casually and head north UnJortunately, the ef{ects o{ the potion are short-1ived. Suddenly you hear a shriek behind you as one of the Troglodytes spots you, and you are forced to run across the cavern floor. A herd 1ou 'ee an underground river running east to west through the cavern and a wooden 346187 bridge crossing over it. lf you wish to run over the bridge, turn to 38",
+  "choices": [
+    {
+      "id": "to_38",
+      "label": "lf you wish to run over the bridge",
+      "aliases": [],
+      "to": 38
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

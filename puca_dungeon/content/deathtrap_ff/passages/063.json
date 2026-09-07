@@ -1,0 +1,19 @@
+{
+  "id": 63,
+  "text": "You tie the rope aroundyourwaist and take hold of the lighted torch given to you by Throm, as your Barbarian ally calls himself Taking hold o{ the slack rope, Throm lowers you slowlyoverthe edge of the pit and down into the dark depths below. You can see by the light of the torch that the sides of the pit are extremely smooth. You drop about twenty metres before hitting the bottom of the pit. There you see another funnel heading north and you call up to Throm and tell him of your discovery He calls back, saying that he is going to tie the rope arounda protrudjng rock on the edge ofthe pit and will come down and ,oin you. You hear him climbing down and soon you are together a8ain. Throm retijeves his rope by shaking it off the rock, and you set off north along the new tunnel. Turn to 19t.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 191
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

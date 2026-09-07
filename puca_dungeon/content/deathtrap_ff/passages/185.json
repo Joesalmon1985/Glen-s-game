@@ -1,0 +1,19 @@
+{
+  "id": 185,
+  "text": "The Troglodytes are too involved in their tribal dancing to hear the clatter of your sword, and you crawl past. When you think you are far enough away, you stand up andrun across the cavem floor. Ahead you see an underground river running east to west through the cavern with a wooden b dge crossing over it. Hea ng a noise, you tlance back and realize you have been spotted. The Troglodytes are chasng you. If youwishto run ove! theb dge, turn to31E. lf youwish to dive into the river, tu to",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "theb dge",
+      "aliases": [],
+      "to": 316
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

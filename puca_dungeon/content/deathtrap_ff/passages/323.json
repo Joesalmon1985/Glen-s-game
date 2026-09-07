@@ -1,0 +1,19 @@
+{
+  "id": 323,
+  "text": "After tying thc rope around the rock, you lo{er )oursoll slo\\vl!' to the botbm ot the Pit. Throm retrieves his rope bv shaking it ofi ihe rock, and you set oll totcthcr down the n€\\' hrnnel turn to 194 )24-J25",
+  "choices": [
+    {
+      "id": "to_194",
+      "label": "Throm retrieves his rope bv shaking it ofi ihe rock, and you set oll totcthcr down the n€\\' hrnnel",
+      "aliases": [],
+      "to": 194
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": 379,
+  "text": "Exhaustcd b)r vour lonS!duel, I'ou iall to your knees. As you stare at Throm's still tody, a bitter loathing for tl,e Du,arf fills your heart. Somehou,you wilJ avenge Throm Engulfed invourhatred, voudonot notice the Dh'arf enter the arena until he is standing riEiht in front oi yoLl, a loadcd crossbo\\,!' almed at vour chest. 'l know, whdt vo11 are thinking,' he savs calmly,'but remember that only I know the way out of here Get up, it's time for you to leave.'Once on your feet, the Dwarfindicates that you should walk ahead of him. Back in the chamber, he crosses over to the northern n'all and pushes against one of tts stones. A door-like section of the .!\\,all svr.ings out, opening into another crystal,lit hrnnel. With his crossbow slill aimed at your chest, the Dwarf smiles, saying, 'Cood luck.' If you wish to walk straight into the tunnel, tuin to 213. I{ you would tather take a punch at the Dwarf, turn to q5.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you wish to walk straight into the tunnel",
+      "aliases": [],
+      "to": 213
+    },
+    {
+      "id": "choice_2",
+      "label": "If you wish to walk straight into the tunnel, tuin to 213. I{ you would tathe...",
+      "aliases": [],
+      "to": 95
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

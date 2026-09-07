@@ -1,0 +1,19 @@
+{
+  "id": 380,
+  "text": "the Orc's moming starcrashes into your shield and bounces offharmlessly. The tunnel is too narrow for both ofthem toattackyou al once, so you are able to fight them one at a time. l8o Fust ORC Second ORC If you tfin, turn to 252. SXILL STAMINA",
+  "choices": [
+    {
+      "id": "to_252",
+      "label": "l8o Fust ORC Second ORC If you tfin",
+      "aliases": [],
+      "to": 252
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

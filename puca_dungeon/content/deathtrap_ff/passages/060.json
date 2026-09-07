@@ -1,0 +1,19 @@
+{
+  "id": 60,
+  "text": "6o fhe tunnel ends at a large oak door. Throm wastes no time in testing the handle and is somewhat strrprised to find the dooi unlocked He pushes it open and walks into a torchlit chamber Sitting alone on an ornate chairis a DWARF, whobidsyou enter the chamber As you do so, the oak door swlngs shut behind you 'Adventurers, you have done rvell to get this fai,' says the Dwarl in a deep voice. 'However, as you both know, there can only be one winner in the T al of Champions As Trialmaster, it is my duty to Baron Sukumvit to let only the most able conhnue Therefore. I musr uevrse a test of wlts and strength to eliminate one o{ you. Please do not attempt to dispose ofme. It would be utterly porntless, for, as you can see, there is no obvious way out of this chamber and only I know h'here the hidden exit lies. Now if you would care to decide between you who will go first, I shall make the necessary preparations.' You look at Thro , suddenly angry that your e{fective patnership might come to an end He leans over and whispeF in vour ear that you should try to kill the Dwa and worry about the exit later. Ifvou wish toJoin Throm in attacking the Dwarf, turn to 179",
+  "choices": [
+    {
+      "id": "to_179",
+      "label": "Ifvou wish toJoin Throm in attacking the Dwarf",
+      "aliases": [],
+      "to": 179
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

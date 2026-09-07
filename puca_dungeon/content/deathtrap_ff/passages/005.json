@@ -1,0 +1,33 @@
+{
+  "id": 5,
+  "text": "You crawl along the floor and find yourself in the lair of a tribe of TROGLODYTES. As you creep past them, your scabbard bangs against a rock on the floor. Test your Luck. If you are Lucky, turn to 185 . If you are Unlucky, turn to 395 .",
+  "choices": [
+    {
+      "id": "to_185",
+      "label": "If you are Lucky",
+      "aliases": [],
+      "to": 185
+    },
+    {
+      "id": "to_395",
+      "label": "If you are Unlucky",
+      "aliases": [],
+      "to": 395
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": 185,
+      "failure_to": 395,
+      "lucky_to": 185,
+      "unlucky_to": 395
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

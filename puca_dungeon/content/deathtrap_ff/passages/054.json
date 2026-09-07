@@ -1,0 +1,79 @@
+{
+  "id": 54,
+  "text": "The lasso loosens itself and you are able to shake it free ofthe idol's neck. It falls to thefloorwith a loud clatter. You quickly coil the rope up again and Putit in your backpack. Wasting no more time in the cavein, you run fon /ard to the tunnel in the northern wall. turn to 239.\n\nWithlightning speed, you thrust your hand outand grip the cobra just below its open mouth. You lift it up and/ arm outstretched/ dangle it in ftont of the Dwarf. He doesn't flinch but says in his calm expressionless way, 'Please put the cobra back in the basket and prepare for the final part of the test. Follow me.' You do what he says and follow him bdck inlo the chamber, where Throm is pdcing up and dou,n, obviously ill at ease. You wave to him wh e the Dwarfopens a second secret doorand tells youto walkon fhrough and waitfor him. Againyou comply, and you find yourself in another circular room, although this one resembles a small arena The floor is covered with sand, and a small balcony runs around the arena wall- Opposite the secret door by whrch you entered is an ominous-looking wooden door. Suddenly you hear a shout, and you look up to see thq smiling Dwarf standing on the balcony. He throws Lwo pieces of paper down to you. On one of them, the words NO CROP IS are w tten, on the other, RUIN MOAT. In his evercalm voice he says, 'If you rearrange the letters of the words, you willfind the names of two creatures. You may choose which one to fight in my Arena of Death.'lfyou can identify the creature by rearanging the letters NO CROP IS, turn to 143. If you can identify the creature bV rearranging the letters RUIN MOAT, turn to 40. If you cannot identi{y either of the creatures, turn to 347.\n\nI 425-427 You tiptoe towards the door while Ivy Prattles on. Test yaur Luck.Ifyovare Lucky, turn to 69 Ifyouare Unlucky, turn to 139. a26 The pouch on the Barbadan's belt is emPty apart fionasome stran8e-lookinB dried meat wraPPed in a cloth. Will you: Eat the dried meat? Leave the meat and walk over to the alcove (ifyou have not done so already)? Tuln to 41 Leave the chamber and head west? Tu to 83 1.28-1.29 a28 At the back of the alcove are some steps leading down into a cellar. Cobwebs brush your face as you descend The cellar ceilingis quite low, and the floor is strewn with rubbish and debris In the middle of the wall opposite you is an archway whrch leads into another crystal lit tunnel. There are large mushrooms growing on the rubbish to yourright. If you wish to step through the archway, turn to 35 If you wish to stop to eat some of the mushrooms, hrln to 233. 429 You tie the rope to the grapphng iron and hurl it over the top ofthe wall. lts hooks dig into the stone and you beBin to haul yourself up Peering over the top of the wall, you see an enormous dinosaurlike monster thmshing about in a sand-covered pit. Its tough hide is a mottled green colour, and it stands some tenmetres tallonits muscular hind legs Rows turn to 226 427 The only possible way out of the hall as far as you can see is by using the chute in Lhe northern wall You decide to give it a Bo and climb into the chute. You slide gently down and emerge into another room. landinB on your bacl. Turn Lo 90\n\n430 of razor-sharp teeth line its gigantic iaws, which open and close with bone-snaPPing Power. There is a large double door in the wall on the far side o{ the pit, which appears to be the only way out of this section of the dungeon. Willyou: Lower yoursel{ down on the roPe into the pit to fi8ht the PIT FIEND? turn to 349 Throw yourbone monkey charm into the pit (if you have one)? turn to 351 Try to hook the PIT FIEND with the grap-pling iron while sitting on top of the wall? turn to 167",
+  "choices": [
+    {
+      "id": "to_239",
+      "label": "Turn to 239",
+      "aliases": [],
+      "to": 239
+    },
+    {
+      "id": "to_143",
+      "label": "may choose which one to fight in my Arena of Death.'lfyou can identify the creature by rearanging the letters NO CROP IS",
+      "aliases": [],
+      "to": 143
+    },
+    {
+      "id": "to_40",
+      "label": "If you can identify the creature bV rearranging the letters RUIN MOAT",
+      "aliases": [],
+      "to": 40
+    },
+    {
+      "id": "to_347",
+      "label": "If you cannot identi{y either of the creatures",
+      "aliases": [],
+      "to": 347
+    },
+    {
+      "id": "to_69",
+      "label": "Test yaur Luck.Ifyovare Lucky",
+      "aliases": [],
+      "to": 69
+    },
+    {
+      "id": "to_139",
+      "label": "Test yaur Luck.Ifyovare Lucky, turn to 69 Ifyouare Unlucky",
+      "aliases": [],
+      "to": 139
+    },
+    {
+      "id": "to_35",
+      "label": "If you wish to step through the archway",
+      "aliases": [],
+      "to": 35
+    },
+    {
+      "id": "to_226",
+      "label": "Its tough hide is a mottled green colour, and it stands some tenmetres tallonits muscular hind legs Rows",
+      "aliases": [],
+      "to": 226
+    },
+    {
+      "id": "to_349",
+      "label": "Turn to 349",
+      "aliases": [],
+      "to": 349
+    },
+    {
+      "id": "to_351",
+      "label": "Turn to 351",
+      "aliases": [],
+      "to": 351
+    },
+    {
+      "id": "to_167",
+      "label": "Turn to 167",
+      "aliases": [],
+      "to": 167
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,0 +1,24 @@
+{
+  "id": 181,
+  "text": "The tunnel leads into a marble-floored hall with pillars dsing right up to the ceiling. Asyou cross the floor, your footsteps echo through the hall. The hairs on the back ofyour neck start to prickle as you sense unseen eyes watchingyou. unknown to you, one of your vals is hiding behind a pillar. Itisthe NINJA, the deadly assassin dressed in black robes. Without a sound, he steps out ftom behind the pillar and throws a star-ed8ed disc at your back. Instinc tively, an inner voice tells you to dtick. Test your Luck l( yort are Lucky, fum to 312 II you are Unlucky, turn to 45.",
+  "choices": [
+    {
+      "id": "to_45",
+      "label": "Test your Luck l( yort are Lucky, fum to 312 II you are Unlucky",
+      "aliases": [],
+      "to": 45
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "needs_review": true
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

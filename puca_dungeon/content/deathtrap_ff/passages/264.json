@@ -1,0 +1,31 @@
+{
+  "id": 264,
+  "text": "Ahead in the dim light you see two HOBGOBLINS righting, punching and kicking each other furlously. There is a leather baglyingon thefloor, and rt seems to be this that the], are fighting over. Will you: fry to talk to them2 turn to 130 Attack them with your sword2 turn to 51 Trv to slip by them unnoticed? turn to 355",
+  "choices": [
+    {
+      "id": "to_130",
+      "label": "Will you: fry to talk to them2",
+      "aliases": [],
+      "to": 130
+    },
+    {
+      "id": "to_51",
+      "label": "Will you: fry to talk to them2 turn to 130 Attack them with your sword2",
+      "aliases": [],
+      "to": 51
+    },
+    {
+      "id": "to_355",
+      "label": "Turn to 355",
+      "aliases": [],
+      "to": 355
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

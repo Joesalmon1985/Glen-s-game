@@ -1,0 +1,61 @@
+{
+  "id": 249,
+  "text": "The pain'in your lungs forces you to rise to the surface for air. Unfortunately, one of the Troglodvtes sees you and yells to his comrades You watch helplessly as the bowmen take aim, and a hail of arrows falls on you with fatal impact. Your lifeless body floats down-river, down -intci the hidden depths of the mountain. You just have time to hear the Gnome say, 'One crown and two skulls', before a white bolt ofenergy shoots out from the lock into your chest, knocking you unconscious. Roll one die, add 1 to the number and reduce your srawr^Ie by the total If you are still alive, you come to and are toldbv the Cnome to try a8ain. You know you placed one gem in the coDect slot, butwhich one?Yousigh and tentahvely try a new combrnaLion. c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2 turn to 249 turn to 44 turn to 195 turn to 382 Emerald Diamond Dramond Sapphire Sapphire Emerald Emerald Sapphire Diamond Emerald Sapphire Dramond",
+  "choices": [
+    {
+      "id": "to_15",
+      "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald",
+      "aliases": [],
+      "to": 15
+    },
+    {
+      "id": "to_392",
+      "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15",
+      "aliases": [],
+      "to": 392
+    },
+    {
+      "id": "to_177",
+      "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392",
+      "aliases": [],
+      "to": 177
+    },
+    {
+      "id": "to_287",
+      "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177",
+      "aliases": [],
+      "to": 287
+    },
+    {
+      "id": "to_249",
+      "label": "c Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2",
+      "aliases": [],
+      "to": 249
+    },
+    {
+      "id": "to_44",
+      "label": "Sapphire Emerald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2 turn to 249",
+      "aliases": [],
+      "to": 44
+    },
+    {
+      "id": "to_195",
+      "label": "erald Diamond Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2 turn to 249 turn to 44",
+      "aliases": [],
+      "to": 195
+    },
+    {
+      "id": "to_382",
+      "label": "d Diamond Sapphire Emerald turn to 15 turn to 392 turn to 177 turn to 287 Turn to 1J2 turn to 249 turn to 44 turn to 195",
+      "aliases": [],
+      "to": 382
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

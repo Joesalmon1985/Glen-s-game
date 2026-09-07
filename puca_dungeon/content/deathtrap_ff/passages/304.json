@@ -1,0 +1,28 @@
+{
+  "id": 304,
+  "text": "Thepipe iswet and slimy, butyou crawloninto the danl darkness, slithering and sliding as you go. Suddenly your hand touches something hard and square which feels as ifitis made ofwood. Itrattles as you shake it, and you decide you must be holding a box. Ifyou wish to crawl back out o{ the pipe and examine your find, turn to 162 lI you would rather press on turther down the pipe, taking the box with you to examine later, fum to 4. Jo2 After about twenty minutes the Dwarfreappears on the balcony. He calls down to you, saying, 'Well, I do have an interesting problem on my hands Prepare to fight your next opponent.' The wooden door ses once again and you are surp sed to see a familiar face lt is Throml He is cut and badly bruised, and doesn't seem to recognize you. He is clearly delirious as he staggers forward wiih his axe raised lo attack you The Dwarf laughs and says, 'The cobra bit him, but he has the strength of an ox and managed to carry on, even though most men wouldhave died. Now you must fight him to decide finally whi ch of you will con tinue the Trial of Cham pions.' You shout abuse at the Dwart protesting against the cruelty of such a contest. He merely laughs, and you have no option but to defend yourself against poor Throm. THROM SKILL 10 slAMlNA 12 Despite his wounds, Throm is immensely strong. If you win, turn to 379. 10J your mounting Panic, and are horrified to see a BLACK WIDOW SPIDER. Before you can shake it off, it sinks its poisonous fangs deePintoyourw st Lose 6 STAMINA points. Ifyou are still alive, furn to 2(,.\n\n3o5-306",
+  "choices": [
+    {
+      "id": "to_162",
+      "label": "Ifyou wish to crawl back out o{ the pipe and examine your find",
+      "aliases": [],
+      "to": 162
+    },
+    {
+      "id": "to_379",
+      "label": "If you win",
+      "aliases": [],
+      "to": 379
+    }
+  ],
+  "combat": {
+    "enemies": [],
+    "win_to": 379
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

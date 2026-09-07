@@ -1,0 +1,25 @@
+{
+  "id": 165,
+  "text": "You tell Thrcm that there is no point in killing the Dwarf as you will never find you! way out of the chamber alone. You ar8ue that an opportunity of tricking the DwarI might arise later, once you have found the exit from the chamber, so you intend togo throueh with the Dwarfs test. You tell the Dwarf that ybu are ready and he beckons you to follow him, telling Throm to wait for his return. A secret door opens in the chamber wall and you follow the Dwarf into a small circularroom. He closes the door behind you and hands you two bone dice, tellinS you to throw them on to the floor. You roll a sir and a two: a total of eight. The Dwarf asks you to roll them again, butthis time you must predict whether the total will be the same as, or less or more than eight- If you wish to guess that it will be the same, turn to 290. lf you wish to guess that it will total less than eight, tuln to 191. If you wigh to guess that it will total more than eight, turn to 84.",
+  "choices": [
+    {
+      "id": "to_290",
+      "label": "predict whether the total will be the same as, or less or more than eight- If you wish to guess that it will be the same",
+      "aliases": [],
+      "to": 290
+    },
+    {
+      "id": "to_84",
+      "label": "If you wigh to guess that it will total more than eight",
+      "aliases": [],
+      "to": 84
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

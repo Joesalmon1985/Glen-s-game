@@ -1,0 +1,25 @@
+{
+  "id": 288,
+  "text": "You look to your left and see Throm standing over the Cave Trolt he has slain. Blood is Pouring out Irom a deep cut inhis shoulder, but it does not seem to worry him. You search the bodies of the Cave I roll<, but find nolhinB apdrt from a bone ring on d leathercord hanginground the neckofone of them. The ring is engraved rvith a symbol which Throm recognizes. He explains that it must have belonged to druids of the north and that an ancient talisman such as this wtll increaseyour Powers ilyourbody is able toacceptit. Throm will not touch it, and advises you to leave it well alone I{ you wish to Put the ring on, turn to 64 lf you would rathel continue east wlth Throm, turn to 221",
+  "choices": [
+    {
+      "id": "to_64",
+      "label": "Throm will not touch it, and advises you to leave it well alone I{ you wish to Put the ring on",
+      "aliases": [],
+      "to": 64
+    },
+    {
+      "id": "to_221",
+      "label": "vises you to leave it well alone I{ you wish to Put the ring on, turn to 64 lf you would rathel continue east wlth Throm",
+      "aliases": [],
+      "to": 221
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

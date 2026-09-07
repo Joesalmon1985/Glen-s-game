@@ -1,0 +1,25 @@
+{
+  "id": 317,
+  "text": "The cool water is refteshing, but comes from a source which has been cursed by a Hag. Add 1 STAMINA point and lose 2 LUcK poillts. If you have not done so already, you may either ddnk from the other fountain - turn to 17J - or corltmue north turn to 368 fi8 The bodies are those of lwo Orc gtrards At least one oiyolu vals in the lnal ofChampions must still be ahead of you A quick search of the bodies produces nothing apart from a necklace of tceth hanging around the neck of one of the Orcs. lf you wish to wear the necklace vourself, turn to123 Ilyorwould rather set off no h without the necklace, turn to 282.",
+  "choices": [
+    {
+      "id": "to_368",
+      "label": "If you have not done so already, you may either ddnk from the other fountain - turn to 17J - or corltmue north",
+      "aliases": [],
+      "to": 368
+    },
+    {
+      "id": "to_282",
+      "label": "lf you wish to wear the necklace vourself, turn to123 Ilyorwould rather set off no h without the necklace",
+      "aliases": [],
+      "to": 282
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

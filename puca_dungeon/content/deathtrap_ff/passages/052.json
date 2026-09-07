@@ -1,0 +1,27 @@
+{
+  "id": 52,
+  "text": "[Passage 52 — needs review]",
+  "choices": [
+    {
+      "id": "press_on",
+      "label": "Press on deeper into the dungeon",
+      "aliases": [
+        "press on",
+        "continue",
+        "go on",
+        "onward",
+        "deeper"
+      ],
+      "to": 53
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true,
+  "referenced": true,
+  "stub_bridged": true
+}

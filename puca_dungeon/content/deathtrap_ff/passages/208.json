@@ -1,0 +1,19 @@
+{
+  "id": 208,
+  "text": "The door swrngs open into the room, and you step backandjump over thepit You put the rope rn your backpack and lump back over the pit to leave the room and head north turn to326.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "r swrngs open into the room, and you step backandjump over thepit You put the...",
+      "aliases": [],
+      "to": 326
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

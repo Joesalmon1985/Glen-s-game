@@ -1,0 +1,9 @@
+{
+  "title": "Deathtrap Dungeon",
+  "author": "Ian Livingstone",
+  "system": "fighting_fantasy",
+  "passage_range": [1, 400],
+  "start_id": 1,
+  "rules_version": "1.0",
+  "notes": "Paraphrased/cleaned passage pack for Puca. Source PDF is local reference only."
+}

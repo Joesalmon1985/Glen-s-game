@@ -1,0 +1,49 @@
+{
+  "id": 268,
+  "text": "You leap foiward and try to grabtheleader to use as a hostage. However, the Troglodytes are ready for your move, and six of their bowmen immediately shoot their arrows at you- Their aim is deadly accurate and all six arrows find their mark. Lifeless, you fall to the floor. The Troglod]'tes have ended your joumey abruptly. 2b9 You empty the contents of the jar into your hand and apply them to your u'ounds. Their healing powers take immediate effect and you feel yourself growlng stronger. Add 3 sr.lrlrul Points lI you havenotdone so alreadv, you may eithereat the rice and drink the water turntollo orleave thehall, taking iust the diamond with you turn to 127 shoots out from the lock into your chest, knocking youunconscious Roll one die, add r to the number and reduce your srAMtNA by the total lf you are still alive, you come to and are told by the Gnome to try a8ain. You know you Placed one gem n the correct slot, butwhich one? You sigh and tentatively try a new combination. AB Emerald Diamond Diamond Sapphire Sapphire Emerald Emerald SepPhire Diamond Emerald Sapphire Diamond C Sapphrre turn to 16 Emerald Tun to 392 Diamond turn to 177 Diamond turn to 287 Sapphire turn to 132 Emerald turn to 249",
+  "choices": [
+    {
+      "id": "to_127",
+      "label": "e so alreadv, you may eithereat the rice and drink the water turntollo orleave thehall, taking iust the diamond with you",
+      "aliases": [],
+      "to": 127
+    },
+    {
+      "id": "to_16",
+      "label": "AB Emerald Diamond Diamond Sapphire Sapphire Emerald Emerald SepPhire Diamond Emerald Sapphire Diamond C Sapphrre",
+      "aliases": [],
+      "to": 16
+    },
+    {
+      "id": "to_177",
+      "label": "hire Sapphire Emerald Emerald SepPhire Diamond Emerald Sapphire Diamond C Sapphrre turn to 16 Emerald Tun to 392 Diamond",
+      "aliases": [],
+      "to": 177
+    },
+    {
+      "id": "to_287",
+      "label": "d Emerald SepPhire Diamond Emerald Sapphire Diamond C Sapphrre turn to 16 Emerald Tun to 392 Diamond turn to 177 Diamond",
+      "aliases": [],
+      "to": 287
+    },
+    {
+      "id": "to_132",
+      "label": "amond Emerald Sapphire Diamond C Sapphrre turn to 16 Emerald Tun to 392 Diamond turn to 177 Diamond turn to 287 Sapphire",
+      "aliases": [],
+      "to": 132
+    },
+    {
+      "id": "to_249",
+      "label": "re Diamond C Sapphrre turn to 16 Emerald Tun to 392 Diamond turn to 177 Diamond turn to 287 Sapphire turn to 132 Emerald",
+      "aliases": [],
+      "to": 249
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,0 +1,25 @@
+{
+  "id": 43,
+  "text": "The tunnel turns sharplv to the dght and continues lorth for as faras you can see. There is a doorin the .. lr-hr nd wall vl hich is ajar. \\ ou hear strrrrcune rry :.r help from the other )rdc of lhe dour. lt yuu wish :iJ open it, turn to 200. Ifyou would rather continue ]1orth, turn to 316.",
+  "choices": [
+    {
+      "id": "to_200",
+      "label": "lt yuu wish :iJ open it",
+      "aliases": [],
+      "to": 200
+    },
+    {
+      "id": "to_316",
+      "label": "Ifyou would rather continue ]1orth",
+      "aliases": [],
+      "to": 316
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

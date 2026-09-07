@@ -1,0 +1,34 @@
+{
+  "id": 207,
+  "text": "You take offyour shirt and tear it in hal{. You wrap a piece around each foot to give yourself some sort of protection against the cofiosive slime, and dash across it in giant leaps. On the firm ground beyond the slime, you lrantically try to ip the burning shirt off your feet with your sword. However, some of the slime has eaten its way through to your ankle. Lose 3 sreurul points. Sethng off north again, you come td a junction If you wish to go west, turn to 386 I{ you wish to continue north, turn to 218. lfyou win, turn to 258.",
+  "choices": [
+    {
+      "id": "to_386",
+      "label": "Sethng off north again, you come td a junction If you wish to go west",
+      "aliases": [],
+      "to": 386
+    },
+    {
+      "id": "to_218",
+      "label": "Sethng off north again, you come td a junction If you wish to go west, turn to 386 I{ you wish to continue north",
+      "aliases": [],
+      "to": 218
+    },
+    {
+      "id": "to_258",
+      "label": "lfyou win",
+      "aliases": [],
+      "to": 258
+    }
+  ],
+  "combat": {
+    "enemies": [],
+    "win_to": 258
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

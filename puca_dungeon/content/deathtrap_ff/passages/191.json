@@ -1,0 +1,19 @@
+{
+  "id": 191,
+  "text": "a95-196 495 You draw vour sword and rush towards the old man He raises his left arm and suddenly you hit and bounce off an invisible shield. 'Do not be {oolish, my powers are great,' the old man says calmly. 'lf you do not believe fte, watch this,'From out of nowhere a flying fist appears, which smashes into your face before ,you can duck. Lose 1 STAMINA point. You shake your head and rub yourjarv. You appear to have no alternative but to try to answerhis question. Tuin to 382, 19b You raise vour shield in front of you just in time to protect yourseff from a vollev of spikes released from the Manticore's tail and aimed straLght at your herrt. They \\inl intu your rhield and you remJin unharmed. Swiftly you draw your sword and advance on the Manticore. r97-499",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 382
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": 149,
+  "text": "If the total is greater than your SKILL, turn ro 159.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If the total is greater than your SKILL",
+      "aliases": [],
+      "to": 159
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

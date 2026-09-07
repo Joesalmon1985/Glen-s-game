@@ -1,0 +1,11 @@
+{
+  "id": 400,
+  "text": "You emerge from Deathtrap Dungeon into daylight and a roar of cheering crowds. Banners snap above Fang as Baron Sukumvit himself steps forward to award you the prize for surviving his infamous labyrinth. You have conquered Deathtrap Dungeon!",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "victory",
+  "image_seed": "triumphant exit from Fang dungeon, cheering crowds, Baron Sukumvit awarding the victor",
+  "needs_review": false
+}

@@ -1,0 +1,34 @@
+{
+  "id": 89,
+  "text": "Backon solid ground once again on thecavern floor, you try to shake the rope off the idol's neck Test uout I u(k. ll you are I ucky, turn to 54. lf you dre Unlucky, turn to 26. 9a'92 9a The Orc's morning star thuds into your arm, knocking your sword to the floor. You must fight them bare-handed, reducing your SKILL by 4 for the duration of the combat. Fortunately, the tunnel is too narrowforboth Orcs toattackyou atonce Fight them one at a time. S(ILL STAMIN A First ORC ' I 5 Second ORC 6 4 lf you win, turn to 257.",
+  "choices": [
+    {
+      "id": "to_54",
+      "label": "ll you are I ucky",
+      "aliases": [],
+      "to": 54
+    },
+    {
+      "id": "to_26",
+      "label": "lf you dre Unlucky",
+      "aliases": [],
+      "to": 26
+    },
+    {
+      "id": "to_257",
+      "label": "S(ILL STAMIN A First ORC ' I 5 Second ORC 6 4 lf you win",
+      "aliases": [],
+      "to": 257
+    }
+  ],
+  "combat": {
+    "enemies": [],
+    "win_to": 257
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

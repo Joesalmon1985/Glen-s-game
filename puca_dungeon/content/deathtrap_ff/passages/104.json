@@ -1,0 +1,19 @@
+{
+  "id": 104,
+  "text": "Reacting quickly, you manage to tump over the outstretched tongue and run into the tunnel, leaving the Bloodbeast wallowing in its pool to arvalt another victim. turn to 134",
+  "choices": [
+    {
+      "id": "to_134",
+      "label": "Turn to 134",
+      "aliases": [],
+      "to": 134
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": 101,
+  "text": "You follow the white arrow west. The junction falls behind you and the corridor stretches on in soft crystal light, damp and narrow. Water beads on the chiselled walls. Far ahead, the passage continues into deeper shadow; behind you, the junction still waits to the east.",
+  "choices": [
+    {
+      "id": "continue_corridor",
+      "label": "Continue along the corridor",
+      "aliases": ["continue", "go on", "press on", "go west", "onward"],
+      "to": 37
+    },
+    {
+      "id": "return_east",
+      "label": "Return east to the junction",
+      "aliases": ["go back", "return", "east", "back to junction"],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "narrow crystal-lit dungeon corridor heading west, damp stone walls, soft hanging crystal light",
+  "needs_review": false
+}

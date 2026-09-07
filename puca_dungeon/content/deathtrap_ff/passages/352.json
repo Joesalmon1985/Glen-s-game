@@ -1,0 +1,25 @@
+{
+  "id": 352,
+  "text": "Ahead you hear the sound of rocks being grcund and crushed. The noise grows louderand suddenly you realize that the wall on your dght is startinB to collapse. Terrified, you watch as a large, hideous worm{ike creature with a gaping mouth and extraordinarily powerful mandibles slithers through a hole in the wall. Its great iaws continue to crunch the rock as it tums its head slowly from side to side, feeling the cool air in the tunnel It appears to be totally blind. but seems to know of your presence, perhaps sensing the heat of your body. lt starts to slithertowards you with its mandibles wide apart to attack. lf you wish b fight rhe ROCK CRUB, turn to 254. lf you would rather run back down the tunnel lo the iunction to head east. turn to 6E. ttJ Before you have time to get out of the way, the boulder smashes into your shoulder. Lose r s<rrr poinL and 4 STAMINA points. tf you are still alive, turn to 325.\n\ntta",
+  "choices": [
+    {
+      "id": "to_254",
+      "label": "lf you wish b fight rhe ROCK CRUB",
+      "aliases": [],
+      "to": 254
+    },
+    {
+      "id": "to_325",
+      "label": "tf you are still alive",
+      "aliases": [],
+      "to": 325
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

@@ -1,0 +1,12 @@
+{
+  "id": 147,
+  "text": "The Dwarf shakes his head, saying, 'All bruwn and no brain is not enough to master the Trial ofChampions. I regret you have failed, You will not be allowed to leave in case you impart its secrets to others. However, you have done well to get so far and I will appoint you my servant for the coming years to plepare the dungeon for its new confestants,'",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

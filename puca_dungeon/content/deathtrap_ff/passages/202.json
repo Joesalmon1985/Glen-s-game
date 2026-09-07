@@ -1,0 +1,27 @@
+{
+  "id": 202,
+  "text": "The cobra's reactions are quickerthan yours, and its hnoded hedd \\hoot\\ forwdrd to biie you. ll..t yorl Luck. ll yorl are Lucky, turn Lo 1E. If you are Unlucky, turn to 42\n\n2O1-205",
+  "choices": [
+    {
+      "id": "to_42",
+      "label": "If you are Unlucky",
+      "aliases": [],
+      "to": 42
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": null,
+      "failure_to": 42,
+      "lucky_to": null,
+      "unlucky_to": 42
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

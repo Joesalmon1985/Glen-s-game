@@ -1,0 +1,19 @@
+{
+  "id": 395,
+  "text": "On hearing the noise of your scabbard, one of the Troglodytes raises the alarm You stand up and run as fast as you can throu8h the cavern. One of their bowmen let. fly an arrow dF yru run. It pierces your shoulder with deadly accuracy Lose I STAMINA points. Ifyou are still alive, turnto259.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Ifyou are still alive",
+      "aliases": [],
+      "to": 259
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

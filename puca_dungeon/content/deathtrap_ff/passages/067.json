@@ -1,0 +1,25 @@
+{
+  "id": 67,
+  "text": "You grab one of the underwater bridge pillars and cling to it, holding your breath. Meanwhile the Troglod]'tes reach the ver bank and decide that you must have been swept to your death downriver as it drsappears into the depths of the moun tain By now your lungs are bursting lor air Trsf Vout L ck agal1\\.1+ you are Lucky, tuln to 46.l{you are Unlucky, turrr to 219",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "swept to your death downriver as it drsappears into the depths of the moun ta...",
+      "aliases": [],
+      "to": 46
+    },
+    {
+      "id": "choice_2",
+      "label": "as it drsappears into the depths of the moun tain By now your lungs are burst...",
+      "aliases": [],
+      "to": 219
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

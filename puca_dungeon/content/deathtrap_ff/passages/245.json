@@ -1,0 +1,43 @@
+{
+  "id": 245,
+  "text": "Your sword easily pierces the thin outer casing of the giant spore ball. A thick brown cloud of sPores bursts out ofthe ball andenvelops you. Some ofthe spores stick to Your skin and start to ltch teribly. Great lumps come up on your face and arms, and your skin feels as if it is on fire. Lose 2 5TAMINA points. Frantically scraichinB your itching lumPs ytru step over the now deflated spore ball and head east turn to 13. 2a6 to J16 Ifyou win, turn to 201. You have no choice but to open the door, as the wall is foo smooth to dimb. Taking a deep breath, you turn the handle and enter a sand covered pit. There, standing some ten metres tall on its huge hind legs in lront of large double doors in the opposite wall, rs an enormous dinosaurlike monster, It has a iough, moitled green hide and a mouth lined wrth razor sharp ieeth. Its jaws open and close with bone snapping power, and even you cannot help trembling as you approach it with your sword drawn, PIT FIEND SKILL 12 STAMINA 15 Ifyou win, turn to 258",
+  "choices": [
+    {
+      "id": "to_13",
+      "label": "Frantically scraichinB your itching lumPs ytru step over the now deflated spore ball and head east",
+      "aliases": [],
+      "to": 13
+    },
+    {
+      "id": "to_201",
+      "label": "2a6 to J16 Ifyou win",
+      "aliases": [],
+      "to": 201
+    },
+    {
+      "id": "to_258",
+      "label": "er, and even you cannot help trembling as you approach it with your sword drawn, PIT FIEND SKILL 12 STAMINA 15 Ifyou win",
+      "aliases": [],
+      "to": 258
+    }
+  ],
+  "combat": {
+    "enemy_name": "Pit Fiend",
+    "enemy_skill": 12,
+    "enemy_stamina": 15,
+    "win_to": 201,
+    "enemies": [
+      {
+        "name": "Pit Fiend",
+        "skill": 12,
+        "stamina": 15
+      }
+    ]
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,0 +1,37 @@
+{
+  "id": 111,
+  "text": "You wipe the vile yellow slime from the blade of your sword and walk quickly to the door, back into the funnel and head north. turn to 262. Apart from two portions of yqur Provisions which were saturated and are now inedible, all your other possessions rcmain intact, You repack them carefully inside your backpack and set off north again turn to 356. aa3-aL6 aa1 The wooden ball whistles past the skull, hitting the far wall with a loud 'crack'. If you wish to hy again with the other ball, turn to 371. If you have aheady thrown twice, or do noL wish to lhrow again, you may decide to clo\\e the door and continue \\ est along the tunnel -turn to 74aa4 The Caveman is wearing a leather wristband with four small rats'skulls hanging ftom it. I{ you wish to put it on your own wrist, turn to 336",
+  "choices": [
+    {
+      "id": "to_262",
+      "label": "Turn to 262",
+      "aliases": [],
+      "to": 262
+    },
+    {
+      "id": "to_356",
+      "label": "edible, all your other possessions rcmain intact, You repack them carefully inside your backpack and set off north again",
+      "aliases": [],
+      "to": 356
+    },
+    {
+      "id": "to_371",
+      "label": "If you wish to hy again with the other ball",
+      "aliases": [],
+      "to": 371
+    },
+    {
+      "id": "to_336",
+      "label": "I{ you wish to put it on your own wrist",
+      "aliases": [],
+      "to": 336
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": 142,
+  "text": "You turn east against the painted arrow. The corridor here is dustier, the crystals fewer and dimmer. Boot-scuffs and claw marks rake the grit underfoot. Ahead the dusty passage continues; west leads back to the junction you left.",
+  "choices": [
+    {
+      "id": "continue_east",
+      "label": "Continue along the dusty corridor",
+      "aliases": ["continue", "go on", "press on", "go east", "onward"],
+      "to": 88
+    },
+    {
+      "id": "return_west",
+      "label": "Return west to the junction",
+      "aliases": ["go back", "return", "west", "back to junction"],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "dusty east dungeon corridor, faint crystal light, tracks in grit on stone floor",
+  "needs_review": false
+}

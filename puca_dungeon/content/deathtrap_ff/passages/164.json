@@ -1,0 +1,28 @@
+{
+  "id": 164,
+  "text": "As you walk along, droplets of $'ater atain start falJing from the tunnel ceiling. You see wet footprints, made by the same boots that you followed earlier, hea ding west. The footprints lead to a dosed iron doorin the right-hand wall of the tunnel, but do not seem to go any further. If you wish to open the door, tull1 to 299. lf you would rather keep going west, turn to 83 1.65 There is a slot in the padlock into which you place the coin. lmmediately the lockclicks apart, and you are able to unchain the stilts. You place them on your shoulder and once again set off north. Turn to 2J4. 1,66 As you touch the emerald eye of theidol, youheara creaking sound below you, Looking dovr'n, you are shocked to see the two stufled birds taking flight. Their wings flap in jerky movements, but they are soon above you and look set to attack Fighi the FLYINC GUARDIANS one at a time, but leduce your srrrr, by 3 during this combai because ofyour restricted position. First FLYING GUARDIAN Second FLYING GUARDI AN lfyou win, turn to 11. SXTLL STAMINA",
+  "choices": [
+    {
+      "id": "to_83",
+      "label": "lf you would rather keep going west",
+      "aliases": [],
+      "to": 83
+    },
+    {
+      "id": "to_11",
+      "label": "First FLYING GUARDIAN Second FLYING GUARDI AN lfyou win",
+      "aliases": [],
+      "to": 11
+    }
+  ],
+  "combat": {
+    "enemies": [],
+    "win_to": 11
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

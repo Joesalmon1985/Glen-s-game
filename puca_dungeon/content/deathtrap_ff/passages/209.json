@@ -1,0 +1,31 @@
+{
+  "id": 209,
+  "text": "You are dismayed to find that not onl)' are all your remarning Provisions safuiated and inedible, but one of the treasures you found is missing, Cross off one item on your Equipment List, or one of your jeu,els or potions. You carefully repack your re maining possessions and set off north again turn to 356. 2ao You enter a room in which a manin tattered clothing is standing chained to the wall by hrs left arm. You see thathisright handis missingand realize thathis mlrst be the hand nailed to the door Pleading for mercy, he cowers back from you as far as hrs charns will allow. If you wish to cut him free ftom his chains, turn to 27. If you would rather leave the room to head north, turn to 78",
+  "choices": [
+    {
+      "id": "to_356",
+      "label": "You carefully repack your re maining possessions and set off north again",
+      "aliases": [],
+      "to": 356
+    },
+    {
+      "id": "to_27",
+      "label": "If you wish to cut him free ftom his chains",
+      "aliases": [],
+      "to": 27
+    },
+    {
+      "id": "to_78",
+      "label": "If you would rather leave the room to head north",
+      "aliases": [],
+      "to": 78
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

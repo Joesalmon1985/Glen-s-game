@@ -1,0 +1,19 @@
+{
+  "id": 78,
+  "text": "15{-156 454 Running down the tunnel, you soon catch up with the Barbalian and tell him that the eastem passage comes to a dead end- He nod8 his head in silent understanding and sets off towalds the west with you at his side- turn to22.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "arbalian and tell him that the eastem passage comes to a dead end- He nod8 hi...",
+      "aliases": [],
+      "to": 22
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

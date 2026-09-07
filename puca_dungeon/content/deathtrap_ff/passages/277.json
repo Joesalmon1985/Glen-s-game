@@ -1,0 +1,26 @@
+{
+  "id": 277,
+  "text": "turn to 15 turn to 204\n\n2?8",
+  "choices": [
+    {
+      "id": "to_15",
+      "label": "Turn to 15",
+      "aliases": [],
+      "to": 15
+    },
+    {
+      "id": "to_204",
+      "label": "turn to 15",
+      "aliases": [],
+      "to": 204
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true,
+  "raw_text": "turn to 15\nturn to 204\n\n2?8"
+}

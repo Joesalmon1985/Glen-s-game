@@ -1,0 +1,12 @@
+{
+  "id": 197,
+  "text": "Mercifully, the tempeiature now starts to drop rapidly, and soon it feels almost cool again. On the left-hand side of the tunnel is a closed door. Ithas a small iron phte in it, whrch might possibly slide oPen. wlll you: Try to open the door? Try to slide the iron plate? Continue north up the tunnel?",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": 95,
+  "text": "The iron ring is attached to a small trapdoor. lt lfts up easily, and inside a small compartment you find a finely crafted shield made of the purest iron. Marvelling at its splendour,you strap it on to your arm. Add 1 SKILL point You walk towards the double doors and push them open Turn to248.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Add 1 SKILL point You walk towards the double doors and push them open",
+      "aliases": [],
+      "to": 248
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

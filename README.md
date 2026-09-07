@@ -6,18 +6,21 @@ Double-click **Puca - Play** on your desktop, or **START PUCA** in this folder. 
 
 For the same Spirit adventure with the turn debug panel, use **Play Puca Dungeon Debug.bat** (runs `launch.bat --debug`).
 
-## Deathtrap Dungeon POC (typing-first)
+## Deathtrap Dungeon (Fighting Fantasy gamebook)
 
-Separate console POC for Encounter 1 (boxes/traps; image generation suppressed):
+Typing-first console engine over FF passages 1–400 (`puca_dungeon/content/deathtrap_ff`). Skill / Stamina / Luck sheet; Ollama interpret by default, Python resolution. The d20 PDF is not the playable source.
 
 ```bash
-./launch_dungeon_debug.sh
-# or: python -m puca_dungeon --debug --seed 91
+# Offline / tests
+python -m puca_dungeon --heuristic --seed 91
+
+# Player mode with images (needs GPU stack); pick starting potion via chargen ids
+python -m puca_dungeon --no-debug --images --seed 91 --potion potion_skill --name Glen
 ```
 
-Windows: **Play Deathtrap Dungeon.bat**
+Windows: **Play Deathtrap Dungeon.bat** (CLI) or **Play Deathtrap Dungeon GUI.bat** (Tk window + illustrations, no visible Skill/Stamina/Luck meters).
 
-See [docs/DEATHTRAP_POC.md](docs/DEATHTRAP_POC.md) for source vs POC additions. Automated tests: `python -m unittest tests.test_dungeon_encounter1`. Traces: `tests/traces/`.
+See [docs/DEATHTRAP_POC.md](docs/DEATHTRAP_POC.md). Tests: `python -m unittest tests.test_deathtrap_ff -v`.
 
 The game opens at **2560 x 1440** with larger story text and up to **768 x 768** displayed pixel artwork. You can resize the window; artwork fits the available space. AI illustrations still generate at **512 x 512**, so the larger window does not request more expensive AI images. Close an older open version and use the shortcut again to pick up the update.
 

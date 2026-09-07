@@ -1,0 +1,33 @@
+{
+  "id": 228,
+  "text": "You reach down into the hole. Suddenlyyour blood runs cold as you feel something warm and sticky wrapping itself around your arm. You manage to pull your arm out of the hole, but a hideous tentacled limb with unbelievably strong suckers is clingrng to your arm. By the time you manage to cut yourself [ree, your arm ls trembling with pain Tesf yolLr Luck. If yo.u are Lucky, turn to 150. If you are Unlucky, turn to 33 .",
+  "choices": [
+    {
+      "id": "to_150",
+      "label": "If yo.u are Lucky",
+      "aliases": [],
+      "to": 150
+    },
+    {
+      "id": "to_33",
+      "label": "If you are Unlucky",
+      "aliases": [],
+      "to": 33
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": null,
+      "failure_to": 33,
+      "lucky_to": null,
+      "unlucky_to": 33
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

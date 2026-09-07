@@ -1,0 +1,43 @@
+{
+  "id": 155,
+  "text": "The words of her poem flash through your mind: 'When corridor doth water meet, do not make a quick retreat. . .'Ofcourse, it is hele that she wants you to dive into the water, Now you must decide what to do, lf you wish to dive into the water, turn to 378. If you would rather walk back down the tunnel, turn to 322. a56 The small plate slides open easily, arrd you 6rrd yourself peering into a room h,ith a deep pit in the floor behind the door- On the opposite wall there are two iron hooks, on one of which hangs a coil of rope. If you wish to open the doo!, jump over the pit afld take the iope, turn to 208. If you would rather continue north along the tunnel, turn to 326. r17-a6o The casket opens eagily, and inside there is a black velvet bag containing a large pearl. Add I LUCK point. Af[er putting the pearl in your pocket, you press on through the cobwebs. turn to 310.",
+  "choices": [
+    {
+      "id": "to_378",
+      "label": "it is hele that she wants you to dive into the water, Now you must decide what to do, lf you wish to dive into the water",
+      "aliases": [],
+      "to": 378
+    },
+    {
+      "id": "to_322",
+      "label": "If you would rather walk back down the tunnel",
+      "aliases": [],
+      "to": 322
+    },
+    {
+      "id": "to_208",
+      "label": "If you wish to open the doo!, jump over the pit afld take the iope",
+      "aliases": [],
+      "to": 208
+    },
+    {
+      "id": "to_326",
+      "label": "If you would rather continue north along the tunnel",
+      "aliases": [],
+      "to": 326
+    },
+    {
+      "id": "to_310",
+      "label": "Turn to 310",
+      "aliases": [],
+      "to": 310
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

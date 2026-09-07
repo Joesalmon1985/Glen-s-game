@@ -1,0 +1,37 @@
+{
+  "id": 325,
+  "text": "You stand up ancl carrv on dou'n the tunnel. Suddenlv you see dayhght at the end of the tunnel You iun forrt'ard iowards the most beautiful sighi you have seen fora long timc, a clearblue skv nnd green trces. You walk as fast as yor can towards theend of ihe tlmnel and emcrge cxpecting to see tho wclcomirrB sighi of chccring people- Bui there is no hcro's rvelcome {rom thc people all aroLrnd yc'u lhey are alldead. You are strnding in a cold chamber littercd lvith armoured skcletons and bodies Thc exit to |ictory rvas just an illusion. Oniv the corpses of the past advenhlrers are real. Uiterlv dejt'cted, 1'ou \\!,alk back tou'ards the tunnel, but hit an iDvisible bnlrier. You are trapped in this Bhoulish place and ilestined to end your days in the chninber o{ the Ltead.\n\nthem swings its moming star at you, Roll one die. lf you roll a 1or 2, turn to91 If you ro11 a 3 or 4, turn to 189. Ifyou roll a 5 or 6, turn to 380. The Mirror Demon, being solelv intent on grabbing your arm, makes no attemptto defend itself. MIRROR DEMON s(rLL 10 STAMINA 1O 4 during any Attack Rourld, the MiEor Demon,s Attack Strength is greater than your own, turn to 8, If you manage to de{eat the Miuor Demon u,ithout it ever winning an Attack Round, turn to 92-\n\n32E",
+  "choices": [
+    {
+      "id": "to_189",
+      "label": "lf you roll a 1or 2, turn to91 If you ro11 a 3 or 4",
+      "aliases": [],
+      "to": 189
+    },
+    {
+      "id": "to_380",
+      "label": "Ifyou roll a 5 or 6",
+      "aliases": [],
+      "to": 380
+    },
+    {
+      "id": "to_8",
+      "label": "MIRROR DEMON s(rLL 10 STAMINA 1O 4 during any Attack Rourld, the MiEor Demon,s Attack Strength is greater than your own",
+      "aliases": [],
+      "to": 8
+    },
+    {
+      "id": "to_92",
+      "label": "th is greater than your own, turn to 8, If you manage to de{eat the Miuor Demon u,ithout it ever winning an Attack Round",
+      "aliases": [],
+      "to": 92
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

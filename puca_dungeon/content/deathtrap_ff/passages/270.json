@@ -1,0 +1,22 @@
+{
+  "id": 270,
+  "text": "You try the iron key in the lock of the box that bears your name. It fits. Inside you find two gold pieces and a scrap of parchment signed by Baron Sukumvit. The note reads: GET NO MESS. You may take the gold and the clue.",
+  "choices": [
+    {
+      "id": "continue_after_box",
+      "label": "Continue north along the tunnel",
+      "aliases": ["continue", "go north", "leave", "walk on", "press on"],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [
+    {"op": "add_gold", "amount": 2},
+    {"op": "add_item", "item": "sukumvit_clue"},
+    {"op": "set_flag", "flag": "opened_named_box", "value": true},
+    {"op": "add_knowledge", "fact": "clue_get_no_mess"}
+  ],
+  "ending": null,
+  "image_seed": "open named iron box on stone table, two gold coins, scrap of parchment, crystal-lit tunnel"
+}

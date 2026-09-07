@@ -1,0 +1,39 @@
+{
+  "id": 79,
+  "text": "You grip the arms ofthe chair tightly, hall expecting a surge of energy or pain to rushthrough yourbody. Test your Luck.If you are Lucky, turn to 106. If you are Urllucky, turn to 383 . Fo YoLr takeyour time and inanage to step over the last pole without having touched any of thern. You hurry on east, still following the two pairs of footprints. turn to 313.",
+  "choices": [
+    {
+      "id": "to_106",
+      "label": "Test your Luck.If you are Lucky",
+      "aliases": [],
+      "to": 106
+    },
+    {
+      "id": "to_383",
+      "label": "If you are Urllucky",
+      "aliases": [],
+      "to": 383
+    },
+    {
+      "id": "to_313",
+      "label": "Turn to 313",
+      "aliases": [],
+      "to": 313
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": 106,
+      "failure_to": null,
+      "lucky_to": 106,
+      "unlucky_to": null
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

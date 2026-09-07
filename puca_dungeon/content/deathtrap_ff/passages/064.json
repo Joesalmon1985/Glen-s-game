@@ -1,0 +1,19 @@
+{
+  "id": 64,
+  "text": "As soon as you put the dng on your finger, your wholebody starts to shake. Roll two dice. Ifthe total is the same as or less than your S(ILL score, turn to 115. If the total is greater than your s(ILL score, tutn to 19o.\n\nI",
+  "choices": [
+    {
+      "id": "to_115",
+      "label": "Ifthe total is the same as or less than your S(ILL score",
+      "aliases": [],
+      "to": 115
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

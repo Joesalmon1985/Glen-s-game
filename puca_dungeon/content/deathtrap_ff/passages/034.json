@@ -1,0 +1,19 @@
+{
+  "id": 34,
+  "text": "You hy to force the point of your sword under the emerald eye. Much to your surprise, the emerald shatters on contact, releasing a jet ofpoisonous gas straight into your face. The gas knocks you out and you release the rope, bounce down the idol and crash on to the stone floor. Your advenfurc ends nere. The funnel continues west for several hundred metres, finally ending at some steps leading up to a closed tmpdoor. You climb the steps slowly, hearing muffled voices above you. In the dim light you can see that the trapdooris not locked. Ifyou wishto knock on the kapdoor, turn to 333. If you wish to burst through the trapdoorwithyouI sword dEwn, turn rc 124.",
+  "choices": [
+    {
+      "id": "to_333",
+      "label": "Ifyou wishto knock on the kapdoor",
+      "aliases": [],
+      "to": 333
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

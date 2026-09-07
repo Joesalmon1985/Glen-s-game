@@ -1,0 +1,19 @@
+{
+  "id": 193,
+  "text": "You enter a cold room divided by a deep chasm. A rope is stretched taut across the chasm to the far side, where a magrrificent winged helmet rests on top of a pole. lf you wish to walk across the tightrope to reach the helmet/ turn to 274. If you would rather return to the tunnel to continue north. furn to 2q7,,",
+  "choices": [
+    {
+      "id": "to_274",
+      "label": "lf you wish to walk across the tightrope to reach the helmet/",
+      "aliases": [],
+      "to": 274
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

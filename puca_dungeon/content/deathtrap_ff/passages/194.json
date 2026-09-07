@@ -1,0 +1,19 @@
+{
+  "id": 194,
+  "text": "Still smiling, the old man looks at you and says, 'Well done, Stranger. You have answered correcily. I wish you good fortune during the rest of the Trial and rucr scores. You bid the old man farewelland leave his room to continue north along the passage turn to 100",
+  "choices": [
+    {
+      "id": "to_100",
+      "label": "You bid the old man farewelland leave his room to continue north along the passage",
+      "aliases": [],
+      "to": 100
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

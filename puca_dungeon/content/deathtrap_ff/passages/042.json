@@ -1,0 +1,19 @@
+{
+  "id": 42,
+  "text": "The cobra's fangs sink deep into your wrist and you feel its poison starting to creep through your borly. Lose 5 STAMINA points. lf you are still alive, the Dwarf has no mercy but tells you to try again. Roll two dice. If the tot;l is the sa;e as or lessihan your SKILL/ turn to 55 If the total is greater than vour S(ILL, furn to 2o2_",
+  "choices": [
+    {
+      "id": "to_55",
+      "label": "If the tot;l is the sa;e as or lessihan your SKILL/",
+      "aliases": [],
+      "to": 55
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

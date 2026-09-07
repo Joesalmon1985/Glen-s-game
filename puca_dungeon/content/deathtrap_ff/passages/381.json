@@ -1,0 +1,37 @@
+{
+  "id": 381,
+  "text": "You look round th e room and see nothing of interest apart from an alcove in the west wall and a stone chair in the middle of th€ room. Sitting in the chaii is the skeleton ofan armed wardor, possibly a contestant from years gone by. The skeletal fingers of its ri8ht hand are gripped round a piece of parchment. Ifyou wish to take the parchment from theskeleton, turn to 331. If you wotrld rather walk over to the alcove, turn to 128 ' 1t2 The old man points at one of the statues, and you recognize it immediately. lt is the knight who started the Trial of Champions, the agonized look on his face lockedin stone foretemity, The old man smiles, saying, 'This man riveighs roo pounds plus half his weight. How much does he weigh?' What u.ill ydu answer? roo pounds? 15O POundS? zoo pounds? turn to 44 turn to 222",
+  "choices": [
+    {
+      "id": "to_331",
+      "label": "Ifyou wish to take the parchment from theskeleton",
+      "aliases": [],
+      "to": 331
+    },
+    {
+      "id": "to_128",
+      "label": "If you wotrld rather walk over to the alcove",
+      "aliases": [],
+      "to": 128
+    },
+    {
+      "id": "to_44",
+      "label": "Turn to 44",
+      "aliases": [],
+      "to": 44
+    },
+    {
+      "id": "to_222",
+      "label": "turn to 44",
+      "aliases": [],
+      "to": 222
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

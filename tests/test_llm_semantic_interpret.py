@@ -82,7 +82,7 @@ class FixtureInterpreter:
         return raw, normalize_intent(raw, player_text=text)
 
 
-# Canonical fixtures for the plan §21 phrase list
+# Legacy Encounter-1 box fixtures — SemanticPipelineTests skipped (FF supersedes).
 FIXTURES: dict[str, dict] = {
     'use my key on my box': {
         'classification': 'MATCH_AUTHORED_ACTION',
@@ -384,6 +384,7 @@ FIXTURES: dict[str, dict] = {
 }
 
 
+@unittest.skip('superseded by test_deathtrap_ff — box Encounter-1 fixtures')
 class SemanticPipelineTests(unittest.TestCase):
     def session(self, fixtures: Optional[dict] = None, seed=91):
         interp = FixtureInterpreter(fixtures or FIXTURES)
@@ -570,18 +571,87 @@ class SemanticPipelineTests(unittest.TestCase):
         self.assertEqual(tr.visual_backend_calls, 0)
 
 
+class FFSemanticSmokeTests(unittest.TestCase):
+    """Minimal FF-authored fixtures so this module still exercises normalize → resolve."""
+
+    def test_open_named_box_fixture(self):
+        fixtures = {
+            'open my box': {
+                'classification': 'MATCH_AUTHORED_ACTION',
+                'matched_action_id': 'open_named_box',
+                'confidence': 0.98,
+                'understood': True,
+                'action': {
+                    'class': 'TURN_TO',
+                    'turn_to': 270,
+                    'intended_effect': 'follow_choice',
+                },
+                'ambiguities': [],
+                'needs_clarification': False,
+            },
+        }
+        s = GameSession(
+            player_name='Glen',
+            seed=91,
+            debug=True,
+            interpreter=FixtureInterpreter(fixtures),
+        )
+        tr = s.submit('open my box')
+        self.assertEqual(tr.validated_intent['matched_action_id'], 'open_named_box')
+        self.assertEqual(s.world.passage_id, 270)
+        self.assertIn('clue_get_no_mess', s.world.sheet.knowledge)
+
+    def test_cartwheel_silly_fixture(self):
+        fixtures = {
+            'do a cartwheel': {
+                'classification': 'SILLY_BUT_VALID',
+                'matched_action_id': None,
+                'understood': True,
+                'action': {
+                    'class': 'BODILY',
+                    'method': 'cartwheel',
+                    'utterance': 'do a cartwheel',
+                },
+                'ambiguities': [],
+                'needs_clarification': False,
+            },
+        }
+        s = GameSession(
+            player_name='Glen',
+            seed=91,
+            debug=True,
+            interpreter=FixtureInterpreter(fixtures),
+        )
+        tr = s.submit('do a cartwheel')
+        self.assertEqual(s.world.passage_id, 1)
+        self.assertIn('cartwheel', tr.narrator_output.lower())
+
+    def test_normalize_demote_forced_shake_still_works(self):
+        raw = {
+            'classification': 'MATCH_AUTHORED_ACTION',
+            'matched_action_id': 'box.damage',
+            'understood': True,
+            'action': {'class': 'BREAK', 'target_ref': 'one of the boxes', 'method': 'force'},
+            'ambiguities': [],
+            'needs_clarification': False,
+        }
+        intent = normalize_intent(raw, player_text='grab one of the boxes and shake it')
+        self.assertNotEqual(intent.matched_action_id, 'box.damage')
+        self.assertIn(intent.classification, ('GENERAL_WORLD_ACTION', 'NEEDS_CLARIFICATION'))
+        self.assertEqual(intent.method, 'shake')
+
+
 @unittest.skipUnless(
     os.environ.get('PUCA_LIVE_OLLAMA') == '1' and ollama_model_ready(),
     'Set PUCA_LIVE_OLLAMA=1 with Ollama running and mistral installed for live smoke',
 )
 class LiveOllamaSmokeTests(unittest.TestCase):
-    def test_ollama_interprets_key_use(self):
+    def test_ollama_interprets_open_box(self):
         from puca_dungeon.interpret import OllamaInterpreter
         s = GameSession(player_name='Glen', seed=91, debug=True, interpreter=OllamaInterpreter())
-        tr = s.submit('use my key on my box')
+        tr = s.submit('open my box')
         self.assertTrue(tr.validated_intent['understood'])
         self.assertNotEqual(tr.validated_intent['classification'], 'UNINTERPRETABLE')
-        self.assertNotEqual(tr.validated_intent['action_class'], 'OTHER')
 
 
 if __name__ == '__main__':

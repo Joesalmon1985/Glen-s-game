@@ -1,0 +1,19 @@
+{
+  "id": 300,
+  "text": "If you would rather attack the Mirror Demon instead, turn to J27. Walk over to search the Barbarian? Walk towards the alcove? Close the door and continue we3t?",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you would rather attack the Mirror Demon instead",
+      "aliases": [],
+      "to": 127
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

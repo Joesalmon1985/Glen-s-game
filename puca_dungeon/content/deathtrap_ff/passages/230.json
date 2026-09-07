@@ -1,0 +1,19 @@
+{
+  "id": 230,
+  "text": "The tunnel starts to widen, and ahead you see it open into a huge cavern ftom where you can hear the sound of many high-pitched voices. You creep up to the entrance and take a look inside. There are about twenty tiny people with long noses and ears runningin acircle around a large golden e{Iigy. Will you: Walkup and talk to them? Try to creep past them? Drink a Doppelganger Potion (if you have one)? TuIn to 5 TurTt to 385",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "if you have one)?",
+      "aliases": [],
+      "to": 5
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

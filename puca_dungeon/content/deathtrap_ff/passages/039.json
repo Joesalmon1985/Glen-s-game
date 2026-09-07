@@ -1,0 +1,37 @@
+{
+  "id": 39,
+  "text": "You manage to evade the outstretched legs of the drvin8 Giant Fly. Stepping back, you draw your sword and prepare to fr8ht the hideous insect as it turns to attackyou again. CIANT FLY SKLLL 7 STAMiNA 8 lJ you win, turn to 111. You may Escape by running back mto the tunnel to head north. turn to 252\n\n4o",
+  "choices": [
+    {
+      "id": "to_111",
+      "label": "CIANT FLY SKLLL 7 STAMiNA 8 lJ you win",
+      "aliases": [],
+      "to": 111
+    },
+    {
+      "id": "to_252",
+      "label": "Turn to 252",
+      "aliases": [],
+      "to": 252
+    }
+  ],
+  "combat": {
+    "enemy_name": "Ciant Fly",
+    "enemy_skill": 7,
+    "enemy_stamina": 8,
+    "win_to": 111,
+    "enemies": [
+      {
+        "name": "Ciant Fly",
+        "skill": 7,
+        "stamina": 8
+      }
+    ]
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

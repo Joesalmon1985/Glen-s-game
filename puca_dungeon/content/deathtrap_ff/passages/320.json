@@ -1,0 +1,31 @@
+{
+  "id": 320,
+  "text": "You decide to search the Ninja and find a cloth bag in the folds ofhis robes. Inside it is a flask of water, some rice wrapped in a palm leaf, a jar of ointment and a beautiful diamond. Will you: Eat the rice and drink the water? turn to 330 Rub some of the ointment into your wounds? turn to 269 Take only the diamond and leave the hall? turn to 122",
+  "choices": [
+    {
+      "id": "to_330",
+      "label": "Turn to 330",
+      "aliases": [],
+      "to": 330
+    },
+    {
+      "id": "to_269",
+      "label": "Turn to 269",
+      "aliases": [],
+      "to": 269
+    },
+    {
+      "id": "to_122",
+      "label": "Turn to 122",
+      "aliases": [],
+      "to": 122
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": 128,
+  "text": "You gaze round Ivy's room. Seeing a Painting of another Troll hanging on the wall, you ask her ifhe is any relation. Suddenly her mood and expression change. She loosens her Brip on you and smiles, saying, 'Oh yes. Thar is my dear beloved brother, Sourbelly He has done very well for himself down south in Port Blacksand. He is now an ImPerial Guard in Lord Azzur's elite troop.l'm veryproudof him.' hry stares at the painting and continues to praise her brother. If you wish to slip out of the chamber through the door in the east wall, furn to 125. lfyou would Fther continue the conversation, turn ro 99,",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you wish to slip out of the chamber through the door in the east wall",
+      "aliases": [],
+      "to": 125
+    },
+    {
+      "id": "choice_2",
+      "label": "If you wish to slip out of the chamber through the door in the east wall, fur...",
+      "aliases": [],
+      "to": 99
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

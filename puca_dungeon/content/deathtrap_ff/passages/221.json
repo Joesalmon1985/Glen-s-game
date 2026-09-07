@@ -1,0 +1,19 @@
+{
+  "id": 221,
+  "text": "tYou step confidently on to the first pole and stride across to the next As you land on the third pole, it immediately releases a shower of shary splinte$, each several centimetres long. Lose 2 LUcK points. They fly outin all directions at great speed, andyou cannot avoid being hit. Roll two dice for the number of splinters that sink into your flesh. Each one reduces your STAMINA by one point l{ you are still alive, you mana8e to scramble over the remaining poles and sit down to the pain{ul task of removing the splinters lron your body. After resting for a while, you set offeast again. Turn to 31j.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 311
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

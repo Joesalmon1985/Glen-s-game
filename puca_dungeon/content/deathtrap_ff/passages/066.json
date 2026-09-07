@@ -1,0 +1,29 @@
+{
+  "id": 66,
+  "text": "You leave the stone table and its six boxes behind and press on north along the crystal-lit tunnel. The air grows colder. Ahead, the passage widens into a junction where a white arrow has been painted on the stone floor, pointing to the west.",
+  "choices": [
+    {
+      "id": "follow_arrow_west",
+      "label": "Follow the white arrow west",
+      "aliases": ["go west", "follow arrow", "west", "take the west path"],
+      "to": 101
+    },
+    {
+      "id": "go_east",
+      "label": "Take the passage to the east instead",
+      "aliases": ["go east", "east", "ignore the arrow", "right path"],
+      "to": 142
+    },
+    {
+      "id": "inspect_tracks",
+      "label": "Inspect the dusty floor for tracks",
+      "aliases": ["look at tracks", "examine floor", "search", "inspect"],
+      "to": 198
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "dungeon junction, white painted arrow pointing west on stone floor, crystal-lit corridors"
+}

@@ -1,0 +1,49 @@
+{
+  "id": 108,
+  "text": "There is a large panel olglassinthe left-hand wallof the tunnel Through ityou can see a bight. torchlit room teeming with CIANT INSECTS of every possible description. Bees, wasps, beetles, ticks - even the mites are over six centimetres long. The noise is threatening In the middle of the toom, a jewelled crou'n lies on top of a small table What looks like a large diamond is set in the middle ofthe crown. Will you: Break the glass and try to snatch the crown? turn to 394 Continue west? turn to 59 Return to the junchon to head north? turn to 14 ao9 You arrive at another junction in the tunnel If you wish to keep heading west, turn to 43. Ifyou wish to go north, turn to 24\n\n17,O-a7.2 aao The tunnel soon takes another sharp right fuin Followingiteast, you arrive ata shange obstruction: a line of tweive wooden poles across the tunnel They are fixed to the walls about halfa mehe off the floor and spaced a metre apart. If you wish to step beLween the poles, turn to 5E. If you wish to walk across the top of the poles, turn to 223.",
+  "choices": [
+    {
+      "id": "to_394",
+      "label": "Turn to 394",
+      "aliases": [],
+      "to": 394
+    },
+    {
+      "id": "to_59",
+      "label": "Turn to 59",
+      "aliases": [],
+      "to": 59
+    },
+    {
+      "id": "to_14",
+      "label": "Turn to 14",
+      "aliases": [],
+      "to": 14
+    },
+    {
+      "id": "to_43",
+      "label": "turn to 14 ao9 You arrive at another junction in the tunnel If you wish to keep heading west",
+      "aliases": [],
+      "to": 43
+    },
+    {
+      "id": "to_24",
+      "label": "Ifyou wish to go north",
+      "aliases": [],
+      "to": 24
+    },
+    {
+      "id": "to_223",
+      "label": "If you wish to walk across the top of the poles",
+      "aliases": [],
+      "to": 223
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

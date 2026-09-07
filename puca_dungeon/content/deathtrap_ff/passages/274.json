@@ -1,0 +1,25 @@
+{
+  "id": 274,
+  "text": "You step nervously on to the rope, not daring to look down. Halflvay actoss, you start to panic and lose your footing. Roll two dice If the total is the same as or less than your sxrl-I-, turn to 23E. If the totalis higher than your SKILL, turn to j59",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Roll two dice If the total is the same as or less than your sxrl-I",
+      "aliases": [],
+      "to": 236
+    },
+    {
+      "id": "choice_2",
+      "label": "If the totalis higher than your SKILL",
+      "aliases": [],
+      "to": 159
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

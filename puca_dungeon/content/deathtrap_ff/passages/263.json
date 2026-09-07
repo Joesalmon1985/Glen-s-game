@@ -1,0 +1,19 @@
+{
+  "id": 263,
+  "text": "The door opens into another tunnel. Walking west, i ou soon aril'e at a door in the north rvall If vor.r t:rh t,, rrpen thc door, turn t,' r53 lf you nrruld rather continue west, turn to 74.",
+  "choices": [
+    {
+      "id": "to_74",
+      "label": "on aril'e at a door in the north rvall If vor.r t:rh t,, rrpen thc door, turn t,' r53 lf you nrruld rather continue west",
+      "aliases": [],
+      "to": 74
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

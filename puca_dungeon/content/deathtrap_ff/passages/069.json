@@ -1,0 +1,31 @@
+{
+  "id": 69,
+  "text": "Ivy does not notice you opening the door. You slip out of her room, close the door quietly behind you and findyourselfat the end ofanother tunnel. turn to 305. 7o You just manage to dive to the side before the boulder smashes into the tunnel floor, splitting the stone. As you dustyourselfof{, you suddenly notice daylight at the end o{ the tunnel You run forward towards a beautiful sight oI blue sky and green trees. Runnin8 out of the tunnel, you expect to be greeted by cheering crowds, but are horrified at what you do see. There is no hero's welcome from the people all around you All are dead You are in Iact standing in a cold chamber littered with armoured skeletons and bodies the exit to victory was just an illusionl Only the corpses ofpast advenfurersarereal. You runback towardsthe tunnel, but hlt an invisible ballier. You are trapped and destined to end your days in the chamber of the dead. Once again you reach for the parchment, only this iime it is lying amidst a pile of broken bones. Un ioldingit, you see a map of aroomwitha drawingof a hideous creature inslde it. Beneath the monster is a rhvme which reads: 'Should you meeL the Manticore, Of its tail be$'are. Shield yoursel{ agarnst the spikes Flying throu8h the ar ' You fold up the piece of parchment and put it in \\'our backpack. Repeating the rhyme over and over io vourself, you walk across to the alcove. turn to 128 The Mirror shatters, sending fragments of glass l]ving everywhere. The Mirror Demon's four faces cry out rn agony, and cracks appear all over them Then they too shatter and fall to the lloor in a pile of broken glass. Un{ortunately, you cut your sword arm badly while smashing ihe miruor Although lour strength is una{fected, vour weaponskill is diminlshed. Lose 2 SKILL points belore continuing \\ ourJourneynorth Turn to f2.\n\n::=ls 7i-75 lfyou have not done so aheady, you may walkback to search the Barba an - turn to 126",
+  "choices": [
+    {
+      "id": "to_305",
+      "label": "Turn to 305",
+      "aliases": [],
+      "to": 305
+    },
+    {
+      "id": "to_128",
+      "label": "Turn to 128",
+      "aliases": [],
+      "to": 128
+    },
+    {
+      "id": "to_126",
+      "label": "=ls 7i-75 lfyou have not done so aheady, you may walkback to search the Barba an",
+      "aliases": [],
+      "to": 126
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

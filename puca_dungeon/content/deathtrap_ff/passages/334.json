@@ -1,0 +1,39 @@
+{
+  "id": 334,
+  "text": "You try to [rrench thc tongue from ,vour leE; $'ith vour bare hands, but fail Slou'l1' yoLl are dragged into the pool of shme, \\'\\'herc you will be pre' digested and later corlslrmed by the hideous Bloodbeast. 3a5-318 Still running as fast as you can, you dive into the ri\\,ter. Test your L ck Ifyou are Lucky, turn to 67. If You are Unlucky, turn to 101 T6 The wdstband was made and cursed by a Hag. lt slows down your reachons and dulls your senses Reduce yorrr sxrLL by 4 point5. You kick the tunnel wall in anger and stomp offnorth. turn to 298",
+  "choices": [
+    {
+      "id": "to_67",
+      "label": "Test your L ck Ifyou are Lucky",
+      "aliases": [],
+      "to": 67
+    },
+    {
+      "id": "to_101",
+      "label": "If You are Unlucky",
+      "aliases": [],
+      "to": 101
+    },
+    {
+      "id": "to_298",
+      "label": "Turn to 298",
+      "aliases": [],
+      "to": 298
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": null,
+      "failure_to": 101,
+      "lucky_to": null,
+      "unlucky_to": 101
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

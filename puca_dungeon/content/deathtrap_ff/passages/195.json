@@ -1,0 +1,19 @@
+{
+  "id": 195,
+  "text": "You smash the glass with the hilt of your sword, making a hole big enough to climb through. lmmediately the Giant Insects 6iart swarming and jumping towards you. Wasting no time, you clamber into the room, grabbing one of the lit torches to defend vourself. The 6re keeDs most of the Insects at bay, but by the time you have snatched the crown and climbed back into the corridor, some will certainlv have stung you. Roll one die and add 2 to the total. This is the numberofstings you h:rve suffered and you must reduce yout SIAMTNA by 1 for each sting. The Giant Insects do not chase you, pteferring the bright light of the room they are in. You examine the crown, and s€e with disgust that lt is merely painted r!on, and the'diamond'is just glass andtotally worthless. You throw iton the groundin a rage and wonder which way to go next If you \\^.ish to head west, turh to 59 If you would rather retum to the iunction to head north, turn to q.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you would rather retum to the iunction to head north",
+      "aliases": [],
+      "to": 9
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

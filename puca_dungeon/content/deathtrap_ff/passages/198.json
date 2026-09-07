@@ -1,0 +1,24 @@
+{
+  "id": 198,
+  "text": "You kneel and study the dusty floor at the junction. You find three sets of tracks heading west and one heading east.",
+  "choices": [
+    {
+      "id": "follow_west",
+      "label": "Follow the tracks west",
+      "aliases": ["go west", "west", "follow west tracks", "three sets west"],
+      "to": 101
+    },
+    {
+      "id": "follow_east",
+      "label": "Follow the single trail east",
+      "aliases": ["go east", "east", "follow east track", "one set east"],
+      "to": 142
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "adventurer inspecting dusty dungeon floor tracks at a junction, white arrow painted on stone",
+  "needs_review": false
+}

@@ -1,0 +1,19 @@
+{
+  "id": 29,
+  "text": "The tunnel leads north for some distance before coming to a dead end. The mouth of a chute protrudes from the tunnel's easternwall. lt seems to be the only way out- You decide to risk it and climb into the chute. You slide gently down and come out in a room, landing on yourback. turn to 90",
+  "choices": [
+    {
+      "id": "to_90",
+      "label": "Turn to 90",
+      "aliases": [],
+      "to": 90
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

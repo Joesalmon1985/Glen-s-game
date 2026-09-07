@@ -1,0 +1,19 @@
+{
+  "id": 239,
+  "text": "Not much farthbr down the tunnel you come to a closed door on your left. Putting your ear to the door, you listen intently but hear nothing. If you wish to open the door, turn to 102. lf you wish to keep walking north, turn to j44.",
+  "choices": [
+    {
+      "id": "to_102",
+      "label": "If you wish to open the door",
+      "aliases": [],
+      "to": 102
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

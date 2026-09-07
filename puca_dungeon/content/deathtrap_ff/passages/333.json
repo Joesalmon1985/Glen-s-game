@@ -1,0 +1,12 @@
+{
+  "id": 333,
+  "text": "You hear footsteps and suddenlv the trapdoor is thrown back. For a fe , seconds you are completelv blinded by the bnghtlight from the room above and do not see the Goblin thrusting his spear dor.vnwards, or hear his sadistic laughter as the poi11t pierccs your neck Your adventure ends here on the stone steps of the tunnel",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

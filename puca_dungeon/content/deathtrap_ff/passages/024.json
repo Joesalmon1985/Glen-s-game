@@ -1,0 +1,25 @@
+{
+  "id": 24,
+  "text": "Set back in an arched alcove in the tunnel wall you see an ornate wooden charr carved jn the shape o{ a demon like bird of prey. If you wish to sjt in the chair, tuin to 324. If you would raiher keep going north, turn to 188. Although the tempeiature in the tunnel is higher than you could normally tolerate, the liquid from the bamboo pipe keeps you alive turn to 197.",
+  "choices": [
+    {
+      "id": "to_188",
+      "label": "If you would raiher keep going north",
+      "aliases": [],
+      "to": 188
+    },
+    {
+      "id": "to_197",
+      "label": "he tempeiature in the tunnel is higher than you could normally tolerate, the liquid from the bamboo pipe keeps you alive",
+      "aliases": [],
+      "to": 197
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

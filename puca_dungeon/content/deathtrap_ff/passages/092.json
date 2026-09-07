@@ -1,0 +1,19 @@
+{
+  "id": 92,
+  "text": "Summoning all your shength, you deal the Mirror Demon one final blow with your sword With an ear-splitfing sound, cracks begin to .un across its faces and limbs. Its many mouths cry out rn the agony ofits death throes before the Demon shatters completely and falls to the ground in a pile of tiny fragments. You heave a huge sigh ofrelie{and then hurry on past. turn to D2.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 2
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

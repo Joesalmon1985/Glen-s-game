@@ -1,0 +1,19 @@
+{
+  "id": 343,
+  "text": "The tunnel ends at a junction. The footpdnts you have been following turn north and you decide to stay \\ iith them Tumto12.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "The footpdnts you have been following turn north and you decide to stay \\ iit...",
+      "aliases": [],
+      "to": 12
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

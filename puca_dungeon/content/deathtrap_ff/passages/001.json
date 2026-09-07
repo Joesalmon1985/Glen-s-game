@@ -1,0 +1,23 @@
+{
+  "id": 1,
+  "text": "The clamour of the excited spectators gradually fades behind you as you venture deep into the gloom of the cavern tunnel. Large crystals hang from the tunnel roof at twenty-metre intervals, radiating a soft light, just enough for you to see your way. As your eyes gradually become accustomed to the near-darkness, you begin to see movement all around. Spiders and beetles crawling up and down the chiselled walls disappear quickly into cracks and crevices as they sense your approach; rats and mice scurry along the floor ahead of you. Droplets of water drip into small pools with an eerie plopping sound which echoes down the tunnel. The air is cold, moist and dank. After walking slowly along the tunnel for about five minutes, you arrive at a stone table standing against the wall to your left. On it there are six boxes, one of which has your name painted on its lid.",
+  "choices": [
+    {
+      "id": "open_named_box",
+      "label": "Open the box with your name on it",
+      "aliases": ["open the box", "open my box", "open named box", "use the key", "open lid"],
+      "to": 270
+    },
+    {
+      "id": "continue_north",
+      "label": "Continue walking north",
+      "aliases": ["continue", "go north", "walk north", "keep walking", "ignore the boxes", "leave"],
+      "to": 66
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "crystal-lit cavern tunnel, stone table against wall, six iron-bound boxes, soft crystal light, dank dungeon atmosphere"
+}

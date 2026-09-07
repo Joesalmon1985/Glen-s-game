@@ -1,0 +1,19 @@
+{
+  "id": 267,
+  "text": "The tunnel ends shortly at a junction Looking left rnJ right. \\ ou see r narrow pa..age disappearinB :nto the dim distance Iivouwish toheadwest, turn :.r 152. Ifvou wish to go east, turn to 68.",
+  "choices": [
+    {
+      "id": "to_68",
+      "label": "Ifvou wish to go east",
+      "aliases": [],
+      "to": 68
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

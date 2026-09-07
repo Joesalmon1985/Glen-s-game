@@ -1,0 +1,19 @@
+{
+  "id": 70,
+  "text": "Otherwise, leave the chamber to continue west turn to E3.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Otherwise, leave the chamber to continue west",
+      "aliases": [],
+      "to": 63
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

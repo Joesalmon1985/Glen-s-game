@@ -1,0 +1,19 @@
+{
+  "id": 241,
+  "text": "Covering your nose and mouth with your hand to avoid breathing in thb gas, you follow the Gnome through theopen door You enter anothertunnel, at the end of which is the welcome sight of daylight. Much to your surp se, you see the Gnome lying dead halfway down the tunnel. A crossbow bolt protrudes from the side ofhis head. The Gnome, in hisbid for freedom, has fallen foul o{ Baron Sukumvit's final trap. You walk past him and out into b lliant sunshine. turn to 400.",
+  "choices": [
+    {
+      "id": "to_400",
+      "label": "Turn to 400",
+      "aliases": [],
+      "to": 400
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

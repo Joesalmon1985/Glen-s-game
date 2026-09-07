@@ -1,0 +1,25 @@
+{
+  "id": 88,
+  "text": "As soon as they see you, the TROGLODYIES raise their bows and run to surround you. To your horror, their leader then steps forward and declares thatyouare their pnsonerandmust subiectyourself to t al by their ancient ite, the Run of the Arrow. If you are willing to take part in the Run of the Arow, turn to 343. Ifyou would rather try to fiSht your way out, turn to 258.\n\nE9",
+  "choices": [
+    {
+      "id": "to_343",
+      "label": "If you are willing to take part in the Run of the Arow",
+      "aliases": [],
+      "to": 343
+    },
+    {
+      "id": "to_258",
+      "label": "Ifyou would rather try to fiSht your way out",
+      "aliases": [],
+      "to": 258
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

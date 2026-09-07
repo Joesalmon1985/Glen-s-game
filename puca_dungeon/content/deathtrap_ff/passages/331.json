@@ -1,0 +1,22 @@
+{
+  "id": 331,
+  "text": "Touching the parchmenthas precisely the effectyou had feared The skeleton lurches forward and, nsing from its chair in a series of jerky movements, raises its s\\,\\,ord to stdke yolr. Lunging sideways, you draw your sword to defend yourself. SKELETON WARRIOR SKILL 8 sraMrNA 6 lfyou win, turn to 71.",
+  "choices": [
+    {
+      "id": "to_71",
+      "label": "SKELETON WARRIOR SKILL 8 sraMrNA 6 lfyou win",
+      "aliases": [],
+      "to": 71
+    }
+  ],
+  "combat": {
+    "enemies": [],
+    "win_to": 71
+  },
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

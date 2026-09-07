@@ -1,0 +1,12 @@
+{
+  "id": 2,
+  "text": "The Scorpion manages to hold you in its pincers long enough to flick its segmented tail forward over its head and sting you with its poisonous barb. The eflect is {atal and you slump to the ground 1n the Arena of Death, wonderin8 u'hether Throm r{'il] w1n through.",
+  "choices": [],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": "death",
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

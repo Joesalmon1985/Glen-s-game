@@ -1,0 +1,19 @@
+{
+  "id": 294,
+  "text": "The tunnel continues noth a long waybefore tuming shary right. Around the corner you come to a dead end. Only the mouth of a wooden chute in the wall offers any hope of further progress. You decide to take a chance and climb into the chute. You slide gently down and emerge into a room, landing on yourback. Tuln to 90. You ?ull the dagger from your belt with your hee hand and hack at the Bloodbeast,s tongue. The beast screams in pain and rolls forward as far as ii can to try and clasp you between its blood-filled jaws. You must fight it from the floor with your dagger. Reduce your SKILL by 2 during this combat because you are not fighting with your sq,ord.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 90
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,4 +1,4 @@
-"""Typing-first debug UI for the Deathtrap Dungeon POC."""
+"""Typing-first CLI for Fighting Fantasy Deathtrap Dungeon."""
 from __future__ import annotations
 
 import argparse
@@ -14,8 +14,13 @@ from puca_dungeon.session import GameSession
 def run_cli(session: GameSession) -> int:
     print(session.opening_text)
     print()
-    print('Debug play mode. Type freely. Developer commands start with / (e.g. /state, /help, /quit).')
-    print('IMAGE GENERATION IS SUPPRESSED; would-be prompts still appear in the turn debug dump.')
+    if session.debug:
+        print('Debug play mode. Type freely. Developer commands start with / (e.g. /state, /sheet, /help, /quit).')
+        print('IMAGE GENERATION IS SUPPRESSED; would-be prompts still appear in the turn debug dump.')
+    else:
+        print('Type freely to act. Commands: /sheet /save /load /quit')
+        if session.generate_images:
+            print('Image generation enabled.')
     print(f'Interpreter: {type(session.interpreter).__name__}')
     print()
     while True:
@@ -41,21 +46,43 @@ def run_cli(session: GameSession) -> int:
         print()
         print(trace.narrator_output)
         print()
+        sheet = session.world.sheet
+        print(
+            f"— Passage {session.world.passage_id} | "
+            f"SKILL {sheet.skill}  STAMINA {sheet.stamina}/{sheet.stamina_initial}  "
+            f"LUCK {sheet.luck}  GP {sheet.gold}  Prov {sheet.provisions} —"
+        )
+        if session.world.combat.active:
+            c = session.world.combat
+            print(
+                f"— Fighting {c.enemy_name}: "
+                f"SKILL {c.enemy_skill}  STAMINA {c.enemy_stamina}/{c.enemy_stamina_initial} —"
+            )
+        print()
         if session.debug:
             print(trace.format_debug())
             print()
-        if not session.world.player.alive:
+        if session.world.victory or session.world.ending == 'victory':
+            print('[Victory! You have conquered Deathtrap Dungeon.]')
+            return 0
+        if not session.world.sheet.alive or session.world.ending == 'death':
             print('[You have died.]')
             return 0
     return 0
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description='Puca Deathtrap Dungeon POC — typing-first debug play')
+    parser = argparse.ArgumentParser(description='Puca Deathtrap Dungeon — Fighting Fantasy gamebook')
     parser.add_argument('--debug', action='store_true', default=True, help='Full pipeline debug (default on)')
     parser.add_argument('--no-debug', action='store_true', help='Player-facing mode (hide mechanics)')
     parser.add_argument('--seed', type=int, default=91, help='RNG seed for determinism')
-    parser.add_argument('--name', default='Adventurer', help='Player name (named box label)')
+    parser.add_argument('--name', default='Adventurer', help='Player name')
+    parser.add_argument(
+        '--potion',
+        default='potion_skill',
+        choices=['potion_skill', 'potion_strength', 'potion_fortune'],
+        help='Starting potion',
+    )
     parser.add_argument('--heuristic', action='store_true',
                         help='Use deterministic HeuristicInterpreter (tests/offline only)')
     parser.add_argument('--llm', action='store_true',
@@ -65,6 +92,8 @@ def main(argv=None) -> int:
     parser.add_argument('--model', default='mistral', help='Ollama model for interpreter/narrator')
     parser.add_argument('--template-narrator', action='store_true',
                         help='Use deterministic template narrator instead of Ollama narrator')
+    parser.add_argument('--images', action='store_true',
+                        help='Generate images when not in --debug (requires GPU stack)')
     parser.add_argument('--trace-out', type=Path, help='Write JSONL turn traces to this path')
     args = parser.parse_args(argv)
 
@@ -80,11 +109,13 @@ def main(argv=None) -> int:
         session = GameSession(
             player_name=args.name,
             seed=args.seed,
+            potion_id=args.potion,
             interpreter=interpreter,
             debug=debug,
             narrator=narrator,
             allow_heuristic_fallback=args.allow_heuristic_fallback,
             ollama_model=args.model,
+            generate_images=bool(args.images),
         )
     except InterpreterUnavailable as exc:
         print(f'ERROR: {exc}', file=sys.stderr)

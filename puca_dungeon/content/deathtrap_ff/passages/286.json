@@ -1,0 +1,19 @@
+{
+  "id": 286,
+  "text": "It was obviously a mistake to drop vour weapons earlier, but at least you can now take those of the dead Ninia. You select one of his long knives and his long curved sword Ils steel culting edge is e\\ceptionally hard, and you cannot help but admire its awesome beauty Add 4 SKILL points and turn to 320",
+  "choices": [
+    {
+      "id": "to_320",
+      "label": "d Ils steel culting edge is e\\ceptionally hard, and you cannot help but admire its awesome beauty Add 4 SKILL points and",
+      "aliases": [],
+      "to": 320
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

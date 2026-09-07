@@ -1,0 +1,19 @@
+{
+  "id": 322,
+  "text": "You prss the wooden chair and soon get back to the juncLion, trrrning right to head wosl turn to 43",
+  "choices": [
+    {
+      "id": "to_43",
+      "label": "You prss the wooden chair and soon get back to the juncLion, trrrning right to head wosl",
+      "aliases": [],
+      "to": 43
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

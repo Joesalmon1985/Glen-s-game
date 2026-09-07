@@ -1,0 +1,39 @@
+{
+  "id": 373,
+  "text": "You clamber on to the softboulder, halfexPecting to be engulfed by it at any moment. Getting over it is drfficult, as your limbs sink into its soft casing, but evenfuallyyou manage to struggle over it. Relieved to be back on firm ground, you head east. turn to 374 You walk around the cavern, but find nothing of interest. Thromaallsoutbehindyou, sayingthathe has found a leather pouch undet a pile of rocks. Opening the pouch he laughs out loud as a tiny mouse runs throughhis fingers and scurriesoffinto a cievice between two boulders. Suddenlyyou hear the sound of ctacking rock above you. and look uP to see stalactltes breaking ofl the roof. Throm's booming laugh, which still echoes through the chamber, has made the stalacLites vibrate and break off. You Jrell at Throm to run through the atchwayas the stalactites start to crash to the floor. fesl yotrl Luck. lI you are Lucky, turn to 118. If you are Unlucky, turn to 295.",
+  "choices": [
+    {
+      "id": "to_374",
+      "label": "Turn to 374",
+      "aliases": [],
+      "to": 374
+    },
+    {
+      "id": "to_118",
+      "label": "lI you are Lucky",
+      "aliases": [],
+      "to": 118
+    },
+    {
+      "id": "to_295",
+      "label": "If you are Unlucky",
+      "aliases": [],
+      "to": 295
+    }
+  ],
+  "combat": null,
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": null,
+      "failure_to": 295,
+      "lucky_to": null,
+      "unlucky_to": 295
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

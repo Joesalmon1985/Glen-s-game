@@ -1,0 +1,25 @@
+{
+  "id": 100,
+  "text": "Only a few metres fufther down the passage, you see another closed door in the left-hand $'all. The letter X is scratched into its centre panel. Putting your ear to the door, you listen intentlybut can hear nothing If you wish to open the door, turn to 87. If you would rather keep walking north, turn to 217\n\nL0L-10J",
+  "choices": [
+    {
+      "id": "to_87",
+      "label": "Putting your ear to the door, you listen intentlybut can hear nothing If you wish to open the door",
+      "aliases": [],
+      "to": 87
+    },
+    {
+      "id": "to_217",
+      "label": "If you would rather keep walking north",
+      "aliases": [],
+      "to": 217
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

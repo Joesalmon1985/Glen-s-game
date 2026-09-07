@@ -1,0 +1,19 @@
+{
+  "id": 112,
+  "text": "If you would rather set off north again, turn [o 298.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "If you would rather set off north again",
+      "aliases": [],
+      "to": 298
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

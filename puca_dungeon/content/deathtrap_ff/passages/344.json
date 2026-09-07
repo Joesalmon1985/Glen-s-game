@@ -1,0 +1,25 @@
+{
+  "id": 344,
+  "text": "Your sword cleaves the handle and, beingseparated from its parent body, you watch the membrane shrivel away and drop on to the floor. Having no other cholce, you somewhat apprehensively hrrn the handle oI the other door. lurn to 262-\n\nl' !i i I i ii ii i Ihe tunnel hvists and turns but keeps steadily north Ahead you see a thin shaft of blue light streanrinfi down ftom the ceiling k) the floor. It sparkles and shimners, and you can see inuges of laughing faces in the light If you wish to walk through the light, turn to 229. lf you would rather wirik round the hghL, turn to 107 You arc about to enter thc room whci the Potion crf Trap Detecbon begins to work and you are fillecl $'ith a ternble premonition of dangcr. 'lhe room is set u'ith i1 deadllr trap. You decidc not k' go in and contrnue north along the tunncl Tornto252. 34b You pull vour boot off your foot an(i force yourselt to reach up and hold it atainst ihc bell Slowlt' the bell stof.s vibratin8 and the paln in your body qradually eases You mallace k) stand up, but you d(r not release your boot from the bell until it be comes completelv still You put your boot back on your foot and therl contrnue your jorlrney west I urn to 352-",
+  "choices": [
+    {
+      "id": "to_229",
+      "label": "It sparkles and shimners, and you can see inuges of laughing faces in the light If you wish to walk through the light",
+      "aliases": [],
+      "to": 229
+    },
+    {
+      "id": "to_107",
+      "label": "lf you would rather wirik round the hghL",
+      "aliases": [],
+      "to": 107
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

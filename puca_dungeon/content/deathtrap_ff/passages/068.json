@@ -1,0 +1,25 @@
+{
+  "id": 68,
+  "text": "You walk down the passage and soon find vourself standing at the edge ofa deep, dark pit. The passage continues easton the otherside ofthepit You think you could probably jump over the pit, but you are not sure. There is a rope hanging down lrom the cetling over the centre o{ the pit. Will you: Throw your shleld over the pit and jump after it? Jump over the pit carrying all your Possessions? Reach for the rope with your sword to enable you to swing across the pit? turn to 212 turn to 221 Turn to Jo",
+  "choices": [
+    {
+      "id": "to_212",
+      "label": "Turn to 212",
+      "aliases": [],
+      "to": 212
+    },
+    {
+      "id": "to_221",
+      "label": "turn to 212",
+      "aliases": [],
+      "to": 221
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

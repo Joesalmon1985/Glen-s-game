@@ -1,0 +1,72 @@
+{
+  "id": 47,
+  "text": "Have you got a hollow wooden tube? If you have, turn to 10. Ifyou have not, turn to 335. 4& Only your immense strength a4d grim determina, fion keep you from falling unconscious to the floor. You Brit your teeth and press on resolutely. Turn to 497. 1E5 Slowly and carefully, you begin to climb the idol. You are about to grab hold of its large ear when suddenly your foot slips. Iesf rorl lrck, If you are Lucky, turn to 260. If you are Unlucky, turn to 356.\n\n1,87-788 aE7 The tunnel bends sharply to the right, and around the corneryou see a little oldmanwitha longbeard, coweringbehind a large wi&er basket. The basket is tied to a rope, the other end of which disappears into the ceiling. The old man sounds very worried as he says, 'Do not a ttack me, stranger- I pose no threat to you. I am here slmply to help you- If you would be so kind as to offer me some sort of remuneration, I will gladly haul you up in the basket to the upper level. And believe me, thai is where you ought to be.' If you wish to give the man somethiflg flom your backpack for his services, turn to 160. If you would rather walk past him down the tunnel, turn to 2Eo. 18E The tunnel starts to slope downwards and finally comes to an end at a deep pool enclosed by the tunnel wall. If you can remember the spirit gill's Poem, turn to 155, If you have not seen the spirjt gll, turn to 224.\n\nFirst ORC Second ORC Ifyou win, turn to 257. SKILL STAMINA",
+  "choices": [
+    {
+      "id": "to_10",
+      "label": "If you have",
+      "aliases": [],
+      "to": 10
+    },
+    {
+      "id": "to_335",
+      "label": "Ifyou have not",
+      "aliases": [],
+      "to": 335
+    },
+    {
+      "id": "to_260",
+      "label": "Iesf rorl lrck, If you are Lucky",
+      "aliases": [],
+      "to": 260
+    },
+    {
+      "id": "to_356",
+      "label": "If you are Unlucky",
+      "aliases": [],
+      "to": 356
+    },
+    {
+      "id": "to_160",
+      "label": "d believe me, thai is where you ought to be.' If you wish to give the man somethiflg flom your backpack for his services",
+      "aliases": [],
+      "to": 160
+    },
+    {
+      "id": "to_155",
+      "label": "If you can remember the spirit gill's Poem",
+      "aliases": [],
+      "to": 155
+    },
+    {
+      "id": "to_224",
+      "label": "If you can remember the spirit gill's Poem, turn to 155, If you have not seen the spirjt gll",
+      "aliases": [],
+      "to": 224
+    },
+    {
+      "id": "to_257",
+      "label": "First ORC Second ORC Ifyou win",
+      "aliases": [],
+      "to": 257
+    }
+  ],
+  "combat": {
+    "enemies": [],
+    "win_to": 257
+  },
+  "tests": [
+    {
+      "type": "luck",
+      "success_to": 260,
+      "failure_to": 356,
+      "lucky_to": 260,
+      "unlucky_to": 356
+    }
+  ],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

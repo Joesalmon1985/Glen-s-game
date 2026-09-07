@@ -1,0 +1,19 @@
+{
+  "id": 189,
+  "text": "The Orc's morning star sinks agonizingly rnto vour left thigh Lose I STAMINA pornts You stagger backwards, but mana8€ to regaln vour balance in time to defend yourseif fortunately, the tunnel is too narrow forboih Orcs toattackyouatonce Fight them one at a time aga-L94 aga Roll two dice If the total is less than eight, turn to 152 If the total is eight orhigher, turnto12l.",
+  "choices": [
+    {
+      "id": "to_152",
+      "label": "narrow forboih Orcs toattackyouatonce Fight them one at a time aga-L94 aga Roll two dice If the total is less than eight",
+      "aliases": [],
+      "to": 152
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

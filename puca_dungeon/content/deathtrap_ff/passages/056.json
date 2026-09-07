@@ -1,0 +1,31 @@
+{
+  "id": 56,
+  "text": "You see that the obstruction is a large, b'rown, boulder-like object. You touch it with your hand and are surprised to tiod that it is soft and spongy. lf you wish to try to cljmb over il, turn to 171. lf ydu lvish to slice it open with your swotd, turn to 215. Although you check the chest carefully for any hidden devices, you are unable to see the trap inside it As you lift the lid, an iron ball hanging on a cord swings back, shattering the glass capsule fixed in side the lid. A cloud of poisonous gas is instantly released into the air and you staggerback coughing and spluttering. Lose 4 sTAMtNA points. lf you are still alive, turn to 198",
+  "choices": [
+    {
+      "id": "to_171",
+      "label": "lf you wish to try to cljmb over il",
+      "aliases": [],
+      "to": 171
+    },
+    {
+      "id": "to_215",
+      "label": "lf ydu lvish to slice it open with your swotd",
+      "aliases": [],
+      "to": 215
+    },
+    {
+      "id": "to_198",
+      "label": "lf you are still alive",
+      "aliases": [],
+      "to": 198
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

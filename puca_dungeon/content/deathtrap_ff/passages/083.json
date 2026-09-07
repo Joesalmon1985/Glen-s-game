@@ -1,0 +1,19 @@
+{
+  "id": 83,
+  "text": "The passage soon leads to a junction You notice more footprints on the floor, possibly as many as three paus, headinB north from the south passage You decide to {ollou'them. Turn to 3Z",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 32
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

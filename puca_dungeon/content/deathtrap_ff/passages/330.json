@@ -1,0 +1,19 @@
+{
+  "id": 330,
+  "text": "The Ninja's rations are basic but welcome. Add r sraMrNA point. If you have not done so already, you may either rub some of the oinlment into your rvounds - turn to 269 - or leave the hall, taking just the diamond - turn to i2Z",
+  "choices": [
+    {
+      "id": "to_269",
+      "label": "If you have not done so already, you may either rub some of the oinlment into your rvounds",
+      "aliases": [],
+      "to": 269
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": 382,
+  "text": "turn to 39t 383Much to your surprise, nothing extraordinary happens to you while you are sitting in the chair. There is nothing else to do but continue north up the funnel. Turn to rBE.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 391
+    },
+    {
+      "id": "choice_2",
+      "label": "Turn to option 2",
+      "aliases": [],
+      "to": 186
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

@@ -1,0 +1,37 @@
+{
+  "id": 158,
+  "text": "You lift the jug to your lips and take a swig of the liquid It bums so much that you drop the jug and grab your throat in agony. You have swallowed acidl Lose 1 s(rLL point and 4 STAMINA points, If you are still alive, tuln to 275. r59 Your reactionsare stillslow becduseof lhe poison in your system, and although you try to i ump over the outstretched tongue, your legs let you down. The sticky tongue wraps itselfaround your leg, flipping you over, and starts to pull you towards the pool. Your sword has slipped out of your hand and you start to panic If you have a dagger, turn to 294, If you do not have a dagger, turn to 334. 15o Your armour and swold weigh you down, but you just manaBe to land safely on the far edge ofthe pit You waste no time and head east turn to 237.\n\na6r-1.63 16a You push past the tra/o LePrechauns and head off norlh, the;oise of jeering dnd laughter rin8in8 in thieving Leprechauns and set off north again turn to 29.",
+  "choices": [
+    {
+      "id": "to_294",
+      "label": "Your sword has slipped out of your hand and you start to panic If you have a dagger",
+      "aliases": [],
+      "to": 294
+    },
+    {
+      "id": "to_334",
+      "label": "sword has slipped out of your hand and you start to panic If you have a dagger, turn to 294, If you do not have a dagger",
+      "aliases": [],
+      "to": 334
+    },
+    {
+      "id": "to_237",
+      "label": "r and swold weigh you down, but you just manaBe to land safely on the far edge ofthe pit You waste no time and head east",
+      "aliases": [],
+      "to": 237
+    },
+    {
+      "id": "to_29",
+      "label": "LePrechauns and head off norlh, the;oise of jeering dnd laughter rin8in8 in thieving Leprechauns and set off north again",
+      "aliases": [],
+      "to": 29
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

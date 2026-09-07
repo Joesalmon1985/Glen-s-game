@@ -1,0 +1,19 @@
+{
+  "id": 265,
+  "text": "You rub your nugic ring and wish for the Mifor Demon to be transported back to its own world, ruever to return. Still advancin€i towards you, it starts to shrmmer and fade away. Then it vanishes completely, and you are able to continuevour quest north- Turn to 122266 You search through the cupboards and boxes 1n lvy's room, but you find nothirlg except an old bone, whrch you may take with yoLL iI you wlsh. Leaving the chamber by the east door, you now find yourself sta nding at the end ofanother tunnel. Turn ro 3o5.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 305
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

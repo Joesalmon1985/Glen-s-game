@@ -1,0 +1,19 @@
+{
+  "id": 119,
+  "text": "r23 The necklace is an amulet of strength. Add 1 SKILL pointand 1 STAMINA point and continue your quest north. Tuln to 282.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Turn to option 1",
+      "aliases": [],
+      "to": 282
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

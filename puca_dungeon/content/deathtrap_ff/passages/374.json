@@ -1,0 +1,19 @@
+{
+  "id": 374,
+  "text": "You take aim and hurl the wooden ball at the skull. Roll two dice, If the number rolled is the same as or less than your sxllr score, turn to zZ3. If the num ber rolled is greater than your SKILL score, rutn ro aa3 You finally reach the wi#or,s body, but as soon as you touch the iewel, both it and the warior vanish into thin air. You hear the door slam behind you. followed by a sudden ominous rumbling above you. You look up and see the ceiling start to lower. you run [o the door to tr]r to escape, but it i9 locked and there is no handle on the inside, The ceiling gradually drops, until you are forced to lie on the ground, trying to halt the ceiling's progtess with your hands and feet. Bul it is a hopeless task, and you are crushed to death in the stone vice.",
+  "choices": [
+    {
+      "id": "choice_1",
+      "label": "Roll two dice, If the number rolled is the same as or less than your sxllr score",
+      "aliases": [],
+      "to": 223
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": true
+}

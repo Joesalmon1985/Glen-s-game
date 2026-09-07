@@ -1,0 +1,25 @@
+{
+  "id": 205,
+  "text": "Running after the Leprechauns, you hear more laughter, onlynowitisbehindyou. Youlookround and see six more Leprechauns emerging from be hind a hidden door in the tunnel rvall Suddenly, yet another Leprechaun drops on your back hom a ledBe fixed to the ceiling. Shaking him offyour back, you drawyour sword, whereupon the Leprechauns laugh even louder. If you wish to attack them, turn to 306. II you would rather try to walk past them, turn to 161.",
+  "choices": [
+    {
+      "id": "to_306",
+      "label": "If you wish to attack them",
+      "aliases": [],
+      "to": 306
+    },
+    {
+      "id": "to_161",
+      "label": "II you would rather try to walk past them",
+      "aliases": [],
+      "to": 161
+    }
+  ],
+  "combat": null,
+  "tests": [],
+  "effects_on_enter": [],
+  "ending": null,
+  "image_seed": "",
+  "ocr_source": true,
+  "needs_review": false
+}
