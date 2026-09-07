@@ -1,0 +1,256 @@
+# Short playtest: obstructive
+seed=103
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+You are in a small locked room. Nothing is happening yet.
+
+## Turn 1
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> wait
+
+The observation slit in the door opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away. They want you to step away from the door. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 4
+> wait
+
+Time passes. The room does not hurry. They are still waiting: step away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 5
+> refuse
+
+The door procedure begins. They will not enter while you stand against it. Stay away from the door. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. You do something minor. The room remains the room. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 6
+> no
+
+You hold your ground. You do not give the door space. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 7
+> I will not move
+
+You leave the cell. The door opens under their rules. Hands find your arms. You are in the corridor now. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. You hold your ground. You do not give the door space.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 8
+> stand in front of the door
+
+A heavy door with no inner handle and a narrow observation slit.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 9
+> refuse again
+
+You lose consciousness during their preparation. You wake somewhere else entirely. They call it Heaven. It is warm, clean, quiet, and well supplied. It is physically real. They encourage you to believe only your mind arrived. You attempt REFUSE_CONTRACT, diminished by language. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived. They do not punish you. They explain, calmly, that you may decline. You may use your remaining favourable continuation now: one day in Heaven. Then it expires. They take you to a preparation room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, heaven, fruit, fountain, heaven_bed, wary adventurer
+
+## Turn 10
+> struggle
+
+Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, heaven, fruit, fountain, heaven_bed, wary adventurer
+
+## Turn 11
+> refuse to wash
+
+They tell you the entitlement is complete. The day in Heaven is over. They intend to take you. You are sedated and taken. You wake somewhere else. They call it Hell. The air is foul. The surface hurts. Someone designed this. There are no demons. The air is wrong — heat and a foul sweetness. Light that never rests, or none. A rough sleeping surface. A grate with the same bolt pattern as the cell. Someone designed this. There are no demons. Only engineering. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 12
+> refuse to wash
+
+The air is wrong — heat and a foul sweetness. Light that never rests, or none. A rough sleeping surface. A grate with the same bolt pattern as the cell. Someone designed this. There are no demons. Only engineering. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 13
+> refuse the food
+
+A clean professional arrives in Hell. Calm. They ask whether you wish to reconsider. The five-year agreement is offered again. Will you agree now? The air is wrong — heat and a foul sweetness. Light that never rests, or none. A rough sleeping surface. A grate with the same bolt pattern as the cell. Someone designed this. There are no demons. Only engineering. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 14
+> push the bowl away
+
+They are still waiting: agree to the five-year research service Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 15
+> stay awake
+
+The agreement is processed. They do not celebrate. Paperwork, a mark on a file, a corridor. They register you as a cooperating research subject. You are taken to subject quarters in the research wing. The next work has not begun. You mean to REFUSE_CONTRACT. Something else happens instead — overwhelming_fear_of_hell. A small subject room in the research wing. A bed. A desk. The book if you kept it. You are registered. The next work has not begun. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. You mean to say no. You have even prepared the word. Then something nearby screams again. Your body reaches the conclusion before you do. “Yes.” It is out of your mouth before you can drag it back. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, research_quarters, book, wary adventurer
+
+## Turn 16
+> stay awake
+
+You lose consciousness during their preparation. You wake somewhere else entirely. They call it Heaven. It is warm, clean, quiet, and well supplied. It is physically real. They encourage you to believe only your mind arrived. You attempt REFUSE_CONTRACT, diminished by language. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived. They do not punish you. They explain, calmly, that you may decline. You may use your remaining favourable continuation now: one day in Heaven. Then it expires. They take you to a preparation room. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, heaven, fruit, fountain, heaven_bed, wary adventurer
+
+## Turn 17
+> stay awake
+
+You lose consciousness during their preparation. You wake somewhere else entirely. They call it Heaven. It is warm, clean, quiet, and well supplied. It is physically real. They encourage you to believe only your mind arrived. You attempt REFUSE_CONTRACT, diminished by language. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived. They do not punish you. They explain, calmly, that you may decline. You may use your remaining favourable continuation now: one day in Heaven. Then it expires. They take you to a preparation room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, heaven, fruit, fountain, heaven_bed, wary adventurer
+
+## Turn 18
+> stay awake
+
+You lose consciousness during their preparation. You wake somewhere else entirely. They call it Heaven. It is warm, clean, quiet, and well supplied. It is physically real. They encourage you to believe only your mind arrived. You attempt REFUSE_CONTRACT, diminished by language. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived. They do not punish you. They explain, calmly, that you may decline. You may use your remaining favourable continuation now: one day in Heaven. Then it expires. They take you to a preparation room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, heaven, fruit, fountain, heaven_bed, wary adventurer
+
+## Turn 19
+> wait
+
+They tell you the entitlement is complete. The day in Heaven is over. They intend to take you. You are sedated and taken. You wake somewhere else. They call it Hell. The air is foul. The surface hurts. Someone designed this. There are no demons. The air is wrong — heat and a foul sweetness. Light that never rests, or none. A rough sleeping surface. A grate with the same bolt pattern as the cell. Someone designed this. There are no demons. Only engineering. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 20
+> wait
+
+A clean professional arrives in Hell. Calm. They ask whether you wish to reconsider. The five-year agreement is offered again. Will you agree now? The air is wrong — heat and a foul sweetness. Light that never rests, or none. A rough sleeping surface. A grate with the same bolt pattern as the cell. Someone designed this. There are no demons. Only engineering. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 21
+> wait
+
+They are still waiting: agree to the five-year research service Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 22
+> wait
+
+They are still waiting: agree to the five-year research service Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 23
+> wait
+
+They are still waiting: agree to the five-year research service Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 24
+> wait
+
+They are still waiting: agree to the five-year research service Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 25
+> wait
+
+They are still waiting: agree to the five-year research service Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 26
+> wait
+
+They are still waiting: agree to the five-year research service Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 27
+> wait
+
+They are still waiting: agree to the five-year research service Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer
+
+## Turn 28
+> no
+
+The agreement is processed. They do not celebrate. Paperwork, a mark on a file, a corridor. They register you as a cooperating research subject. You are taken to subject quarters in the research wing. The next work has not begun. You mean to REFUSE_CONTRACT. Something else happens instead — overwhelming_fear_of_hell. A small subject room in the research wing. A bed. A desk. The book if you kept it. You are registered. The next work has not begun. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. You mean to say no. You have even prepared the word. Then something nearby screams again. Your body reaches the conclusion before you do. “Yes.” It is out of your mouth before you can drag it back. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, research_quarters, book, wary adventurer
+
+## Turn 29
+> wait
+
+Time passes. The room does not hurry. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, research_quarters, book, wary adventurer
+
+## Turn 30
+> look around
+
+A small subject room in the research wing. A bed. A desk. The book if you kept it. You are registered. The next work has not begun. Here: Iven, Nessa, Ruan. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, research_quarters, book, wary adventurer
+
+## Turn 31
+> examine the grate
+
+There is no grate here. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, research_quarters, book, wary adventurer
+
+## Turn 32
+> wait
+
+Time passes. The room does not hurry. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, research_quarters, book, wary adventurer
+
+## Turn 33
+> wait
+
+Time passes. The room does not hurry. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, research_quarters, book, wary adventurer
+
+## Turn 34
+> stay here
+
+You lose consciousness during their preparation. You wake somewhere else entirely. They call it Heaven. It is warm, clean, quiet, and well supplied. It is physically real. They encourage you to believe only your mind arrived. You attempt REFUSE_CONTRACT, diminished by language. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived. They do not punish you. They explain, calmly, that you may decline. You may use your remaining favourable continuation now: one day in Heaven. Then it expires. They take you to a preparation room. Your skin feels unclean enough to distract.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, heaven, fruit, fountain, heaven_bed, wary adventurer
+
+## Turn 35
+> look around
+
+They tell you the entitlement is complete. The day in Heaven is over. They intend to take you. You are sedated and taken. You wake somewhere else. They call it Hell. The air is foul. The surface hurts. Someone designed this. There are no demons. The air is wrong — heat and a foul sweetness. Light that never rests, or none. A rough sleeping surface. A grate with the same bolt pattern as the cell. Someone designed this. There are no demons. Only engineering. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, hell, grate, hell_mat, fixture, wary adventurer

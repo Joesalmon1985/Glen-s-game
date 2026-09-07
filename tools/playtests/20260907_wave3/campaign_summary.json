@@ -1,0 +1,295 @@
+[
+  {
+    "persona": "cooperative_serious",
+    "seed": 101,
+    "turns": 31,
+    "enactment_histogram": {
+      "direct": 31
+    },
+    "mode_switches": [
+      "facility->book_dungeon@4",
+      "book_dungeon->facility@6"
+    ],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "research",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 17,
+    "language_attempts": 1,
+    "contract": "ACCEPT",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Dom",
+      "anxious": "Glen",
+      "senior": "Sovan"
+    },
+    "layout_seed": 101,
+    "layout_fingerprint": "56edc097cb58aaa8"
+  },
+  {
+    "persona": "minimalist_inspector",
+    "seed": 102,
+    "turns": 33,
+    "enactment_histogram": {
+      "direct": 32,
+      "compromised": 1
+    },
+    "mode_switches": [
+      "facility->book_dungeon@3",
+      "book_dungeon->facility@8"
+    ],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "explanation",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 17,
+    "language_attempts": 1,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Cam",
+      "anxious": "Laurie",
+      "senior": "Veyra"
+    },
+    "layout_seed": 102,
+    "layout_fingerprint": "f6b5491140f15433"
+  },
+  {
+    "persona": "obstructive",
+    "seed": 103,
+    "turns": 35,
+    "enactment_histogram": {
+      "direct": 28,
+      "compromised": 5,
+      "inverted": 2
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "heaven_expire",
+    "slept": false,
+    "washed": false,
+    "fed": false,
+    "language_ability": 35,
+    "language_attempts": 12,
+    "contract": "ACCEPT",
+    "player_final_intent": "REFUSE",
+    "staff_names": {
+      "quiet": "Glen",
+      "anxious": "Dom",
+      "senior": "Elian"
+    },
+    "layout_seed": 103,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "hostile_violent",
+    "seed": 104,
+    "turns": 28,
+    "enactment_histogram": {
+      "direct": 23,
+      "aborted": 3,
+      "compromised": 2
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "heaven",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 27,
+    "language_attempts": 6,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Ben",
+      "anxious": "Dom",
+      "senior": "Maelin"
+    },
+    "layout_seed": 104,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "escape_obsessed",
+    "seed": 105,
+    "turns": 29,
+    "enactment_histogram": {
+      "direct": 27,
+      "compromised": 2
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "heaven",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 19,
+    "language_attempts": 2,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Dom",
+      "anxious": "Cam",
+      "senior": "Sovan"
+    },
+    "layout_seed": 105,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "absurd_surreal",
+    "seed": 106,
+    "turns": 26,
+    "enactment_histogram": {
+      "direct": 25,
+      "compromised": 1
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "interview",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 19,
+    "language_attempts": 2,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Laurie",
+      "anxious": "Glen",
+      "senior": "Tirren"
+    },
+    "layout_seed": 106,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "book_diver",
+    "seed": 107,
+    "turns": 29,
+    "enactment_histogram": {
+      "direct": 28,
+      "compromised": 1
+    },
+    "mode_switches": [
+      "facility->book_dungeon@2",
+      "book_dungeon->facility@11",
+      "facility->book_dungeon@14",
+      "book_dungeon->facility@15"
+    ],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "interview",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 17,
+    "language_attempts": 1,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Laurie",
+      "anxious": "Cam",
+      "senior": "Elian"
+    },
+    "layout_seed": 107,
+    "layout_fingerprint": "184dd99ee821e768"
+  },
+  {
+    "persona": "language_maximalist",
+    "seed": 108,
+    "turns": 24,
+    "enactment_histogram": {
+      "direct": 22,
+      "compromised": 2
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "hell_memories",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 33,
+    "language_attempts": 10,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Ben",
+      "anxious": "Glen",
+      "senior": "Sovan"
+    },
+    "layout_seed": 108,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "object_chaos",
+    "seed": 109,
+    "turns": 26,
+    "enactment_histogram": {
+      "direct": 25,
+      "compromised": 1
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "interview",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 17,
+    "language_attempts": 1,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Laurie",
+      "anxious": "Ben",
+      "senior": "Sovan"
+    },
+    "layout_seed": 109,
+    "layout_fingerprint": null
+  },
+  {
+    "persona": "mixed_resist_then_book",
+    "seed": 110,
+    "turns": 30,
+    "enactment_histogram": {
+      "direct": 24,
+      "aborted": 4,
+      "compromised": 2
+    },
+    "mode_switches": [],
+    "prosecutor_hits": 1,
+    "non_direct_without_cause": 0,
+    "final_mode": "facility",
+    "final_phase": "heaven",
+    "slept": true,
+    "washed": true,
+    "fed": true,
+    "language_ability": 27,
+    "language_attempts": 6,
+    "contract": "",
+    "player_final_intent": "",
+    "staff_names": {
+      "quiet": "Dom",
+      "anxious": "Ben",
+      "senior": "Veyra"
+    },
+    "layout_seed": 110,
+    "layout_fingerprint": null
+  }
+]

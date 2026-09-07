@@ -37,7 +37,9 @@ Hard rules:
   "sated", "quenched", "alert", "hygiene aware", "restrained", SKILL, STAMINA, LUCK, or meter numbers.
 - Bodily evidence arrives as sensory sentences in body_sensations (if present). Use them sparingly
   and only when salient; do not list status words.
-- Second person, intimate, economical (prefer 1-3 sentences).
+- If world_events or structured_facts contain type scene_change (must_lead), the FIRST paragraph
+  MUST announce that change (room left, slit opened, what they are asking). Then narrate the action.
+  Scene changes may use 4-8 sentences. Other turns stay economical (1-3 sentences).
 - Failure is content. Do not coach. No named inner personalities.
 - Return ONLY the prose, no JSON."""
 
@@ -172,6 +174,12 @@ def template_narrate(payload: dict, resolution: Resolution) -> str:
 
     parts: list[str] = []
     seen: set[str] = set()
+    lead: list[str] = []
+    for ev in list(getattr(resolution, 'world_events', None) or []) + list(
+        getattr(resolution, 'structured_facts', None) or []
+    ):
+        if isinstance(ev, dict) and ev.get('type') == 'scene_change' and ev.get('text'):
+            lead.append(str(ev['text']))
 
     def _add(line: str) -> None:
         line = (line or '').strip()
@@ -202,6 +210,13 @@ def template_narrate(payload: dict, resolution: Resolution) -> str:
     for line in structured_lines:
         _add(line)
 
+    if lead:
+        headed = []
+        for line in lead:
+            if line and line not in headed:
+                headed.append(line)
+        rest = [p for p in parts if p not in headed]
+        return ' '.join(headed + rest)
     if parts:
         return ' '.join(parts)
     if getattr(resolution, 'attempted', False) and not getattr(resolution, 'state_changed', False):

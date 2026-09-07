@@ -1,0 +1,232 @@
+# Short playtest: book_diver
+seed=107
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+You are in a small locked room. Nothing is happening yet.
+
+## Turn 1
+> pick up the book
+
+You pick up the book. It stays closed.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, door, wary adventurer
+
+## Turn 2
+> read the book
+
+You turn to the book. The first page is badly printed. The second is worse.
+
+By the third, you are somewhere else.
+
+Torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your name, cut cleanly into the wood as if the carver knew you would come. The air here is still; farther ahead the tunnel continues into deeper dark.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 3
+> look around
+
+Torchlight catches on damp stone as the tunnel opens into a shallow alcove. A low table of unfinished rock sits against the left wall. Six sealed caskets rest on it in a neat row, each lid bound with iron straps and a simple latch. Five lids are unmarked. The sixth bears your... You notice: six caskets, named casket, stone table.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original stone alcove, six sealed iron-strapped caskets on a rock table, one lid carved with a name, torchlit tunnel beyond, wary adventurer
+
+## Turn 4
+> open the named casket
+
+The latch on the named casket lifts with a dry click. Inside, nestled in coarse cloth, sits a small oil phial sealed with wax and a scarred token of dark metal—worn smooth at the edges, as if carried for years. Nothing else. The other five caskets remain sealed and silent.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 5
+> continue
+
+Your words do not resolve into any clear action the world can meet.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original open named casket on stone table, oil phial and scarred metal token in coarse cloth, wary adventurer
+
+## Turn 6
+> go west
+
+A sealed iron hatch sits flush in the wall. The scarred token fits a shallow recess as if cast for it. Beyond, a narrow crawl leads somewhere you have not yet walked.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original iron hatch in dungeon wall with token-shaped recess, wary adventurer
+
+## Turn 7
+> look around
+
+A sealed iron hatch sits flush in the wall. The scarred token fits a shallow recess as if cast for it. Beyond, a narrow crawl leads somewhere you have not yet walked. You notice: iron hatch, token recess.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original iron hatch in dungeon wall with token-shaped recess, wary adventurer
+
+## Turn 8
+> continue
+
+A sealed iron hatch sits flush in the wall. The scarred token fits a shallow recess as if cast for it. Beyond, a narrow crawl leads somewhere you have not yet walked. You notice: iron hatch, token recess.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original iron hatch in dungeon wall with token-shaped recess, wary adventurer
+
+## Turn 9
+> attack
+
+Nothing in the world shifts for that.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original iron hatch in dungeon wall with token-shaped recess, wary adventurer
+
+## Turn 10
+> attack
+
+Nothing in the world shifts for that.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original iron hatch in dungeon wall with token-shaped recess, wary adventurer
+
+## Turn 11
+> attack
+
+The observation slit in the door opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away. They want you to step away from the door. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. Nothing in the world shifts for that. Something knocks. Not in the corridor you were imagining. Again. The page is still under your thumb. Something knocks.
+
+Not in the corridor you were imagining.
+
+Again.
+
+The page is still under your thumb.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, door slit open, wary adventurer
+
+## Turn 12
+> put the book down
+
+You put the book down. It stays closed. They are still waiting: step away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 13
+> look at the cup
+
+A plain cup, half-full of water. Water still sits in it. It is beside bed. They are still waiting: step away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 14
+> read the book
+
+You turn to the book. The page is still under your thumb.
+
+A sealed iron hatch sits flush in the wall. The scarred token fits a shallow recess as if cast for it. Beyond, a narrow crawl leads somewhere you have not yet walked. They are still waiting: step away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, original iron hatch in dungeon wall with token-shaped recess, wary adventurer
+
+## Turn 15
+> look around
+
+The door procedure begins. They will not enter while you stand against it. Stay away from the door. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. A sealed iron hatch sits flush in the wall. The scarred token fits a shallow recess as if cast for it. Beyond, a narrow crawl leads somewhere you have not yet walked. You notice: iron hatch, token recess. They are still waiting: stay away from the door Something knocks. Not in the corridor you were imagining. Again. The page is still under your thumb. Something knocks.
+
+Not in the corridor you were imagining.
+
+Again.
+
+The page is still under your thumb.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 16
+> put the book down
+
+You are not reading. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 17
+> wait
+
+Time passes. The room does not hurry. The instruction repeats. Gestures sharpen. Another figure arrives. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door slit open, wary adventurer
+
+## Turn 18
+> wait
+
+You leave the cell. The door opens under their rules. Hands find your arms. You are in the corridor now. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. Time passes. The room does not hurry. The instruction repeats. Gestures sharpen. Another figure arrives.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 19
+> sleep
+
+They take you out of the corridor and into a washroom. Water. A basin. They intend to wash you. Water. A basin. Soap that smells medicinal. Staff wait without patience. You do something minor. The room remains the room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 20
+> wait
+
+Time passes. The room does not hurry. They are still waiting: wash
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 21
+> wait
+
+They take you from the washroom to a mess room. A table. A bowl. Heat rising from food. They want you to eat. You attempt WAIT, diminished by institutional_force. A narrow table. A bowl of something warm. A spoon. Time passes. The room does not hurry. Resistance fails. You are washed anyway. The air smells less like you. Your skin is immediately, unmistakably cleaner. They are still waiting: eat
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 22
+> wait
+
+Time passes. The room does not hurry. They are still waiting: eat
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 23
+> wait
+
+They take you back to the same cell. Whatever you moved is still moved. You are cleaner, and much more tired. You are less hungry. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. Time passes. The room does not hurry. They do not leave the food as a debate forever. Hunger eases a little.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door, wary adventurer
+
+## Turn 24
+> wait
+
+Time passes. The room does not hurry. The bed, once bleak, begins to look like an argument you will lose. This is still the same cell. Day 1 is ending.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door, wary adventurer
+
+## Turn 25
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door, wary adventurer
+
+## Turn 26
+> wait
+
+You wake in the same cell. It is a new day. The institution will collect you more formally. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. Time passes. The room does not hurry. A magnificent plan to stay awake. You wake later with your face against the wall.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book on floor, door, wary adventurer
+
+## Turn 27
+> wait
+
+Morning. The collection is more formal. They take you from the cell into the corridor, then toward another room. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 28
+> yes
+
+They show you a word. A name. Yours? That is not the answer they expected. They do not say so.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 29
+> look around
+
+You are taken into an interview room. Elian sits opposite you. They wear a precisely fitted collar as naturally as clothing. No one explains it. They begin to ask questions with pictures and slow words. A brighter room. A table. Images and objects laid out like a lesson. A person with a fitted collar sits opposite you. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. Here: Laurie, Cam, Iven.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer

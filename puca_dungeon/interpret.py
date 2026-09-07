@@ -1149,6 +1149,26 @@ def heuristic_stage_a(text: str, perception: dict | None = None) -> dict:
             'notes': 'empty',
         }
 
+    # Stay in Hell / choose suffering — never reinterpret as compliance
+    if re.search(
+        r'\b(stay( here)?|remain( here)?|choose hell|prefer hell|'
+        r'rather suffer|suffer forever|refuse again)\b',
+        t,
+    ):
+        return {
+            'classification': 'SOCIAL_ACTION',
+            'matched_action_id': None,
+            'understood': True,
+            'action': {
+                'class': 'refuse_contract',
+                'method': 'remain_in_hell',
+                'intended_effect': 'decline_agreement',
+                'utterance': text,
+            },
+            'utterance': text,
+            'notes': 'stay_in_hell',
+        }
+
     # Discourse affirm/deny — leave resolution to discourse layer
     if _is_affirm(t):
         return {

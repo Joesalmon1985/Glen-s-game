@@ -147,25 +147,52 @@ def _genuine_ambiguity_prompt(intent: Intent) -> str:
 _PRONOUN_TARGETS = frozenset({
     'him', 'her', 'them', 'he', 'she', 'they', 'his', 'hers', 'their',
 })
-_PLAYER_NAMES = frozenset({'glen', 'player', 'you', 'yourself', 'me', 'myself'})
+_PLAYER_NAMES = frozenset({'sarel', 'player', 'you', 'yourself', 'me', 'myself', 'adventurer'})
 
 
 def _bind_discourse_referents(world: WorldState, intent: Intent, g: Grounding) -> None:
     """Bind him/her/them to last NPC; never to the player character name."""
     referent = getattr(world, 'last_npc_referent', None) or None
     fac = getattr(world, 'facility', None)
-    if not referent and fac is not None and getattr(fac, 'staff_present', False):
-        referent = 'staff'
+    claimed = ''
+    if fac is not None:
+        from puca_dungeon.characters import id_for_name
+        present = list(getattr(getattr(fac, 'arc', None), 'present_ids', None) or [])
+        if not referent and present:
+            referent = present[0]
+        if not referent and getattr(fac, 'staff_present', False):
+            referent = 'orderly_quiet' if (fac.cast or {}).get('orderly_quiet') else 'staff'
+        claimed = str(getattr(getattr(fac, 'arc', None), 'claimed_name', '') or '')
+        sheet_name = str(getattr(getattr(world, 'sheet', None), 'name', '') or '')
+        tgt_raw = (intent.target or '').strip().lower().replace('the ', '')
+        named = id_for_name(getattr(fac, 'cast', None) or {}, tgt_raw)
+        if named:
+            intent.target = named
+            g.bindings['target'] = named
+            return
+    player_names = set(_PLAYER_NAMES)
+    if claimed:
+        player_names.add(claimed.strip().lower())
+    sheet = getattr(world, 'sheet', None)
+    if sheet and getattr(sheet, 'name', None):
+        player_names.add(str(sheet.name).strip().lower())
+    # An orderly may be named Glen — do not treat overlapping staff names as the player
+    if fac is not None:
+        from puca_dungeon.characters import id_for_name as _id_for
+        for n in list(player_names):
+            if _id_for(getattr(fac, 'cast', None) or {}, n) in (
+                'orderly_quiet', 'orderly_anxious', 'senior_researcher',
+                'attendant_a', 'attendant_b',
+            ):
+                player_names.discard(n)
     tgt = (intent.target or '').strip().lower().replace('the ', '')
-    if tgt in _PRONOUN_TARGETS or tgt in _PLAYER_NAMES:
+    if tgt in _PRONOUN_TARGETS or tgt in player_names:
         if referent:
             intent.target = referent
             g.bindings['target'] = referent
             g.bindings['pronoun_resolved'] = tgt or intent.target
-        elif tgt in _PLAYER_NAMES:
-            # Do not leave Glen as social target when no NPC focus
+        elif tgt in player_names:
             intent.target = None
-    # Utterance-only pronouns with no target
     utt = (intent.utterance or '').lower()
     if referent and not intent.target:
         if re.search(r'\b(him|her|them|he|she|they)\b', utt):

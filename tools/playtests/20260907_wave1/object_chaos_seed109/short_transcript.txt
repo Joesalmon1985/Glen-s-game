@@ -1,0 +1,193 @@
+# Short playtest: object_chaos
+seed=109
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+You are in a small locked room. Nothing is happening yet.
+
+## Turn 1
+> throw the cup at the wall
+
+The cup skitters across the floor. Water spills.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup on floor spilled water on floor, book, door, wary adventurer
+
+## Turn 2
+> pull the bedding onto the floor
+
+The bedding ends up on the floor. The smell follows it.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, cup on floor spilled water on floor, book, door, wary adventurer
+
+## Turn 3
+> move the cup
+
+You take the cup.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book, door, wary adventurer
+
+## Turn 4
+> throw the book
+
+The book hits the floor. Pages slap shut. You do not read it.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on floor, door, wary adventurer
+
+## Turn 5
+> pick up the book
+
+You pick up the book. It stays closed.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, door, wary adventurer
+
+## Turn 6
+> put the book on the bed
+
+The observation slit in the door opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away. They want you to step away from the door. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. You put the book on the bed. It stays closed.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 7
+> kick the door
+
+The door has no handle on this side. It does not open for you. They are still waiting: step away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 8
+> drink from the cup
+
+The cup is empty. They are still waiting: step away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 9
+> wait
+
+The door procedure begins. They will not enter while you stand against it. Stay away from the door. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. Time passes. The room does not hurry. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 10
+> wait
+
+Time passes. The room does not hurry. The instruction repeats. Gestures sharpen. Another figure arrives. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door slit open, wary adventurer
+
+## Turn 11
+> wait
+
+You leave the cell. The door opens under their rules. Hands find your arms. You are in the corridor now. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. Time passes. The room does not hurry. The instruction repeats. Gestures sharpen. Another figure arrives.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 12
+> throw water
+
+They take you out of the corridor and into a washroom. Water. A basin. They intend to wash you. Water. A basin. Soap that smells medicinal. Staff wait without patience. You do something minor. The room remains the room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 13
+> hide the food
+
+There is no food here to hide. They are still waiting: wash There is no food here.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 14
+> throw the bowl
+
+The bowl hits the floor. Food spreads. They are still waiting: wash
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer
+
+## Turn 15
+> look around
+
+Water. A basin. Soap that smells medicinal. Staff wait without patience. Here: Laurie, Ben, Iven. They are still waiting: wash
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, bowl food spilled, basin, wary adventurer
+
+## Turn 16
+> sleep
+
+They take you from the washroom to a mess room. A table. A bowl. Heat rising from food. They want you to eat. You attempt OTHER, diminished by institutional_force. A narrow table. A bowl of something warm. A spoon. You do something minor. The room remains the room. Resistance fails. You are washed anyway. The air smells less like you. Your skin is immediately, unmistakably cleaner. They are still waiting: eat
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, wary adventurer
+
+## Turn 17
+> wait
+
+Time passes. The room does not hurry. They are still waiting: eat
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, wary adventurer
+
+## Turn 18
+> wait
+
+They take you back to the same cell. Whatever you moved is still moved. You are cleaner, and much more tired. You are less hungry. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. Time passes. The room does not hurry. They do not leave the food as a debate forever. Hunger eases a little.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer
+
+## Turn 19
+> wait
+
+Time passes. The room does not hurry. The bed, once bleak, begins to look like an argument you will lose. This is still the same cell. Day 1 is ending.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer
+
+## Turn 20
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer
+
+## Turn 21
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer
+
+## Turn 22
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer
+
+## Turn 23
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer
+
+## Turn 24
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer
+
+## Turn 25
+> yes
+
+You do something minor. The room remains the room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer
+
+## Turn 26
+> look around
+
+Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. Here: Iven.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed bedding on floor, book on bed, door, wary adventurer

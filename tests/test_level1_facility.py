@@ -126,7 +126,10 @@ def test_wash_and_food_forced_eventually():
         if s.world.facility.washed:
             break
         s.submit('refuse')
-    assert s.world.facility.washed or s.world.facility.phase in (PHASE_FOOD, 'food', 'return_cell', 'sleep', PHASE_DONE)
+    assert s.world.facility.washed or s.world.facility.phase in (
+        PHASE_FOOD, 'food', 'return_cell', 'sleep', PHASE_DONE,
+        'day2_wake', 'retrieval', 'interview',
+    )
 
 
 def test_layout_seed_in_save_roundtrip(tmp_path):
@@ -274,8 +277,8 @@ def test_him_resolves_to_staff_not_glen():
         understood=True,
     )
     g = ground_intent(s.world, intent, s.current_passage(), [])
-    assert intent.target == 'staff'
-    assert g.bindings.get('target') == 'staff'
+    assert intent.target in ('staff', 'orderly_quiet', 'orderly_anxious')
+    assert g.bindings.get('target') in ('staff', 'orderly_quiet', 'orderly_anxious')
 
 
 def test_bare_no_after_back_gesture_refuses():

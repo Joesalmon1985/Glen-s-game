@@ -174,7 +174,7 @@ class GameSession:
         else:
             mode = 'facility'
             use_generated = False
-            facility = make_initial_facility()
+            facility = make_initial_facility(rng=self.rng, claimed_name=player_name)
         self.world = WorldState(
             passage_id=1,
             sheet=sheet,
@@ -231,6 +231,16 @@ class GameSession:
         passage = self.current_passage()
         text = passage.get('text') if isinstance(passage, dict) else getattr(passage, 'text', '')
         return (text or '').strip()
+
+    @property
+    def situation_line(self) -> str:
+        fac = getattr(self.world, 'facility', None)
+        if fac is None or getattr(self.world, 'mode', '') != 'facility':
+            return ''
+        arc = getattr(fac, 'arc', None)
+        if arc is not None and getattr(arc, 'situation_line', ''):
+            return str(arc.situation_line)
+        return 'You are in the facility.'
 
     def _ensure_dungeon_layout(self) -> GeneratedDungeon:
         if self._generated_dungeon is not None:
@@ -289,7 +299,7 @@ class GameSession:
                 'entities': ents,
                 'hazards': [],
                 'effects_on_enter': [],
-                'ending': 'sleep' if fac.slept else None,
+                'ending': None,
                 'image_seed': ', '.join(seed_parts),
             }
         return get_passage(self.world.passage_id)

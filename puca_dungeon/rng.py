@@ -23,6 +23,11 @@ class GameRNG:
     def choice(self, seq):
         return self._rng.choice(seq)
 
+    def shuffle(self, seq) -> list:
+        items = list(seq)
+        self._rng.shuffle(items)
+        return items
+
     def getstate(self):
         return self._rng.getstate()
 

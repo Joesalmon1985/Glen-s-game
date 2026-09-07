@@ -1,0 +1,29 @@
+{
+  "persona": "obstructive",
+  "seed": 103,
+  "turns": 35,
+  "enactment_histogram": {
+    "direct": 28,
+    "compromised": 5,
+    "inverted": 2
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 1,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "hell",
+  "slept": false,
+  "washed": false,
+  "fed": false,
+  "language_ability": 35,
+  "language_attempts": 12,
+  "contract": "ACCEPT",
+  "player_final_intent": "REFUSE",
+  "staff_names": {
+    "quiet": "Glen",
+    "anxious": "Dom",
+    "senior": "Elian"
+  },
+  "layout_seed": 103,
+  "layout_fingerprint": null
+}

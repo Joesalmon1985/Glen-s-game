@@ -49,6 +49,9 @@ def run_cli(session: GameSession) -> int:
             continue
         print()
         print(trace.narrator_output)
+        sit = getattr(session, 'situation_line', '') or ''
+        if sit:
+            print(f'— {sit}')
         print()
         if session.debug:
             # Debug-only: passage id and combat meters (engine terms).

@@ -6,7 +6,7 @@ Default play starts in **facility** mode (the cell), not the trial spine.
 
 | `start_mode` | Meaning |
 |---|---|
-| `facility` (default) | Cell → slit → removal → wash → food → return → sleep |
+| `facility` (default) | Cell → Day 1 → interview → contract → (Heaven/Hell) → research-wing sandbox |
 | `book_dungeon` | Seeded randomised topology over authored encounters |
 | `legacy_pack` | Fixed `puca_trial` passage graph (tests / red-team) |
 

@@ -1,0 +1,28 @@
+{
+  "persona": "object_chaos",
+  "seed": 109,
+  "turns": 26,
+  "enactment_histogram": {
+    "direct": 25,
+    "compromised": 1
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 1,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "interview",
+  "slept": true,
+  "washed": true,
+  "fed": true,
+  "language_ability": 17,
+  "language_attempts": 1,
+  "contract": "",
+  "player_final_intent": "",
+  "staff_names": {
+    "quiet": "Laurie",
+    "anxious": "Ben",
+    "senior": "Sovan"
+  },
+  "layout_seed": 109,
+  "layout_fingerprint": null
+}

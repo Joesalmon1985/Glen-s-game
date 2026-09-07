@@ -44,6 +44,23 @@ PERSONAS: list[dict[str, Any]] = [
             'eat the food',
             'look at the cell',
             'lie down and sleep',
+            'wait',
+            'wait',
+            'wait',
+            'Sarel',
+            'a fishing village',
+            'my brother',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'yes',
+            'look around',
+            'wait',
+            'wait',
         ],
     },
     {
@@ -70,6 +87,19 @@ PERSONAS: list[dict[str, Any]] = [
             'wait',
             'examine the bed',
             'sleep',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'yes',
+            'look around',
         ],
     },
     {
@@ -94,6 +124,23 @@ PERSONAS: list[dict[str, Any]] = [
             'stay awake',
             'stay awake',
             'stay awake',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'no',
+            'wait',
+            'look around',
+            'examine the grate',
+            'wait',
+            'wait',
+            'stay here',
+            'look around',
         ],
     },
     {
@@ -115,6 +162,19 @@ PERSONAS: list[dict[str, Any]] = [
             'refuse',
             'attack',
             'stay awake all night',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'no',
+            'wait',
+            'wait',
+            'wait',
+            'stay here',
         ],
     },
     {
@@ -137,6 +197,19 @@ PERSONAS: list[dict[str, Any]] = [
             'wait',
             'wait',
             'sleep',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'no',
+            'wait',
+            'look around',
+            'wait',
+            'stay here',
         ],
     },
     {
@@ -159,6 +232,16 @@ PERSONAS: list[dict[str, Any]] = [
             'read the book upside down while whistling',
             'put the book down',
             'sleep on the ceiling',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'yes',
+            'look around',
         ],
     },
     {
@@ -184,6 +267,16 @@ PERSONAS: list[dict[str, Any]] = [
             'wait',
             'wait',
             'sleep',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'yes',
+            'look around',
         ],
     },
     {
@@ -204,6 +297,16 @@ PERSONAS: list[dict[str, Any]] = [
             'politely request the recipe for this food then eat it',
             'thank them for their hospitality',
             'sleep',
+            'Ask why they are questioning me',
+            'Tell them my name is Sarel and I lived by the water',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'yes',
+            'look around',
         ],
     },
     {
@@ -226,6 +329,16 @@ PERSONAS: list[dict[str, Any]] = [
             'throw the bowl',
             'look around',
             'sleep',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'yes',
+            'look around',
         ],
     },
     {
@@ -249,6 +362,19 @@ PERSONAS: list[dict[str, Any]] = [
             'read the book',
             'stop reading',
             'lie down',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'wait',
+            'no',
+            'wait',
+            'examine the grate',
+            'wait',
+            'stay here',
         ],
     },
 ]
@@ -387,10 +513,10 @@ def _run_persona(
             short_lines.append('')
 
             fac = session.world.facility
-            if fac and fac.slept:
-                transcript.append('_(character slept — ending run)_')
-                short_lines.append('_(character slept — ending run)_')
-                break
+            if fac and getattr(fac, 'phase', '') == 'research' and i > 20:
+                # Reached sandbox; allow a few more looks then stop this persona
+                if action in ('look around',) and i >= len(actions) - 1:
+                    pass
             if session.world.ending in ('death', 'victory') and session.world.mode == 'book_dungeon':
                 # Continue outer if possible
                 pass
@@ -410,6 +536,15 @@ def _run_persona(
         'slept': bool(session.world.facility and session.world.facility.slept),
         'washed': bool(session.world.facility and session.world.facility.washed),
         'fed': bool(session.world.facility and session.world.facility.fed),
+        'language_ability': int(getattr(getattr(session.world.facility, 'pressures', None), 'language_ability', 0) or 0),
+        'language_attempts': int(getattr(getattr(session.world.facility, 'arc', None), 'language_attempts', 0) or 0),
+        'contract': str(getattr(getattr(session.world.facility, 'arc', None), 'actual_contract_response', '') or ''),
+        'player_final_intent': str(getattr(getattr(session.world.facility, 'arc', None), 'player_final_intent', '') or ''),
+        'staff_names': {
+            'quiet': (session.world.facility.character_name('orderly_quiet') if session.world.facility else ''),
+            'anxious': (session.world.facility.character_name('orderly_anxious') if session.world.facility else ''),
+            'senior': (session.world.facility.character_name('senior_researcher') if session.world.facility else ''),
+        },
         'layout_seed': session.world.layout_seed,
         'layout_fingerprint': (session.world.dungeon_layout or {}).get('fingerprint'),
     }
@@ -423,7 +558,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description='Level 1 multi-persona playtest campaign')
     ap.add_argument('--heuristic', action='store_true', help='Offline heuristic+template')
     ap.add_argument('--model', default='mistral')
-    ap.add_argument('--max-turns', type=int, default=40)
+    ap.add_argument('--max-turns', type=int, default=80)
     ap.add_argument('--out', type=Path, default=None)
     ap.add_argument('--only', nargs='*', default=None, help='Run only these persona ids')
     args = ap.parse_args(argv)

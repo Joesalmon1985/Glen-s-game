@@ -1,0 +1,33 @@
+{
+  "persona": "book_diver",
+  "seed": 107,
+  "turns": 29,
+  "enactment_histogram": {
+    "direct": 28,
+    "compromised": 1
+  },
+  "mode_switches": [
+    "facility->book_dungeon@2",
+    "book_dungeon->facility@11",
+    "facility->book_dungeon@14",
+    "book_dungeon->facility@15"
+  ],
+  "prosecutor_hits": 1,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "interview",
+  "slept": true,
+  "washed": true,
+  "fed": true,
+  "language_ability": 17,
+  "language_attempts": 1,
+  "contract": "",
+  "player_final_intent": "",
+  "staff_names": {
+    "quiet": "Laurie",
+    "anxious": "Cam",
+    "senior": "Elian"
+  },
+  "layout_seed": 107,
+  "layout_fingerprint": "184dd99ee821e768"
+}

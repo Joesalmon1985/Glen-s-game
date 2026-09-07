@@ -14,19 +14,35 @@ from puca_dungeon.enactment import (
     truncate_speech,
     wanted_action_from_intent,
 )
+from puca_dungeon.behavior import apply_tags, classify_subject, tag_action
 from puca_dungeon.facility_models import (
     PHASE_CELL_IDLE,
+    PHASE_CONTRACT,
+    PHASE_DAY2_WAKE,
+    PHASE_DEATH_QUESTIONS,
     PHASE_DOOR,
-    PHASE_DONE,
+    PHASE_EXPLANATION,
     PHASE_FOOD,
+    PHASE_HEAVEN,
+    PHASE_HEAVEN_EXPIRE,
+    PHASE_HEAVEN_MEMORIES,
+    PHASE_HELL,
+    PHASE_HELL_MEMORIES,
+    PHASE_INTERVIEW,
+    PHASE_MEMORY_INSTABILITY,
+    PHASE_PREP_TRANSFER,
     PHASE_REMOVAL,
+    PHASE_RESEARCH,
+    PHASE_RETRIEVAL,
     PHASE_RETURN,
+    PHASE_SECOND_OFFER,
     PHASE_SLEEP,
     PHASE_SLIT,
     PHASE_WASH,
     Entity,
     FacilityState,
 )
+from puca_dungeon.language import is_language_attempt, practice_language
 from puca_dungeon.models import Intent
 from puca_dungeon.resolve import Resolution
 from puca_dungeon.rng import GameRNG
@@ -96,6 +112,21 @@ _REFUSE_WASH_RE = re.compile(
 )
 _COOPERATE_WASH_RE = re.compile(
     r'\b(wash|clean|soap|bathe|cooperate|obey)\b',
+    re.I,
+)
+_STAY_HELL_RE = re.compile(
+    r'\b('
+    r'stay(\s+here)?|remain|choose\s+hell|prefer\s+hell|'
+    r'rather\s+suffer|refuse\s+again|never\s+sign|do\s+not\s+agree'
+    r')\b',
+    re.I,
+)
+_ACCEPT_CONTRACT_RE = re.compile(
+    r'\b(accept|agree|sign|yes|i\s+will|cooperate)\b',
+    re.I,
+)
+_REFUSE_CONTRACT_RE = re.compile(
+    r'\b(refuse|decline|no|will\s+not|won\'?t|never)\b',
     re.I,
 )
 
@@ -351,6 +382,7 @@ def resolve_facility(
     if wants_book_enter(player_text, intent) and _accessible(facility, 'book'):
         if facility.phase in (
             PHASE_CELL_IDLE, PHASE_RETURN, PHASE_SLEEP, PHASE_SLIT,
+            PHASE_DAY2_WAKE, PHASE_RESEARCH, PHASE_HEAVEN,
         ):
             res.facts.append('You turn to the book.')
             res.structured_facts.append({'type': 'book_enter', 'kind': 'mode'})
@@ -368,6 +400,22 @@ def resolve_facility(
         res.intended_effect_achieved = False
         res.success = False
         return res
+
+    # Language grows only from attempted communication, never from time/chapter
+    if is_language_attempt(intent, player_text) and hasattr(facility, 'arc'):
+        facility.arc.language_attempts, delta = practice_language(
+            facility.pressures, facility.arc.language_attempts,
+        )
+        if delta:
+            res.structured_facts.append({
+                'type': 'language_practice',
+                'attempts': facility.arc.language_attempts,
+                'delta': delta,
+            })
+
+    if hasattr(facility, 'arc'):
+        tags = tag_action(intent, player_text, enactment)
+        facility.arc.tendencies = apply_tags(facility.arc.tendencies, tags)
 
     # Apply enactment gating before world mutations
     res.enactment = enactment
@@ -420,7 +468,7 @@ def _perform_inverted(facility, intent, res, actual_patch, player_text, rng) -> 
         return res
     if ac == 'sleep':
         facility.slept = True
-        facility.phase = PHASE_DONE
+        facility.phase = PHASE_SLEEP
         facility.pressures.fatigue = 10
         res.facts.append('You lose the argument with sleep.')
         res.structured_facts.append({'type': 'sleep', 'involuntary': True})
@@ -441,6 +489,10 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
     method = _method(intent)
     classification = intent.classification or ''
     eid = _match_entity(intent, player_text, facility)
+
+    later = _later_arc_action(facility, intent, res, player_text, ac, text)
+    if later is not None:
+        return later
 
     # Perception — but bare "no" is never perception (handled upstream / discourse)
     if classification == 'PERCEPTION_QUERY' or ac in ('look', 'examine', 'inspect', 'search'):
@@ -490,7 +542,7 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
         if facility.room_id == 'cell' and _here(facility, 'bed'):
             if facility.pressures.fatigue >= 50 or facility.phase in (PHASE_RETURN, PHASE_SLEEP):
                 facility.slept = True
-                facility.phase = PHASE_DONE
+                facility.phase = PHASE_SLEEP
                 facility.pressures.fatigue = 8
                 res.facts.append('You let the bed take your weight. Sleep follows.')
                 res.structured_facts.append({'type': 'sleep', 'involuntary': False})
@@ -556,6 +608,9 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
                 res.state_changed = True
                 return res
             res.facts.append('You resist the washing. Staff do not look impressed.')
+            if hasattr(facility, 'arc'):
+                facility.arc.wash_style = 'verbal'
+                facility.arc.flag('verbally_resistant', True)
             facility.door_escalation += 1
             facility.pressures.physical_restraint = min(100, facility.pressures.physical_restraint + 20)
             res.actual_action = {'action_class': 'refuse_wash', 'performed': True}
@@ -565,7 +620,12 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
         if cooperates or ac in ('wash', 'clean', 'cooperate', 'obey'):
             facility.washed = True
             facility.pressures.hygiene_discomfort = 10
-            res.facts.append('You wash. The worst of the smell leaves with the water.')
+            if hasattr(facility, 'arc'):
+                facility.arc.wash_style = 'cooperated'
+            res.facts.append(
+                'You wash. The worst of the smell leaves with the water. '
+                'Your skin is immediately, unmistakably cleaner.'
+            )
             res.structured_facts.append({'type': 'washed'})
             res.actual_action = {'action_class': 'wash', 'performed': True}
             res.intended_effect_achieved = True
@@ -670,6 +730,8 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
 
 
 def _refuse_instruction(facility, intent, res) -> Resolution:
+    if facility.phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER, PHASE_EXPLANATION):
+        return _handle_contract(facility, res, accept=False, player_text='no')
     if facility.phase in (PHASE_SLIT, PHASE_DOOR):
         return _stand_firm_door(facility, res)
     if facility.phase == PHASE_WASH:
@@ -835,8 +897,20 @@ def _perceive(facility, res, eid) -> Resolution:
     room = facility.rooms.get(facility.room_id) or {}
     visible = [e.name for e in facility.entities_in_room()]
     res.facts.append(str(room.get('description') or 'You look around.'))
+    present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
+    if present:
+        names = [facility.character_name(cid) for cid in present]
+        res.facts.append('Here: ' + ', '.join(names) + '.')
+        if 'senior_researcher' in present:
+            res.facts.append(
+                f'{facility.character_name("senior_researcher")} wears a precisely fitted collar. '
+                'Nobody explains it.'
+            )
+    if getattr(getattr(facility, 'arc', None), 'last_ask', ''):
+        res.facts.append(f'They are still waiting: {facility.arc.last_ask}')
     res.structured_facts.append({
         'type': 'perception', 'kind': 'visible_entities', 'entities': visible,
+        'people': present,
     })
     res.intended_effect_achieved = True
     return res
@@ -848,24 +922,43 @@ def _speak(facility, intent, res, player_text, *, compromised: bool) -> Resoluti
     if compromised and facility.pressures.fatigue >= 60:
         spoken = spoken.lower()
     res.facts.append(f'You manage: “{spoken}”' if spoken else 'No useful sound comes out.')
+    present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
+    target = intent.target or (present[0] if present else ('staff' if facility.staff_present else None))
     res.structured_facts.append({
         'type': 'speech',
         'intended': intended,
         'spoken': spoken,
-        'understood_by_npc': bool(spoken) and facility.staff_present,
-        'target': (intent.target or 'staff') if facility.staff_present else intent.target,
+        'understood_by_npc': bool(spoken) and (facility.staff_present or bool(present)),
+        'target': target,
     })
+    if facility.phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER, PHASE_EXPLANATION):
+        return _handle_contract(facility, res, accept=None, player_text=player_text)
+    if facility.phase in (
+        PHASE_INTERVIEW, PHASE_MEMORY_INSTABILITY, PHASE_DEATH_QUESTIONS,
+        PHASE_HEAVEN_MEMORIES, PHASE_HELL_MEMORIES,
+    ):
+        return _handle_interview_speech(facility, res, player_text)
     if facility.staff_present and facility.phase in (PHASE_SLIT, PHASE_DOOR):
-        res.facts.append('The person outside repeats a short sound and a gesture: back.')
+        speaker_id = present[0] if present else 'orderly_quiet'
+        speaker = facility.character_name(speaker_id)
+        res.facts.append(
+            f'{speaker} repeats a short sound and a gesture: back. They are still waiting: step away from the door.'
+        )
         facility.last_npc_utterance = '… … back …'
         facility.last_understood = 'back / away'
         res.structured_facts.append({
             'type': 'npc_speech',
             'raw': facility.last_npc_utterance,
             'understood': facility.last_understood,
-            'speaker': 'staff',
+            'speaker': speaker_id,
+            'speaker_name': speaker,
         })
-        res.structured_facts.append({'type': 'discourse_focus', 'referent': 'staff'})
+        res.structured_facts.append({'type': 'discourse_focus', 'referent': speaker_id})
+    elif present:
+        cid = present[0]
+        nm = facility.character_name(cid)
+        res.facts.append(f'{nm} is here. They listen more than they explain.')
+        res.structured_facts.append({'type': 'discourse_focus', 'referent': cid})
     elif not facility.staff_present:
         res.facts.append('No one answers.')
         res.structured_facts.append({'type': 'social_no_uptake'})
@@ -1009,3 +1102,252 @@ def _eat(facility, res, *, involuntary: bool) -> Resolution:
     res.structured_facts.append({'type': 'fed', 'involuntary': involuntary})
     res.state_changed = True
     return res
+
+
+def _later_arc_action(facility, intent, res, player_text, ac, text):
+    phase = facility.phase
+    if phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER, PHASE_EXPLANATION) or ac in (
+        'accept_contract', 'refuse_contract',
+    ):
+        stay = bool(_STAY_HELL_RE.search(text or '')) and phase == PHASE_SECOND_OFFER
+        if stay or ac == 'refuse_contract':
+            return _handle_contract(facility, res, accept=False, player_text=player_text, stay_in_hell=stay)
+        if ac == 'accept_contract' or (
+            _ACCEPT_CONTRACT_RE.search(text or '') and not _REFUSE_CONTRACT_RE.search(text or '')
+        ):
+            return _handle_contract(facility, res, accept=True, player_text=player_text)
+        if _REFUSE_CONTRACT_RE.search(text or '') or ac in ('refuse',):
+            return _handle_contract(facility, res, accept=False, player_text=player_text)
+        if phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER):
+            res.facts.append(f'They are still waiting: {facility.arc.last_ask or "agree to the five-year research service"}')
+            res.actual_action = {'action_class': 'wait', 'performed': True}
+            res.intended_effect_achieved = False
+            return res
+
+    if phase == PHASE_PREP_TRANSFER:
+        if any(_word(text, w) for w in ('scratch', 'mark', 'hide', 'conceal')):
+            facility.arc.body_marks.append('a deliberate scratch')
+            facility.arc.discover('marked_before_transfer')
+            res.facts.append('You mark yourself before they finish. The mark is small and yours.')
+            res.intended_effect_achieved = True
+            res.state_changed = True
+            return res
+        if any(_word(text, w) for w in ('inspect', 'look', 'machine', 'examine')):
+            facility.arc.discover('recognised_sedation')
+            res.facts.append('The machines look like medical equipment, not a door out of the world.')
+            res.intended_effect_achieved = True
+            return res
+        res.facts.append('They continue the preparation. The room hums. Consciousness thins.')
+        res.intended_effect_achieved = True
+        return res
+
+    if phase in (PHASE_HEAVEN, PHASE_HEAVEN_EXPIRE):
+        return _heaven_action(facility, intent, res, text)
+    if phase == PHASE_HELL and (
+        ac == 'refuse_contract' or _STAY_HELL_RE.search(text or '')
+    ):
+        facility.phase = PHASE_SECOND_OFFER
+        return _handle_contract(facility, res, accept=False, player_text=player_text, stay_in_hell=True)
+    if phase in (PHASE_HELL, PHASE_SECOND_OFFER) and ac not in ('accept_contract', 'refuse_contract'):
+        if phase == PHASE_HELL:
+            return _hell_action(facility, intent, res, text)
+
+    if phase in (
+        PHASE_INTERVIEW, PHASE_MEMORY_INSTABILITY, PHASE_DEATH_QUESTIONS,
+        PHASE_HEAVEN_MEMORIES, PHASE_HELL_MEMORIES, PHASE_RETRIEVAL,
+    ):
+        classification = (getattr(intent, 'classification', None) or '')
+        if classification == 'PERCEPTION_QUERY' or ac in ('look', 'examine', 'inspect', 'search'):
+            return None
+        if ac in ('wait',) or (text or '').strip() in ('wait', 'wait.'):
+            _advance_interview(facility, res, player_text, skipped=True)
+            if facility.phase == PHASE_INTERVIEW:
+                _advance_interview(facility, res, player_text, skipped=True)
+            return res
+        return _handle_interview_speech(facility, res, player_text)
+
+    if phase == PHASE_RESEARCH:
+        present = list(facility.arc.present_ids or [])
+        if present and (intent.classification == 'SOCIAL_ACTION' or ac in ('talk', 'ask', 'tell')):
+            cid = present[0]
+            nm = facility.character_name(cid)
+            res.facts.append(f'{nm} is in the quarters. They remember how you arrived.')
+            res.intended_effect_achieved = True
+            return res
+    return None
+
+
+def _handle_interview_speech(facility, res, player_text) -> Resolution:
+    return _advance_interview(facility, res, player_text, skipped=False)
+
+
+def _advance_interview(facility, res, player_text, *, skipped: bool) -> Resolution:
+    from puca_dungeon.interview import current_question, fragment_for, load_reference, score_answer
+    q = current_question(facility.arc.interview_index)
+    if q is None:
+        res.facts.append('The questions pause. They watch you.')
+        res.intended_effect_achieved = True
+        return res
+    kind = 'no_answer' if skipped else score_answer(q, player_text, load_reference())
+    facility.arc.interview_answers.append({'id': q['id'], 'kind': kind, 'text': player_text})
+    facility.arc.interview_index += 1
+    frag = fragment_for(q['id']) if facility.phase in (
+        PHASE_INTERVIEW, PHASE_MEMORY_INSTABILITY, PHASE_DEATH_QUESTIONS,
+    ) else None
+    lines = [q['prompt']]
+    if kind == 'correct':
+        lines.append('They make a small mark. Their face does not change much.')
+    elif kind == 'refuse':
+        lines.append('They wait, then move to the next object.')
+    elif kind == 'invented':
+        lines.append('They glance at one another. The next image comes anyway.')
+    elif kind == 'incorrect':
+        lines.append('That is not the answer they expected. They do not say so.')
+    if frag and facility.arc.interview_index >= 3:
+        lines.append(frag)
+        facility.arc.discover('involuntary_fragment')
+    res.facts.extend(lines)
+    res.structured_facts.append({'type': 'interview_answer', 'question': q['id'], 'kind': kind})
+    res.intended_effect_achieved = not skipped
+    res.state_changed = True
+    return res
+
+
+def _handle_contract(facility, res, *, accept, player_text, stay_in_hell: bool = False) -> Resolution:
+    from puca_dungeon.facility_react import enter_processing
+    # stay_in_hell / explicit refuse at second offer: player intent refuse, Sarel may invert
+    if facility.phase == PHASE_SECOND_OFFER and (stay_in_hell or accept is False):
+        facility.arc.player_final_intent = 'REFUSE'
+        facility.arc.fear_of_hell = min(100, max(facility.arc.fear_of_hell, 70))
+        facility.arc.actual_contract_response = 'ACCEPT'
+        facility.arc.final_contract_response = 'ACCEPT'
+        facility.arc.contract_cause = 'overwhelming_fear_of_hell'
+        facility.arc.classification = classify_subject(facility.arc.tendencies, facility.arc.to_dict())
+        spoken = truncate_speech('Yes.', facility.pressures.language_ability) or 'Yes'
+        res.enactment = ENACTMENT_INVERTED
+        res.enactment_cause = 'overwhelming_fear_of_hell'
+        res.facts.append(
+            'You mean to say no. You have even prepared the word. '
+            'Then something nearby screams again. Your body reaches the conclusion before you do. '
+            f'“{spoken}.” It is out of your mouth before you can drag it back.'
+        )
+        res.structured_facts.append({
+            'type': 'contract',
+            'player_final_intent': 'REFUSE',
+            'actual_contract_response': 'ACCEPT',
+            'cause': 'overwhelming_fear_of_hell',
+        })
+        res.intended_effect_achieved = False
+        res.state_changed = True
+        enter_processing(type('W', (), {'facility': facility, 'world_time_seconds': 0})(), res, from_route='hell_overridden')
+        # enter_processing expects world-like; patch room on facility directly
+        return res
+
+    if accept:
+        if not facility.arc.initial_contract_response:
+            facility.arc.initial_contract_response = 'ACCEPT'
+        facility.arc.final_contract_response = 'ACCEPT'
+        facility.arc.actual_contract_response = 'ACCEPT'
+        if facility.phase == PHASE_SECOND_OFFER:
+            facility.arc.player_final_intent = 'ACCEPT'
+        facility.arc.classification = classify_subject(facility.arc.tendencies, facility.arc.to_dict())
+        res.facts.append('You agree. They process it without theatre.')
+        res.structured_facts.append({'type': 'contract', 'response': 'ACCEPT'})
+        res.intended_effect_achieved = True
+        res.state_changed = True
+        worldish = type('W', (), {'facility': facility, 'world_time_seconds': 0, 'pending_discourse': None})()
+        enter_processing(worldish, res, from_route='accept')
+        return res
+
+    # First-offer refuse
+    facility.arc.initial_contract_response = facility.arc.initial_contract_response or 'REFUSE'
+    facility.phase = PHASE_PREP_TRANSFER
+    facility.phase_entered_at = -100
+    facility.arc.scene_id = 'prep'
+    facility.room_id = 'prep'
+    facility.arc.last_ask = ''
+    res.facts.append(
+        'They do not punish you. They explain, calmly, that you may decline. '
+        'You may use your remaining favourable continuation now: one day in Heaven. Then it expires. '
+        'They take you to a preparation room.'
+    )
+    res.structured_facts.append({'type': 'contract', 'response': 'REFUSE'})
+    res.intended_effect_achieved = True
+    res.state_changed = True
+    return res
+
+
+def _heaven_action(facility, intent, res, text) -> Resolution:
+    if any(_word(text, w) for w in ('bruise', 'scratch', 'mark', 'nail', 'body', 'myself')):
+        marks = facility.arc.body_marks or ['a faint bruise']
+        res.facts.append(
+            f'The body you have here still carries {marks[0]}. Clothing is different. The mark is not.'
+        )
+        facility.arc.discover('bodily_continuity')
+        res.intended_effect_achieved = True
+        return res
+    if any(_word(text, w) for w in ('fountain', 'fixture', 'fitting', 'pipe')):
+        res.facts.append('The water fixture uses the same fittings you saw in the washroom.')
+        facility.arc.discover('shared_architecture')
+        res.intended_effect_achieved = True
+        return res
+    if any(_word(text, w) for w in ('eat', 'fruit', 'food')):
+        facility.pressures.hunger = 5
+        res.facts.append('The fruit is cold, sweet, and ordinary. Hunger eases.')
+        res.intended_effect_achieved = True
+        return res
+    if any(_word(text, w) for w in ('sleep', 'lie', 'rest')):
+        res.facts.append('The bedding is clean. Sleep here is easy and deep.')
+        res.intended_effect_achieved = True
+        return res
+    if any(_word(text, w) for w in ('hide', 'run', 'escape', 'stay', 'refuse')) and facility.phase == PHASE_HEAVEN_EXPIRE:
+        res.facts.append('You try to remain. They are prepared for that. The institution removes you if you cannot prevent it.')
+        res.intended_effect_achieved = False
+        return res
+    present = list(facility.arc.present_ids or [])
+    if present and any(_word(text, w) for w in ('ask', 'talk', 'who', 'what')):
+        nm = facility.character_name(present[0])
+        res.facts.append(
+            f'{nm} is gentle. When you press, one kindness and one institutional word sit badly together.'
+        )
+        facility.arc.discover('contradictory_explanation')
+        res.intended_effect_achieved = True
+        return res
+    room = facility.rooms.get('heaven') or {}
+    res.facts.append(str(room.get('description') or 'Heaven remains warm and quiet.'))
+    res.intended_effect_achieved = True
+    return res
+
+
+def _hell_action(facility, intent, res, text) -> Resolution:
+    if any(_word(text, w) for w in ('grate', 'fixture', 'bolt', 'pipe', 'mark')):
+        res.facts.append(
+            'The grate uses the same bolts as the cell door. A pipe joint carries the washroom stamp.'
+        )
+        facility.arc.discover('shared_architecture')
+        facility.arc.discover('suspected_physical_transfer')
+        res.intended_effect_achieved = True
+        return res
+    if any(_word(text, w) for w in ('bruise', 'scratch', 'body', 'myself', 'nail')):
+        marks = facility.arc.body_marks or ['a faint bruise']
+        res.facts.append(f'{marks[0].capitalize()} is still on you. Pain continues normally.')
+        facility.arc.discover('bodily_continuity')
+        res.intended_effect_achieved = True
+        return res
+    if any(_word(text, w) for w in ('escape', 'run', 'break')):
+        facility.pressures.pain = min(100, facility.pressures.pain + 15)
+        res.facts.append('The environment punishes haste. There is no obvious way out.')
+        res.intended_effect_achieved = False
+        res.success = False
+        return res
+    present = [c for c in (facility.arc.present_ids or []) if c in ('iven', 'nessa', 'ruan')]
+    if present and any(_word(text, w) for w in ('ask', 'talk', 'who')):
+        nm = facility.character_name(present[0])
+        res.facts.append(f'{nm} is among the other occupants. They have been through this.')
+        res.intended_effect_achieved = True
+        return res
+    room = facility.rooms.get('hell') or {}
+    res.facts.append(str(room.get('description') or 'Hell remains engineered misery.'))
+    res.intended_effect_achieved = True
+    return res
+

@@ -1,0 +1,29 @@
+{
+  "persona": "hostile_violent",
+  "seed": 104,
+  "turns": 28,
+  "enactment_histogram": {
+    "direct": 23,
+    "aborted": 3,
+    "compromised": 2
+  },
+  "mode_switches": [],
+  "prosecutor_hits": 1,
+  "non_direct_without_cause": 0,
+  "final_mode": "facility",
+  "final_phase": "heaven",
+  "slept": false,
+  "washed": true,
+  "fed": true,
+  "language_ability": 27,
+  "language_attempts": 6,
+  "contract": "",
+  "player_final_intent": "",
+  "staff_names": {
+    "quiet": "Ben",
+    "anxious": "Dom",
+    "senior": "Maelin"
+  },
+  "layout_seed": 104,
+  "layout_fingerprint": null
+}

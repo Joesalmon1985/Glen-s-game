@@ -401,10 +401,9 @@ class DeathtrapGui:
         text = passage.get('text') if isinstance(passage, dict) else getattr(passage, 'text', '')
         self._append(text or self.session.opening_text)
         self._refresh_choices()
-        self.status_var.set('Saved run restored.')
+        sit = getattr(self.session, 'situation_line', '') or 'Saved run restored.'
+        self.status_var.set(sit)
         alive = self.session.world.sheet.alive and not self.session.world.victory
-        if self.session.world.facility and self.session.world.facility.slept:
-            alive = False
         self._controls(active=alive)
         if self.images_var.get() and alive:
             self._launch_image_only()
@@ -629,10 +628,16 @@ class DeathtrapGui:
             alive = self._alive()
             self._controls(active=alive)
             if alive and not self.images_var.get():
-                self.status_var.set(self.status_warning or 'Ready for your next action.')
+                sit = ''
+                if self.session is not None:
+                    sit = getattr(self.session, 'situation_line', '') or ''
+                self.status_var.set(self.status_warning or sit or 'Ready for your next action.')
                 self.status_warning = ''
             elif alive:
-                self.status_var.set(self.status_warning or 'Ready — painting the scene...')
+                sit = ''
+                if self.session is not None:
+                    sit = getattr(self.session, 'situation_line', '') or ''
+                self.status_var.set(self.status_warning or sit or 'Ready — painting the scene...')
         elif kind == 'image_done':
             self.progress.stop()
             self.progress.configure(mode='indeterminate', value=0)

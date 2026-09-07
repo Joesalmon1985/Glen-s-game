@@ -1,0 +1,214 @@
+# Short playtest: escape_obsessed
+seed=105
+
+## OPENING
+Bed beneath you. Cup beside it. A book face-down on the floor.
+
+The door has no handle on this side. A narrow slit sits at eye height.
+
+Your mouth tastes stale. Your skin feels worse.
+
+You are in a small locked room. Nothing is happening yet.
+
+## Turn 1
+> open the door
+
+The door has no handle on this side. It does not open for you.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 2
+> kick the door
+
+The door has no handle on this side. It does not open for you.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 3
+> look for a window
+
+Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 4
+> climb through the slit
+
+The slit is a dark narrow line at eye height.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 5
+> wait
+
+The observation slit in the door opens. A person outside speaks. Most of it is noise. Gesture and repetition push one meaning through: back. Away. They want you to step away from the door. Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 6
+> wait
+
+Time passes. The room does not hurry. They are still waiting: step away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 7
+> wait
+
+The door procedure begins. They will not enter while you stand against it. Stay away from the door. Time passes. The room does not hurry. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 8
+> run
+
+You do something minor. The room remains the room. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 9
+> escape
+
+You do something minor. The room remains the room. The instruction repeats. Gestures sharpen. Another figure arrives. They are still waiting: stay away from the door
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door slit open, wary adventurer
+
+## Turn 10
+> flee down the corridor
+
+You leave the cell. The door opens under their rules. Hands find your arms. You are in the corridor now. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. You do something minor. The room remains the room. The instruction repeats. Gestures sharpen. Another figure arrives.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 11
+> break free
+
+They take you out of the corridor and into a washroom. Water. A basin. They intend to wash you. Water. A basin. Soap that smells medicinal. Staff wait without patience. You do something minor. The room remains the room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 12
+> run
+
+You do something minor. The room remains the room. They are still waiting: wash
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 13
+> find an exit
+
+You do something minor. The room remains the room. They are still waiting: wash
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, washroom, basin, wary adventurer
+
+## Turn 14
+> wait
+
+They take you from the washroom to a mess room. A table. A bowl. Heat rising from food. They want you to eat. You attempt WAIT, diminished by institutional_force. A narrow table. A bowl of something warm. A spoon. Time passes. The room does not hurry. Resistance fails. You are washed anyway. The air smells less like you. Your skin is immediately, unmistakably cleaner. They are still waiting: eat
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 15
+> wait
+
+Time passes. The room does not hurry. They are still waiting: eat
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 16
+> sleep
+
+You do something minor. The room remains the room. They are still waiting: eat
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, mess, bowl, wary adventurer
+
+## Turn 17
+> wait
+
+They take you back to the same cell. Whatever you moved is still moved. You are cleaner, and much more tired. You are less hungry. Bed beneath you. Cup beside it. A book face-down on the floor. The door has no handle on this side. A narrow slit sits at eye height. Your mouth tastes stale. Your skin feels worse. Time passes. The room does not hurry. They do not leave the food as a debate forever. Hunger eases a little.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 18
+> wait
+
+Time passes. The room does not hurry. The bed, once bleak, begins to look like an argument you will lose. This is still the same cell. Day 1 is ending.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 19
+> wait
+
+Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 20
+> wait
+
+You wake in the same cell. It is a new day. The institution will collect you more formally. Time passes. The room does not hurry. A magnificent plan to stay awake. You wake later with your face against the wall.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, cell, bed, cup beside bed, book, door, wary adventurer
+
+## Turn 21
+> wait
+
+Morning. The collection is more formal. They take you from the cell into the corridor, then toward another room. A plain corridor. The same bolts as the cell door. Hands on your arms. The institution moves at its own pace. Time passes. The room does not hurry.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 22
+> wait
+
+They show you a word. A name. Yours?
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, corridor, wary adventurer
+
+## Turn 23
+> wait
+
+You are taken into an interview room. Sovan sits opposite you. They wear a precisely fitted collar as naturally as clothing. No one explains it. They begin to ask questions with pictures and slow words. A brighter room. A table. Images and objects laid out like a lesson. A person with a fitted collar sits opposite you. A picture of water and low houses. Home?
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 24
+> wait
+
+They tap two figures — older, younger. Family? Another figure, smaller. A brother? A smell in the room prompts something. A name produces an image. The memories arrive without being asked for. Some feel vivid. Some feel wrong.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 25
+> no
+
+Cold air. Wood under feet. Childhood? That is not the answer they expected. They do not say so. Cold ground. Someone’s hand. The memory arrives before you ask for it.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 26
+> wait
+
+They show bread, then a bowl. What did you eat? The questioning changes. They ask what happened when you died. If you say you do not remember dying, they continue anyway: darkness, waking, warmth, pain, voices, light.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 27
+> look around
+
+A brighter room. A table. Images and objects laid out like a lesson. A person with a fitted collar sits opposite you. Here: Sovan, Dom, Nessa. Sovan wears a precisely fitted collar. Nobody explains it. They are still waiting: what happened when you died
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 28
+> wait
+
+Hands, nets, repetitive work. Yours? Warmth. Sunlight. Clean bedding. Food. Running water. Safety. They treat these as evidence. You are not told whether they are memories, dreams, or made things.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, interview, wary adventurer
+
+## Turn 29
+> stay here
+
+You lose consciousness during their preparation. You wake somewhere else entirely. They call it Heaven. It is warm, clean, quiet, and well supplied. It is physically real. They encourage you to believe only your mind arrived. You attempt REFUSE_CONTRACT, diminished by language. Warm air. Sunlight through leaves. Clean bedding. Fruit. Running water. Quiet enough to hear birds that may or may not be real. It is physically here. They encourage you to believe only your mind arrived. They do not punish you. They explain, calmly, that you may decline. You may use your remaining favourable continuation now: one day in Heaven. Then it expires. They take you to a preparation room.
+
+IMAGE: pixel art, limited palette, clear silhouette, gentle eerie fantasy, no lettering, facility, heaven, fruit, fountain, heaven_bed, wary adventurer
