@@ -116,14 +116,30 @@ class SceneComposeTests(unittest.TestCase):
             with Image.open(path) as image:
                 self.assertEqual(image.size, (512, 512))
 
-    def test_image_decision_uses_sprite_renderer(self):
+    def test_image_decision_uses_sprite_renderer_when_requested(self):
         from puca_dungeon.image_prompt import image_decision
         world = self._world()
-        img = image_decision(world, Resolution(image_dirty=True))
+        img = image_decision(world, Resolution(image_dirty=True), use_sprites=True)
         self.assertEqual(img.get('renderer'), 'sprites')
         self.assertTrue(str(img.get('full_prompt') or '').startswith('sprite:'))
-        again = image_decision(world, Resolution(image_dirty=False))
+        again = image_decision(
+            world, Resolution(image_dirty=False), use_sprites=True,
+        )
         self.assertEqual(again.get('decision'), 'REUSE')
+
+    def test_image_decision_defaults_to_diffusion(self):
+        from puca_dungeon.image_prompt import image_decision
+        world = self._world()
+        world.last_image_prompt = ''
+        img = image_decision(
+            world, Resolution(image_dirty=True), use_sprites=False,
+            narration='You wake on a thin mattress. Water has spilled near the cup.',
+        )
+        self.assertEqual(img.get('renderer'), 'diffusion')
+        prompt = str(img.get('full_prompt') or '')
+        self.assertIn('facility', prompt)
+        self.assertIn('from narration:', prompt)
+        self.assertIn('mattress', prompt.lower())
 
 
 if __name__ == '__main__':

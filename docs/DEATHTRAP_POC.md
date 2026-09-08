@@ -60,13 +60,13 @@ python -m puca_dungeon --seed 91
 python scripts/deathtrap_redteam.py --seed 91
 ```
 
-Windows: **Play Deathtrap Dungeon.bat** (Ollama LLM by default; add `--heuristic` only for offline) or **Play Deathtrap Dungeon GUI.bat**.
+Windows: **Play Puca.bat** (Level 1 facility GUI + illustrations).
 
 If the CLI prints `Interpreter: HeuristicInterpreter`, you are **not** using the LLM — start Ollama (`ollama pull mistral`) and relaunch without `--heuristic`.
 
 ```bash
 python -m puca_dungeon.gui
-Play Deathtrap Dungeon GUI.bat --text-only
+Play Puca.bat --text-only
 ```
 
 ## Tests

@@ -274,23 +274,7 @@ class GameSession:
             fac = self.world.facility
             room = fac.rooms.get(fac.room_id) or {}
             ents = [e.id for e in fac.entities_in_room()]
-            seed_parts = ['facility', fac.room_id or 'cell']
-            for e in fac.entities_in_room():
-                bit = e.id
-                pos = (e.state or {}).get('position')
-                if pos:
-                    bit += f' {str(pos).replace("_", " ")}'
-                if e.id == 'cup' and (e.state or {}).get('water_spilled'):
-                    bit += ' spilled water on floor'
-                if e.id == 'cup' and e.broken:
-                    bit += ' broken'
-                if e.id == 'bed' and (e.state or {}).get('bedding') == 'on_floor':
-                    bit += ' bedding on floor'
-                if e.id == 'bowl' and (e.state or {}).get('spilled'):
-                    bit += ' food spilled'
-                if e.id == 'door' and fac.slit_open:
-                    bit += ' slit open'
-                seed_parts.append(bit)
+            from puca_dungeon.image_prompt import facility_image_seed
             return {
                 'id': 0,
                 'text': str(room.get('description') or ''),
@@ -300,7 +284,7 @@ class GameSession:
                 'hazards': [],
                 'effects_on_enter': [],
                 'ending': None,
-                'image_seed': ', '.join(seed_parts),
+                'image_seed': facility_image_seed(self.world),
             }
         return get_passage(self.world.passage_id)
 
@@ -1026,7 +1010,7 @@ class GameSession:
         trace.narrator_input = narrator_in
         trace.narrator_output = prose
 
-        # 7) Image from final visible state
+        # 7) Image from final visible state + player-facing narration cues
         colour = (not self.debug) and not isinstance(self.narrator, TemplateNarrator)
         img = image_decision(
             self.world,
@@ -1034,6 +1018,7 @@ class GameSession:
             passage=self.current_passage(),
             colour_with_llm=colour,
             ollama_model=self.ollama_model,
+            narration=prose,
         )
         if self.debug or not self.generate_images:
             img = dict(img)

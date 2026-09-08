@@ -97,7 +97,7 @@ echo Setup complete.
 echo ============================================
 echo Ollama is required for story play, including --text-only, and was not installed or downloaded by this script.
 echo Install and start Ollama separately, then follow the explicit model instructions in SETUP.md.
-echo Then launch with launch.bat.
+echo Then launch with Play Puca.bat.
 echo.
 pause
 exit /b 0

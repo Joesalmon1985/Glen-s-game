@@ -86,18 +86,17 @@ It never calls `ollama pull`.
 
 ## Launch
 
-Run `launch.bat` after installation. It uses only:
+Run `Play Puca.bat` after installation. It uses only:
 
 ```text
-.venv\Scripts\python.exe my_version_of_kawa.py
+.venv\Scripts\python.exe -m puca_dungeon.gui
 ```
 
-A full launch is blocked when the local GPU preflight or required Ollama
-preflight fails. The text-only path can omit the optional GPU/image stack, but
-it still requires Ollama for narration:
+That starts Level 1 (facility) with Ollama for story text and local image generation when illustrations are on. A soft Ollama check runs first; if it fails, the GUI may still open with offline fallback text.
 
 ```bat
-launch.bat --text-only
+Play Puca.bat
+Play Puca.bat --text-only
 ```
 
 The launch script writes preflight output and any game traceback to

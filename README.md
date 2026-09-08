@@ -1,30 +1,32 @@
 # Puca: repaired local adventure
 
-## Play on this machine (Spirit adventure)
+## Play
 
-Double-click **Puca - Play** on your desktop, or **START PUCA** in this folder. Both use **Play Puca.bat**, which checks the local narrator, starts the project's Ollama runtime if needed, and launches the verified build. No account or paid API is needed.
+Double-click **Play Puca.bat**. That launches Level 1 (facility cell + book dungeon) with Ollama for story text and local Stable Diffusion for illustrations when they are enabled in the window.
 
-For the same Spirit adventure with the turn debug panel, use **Play Puca Dungeon Debug.bat** (runs `launch.bat --debug`).
+```bat
+Play Puca.bat
+```
 
-## Deathtrap Dungeon (Fighting Fantasy gamebook)
+Needs `.venv` from `install.bat`, and Ollama with your usual model (default `mistral`). Logs go to `logs\puca-launch.log`.
 
-Typing-first console engine over FF passages 1–400 (`puca_dungeon/content/deathtrap_ff`). Skill / Stamina / Luck sheet; Ollama interpret by default, Python resolution. The d20 PDF is not the playable source.
+## Deathtrap content / CLI
+
+Typing-first console engine over FF passages (`puca_dungeon/content/deathtrap_ff`) is still available for tests and debug:
 
 ```bash
 # Offline / tests
 python -m puca_dungeon --heuristic --seed 91
 
-# Player mode with images (needs GPU stack); pick starting potion via chargen ids
+# CLI with images (needs GPU stack)
 python -m puca_dungeon --no-debug --images --seed 91 --potion potion_skill --name Glen
 ```
 
-Windows: **Play Deathtrap Dungeon.bat** (CLI) or **Play Deathtrap Dungeon GUI.bat** (Tk window + illustrations, no visible Skill/Stamina/Luck meters).
-
 See [docs/DEATHTRAP_POC.md](docs/DEATHTRAP_POC.md). Tests: `python -m unittest tests.test_deathtrap_ff -v`.
 
-The game opens at **2560 x 1440** with larger story text and up to **768 x 768** displayed pixel artwork. You can resize the window; artwork fits the available space. AI illustrations still generate at **512 x 512**, so the larger window does not request more expensive AI images. Close an older open version and use the shortcut again to pick up the update.
+The game opens at **2560 x 1440** with larger story text. You can resize the window; artwork fits the available space. AI illustrations still generate at **512 x 512**. Close an older open version and use **Play Puca.bat** again to pick up the update.
 
-Enter a name and starting place, then choose **Begin**. Use the suggested actions or type your own. **Resume** restores your saved adventure. Turn **Illustrations** off for faster text play; use **Skip image** during painting. **Retry** recovers a failed request, save, or illustration without spending another turn.
+Enter a name, then choose **Begin**. Use the suggested actions or type your own. **Resume** restores your saved adventure. Turn **Illustrations** off for faster text play; use **Skip image** during painting.
 
 Your normal save, image cache and runtime log live in `%LOCALAPPDATA%\Puca`. Verification playthroughs use separate saves under `docs/verification/` and never replace your adventure.
 

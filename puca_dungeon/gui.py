@@ -172,11 +172,12 @@ class DeathtrapGui:
         self.art_panel.grid_propagate(False)
         self.art_panel.pack_propagate(False)
         art_intro = (
+            'The room will take shape here.\n\n'
+            'Illustrations are drawn from the game state and the turn text.\n'
+            'Type freely — no meters, no menus of numbers.'
+            if not self.sprite_mode else
             'Sprite scenes compose here from the kit in assets/sprites.\n\n'
             'Facility rooms update when objects or people change.\n'
-            'Type freely — no meters, no menus of numbers.'
-            if self.sprite_mode else
-            'The room will take shape here.\n\nIllustrations are optional.\n'
             'Type freely — no meters, no menus of numbers.'
         )
         self.image_label = tk.Label(
@@ -265,9 +266,10 @@ class DeathtrapGui:
         set_state(self.action_entry, active)
         for button in self.choice_buttons:
             set_state(button, active)
-        set_state(self.play_button, self.session is None and not self.turn_busy and not self.image_busy)
-        set_state(self.resume_button, not self.turn_busy and not self.image_busy)
-        set_state(self.new_button, not self.turn_busy and not self.image_busy)
+        set_state(self.play_button, self.session is None and not self.turn_busy)
+        set_state(self.resume_button, not self.turn_busy)
+        # New run must always be available so a stuck illustration cannot trap the player.
+        set_state(self.new_button, True)
         set_state(self.skip_button, self.image_busy and self.images_var.get())
 
     def _resize_layout(self, event):
@@ -375,8 +377,11 @@ class DeathtrapGui:
         )
 
     def begin(self):
-        if self.turn_busy or self.image_busy:
+        if self.turn_busy:
             return
+        if self.image_busy:
+            self.cancel_image.set()
+            self.image_busy = False
         name = (self.name_var.get() or 'Adventurer').strip()[:40] or 'Adventurer'
         potion = self.potion_var.get() or 'potion_skill'
         try:
@@ -396,8 +401,11 @@ class DeathtrapGui:
             self._autosave()
 
     def resume(self):
-        if self.turn_busy or self.image_busy:
+        if self.turn_busy:
             return
+        if self.image_busy:
+            self.cancel_image.set()
+            self.image_busy = False
         if not self.save_path.is_file():
             messagebox.showinfo('Puca', 'No saved run found.')
             return
@@ -422,9 +430,10 @@ class DeathtrapGui:
             self._launch_image_only()
 
     def new_run(self):
-        if self.turn_busy or self.image_busy:
-            return
+        # Always allow abandoning a stuck paint / turn.
         self.cancel_image.set()
+        self.turn_busy = False
+        self.image_busy = False
         self.session = None
         self._clear_story()
         self._append(
@@ -438,7 +447,10 @@ class DeathtrapGui:
             image='',
             text='The room will take shape here.\n\nIllustrations are optional.',
         )
+        self.progress.stop()
+        self.progress.configure(mode='indeterminate', value=0)
         self.status_var.set('Ready for a new run.')
+        self.status_warning = ''
         self._controls(active=False)
 
     def fill_example(self, label: str):
@@ -520,63 +532,82 @@ class DeathtrapGui:
                 self.messages.put(('status', 'Ready — painting the scene...'))
                 self.messages.put(('image_busy', True))
                 self._generate_current_image(trace)
-            self.messages.put(('image_done', None))
         except Exception as exc:
             logging.exception('Deathtrap turn failed')
             self.messages.put(('error', str(exc)))
+        finally:
+            # Always unlock the paint lock — image failures must never jam controls.
+            self.messages.put(('image_done', None))
 
     def _compose_or_generate_image(self, trace=None):
-        """Facility uses sprite composition; other modes keep full-scene diffusion."""
+        """Default: AI draws the scene. Sprite kit only when PUCA_IMAGE_MODE=sprites."""
         assert self.session is not None
+        from puca_images import IllustrationCancelled
+
         img_meta = (trace.image if trace is not None else None) or {}
         renderer = img_meta.get('renderer')
         if renderer is None:
-            try:
-                from puca_dungeon.scene_compose import facility_mode_active
-                if facility_mode_active(self.session.world):
-                    renderer = 'sprites'
-            except Exception:
-                renderer = 'diffusion'
-        if renderer == 'sprites':
+            renderer = 'sprites' if self.sprite_mode else 'diffusion'
+        if renderer == 'sprites' or self.sprite_mode:
             from puca_dungeon.scene_compose import compose_facility_scene
             _spec, path = compose_facility_scene(self.session.world, self.cache_dir)
             self.session.last_image_path = Path(path)
             self.session.world.last_image_prompt = f'sprite:{_spec.key}'
             return path
         from puca_dungeon.image_prompt import build_image_prompt
+        narration = None
+        if trace is not None:
+            narration = getattr(trace, 'narrator_output', None)
+        if not narration:
+            narration = getattr(self.session, 'opening_text', None)
         prompt = img_meta.get('full_prompt') or build_image_prompt(
-            self.session.world, self.session.current_passage()
+            self.session.world,
+            self.session.current_passage(),
+            narration=narration,
         )
+        if str(prompt).startswith('sprite:'):
+            # Stale sprite fingerprint from an older save — rebuild a diffusion prompt.
+            prompt = build_image_prompt(
+                self.session.world,
+                self.session.current_passage(),
+                narration=narration,
+            )
         self.images.use_lora = self.lora_var.get() and (
             resource_path('pixel_style_lora_style_only') / 'adapter_model.safetensors'
         ).is_file()
-        _key, path = self.images.generate(
-            f'passage_{self.session.world.passage_id}',
-            prompt,
-            cancel=self.cancel_image,
-            progress=lambda step, total: self.messages.put(('progress', step, total)),
-        )
+        try:
+            _key, path = self.images.generate(
+                f'passage_{self.session.world.passage_id}',
+                prompt,
+                cancel=self.cancel_image,
+                progress=lambda step, total: self.messages.put(('progress', step, total)),
+            )
+        except IllustrationCancelled:
+            raise
         self.session.last_image_path = Path(path)
         self.session.world.last_image_prompt = prompt
         return path
 
     def _work_image_only(self):
         assert self.session is not None
+        from puca_images import IllustrationCancelled
         try:
             if self.cancel_image.is_set():
-                self.messages.put(('image_done', None))
                 return
             path = self._compose_or_generate_image()
             self.messages.put(('image', str(path)))
             self._autosave()
-            self.messages.put(('image_done', None))
+        except IllustrationCancelled:
+            self.messages.put(('status', 'Illustration skipped.'))
         except Exception as exc:
             logging.exception('Deathtrap image failed')
-            self.messages.put(('notice', f'Illustration failed: {exc}'))
+            self.messages.put(('notice', f'Illustration failed — story continues. ({exc})'))
+        finally:
             self.messages.put(('image_done', None))
 
     def _generate_current_image(self, trace):
         assert self.session is not None
+        from puca_images import IllustrationCancelled
         decision = (trace.image or {}).get('decision')
         if decision == 'REUSE' and self.session.last_image_path and Path(self.session.last_image_path).is_file():
             self.messages.put(('image', str(self.session.last_image_path)))
@@ -586,11 +617,11 @@ class DeathtrapGui:
         try:
             path = self._compose_or_generate_image(trace)
             self.messages.put(('image', str(path)))
-        except RuntimeError as exc:
-            if 'cancelled' in str(exc).lower():
-                return
-            raise
-
+        except IllustrationCancelled:
+            self.messages.put(('status', 'Illustration skipped.'))
+        except Exception as exc:
+            logging.exception('Deathtrap image failed')
+            self.messages.put(('notice', f'Illustration failed — story continues. ({exc})'))
     def _autosave(self):
         if not self.session:
             return

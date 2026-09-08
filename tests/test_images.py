@@ -17,4 +17,33 @@ class ImageTests(unittest.TestCase):
             self.assertEqual(gen.generate('gate', 'a blue gate')[0], key)
             self.assertIsNone(gen.pipe)
 
-if __name__ == '__main__': unittest.main()
+    def test_narration_cues_join_game_state_in_prompt(self):
+        from puca_dungeon.facility_models import make_initial_facility
+        from puca_dungeon.image_prompt import build_image_prompt, extract_visual_cues_from_narration
+        from puca_dungeon.models import AdventureSheet, WorldState
+        from puca_dungeon.rng import GameRNG
+
+        cues = extract_visual_cues_from_narration(
+            'You look at the open slit. "Stand back," someone says. Water darkens the floor by the cup.'
+        )
+        self.assertIn('slit', cues.lower())
+        self.assertNotIn('Stand back', cues)
+
+        rng = GameRNG.from_seed(7)
+        world = WorldState(
+            sheet=AdventureSheet(name='Test'),
+            mode='facility',
+            facility=make_initial_facility(rng),
+        )
+        prompt = build_image_prompt(
+            world,
+            narration='You wake on the mattress and see spilled water near the cup. The slit is open.',
+        )
+        self.assertIn('facility', prompt)
+        self.assertIn('from narration:', prompt)
+        self.assertIn('mattress', prompt.lower())
+        self.assertIn('pixel art', prompt.lower())
+
+
+if __name__ == '__main__':
+    unittest.main()
