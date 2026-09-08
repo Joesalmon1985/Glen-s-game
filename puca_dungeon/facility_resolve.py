@@ -416,6 +416,8 @@ def resolve_facility(
     if hasattr(facility, 'arc'):
         tags = tag_action(intent, player_text, enactment)
         facility.arc.tendencies = apply_tags(facility.arc.tendencies, tags)
+    else:
+        tags = []
 
     # Apply enactment gating before world mutations
     res.enactment = enactment
@@ -429,20 +431,125 @@ def resolve_facility(
         'actual': dict(actual_patch),
     })
 
+    room_before = facility.room_id
     if enactment == ENACTMENT_ABORTED:
         res.success = False
         res.intended_effect_achieved = False
         res.facts.append(_abort_fact(cause, intent))
         res.time_cost = 20
-        return res
+        out = res
+    elif enactment == ENACTMENT_INVERTED:
+        out = _perform_inverted(facility, intent, res, actual_patch, player_text, rng)
+    else:
+        out = _perform_action(
+            facility, intent, res, player_text, rng,
+            compromised=(enactment == ENACTMENT_COMPROMISED),
+        )
+    return _finalise_turn(facility, intent, out, player_text, tags, room_before)
 
-    if enactment == ENACTMENT_INVERTED:
-        return _perform_inverted(facility, intent, res, actual_patch, player_text, rng)
 
-    return _perform_action(
-        facility, intent, res, player_text, rng,
-        compromised=(enactment == ENACTMENT_COMPROMISED),
-    )
+def _finalise_turn(facility, intent, res, player_text, tags, room_before) -> Resolution:
+    """Every facility turn ends here: wishes acknowledged, people react, the Voice speaks."""
+    from puca_dungeon import npc_mind, voice as _voice
+    from puca_dungeon.acknowledge import acknowledge, classify_wish
+    arc = facility.arc
+    arc.turns = int(getattr(arc, 'turns', 0) or 0) + 1
+    structured = res.structured_facts
+    types = {f.get('type') for f in structured if isinstance(f, dict)}
+    present = [c for c in (arc.present_ids or []) if c in (facility.cast or {})]
+
+    # --- 1. Understood-but-not-enacted wishes -------------------------------------
+    wish = classify_wish(player_text)
+    body_act = ''
+    if wish and 'speech' not in types and 'book_enter' not in types:
+        kind, detail = wish
+        counts = dict(arc.wish_counts or {})
+        counts[kind] = int(counts.get(kind, 0) or 0) + 1
+        counts['_total'] = int(counts.get('_total', 0) or 0) + 1
+        arc.wish_counts = counts
+        ack = acknowledge(
+            kind, detail, count_same=counts[kind], count_total=counts['_total'],
+            staff_present=bool(facility.staff_present), restrained=facility.pressures.physical_restraint >= 40,
+            room=facility.room_id,
+        )
+        # Replace the generic default fact with the specific acknowledgement
+        res.facts = [f for f in res.facts if not (isinstance(f, str) and (
+            f.startswith('Nothing useful comes of') or f.startswith('That does not change what they want')
+            or f.startswith('Reality does not stretch') or f == 'Nothing happens.'
+            or f.startswith('You try it.')
+        ))]
+        structured.append({'type': 'understood_not_enacted', 'kind': kind, 'detail': detail, 'text': ack['text']})
+        if 'absurdity' not in tags:
+            tags = list(tags) + ['absurdity']
+            arc.tendencies = apply_tags(arc.tendencies, ['absurdity'])
+        if ack['visible']:
+            body_act = ack['body_act']
+        res.intended_effect_achieved = False
+        res.time_cost = max(res.time_cost, 20)
+
+    # --- 2. Witnesses remember; one ambient beat --------------------------------------
+    event_text = ''
+    if 'aggression' in tags:
+        event_text = 'Sarel tried to attack.'
+    elif body_act:
+        event_text = f'Sarel {body_act}.'
+    elif 'defiance' in tags:
+        event_text = 'Sarel refused an instruction.'
+    elif 'compliance' in tags:
+        event_text = 'Sarel complied.'
+    elif 'warmth' in tags:
+        event_text = 'Sarel was kind.'
+    if present:
+        npc_mind.witness(facility.cast, present, event_text, tags=tags)
+        if 'npc_beat' not in types or body_act:
+            seed = arc.turns
+            beats = npc_mind.ambient(
+                facility.cast, present, phase=facility.phase,
+                language_ability=facility.pressures.language_ability, tags=tags,
+                enactment=res.enactment, ask=str(arc.last_ask or ''), seed=seed, arc=arc,
+            )
+            for b in beats[:1]:
+                structured.append(b.to_fact(facility.cast))
+        # Subjects introduce themselves by name once they have spoken
+        for f in structured:
+            if isinstance(f, dict) and f.get('type') == 'npc_beat' and f.get('speaker') in ('iven', 'nessa', 'ruan') and f.get('kind') == 'speech':
+                arc.learn_name(str(f['speaker']))
+
+    # --- 3. The Voice --------------------------------------------------------------
+    vstate = dict(arc.voice_state or {})
+    present_names = []
+    for c in present:
+        present_names.append(facility.character_name(c) if c in (arc.known_names or []) or c in ('iven', 'nessa', 'ruan')
+                             else {'orderly_quiet': 'the big orderly', 'orderly_anxious': 'the younger orderly',
+                                   'senior_researcher': 'the collared woman'}.get(c, 'the attendant'))
+    line = None
+    addressed = next((f for f in structured if isinstance(f, dict) and f.get('type') == 'voice_addressed'), None)
+    if addressed is not None:
+        line = _voice.reply(
+            str(addressed.get('text') or player_text), state=vstate, tendencies=arc.tendencies,
+            room=facility.room_id, present_names=present_names, knows=[str(arc.last_ask or '')],
+        )
+        if line is None:
+            line = _voice.VoiceLine('…', 'silence')
+    else:
+        force = ''
+        for f in structured:
+            if isinstance(f, dict) and f.get('type') == 'speech':
+                force = str(f.get('force') or '')
+        line = _voice.comment(
+            state=vstate, tendencies=arc.tendencies, phase=facility.phase, room=facility.room_id,
+            enactment=res.enactment, tags=tags, force=force, present_names=present_names,
+            ask=str(arc.last_ask or ''), fear=facility.pressures.fear, fatigue=facility.pressures.fatigue,
+            hunger=facility.pressures.hunger, discoveries=list(arc.discoveries or []),
+            turn_seed=arc.turns, first_turn=(arc.turns == 1), new_scene=False,
+        )
+    arc.voice_state = vstate
+    if line is not None and line.text and line.text != '…':
+        structured.append(line.to_fact())
+    elif line is not None and line.kind == 'silence':
+        structured.append({'type': 'voice', 'kind': 'silence', 'text': 'Nothing answers. Which is not the same as no one listening.'})
+    res.structured_facts = structured
+    return res
 
 
 def _abort_fact(cause: str, intent: Intent) -> str:
@@ -499,6 +606,17 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
         if text.strip() in ('no', 'n', 'nope', 'nah'):
             return _refuse_instruction(facility, intent, res)
         return _perceive(facility, res, eid)
+
+    # Wishes the world cannot honour literally (talk to the cup, sing, dance, become a bird)
+    # are acknowledged in _finalise_turn — never routed through speech.
+    from puca_dungeon.acknowledge import classify_wish as _classify_wish
+    _wish = _classify_wish(player_text)
+    if _wish and _wish[0] in ('talk_object', 'dance', 'babble', 'transform', 'feed_everyone', 'make_food',
+                              'vehicle', 'phase', 'magic', 'romance', 'lick', 'dig', 'meta'):
+        res.intended_effect_achieved = False
+        res.meaningful_effort = False
+        res.time_cost = 30
+        return res
 
     # Speech / social
     if classification == 'SOCIAL_ACTION' or ac in (
@@ -695,13 +813,12 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
 
     # Wait
     if ac in ('wait',) or text.strip() in ('wait', 'wait.', '…'):
-        ask = getattr(getattr(facility, 'arc', None), 'last_ask', '') or ''
-        if ask and facility.staff_present:
-            res.facts.append(f'You wait. They are still waiting: {ask}')
-        elif facility.staff_present:
-            res.facts.append('You wait. The staff do not fill the silence for you.')
-        else:
+        if facility.staff_present:
+            res.facts.append('You wait. They wait better; they have had practice.')
+        elif facility.room_id == 'cell':
             res.facts.append('You wait. The cell keeps its quiet.')
+        else:
+            res.facts.append('You wait.')
         res.actual_action = {'action_class': 'wait', 'performed': True}
         res.intended_effect_achieved = True
         res.time_cost = 60
@@ -731,13 +848,10 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
         return _refuse_instruction(facility, intent, res)
 
     # Default: honest non-achievement — stay in-scene, not meta
-    ask = getattr(getattr(facility, 'arc', None), 'last_ask', '') or ''
-    if ask and facility.staff_present:
-        res.facts.append(f'That does not change what they want. They are still waiting: {ask}')
-    elif facility.staff_present:
-        res.facts.append('Nothing useful comes of it. The staff watch without helping.')
+    if facility.staff_present:
+        res.facts.append('You try it. It changes nothing they can see, and they are the ones watching.')
     else:
-        res.facts.append('Nothing useful comes of that. The cell is unchanged.')
+        res.facts.append('You try it. The room does not take sides.')
     res.intended_effect_achieved = False
     res.meaningful_effort = False
     res.time_cost = 45
@@ -922,18 +1036,18 @@ def _perceive(facility, res, eid) -> Resolution:
 
     room = facility.rooms.get(facility.room_id) or {}
     visible = [e.name for e in facility.entities_in_room()]
-    res.facts.append(str(room.get('description') or 'You look around.'))
+    res.facts.append(_look_around_text(facility))
     present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
     if present:
-        names = [facility.character_name(cid) for cid in present]
-        res.facts.append('Here: ' + ', '.join(names) + '.')
+        from puca_dungeon.compose_turn import person_phrase
+        known = set(getattr(facility.arc, 'known_names', None) or [])
+        names = [person_phrase(facility.cast, cid, known_names=known) for cid in present]
+        if len(names) == 1:
+            res.facts.append(f'{names[0][0].upper() + names[0][1:]} is here, watching you look.')
+        else:
+            res.facts.append('People: ' + ', '.join(names) + '.')
         if 'senior_researcher' in present:
-            res.facts.append(
-                f'{facility.character_name("senior_researcher")} wears a precisely fitted collar. '
-                'Nobody explains it.'
-            )
-    if getattr(getattr(facility, 'arc', None), 'last_ask', ''):
-        res.facts.append(f'They are still waiting: {facility.arc.last_ask}')
+            res.facts.append('The collar on the woman is fitted like a second skin. Nobody explains it.')
     res.structured_facts.append({
         'type': 'perception', 'kind': 'visible_entities', 'entities': visible,
         'people': present,
@@ -942,53 +1056,107 @@ def _perceive(facility, res, eid) -> Resolution:
     return res
 
 
+def _look_around_text(facility) -> str:
+    """Room description from current entity state — never the frozen opening string."""
+    rid = facility.room_id
+    if rid != 'cell':
+        room = facility.rooms.get(rid) or {}
+        return str(room.get('description') or 'You look around.')
+    bits = []
+    bed = facility.entity('bed')
+    cup = facility.entity('cup')
+    book = facility.entity('book')
+    bits.append('Four walls, close enough that you could touch two at once.')
+    if bed:
+        bits.append('The bed is a shelf with a blanket' + (', and the blanket is on the floor.' if bed.state.get('bedding') == 'on_floor' else ' on it.'))
+    if cup and cup.location == 'cell':
+        if getattr(cup, 'broken', False):
+            bits.append('The cup is in pieces by the wall.')
+        elif cup.state.get('position') == 'on_floor':
+            bits.append('The cup lies on its side on the floor' + (', water darkening the stone.' if cup.state.get('water_spilled') else '.'))
+        else:
+            bits.append('The cup ' + ('still has water in it.' if cup.state.get('has_water') else 'is empty.'))
+    elif cup and cup.location == 'inventory':
+        bits.append('The cup is in your hand.')
+    if book and book.location == 'cell':
+        pos = str(book.state.get('position') or '')
+        if pos == 'hidden_under_bedding':
+            bits.append('A corner of the book shows under the bedding.')
+        elif pos == 'on_bed':
+            bits.append('The book sits on the bed, closed.')
+        else:
+            bits.append('The book is on the floor, ' + ('face-down' if book.state.get('face_down') else 'face-up') + ', badly printed.')
+    elif book and book.location == 'inventory':
+        bits.append('The book is in your hands.')
+    bits.append('The door has no handle on this side. ' + ('The slit in it is open.' if facility.slit_open else 'Its slit is shut.'))
+    return ' '.join(bits)
+
+
 def _speak(facility, intent, res, player_text, *, compromised: bool) -> Resolution:
+    from puca_dungeon.mediation import mediate
+    from puca_dungeon import npc_mind
     intended = intent.utterance or player_text
-    spoken = truncate_speech(intended, facility.pressures.language_ability)
-    if compromised and facility.pressures.fatigue >= 60:
-        spoken = spoken.lower()
-    res.facts.append(f'You manage: “{spoken}”' if spoken else 'No useful sound comes out.')
     present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
-    target = intent.target or (present[0] if present else ('staff' if facility.staff_present else None))
-    res.structured_facts.append({
-        'type': 'speech',
-        'intended': intended,
-        'spoken': spoken,
-        'understood_by_npc': bool(spoken) and (facility.staff_present or bool(present)),
-        'target': target,
-    })
+    utt = mediate(
+        intended, facility.pressures.language_ability,
+        staff_present=bool(facility.staff_present or present),
+        fatigue=facility.pressures.fatigue,
+    )
+    speech_fact = utt.to_fact()
+    if utt.given_name:
+        facility.arc.claimed_name = utt.given_name if not utt.is_lie else facility.arc.claimed_name
+        facility.arc.flag('gave_false_name' if utt.is_lie else 'gave_name', utt.given_name)
+    if utt.is_lie:
+        facility.arc.flag('lied', True)
+    res.structured_facts.append(speech_fact)
+
+    # Speaking to the Voice: no foreign-language barrier, no NPC uptake
+    if utt.addressed_to_voice:
+        res.structured_facts.append({'type': 'voice_addressed', 'text': utt.spoken})
+        res.actual_action = {'action_class': 'address_voice', 'performed': True}
+        res.intended_effect_achieved = True
+        res.time_cost = 10
+        return res
+
+    # Choose the addressee: explicit target, else the last referent, else the most senior present
+    target = None
+    tgt = (intent.target or '').strip()
+    if tgt and tgt in (facility.cast or {}):
+        target = tgt
+    if target is None and present:
+        for pref in ('senior_researcher', 'nessa', 'iven', 'ruan', 'orderly_quiet', 'orderly_anxious', 'attendant_a', 'attendant_b'):
+            if pref in present:
+                target = pref
+                break
+        target = target or present[0]
+    speech_fact['target'] = target
+
     if facility.phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER, PHASE_EXPLANATION):
-        return _handle_contract(facility, res, accept=None, player_text=player_text)
+        if utt.force in ('assent', 'refusal') or _ACCEPT_CONTRACT_RE.search(player_text or '') or _REFUSE_CONTRACT_RE.search(player_text or ''):
+            return _handle_contract(facility, res, accept=None, player_text=player_text)
     if facility.phase in (
         PHASE_INTERVIEW, PHASE_MEMORY_INSTABILITY, PHASE_DEATH_QUESTIONS,
         PHASE_HEAVEN_MEMORIES, PHASE_HELL_MEMORIES,
-    ):
+    ) and utt.force in ('statement', 'give_name', 'refusal', 'assent'):
         return _handle_interview_speech(facility, res, player_text)
-    if facility.staff_present and facility.phase in (PHASE_SLIT, PHASE_DOOR):
-        speaker_id = present[0] if present else 'orderly_quiet'
-        speaker = facility.character_name(speaker_id)
-        res.facts.append(
-            f'{speaker} repeats a short sound and a gesture: back. They are still waiting: step away from the door.'
+
+    if target and target in (facility.cast or {}):
+        seed = int(getattr(facility, 'phase_entered_at', 0) or 0) + len(player_text or '')
+        beats = npc_mind.reply_to(
+            facility.cast, target, utt,
+            phase=facility.phase, language_ability=facility.pressures.language_ability,
+            ask=str(getattr(facility.arc, 'last_ask', '') or ''), arc=facility.arc, seed=seed,
         )
-        facility.last_npc_utterance = '… … back …'
-        facility.last_understood = 'back / away'
-        res.structured_facts.append({
-            'type': 'npc_speech',
-            'raw': facility.last_npc_utterance,
-            'understood': facility.last_understood,
-            'speaker': speaker_id,
-            'speaker_name': speaker,
-        })
-        res.structured_facts.append({'type': 'discourse_focus', 'referent': speaker_id})
-    elif present:
-        cid = present[0]
-        nm = facility.character_name(cid)
-        res.facts.append(f'{nm} is here. They listen more than they explain.')
-        res.structured_facts.append({'type': 'discourse_focus', 'referent': cid})
-    elif not facility.staff_present:
-        res.facts.append('No one answers.')
+        for b in beats:
+            res.structured_facts.append(b.to_fact(facility.cast))
+        res.structured_facts.append({'type': 'discourse_focus', 'referent': target})
+        facility.arc.mark_met(target)
+        if utt.force in ('threat', 'insult'):
+            facility.pressures.physical_restraint = min(100, facility.pressures.physical_restraint + 5)
+    elif not facility.staff_present and not present:
+        res.facts.append('No one answers. The room takes the words and gives back nothing.')
         res.structured_facts.append({'type': 'social_no_uptake'})
-    res.intended_effect_achieved = True
+    res.intended_effect_achieved = utt.fidelity in ('full', 'partial')
     res.time_cost = 25
     return res
 
@@ -1180,16 +1348,21 @@ def _later_arc_action(facility, intent, res, player_text, ac, text):
 
     if phase in (
         PHASE_INTERVIEW, PHASE_MEMORY_INSTABILITY, PHASE_DEATH_QUESTIONS,
-        PHASE_HEAVEN_MEMORIES, PHASE_HELL_MEMORIES, PHASE_RETRIEVAL,
+        PHASE_HEAVEN_MEMORIES, PHASE_HELL_MEMORIES,
     ):
         classification = (getattr(intent, 'classification', None) or '')
         if classification == 'PERCEPTION_QUERY' or ac in ('look', 'examine', 'inspect', 'search'):
             return None
-        if ac in ('wait',) or (text or '').strip() in ('wait', 'wait.'):
+        if classification == 'SOCIAL_ACTION' or ac in ('talk', 'speak', 'ask', 'say', 'tell', 'shout', 'yell', 'threaten', 'apologise', 'refuse', 'answer'):
+            return None  # _speak decides: answers go to the interview, questions get replies
+        if ac in ('wait',) or (text or '').strip() in ('wait', 'wait.', '...'):
             _advance_interview(facility, res, player_text, skipped=True)
-            if facility.phase == PHASE_INTERVIEW:
-                _advance_interview(facility, res, player_text, skipped=True)
+            res.actual_action = {'action_class': 'wait', 'performed': True}
             return res
+        from puca_dungeon.acknowledge import classify_wish
+        if classify_wish(player_text):
+            return None  # let the wish be acknowledged; the interview waits a beat
+        # Bare content (a name, a place) is an answer
         return _handle_interview_speech(facility, res, player_text)
 
     if phase == PHASE_RESEARCH:
@@ -1207,33 +1380,77 @@ def _handle_interview_speech(facility, res, player_text) -> Resolution:
     return _advance_interview(facility, res, player_text, skipped=False)
 
 
+def _interview_reaction(kind: str, q: dict, player_text: str) -> str:
+    qid = q.get('id')
+    if kind == 'correct':
+        if qid == 'name':
+            return 'The collared woman does not write it down. She already has it. She nods as if a box had ticked itself.'
+        return 'A small mark on her sheet. Her face gives you nothing, but the pen was quick.'
+    if kind == 'refuse':
+        return 'She waits exactly long enough to be sure you will not go on. Then she moves to the next object. The refusal is written down too.'
+    if kind == 'invented':
+        return 'The two of them exchange a look so brief it might be a blink. The next picture comes anyway. You have the sense of having failed something you did not know was a test.'
+    if kind == 'incorrect':
+        return 'That is not the answer she was expecting. She does not say so. She does not need to; the pause says it.'
+    if kind == 'no_answer':
+        return 'Your silence goes into the record along with everything else.'
+    return ''
+
+
 def _advance_interview(facility, res, player_text, *, skipped: bool) -> Resolution:
+    """Answer the question that was ASKED last turn; then ask the next one.
+
+    Order inside the turn: Sarel's answer → their reaction → (fragment) → next question.
+    The question is an institution beat, so it lands after everything else.
+    """
     from puca_dungeon.interview import current_question, fragment_for, load_reference, score_answer
-    q = current_question(facility.arc.interview_index)
+    from puca_dungeon.mediation import mediate
+    asked = int(getattr(facility.arc, 'interview_asked', -1) if hasattr(facility.arc, 'interview_asked') else -1)
+    if asked < 0:
+        # Nothing has been asked yet: this turn only asks the first question
+        q0 = current_question(0)
+        if q0:
+            facility.arc.interview_asked = 0
+            res.structured_facts.append({'type': 'interview_prompt', 'question': q0['id'], 'content': q0['prompt']})
+            res.world_events = list(res.world_events or []) + [{'type': 'interview_question', 'text': q0['prompt']}]
+        res.intended_effect_achieved = True
+        res.state_changed = True
+        return res
+    q = current_question(asked)
     if q is None:
-        res.facts.append('The questions pause. They watch you.')
+        res.facts.append('The questions have stopped. She is watching you instead, which is worse.')
         res.intended_effect_achieved = True
         return res
     kind = 'no_answer' if skipped else score_answer(q, player_text, load_reference())
     facility.arc.interview_answers.append({'id': q['id'], 'kind': kind, 'text': player_text})
-    facility.arc.interview_index += 1
+    facility.arc.interview_index = asked + 1
+    if not skipped:
+        utt = mediate(player_text, facility.pressures.language_ability, staff_present=True,
+                      fatigue=facility.pressures.fatigue)
+        res.structured_facts.append(utt.to_fact())
+        if kind in ('invented', 'incorrect') and hasattr(facility.arc, 'flag'):
+            facility.arc.flag('interview_mismatch', int(facility.arc.behavior_flags.get('interview_mismatch', 0) or 0) + 1)
+    reaction = _interview_reaction(kind, q, player_text)
+    if reaction:
+        res.structured_facts.append({'type': 'npc_beat', 'speaker': 'senior_researcher',
+                                     'speaker_name': facility.character_name('senior_researcher'),
+                                     'kind': 'gesture', 'body': reaction, 'weight': 3})
     frag = fragment_for(q['id']) if facility.phase in (
         PHASE_INTERVIEW, PHASE_MEMORY_INSTABILITY, PHASE_DEATH_QUESTIONS,
     ) else None
-    lines = [q['prompt']]
-    if kind == 'correct':
-        lines.append('They make a small mark. Their face does not change much.')
-    elif kind == 'refuse':
-        lines.append('They wait, then move to the next object.')
-    elif kind == 'invented':
-        lines.append('They glance at one another. The next image comes anyway.')
-    elif kind == 'incorrect':
-        lines.append('That is not the answer they expected. They do not say so.')
     if frag and facility.arc.interview_index >= 3:
-        lines.append(frag)
+        res.structured_facts.append({'type': 'memory_fragment', 'text': frag})
+        res.world_events = list(res.world_events or []) + [{'type': 'memory_fragment', 'text': frag}]
         facility.arc.discover('involuntary_fragment')
-    res.facts.extend(lines)
     res.structured_facts.append({'type': 'interview_answer', 'question': q['id'], 'kind': kind})
+    # Ask the next one
+    nxt = current_question(asked + 1)
+    if nxt is not None:
+        facility.arc.interview_asked = asked + 1
+        res.structured_facts.append({'type': 'interview_prompt', 'question': nxt['id'], 'content': nxt['prompt']})
+        res.world_events = list(res.world_events or []) + [{'type': 'interview_question', 'text': nxt['prompt']}]
+    else:
+        facility.arc.interview_asked = asked + 1
     res.intended_effect_achieved = not skipped
     res.state_changed = True
     return res

@@ -428,6 +428,29 @@ def _is_go_home(text: str) -> bool:
     return bool(re.search(r'\b(go|head|walk|return|get)\b.*\bhome\b|\bgo back home\b|\bhomeward\b', t))
 
 
+def _is_plain_speech(text: str) -> bool:
+    """Speech acts the facility should treat as talking: questions, requests, quoted lines, speech verbs."""
+    raw = (text or '').strip()
+    t = _norm_text(raw)
+    if not t:
+        return False
+    if re.search(r'["“”]', raw):
+        return True
+    if re.match(
+        r'^(?:i\s+)?(?:try to\s+)?(?:ask|tell|say|shout|scream|yell|whisper|demand|beg|plead|explain|'
+        r'request|call out|answer|reply|greet|thank|apologi[sz]e|insist|declare|announce|mutter|'
+        r'speak|talk|threaten|introduce myself|give (?:him|her|them) (?:my|a|a false) name)\b', t,
+    ):
+        return True
+    if re.match(r'^(?:who|what|why|where|when|how|are you|is this|am i|can you|could you|will you|do you)\b', t):
+        return True
+    if re.search(r'\b(please|hello|hi there|help me|let me (?:out|go)|my name is|shut up|be quiet|stop talking|leave me alone)\b', t):
+        return True
+    if raw.endswith('?'):
+        return True
+    return False
+
+
 def _is_social(text: str) -> bool:
     t = _norm_text(text)
     toks = _tokens(t)
@@ -1262,6 +1285,27 @@ def heuristic_stage_a(text: str, perception: dict | None = None) -> dict:
             'understood': True,
             'action': {'class': 'PERCEIVE', 'query_focus': focus, 'utterance': text},
             'query_focus': focus,
+        }
+
+    # Plain speech: questions, requests, addresses, quoted speech, speech verbs
+    if _is_plain_speech(text):
+        target = None
+        m = re.search(r'\b(?:ask|tell|say to|speak to|talk to|shout at|thank|threaten|greet|whisper to)\s+(him|her|them|the (?:guard|man|woman|staff|orderly|researcher|voice)|[A-Z][a-z]+)\b', text)
+        if m:
+            target = m.group(1)
+        return {
+            'classification': 'SOCIAL_ACTION',
+            'matched_action_id': None,
+            'understood': True,
+            'action': {
+                'class': 'SPEAK',
+                'target_ref': target,
+                'method': 'speak',
+                'intended_effect': 'communicate',
+                'utterance': text,
+            },
+            'utterance': text,
+            'notes': 'plain_speech',
         }
 
     if _is_social(t):

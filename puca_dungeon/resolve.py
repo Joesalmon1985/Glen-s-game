@@ -60,6 +60,7 @@ class Resolution:
     wanted_action: dict = field(default_factory=dict)
     actual_action: dict = field(default_factory=dict)
     enactment_cause: str = ''
+    room_before: str = ''
 
     def to_dict(self) -> dict:
         return {

@@ -36,6 +36,12 @@ class ArcState:
     wash_style: str = ''
     claimed_name: str = ''
     narrative_context: dict = field(default_factory=dict)
+    interview_asked: int = -1
+    voice_state: dict = field(default_factory=dict)
+    known_names: list = field(default_factory=list)
+    wish_counts: dict = field(default_factory=dict)
+    turns: int = 0
+    ask_repeats: int = 0
 
     def to_dict(self) -> dict:
         return {
@@ -68,6 +74,12 @@ class ArcState:
             'wash_style': self.wash_style,
             'claimed_name': self.claimed_name,
             'narrative_context': dict(self.narrative_context or {}),
+            'interview_asked': self.interview_asked,
+            'voice_state': dict(self.voice_state or {}),
+            'known_names': list(self.known_names),
+            'wish_counts': dict(self.wish_counts or {}),
+            'turns': self.turns,
+            'ask_repeats': self.ask_repeats,
         }
 
     @classmethod
@@ -103,6 +115,12 @@ class ArcState:
             wash_style=str(data.get('wash_style') or ''),
             claimed_name=str(data.get('claimed_name') or ''),
             narrative_context=dict(data.get('narrative_context') or {}),
+            interview_asked=int(data.get('interview_asked', -1) if data.get('interview_asked') is not None else -1),
+            voice_state=dict(data.get('voice_state') or {}),
+            known_names=list(data.get('known_names') or []),
+            wish_counts=dict(data.get('wish_counts') or {}),
+            turns=int(data.get('turns', 0) or 0),
+            ask_repeats=int(data.get('ask_repeats', 0) or 0),
         )
 
     def flag(self, key: str, value: Any = True) -> None:
@@ -115,6 +133,10 @@ class ArcState:
     def mark_met(self, cid: str) -> None:
         if cid and cid not in self.met_ids:
             self.met_ids.append(cid)
+
+    def learn_name(self, cid: str) -> None:
+        if cid and cid not in self.known_names:
+            self.known_names.append(cid)
 
 
 def situation_for_phase(phase: str, room_id: str, ask: str = '') -> str:

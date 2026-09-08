@@ -628,8 +628,10 @@ class GameSession:
         player_text: str = '',
     ) -> tuple[Any, Resolution]:
         if self.world.mode == 'facility':
+            room_before = str(getattr(self.world.facility, 'room_id', '') or '')
             grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
             resolution = resolve_facility(self.world, intent, grounding, self.rng, player_text)
+            resolution.room_before = room_before
             # Persist discourse focus + last intent for again/him
             if intent and intent.understood:
                 self.world.last_grounded_intent = intent.to_dict()
@@ -647,6 +649,7 @@ class GameSession:
                     prose = self.exit_book()
                     resolution.facts.append(prose)
             facility_react.after_facility_action(self.world, resolution, book_turn=False)
+            self._voice_on_scene_change(resolution)
             return grounding, resolution
 
         grounding = ground_intent(self.world, intent, passage, authored_actions=authored)
@@ -729,6 +732,37 @@ class GameSession:
                 except Exception:
                     pass
         return grounding, resolution
+
+    def _voice_on_scene_change(self, resolution) -> None:
+        """If the institution moved the scene this turn, let the Voice react to the NEW room."""
+        fac = self.world.facility
+        if fac is None:
+            return
+        events = list(getattr(resolution, 'world_events', None) or [])
+        if not any(isinstance(e, dict) and e.get('type') == 'scene_change' for e in events):
+            return
+        structured = list(getattr(resolution, 'structured_facts', None) or [])
+        if any(isinstance(f, dict) and f.get('type') == 'voice' and f.get('kind') == 'reply' for f in structured):
+            return
+        # Drop any pre-scene-change comment; a scene comment is more relevant
+        structured = [f for f in structured if not (isinstance(f, dict) and f.get('type') == 'voice')]
+        try:
+            from puca_dungeon import voice as _voice
+            arc = fac.arc
+            vstate = dict(arc.voice_state or {})
+            line = _voice.comment(
+                state=vstate, tendencies=arc.tendencies, phase=fac.phase, room=fac.room_id,
+                enactment=resolution.enactment, tags=[], force='', present_names=[],
+                ask=str(arc.last_ask or ''), fear=fac.pressures.fear, fatigue=fac.pressures.fatigue,
+                hunger=fac.pressures.hunger, discoveries=list(arc.discoveries or []),
+                turn_seed=arc.turns, first_turn=False, new_scene=True,
+            )
+            arc.voice_state = vstate
+            if line is not None and line.text:
+                structured.append(line.to_fact())
+        except Exception:
+            pass
+        resolution.structured_facts = structured
 
     def _run_compound(
         self,
@@ -1010,8 +1044,11 @@ class GameSession:
         trace.narrator_input = narrator_in
         trace.narrator_output = prose
 
-        # 7) Image from final visible state + player-facing narration cues
-        colour = (not self.debug) and not isinstance(self.narrator, TemplateNarrator)
+        # 7) Image from final visible state + player-facing narration cues.
+        # Only LLM-colour the prompt when an image will actually be painted —
+        # otherwise it is a wasted Ollama call on every turn.
+        generating = (not self.debug) and self.generate_images
+        colour = generating and not isinstance(self.narrator, TemplateNarrator)
         img = image_decision(
             self.world,
             resolution,

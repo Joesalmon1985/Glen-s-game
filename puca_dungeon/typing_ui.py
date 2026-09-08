@@ -11,6 +11,23 @@ from puca_dungeon.narrate import OllamaNarrator, TemplateNarrator
 from puca_dungeon.session import GameSession
 
 
+def _print_illustration(session: GameSession, trace) -> None:
+    """Tell the player where the turn's illustration lives (text UI has no image pane)."""
+    img = getattr(trace, 'image', None) or {}
+    if session.debug:
+        return
+    if not session.generate_images:
+        return
+    path = img.get('path')
+    if path:
+        if img.get('decision') == 'REUSE' or img.get('note') == 'image reused':
+            print(f'[Illustration unchanged: {path}]')
+        else:
+            print(f'[Illustration: {path}]')
+    elif img.get('decision') == 'REGENERATE':
+        print(f"[Illustration failed — story continues. ({img.get('note') or 'unknown error'})]")
+
+
 def run_cli(session: GameSession) -> int:
     print(session.opening_text)
     print()
@@ -20,7 +37,8 @@ def run_cli(session: GameSession) -> int:
     else:
         print('Type freely to act. Commands: /sheet /save /load /quit')
         if session.generate_images:
-            print('Image generation enabled.')
+            print('Illustrations on: new scenes are painted as 512x512 PNGs (cached, reused until the scene changes).')
+            print(f'Illustration folder: {session._image_cache_dir}')
     print(f'Interpreter: {type(session.interpreter).__name__}')
     print(f'Narrator: {type(session.narrator).__name__}')
     if type(session.interpreter).__name__ == 'HeuristicInterpreter':
@@ -49,6 +67,7 @@ def run_cli(session: GameSession) -> int:
             continue
         print()
         print(trace.narrator_output)
+        _print_illustration(session, trace)
         sit = getattr(session, 'situation_line', '') or ''
         if sit:
             print(f'— {sit}')

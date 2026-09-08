@@ -28,15 +28,8 @@ def emit_scene_change(
     events = list(getattr(resolution, 'world_events', None) or [])
     events.append(event)
     resolution.world_events = events
-    facts = list(resolution.facts or [])
-    if text and text not in facts:
-        facts.insert(0, text)
-    if to_room and to_room != (from_room or getattr(facility, 'room_id', '')):
-        room = (facility.rooms or {}).get(to_room) or {}
-        desc = str(room.get('description') or '')
-        if desc and desc not in facts:
-            facts.insert(1 if facts and facts[0] == text else 0, desc)
-    resolution.facts = facts
+    # Scene-change text is carried on world_events; the turn composer places it
+    # AFTER Sarel's act and the people's response (causal order), never first.
     sf = list(getattr(resolution, 'structured_facts', None) or [])
     sf.append(event)
     resolution.structured_facts = sf
@@ -49,6 +42,8 @@ def emit_scene_change(
         if to_room:
             facility.room_id = to_room
         arc.situation_line = situation_for_phase(facility.phase, facility.room_id, ask)
+        if ask != getattr(arc, 'last_ask', ''):
+            arc.ask_repeats = 0
         arc.last_ask = ask
         facility.arc = arc
     try:

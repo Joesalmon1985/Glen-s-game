@@ -127,7 +127,7 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
         ):
             _enter_phase(facility, PHASE_SLIT, t)
             facility.slit_open = True
-            _set_presence(facility, ['orderly_quiet'], 'wash_corridor')
+            _set_presence(facility, ['orderly_quiet'])
             door = facility.entity('door')
             if door:
                 door.state['slit_open'] = True
@@ -178,7 +178,7 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
                 'npc_raw': facility.last_npc_utterance,
                 'understood': 'something like “back” / “away”',
                 'speaker_name': speaker,
-                'text': resolution.facts[0] if resolution.facts else '',
+                'text': '',
             })
 
     elif phase == PHASE_SLIT:
@@ -192,7 +192,7 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
                 ask='stay away from the door',
                 kind='door_procedure',
             )
-            events.append({'type': 'door_procedure', 'text': resolution.facts[0] if resolution.facts else ''})
+            events.append({'type': 'door_procedure', 'text': ''})
 
     elif phase == PHASE_DOOR:
         elapsed = t - facility.phase_entered_at
@@ -220,28 +220,29 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             _lead(
                 resolution, facility,
                 (
-                    'You leave the cell. The door opens under their rules. Hands find your arms. '
-                    'You are in the corridor now.'
+                    'The door opens under their rules. Hands find your arms and you are walked out of the cell.'
                 ),
                 room='corridor',
                 kind='forced_removal',
             )
-            events.append({'type': 'forced_removal', 'text': resolution.facts[0] if resolution.facts else ''})
+            events.append({'type': 'forced_removal', 'text': ''})
 
     elif phase == PHASE_REMOVAL:
         if (t - facility.phase_entered_at) >= 40:
             _enter_phase(facility, PHASE_WASH, t)
             _set_presence(facility, ['orderly_quiet', 'orderly_anxious'], 'wash_corridor')
+            facility.last_npc_utterance = ''
+            facility.last_understood = ''
             facility.arc.scene_id = 'wash'
             facility.arc.last_ask = 'wash'
             _lead(
                 resolution, facility,
-                'They take you out of the corridor and into a washroom. Water. A basin. They intend to wash you.',
+                'They walk you out of the corridor and into a washroom. They intend to wash you.',
                 room='washroom',
                 ask='wash',
                 kind='arrive_wash',
             )
-            events.append({'type': 'arrive_wash', 'text': resolution.facts[0] if resolution.facts else ''})
+            events.append({'type': 'arrive_wash', 'text': ''})
 
     elif phase == PHASE_WASH:
         elapsed = t - facility.phase_entered_at
@@ -269,14 +270,15 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             _set_presence(facility, ['orderly_quiet', 'orderly_anxious'], 'meal')
             facility.arc.scene_id = 'meal'
             facility.arc.last_ask = 'eat'
+            facility.arc.ask_repeats = 0
             _lead(
                 resolution, facility,
-                'They take you from the washroom to a mess room. A table. A bowl. Heat rising from food. They want you to eat.',
+                'They take you from the washroom to a mess room and sit you at the table. They want you to eat.',
                 room='mess',
                 ask='eat',
                 kind='arrive_food',
             )
-            events.append({'type': 'arrive_food', 'text': resolution.facts[0] if resolution.facts else ''})
+            events.append({'type': 'arrive_food', 'text': ''})
 
     elif phase == PHASE_FOOD:
         elapsed = t - facility.phase_entered_at
@@ -307,28 +309,21 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             facility.arc.scene_id = 'return'
             facility.staff_present = False
             facility.staff_count = 0
-            facility.arc.present_ids = subjects_for_window(
-                facility.arc.encounter_schedule, 'return_escort',
-            )
+            facility.arc.present_ids = []
+            facility.last_npc_utterance = ''
+            facility.last_understood = ''
             company = ''
-            if facility.arc.present_ids:
-                names = [facility.character_name(cid) for cid in facility.arc.present_ids]
-                company = (
-                    f' Another subject is already here: {", ".join(names)}. '
-                    'They watch you without explaining anything.'
-                )
             _lead(
                 resolution, facility,
                 (
-                    'They take you back to the same cell. Whatever you moved is still moved. '
-                    'You are cleaner, and much more tired.'
+                    'They walk you back. You are cleaner, and much more tired.'
                     + (' You are less hungry.' if facility.fed else '')
                     + company
                 ),
                 room='cell',
                 kind='return_cell',
             )
-            events.append({'type': 'return_cell', 'text': resolution.facts[0] if resolution.facts else ''})
+            events.append({'type': 'return_cell', 'text': ''})
 
     elif phase == PHASE_RETURN:
         _enter_phase(facility, PHASE_SLEEP, t)
@@ -347,8 +342,8 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             if not facility.slept:
                 facility.slept = True
                 events.append({
-                    'type': 'sleep', 'involuntary': True,
-                    'text': 'A magnificent plan to stay awake. You wake later with your face against the wall.',
+                    'type': 'sleep', 'involuntary': True, 'order': -1,
+                    'text': 'Whatever plan you had for staying awake, your body overrules it. The wall is cool against your face and then it is not there at all.',
                 })
             _wake_day2(facility, world, resolution, t, events)
 
@@ -360,37 +355,47 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
     elif phase == PHASE_DAY2_WAKE:
         if (t - facility.phase_entered_at) >= 15:
             _enter_phase(facility, PHASE_RETRIEVAL, t)
-            _set_presence(facility, ['orderly_quiet', 'orderly_anxious'], 'day2_retrieval')
+            _set_presence(facility, ['orderly_quiet', 'orderly_anxious'])
             facility.arc.day = 2
             facility.arc.scene_id = 'retrieval'
             _lead(
                 resolution, facility,
-                'Morning. The collection is more formal. They take you from the cell into the corridor, then toward another room.',
+                'Morning. The collection is more formal: two of them, no gestures, hands already on your arms as you leave the cell.',
                 room='corridor',
                 kind='retrieval',
             )
-            events.append({'type': 'retrieval', 'text': resolution.facts[0] if resolution.facts else ''})
+            events.append({'type': 'retrieval', 'text': ''})
 
     elif phase == PHASE_RETRIEVAL:
         if (t - facility.phase_entered_at) >= 35:
             _enter_phase(facility, PHASE_INTERVIEW, t)
-            _set_presence(facility, ['senior_researcher', 'orderly_quiet'], 'interview_waiting')
+            _set_presence(facility, ['senior_researcher', 'orderly_quiet'])
             world.last_npc_referent = 'senior_researcher'
-            senior = facility.character_name('senior_researcher')
+            senior = 'A woman'
             facility.arc.scene_id = 'interview'
             facility.arc.last_ask = 'answer their questions'
+            facility.last_npc_utterance = ''
+            facility.last_understood = ''
             _lead(
                 resolution, facility,
                 (
                     f'You are taken into an interview room. {senior} sits opposite you. '
-                    f'They wear a precisely fitted collar as naturally as clothing. '
-                    f'No one explains it. They begin to ask questions with pictures and slow words.'
+                    f'She wears a precisely fitted collar as naturally as clothing. '
+                    f'No one explains it. She begins with pictures and slow words.'
                 ),
                 room='interview',
                 ask='answer their questions',
                 kind='arrive_interview',
             )
-            events.append({'type': 'arrive_interview', 'text': resolution.facts[0] if resolution.facts else ''})
+            events.append({'type': 'arrive_interview', 'text': ''})
+            try:
+                from puca_dungeon.interview import current_question
+                q0 = current_question(0)
+                if q0 and int(getattr(facility.arc, 'interview_asked', -1)) < 0:
+                    facility.arc.interview_asked = 0
+                    events.append({'type': 'interview_question', 'text': q0['prompt']})
+            except Exception:
+                pass
 
     elif phase == PHASE_INTERVIEW:
         if facility.arc.interview_index >= 4 or (t - facility.phase_entered_at) >= 150:
@@ -405,7 +410,7 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
         if (t - facility.phase_entered_at) >= 40:
             _enter_phase(facility, PHASE_DEATH_QUESTIONS, t)
             facility.arc.scene_id = 'death'
-            facility.arc.last_ask = 'what happened when you died'
+            facility.arc.last_ask = 'answer their questions'
             events.append({
                 'type': 'death_questions',
                 'text': 'The questioning changes. They ask what happened when you died. If you say you do not remember dying, they continue anyway: darkness, waking, warmth, pain, voices, light.',
@@ -434,8 +439,9 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
     elif phase == PHASE_HELL_MEMORIES:
         if (t - facility.phase_entered_at) >= 40:
             _enter_phase(facility, PHASE_EXPLANATION, t)
-            _set_presence(facility, ['senior_researcher'], 'afterlife_break')
+            _set_presence(facility, ['senior_researcher'])
             facility.arc.scene_id = 'explanation'
+            facility.arc.last_ask = ''
             events.append({
                 'type': 'explanation',
                 'text': (
@@ -470,7 +476,7 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
                 ask='',
                 kind='heaven_expires',
             )
-            events.append({'type': 'heaven_expires', 'text': resolution.facts[0] if resolution.facts else ''})
+            events.append({'type': 'heaven_expires', 'text': ''})
             _enter_hell(facility, world, resolution, t, events)
 
     elif phase == PHASE_HEAVEN_EXPIRE:
@@ -501,13 +507,6 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             'You are a registered research subject. The next work has not begun.',
         )
 
-    # Restate pending asks
-    if facility.arc.last_ask and phase in (
-        PHASE_SLIT, PHASE_DOOR, PHASE_WASH, PHASE_FOOD, PHASE_CONTRACT, PHASE_SECOND_OFFER,
-    ):
-        restated = f'They are still waiting: {facility.arc.last_ask}'
-        if restated not in (resolution.facts or []):
-            events.append({'type': 'restated_ask', 'text': restated, 'ask': facility.arc.last_ask})
 
     if facility.book_engaged and any(
         e.get('type') in ('slit_opens', 'door_procedure', 'forced_removal', 'retrieval') for e in events
@@ -522,8 +521,6 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
 
     resolution.world_events = list(getattr(resolution, 'world_events', None) or []) + events
     for ev in events:
-        if ev.get('text') and ev['text'] not in (resolution.facts or []):
-            resolution.facts.append(ev['text'])
         if ev.get('type') in (
             'slit_opens', 'door_procedure', 'forced_removal', 'washed', 'fed',
             'retrieval', 'arrive_interview', 'heaven_expires',
@@ -600,7 +597,7 @@ def _wake_day2(facility, world, resolution, t, events) -> None:
         room='cell',
         kind='day2_wake',
     )
-    events.append({'type': 'day2_wake', 'text': resolution.facts[0] if resolution.facts else ''})
+    events.append({'type': 'day2_wake', 'text': ''})
 
 
 def _offer_contract(world, facility, resolution, t, events, *, first: bool) -> None:
@@ -656,14 +653,13 @@ def _enter_heaven(facility, world, resolution, t, events) -> None:
     _lead(
         resolution, facility,
         (
-            'You lose consciousness during their preparation. You wake somewhere else entirely. '
-            'They call it Heaven. It is warm, clean, quiet, and well supplied. '
-            'It is physically real. They encourage you to believe only your mind arrived.'
+            'The hum rises; the room thins; you lose consciousness. You wake somewhere else entirely. '
+            'They call it Heaven.'
         ),
         room='heaven',
         kind='wake_heaven',
     )
-    events.append({'type': 'wake_heaven', 'text': resolution.facts[0] if resolution.facts else ''})
+    events.append({'type': 'wake_heaven', 'text': ''})
 
 
 def _enter_hell(facility, world, resolution, t, events) -> None:
@@ -678,13 +674,12 @@ def _enter_hell(facility, world, resolution, t, events) -> None:
     _lead(
         resolution, facility,
         (
-            'You are sedated and taken. You wake somewhere else. They call it Hell. '
-            'The air is foul. The surface hurts. Someone designed this. There are no demons.'
+            'You are sedated and taken. You wake somewhere else. They call it Hell.'
         ),
         room='hell',
         kind='wake_hell',
     )
-    events.append({'type': 'wake_hell', 'text': resolution.facts[0] if resolution.facts else ''})
+    events.append({'type': 'wake_hell', 'text': ''})
 
 
 def _ensure_subjects_met(facility, resolution, events) -> None:
@@ -721,13 +716,12 @@ def _enter_research(facility, world, resolution, t, events) -> None:
     _lead(
         resolution, facility,
         (
-            'They register you as a cooperating research subject. '
-            'You are taken to subject quarters in the research wing. The next work has not begun.'
+            'They register you as a cooperating research subject and walk you deeper into the building.'
         ),
         room='research_quarters',
         kind='research_intake',
     )
-    events.append({'type': 'research_intake', 'text': resolution.facts[0] if resolution.facts else ''})
+    events.append({'type': 'research_intake', 'text': ''})
 
 
 def enter_processing(world, resolution, *, from_route: str) -> None:
