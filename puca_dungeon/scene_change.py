@@ -31,11 +31,6 @@ def emit_scene_change(
     facts = list(resolution.facts or [])
     if text and text not in facts:
         facts.insert(0, text)
-    if to_room and to_room != (from_room or getattr(facility, 'room_id', '')):
-        room = (facility.rooms or {}).get(to_room) or {}
-        desc = str(room.get('description') or '')
-        if desc and desc not in facts:
-            facts.insert(1 if facts and facts[0] == text else 0, desc)
     resolution.facts = facts
     sf = list(getattr(resolution, 'structured_facts', None) or [])
     sf.append(event)

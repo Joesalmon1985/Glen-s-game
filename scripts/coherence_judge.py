@@ -69,6 +69,8 @@ META_PATTERNS = [
     (re.compile(r'\b(COOPERATE|DEFECT)\b'), 'no_game_theory_leak', 'COOPERATE/DEFECT label leak'),
     (re.compile(r'\b(strategy_label|relationship_scores|disclose_depth)\b', re.I), 'no_game_theory_leak', 'Strategy internals leak'),
     (re.compile(r'\b(TEST|VERIFY|WITHHOLD|RECIPROCATE|TERMINATE)\s+move\b', re.I), 'dialogue_purpose', 'Conversational move enum leaked'),
+    (re.compile(r'\bdelta\s+of\s+\d+\b', re.I), 'no_game_theory_leak', 'Language-practice delta meter leak'),
+    (re.compile(r'\blanguage practice\b', re.I), 'no_game_theory_leak', 'Language practice meter leak'),
 ]
 
 ROOM_WORDS = {
@@ -98,17 +100,41 @@ def _parse_short_transcript(path: Path) -> list[dict[str, Any]]:
     turns: list[dict[str, Any]] = []
     current: dict[str, Any] | None = None
     buf: list[str] = []
+
+    def _flush() -> None:
+        nonlocal current, buf
+        if current is not None:
+            current['prose'] = '\n'.join(buf).strip()
+            turns.append(current)
+        current = None
+        buf = []
+
     for line in text.splitlines():
         if line.startswith('## OPENING'):
+            _flush()
             current = {'turn': 0, 'input': '(opening)', 'prose_lines': []}
             buf = []
             continue
         if line.startswith('## Turn '):
-            if current is not None:
-                current['prose'] = '\n'.join(buf).strip()
-                turns.append(current)
+            _flush()
             m = re.match(r'## Turn (\d+)', line)
             current = {'turn': int(m.group(1)) if m else len(turns) + 1, 'input': '', 'prose_lines': []}
+            buf = []
+            continue
+        # Social redteam format: "T0 (opening)" / "T12 > command"
+        m_social = re.match(
+            r'^T(\d+)\s*(?:>\s*(.*)| \(\s*opening\s*\))?\s*$',
+            line,
+            re.I,
+        )
+        if m_social:
+            _flush()
+            turn_n = int(m_social.group(1))
+            cmd = (m_social.group(2) or '').strip()
+            if turn_n == 0 or (not cmd and 'opening' in line.lower()):
+                current = {'turn': 0, 'input': '(opening)', 'prose_lines': []}
+            else:
+                current = {'turn': turn_n, 'input': cmd, 'prose_lines': []}
             buf = []
             continue
         if current is None:
@@ -121,9 +147,7 @@ def _parse_short_transcript(path: Path) -> list[dict[str, Any]]:
         if line.startswith('#'):
             continue
         buf.append(line)
-    if current is not None:
-        current['prose'] = '\n'.join(buf).strip()
-        turns.append(current)
+    _flush()
     return turns
 
 
@@ -310,7 +334,11 @@ def judge_run(run_dir: Path) -> dict[str, Any]:
 
         # Causality / motive around door escalation and forced procedures
         if mode != 'book_dungeon' and 'door_escalate' in event_types and 'forced_removal' not in event_types:
-            if not re.search(r'\b(call|footstep|arrive|another|help|gesture|abandon|repeat)', prose, re.I):
+            if not re.search(
+                r'\b(call|footstep|arrive|arrives|enter|enters|another|second|'
+                r'help|gesture|abandon|repeat|staff|figure|coax)\b',
+                prose, re.I,
+            ):
                 defects.append(_defect(
                     turn_n, 'npc_motive',
                     'Door escalation lacks readable motive/causal sequence',

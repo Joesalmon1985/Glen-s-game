@@ -23,6 +23,10 @@ STAGE_A_SYSTEM = """You interpret what a human player means in a text adventure.
 You do NOT decide success, failure, damage, paragraph turns, inventory changes, or combat outcomes.
 You do NOT see authored choices, menus, or preferred solutions — only player text and neutral perception.
 
+When the player explicitly asks, tells, shouts, or speaks, that is SOCIAL_ACTION.
+"I wonder..." or private speculation without ask/tell/shout is not speech — use NO_ACTIONABLE_INTENT with action.class THINK.
+A bare question while alone may be orientation, not speech.
+
 Classify the player's meaning. NEVER use MATCH_AUTHORED_ACTION in this stage.
 
 Classifications (pick exactly one):
@@ -173,7 +177,7 @@ _SOCIAL_VERBS = frozenset({
     'seduce', 'seducing', 'charm', 'charming', 'sing', 'singing', 'song',
     'flirt', 'flirting', 'compliment', 'kiss', 'hug', 'negotiate', 'parley',
     'persuade', 'convince', 'beg', 'plead', 'talk', 'speak', 'say', 'tell',
-    'warn', 'shout', 'yell', 'call',
+    'warn', 'shout', 'yell', 'call', 'ask',
 })
 _COMBAT_VERBS = frozenset({
     'attack', 'fight', 'kill', 'stab', 'slash', 'strike', 'hit', 'punch',
@@ -1264,6 +1268,30 @@ def heuristic_stage_a(text: str, perception: dict | None = None) -> dict:
             'query_focus': focus,
         }
 
+    if re.search(r'\b(i wonder|wonder if|to myself)\b', t) and not re.search(
+        r'\b(ask|tell|say|shout|speak)\b', t
+    ):
+        return {
+            'classification': 'NO_ACTIONABLE_INTENT',
+            'matched_action_id': None,
+            'understood': True,
+            'action': {'class': 'THINK', 'utterance': text},
+            'notes': 'internal_thought',
+            'utterance': text,
+        }
+
+    if re.search(
+        r'\b(ask|tell her|tell him|tell them|who are you|what is your name|my name is)\b',
+        t,
+    ) or (t.endswith('?') and re.search(r'\b(who|what|why|where|how)\b', t)):
+        return {
+            'classification': 'SOCIAL_ACTION',
+            'matched_action_id': None,
+            'understood': True,
+            'action': {'class': 'SPEAK', 'method': 'ask', 'utterance': text, 'intended_effect': 'communicate'},
+            'utterance': text,
+        }
+
     if _is_social(t):
         method = 'sing' if any(_word_in_blob(v, t) for v in ('sing', 'singing', 'song')) else (
             'seduce' if any(_word_in_blob(v, t) for v in ('seduce', 'seducing')) else 'charm'
@@ -1920,12 +1948,15 @@ def heuristic_raw(text: str, perception: dict) -> dict:
             'destination': 'tunnel',
             'intended_effect': 'signal',
         }
-    if re.search(r'\b(say|speak|tell)\b', t):
+    if re.search(r'\b(ask|tell|say|speak|talk|shout|yell|who are you|what is your name)\b', t) or (
+        t.endswith('?') and re.search(r'\b(who|what|why|where|how)\b', t)
+    ):
         return {
-            'action_class': 'SPEAK',
+            'action_class': 'ask' if re.search(r'\b(ask|who|what|why|where)\b', t) else 'speak',
             'classification': 'SOCIAL_ACTION',
             'utterance': text,
             'intended_effect': 'communicate',
+            'understood': True,
         }
 
     return {

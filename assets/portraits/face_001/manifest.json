@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "visual_profile_id": "face_001",
+  "canvas": {
+    "width": 768,
+    "height": 768
+  },
+  "source": "procedural_prototype",
+  "identity": {
+    "head": "base/head.png",
+    "ears": "base/ears.png",
+    "nose": "base/nose.png",
+    "mouth_base": "base/mouth_base.png",
+    "hair_back": "hair/back.png",
+    "hair_front": "hair/front.png"
+  },
+  "expressions": {
+    "eyes": {
+      "open": "eyes/open.png",
+      "slightly_narrow": "eyes/slightly_narrow.png",
+      "narrow": "eyes/narrow.png",
+      "wide": "eyes/wide.png",
+      "closed": "eyes/closed.png"
+    },
+    "eyelids": {
+      "open": "eyelids/open.png",
+      "slightly_narrow": "eyelids/slightly_narrow.png",
+      "narrow": "eyelids/narrow.png",
+      "wide": "eyelids/wide.png",
+      "closed": "eyelids/closed.png"
+    },
+    "gaze": {
+      "forward": "gaze/forward.png",
+      "left": "gaze/left.png",
+      "right": "gaze/right.png",
+      "up": "gaze/up.png",
+      "down": "gaze/down.png",
+      "away_left": "gaze/away_left.png",
+      "away_right": "gaze/away_right.png"
+    },
+    "brows": {
+      "left": {
+        "neutral": "brows/left_neutral.png",
+        "raised": "brows/left_raised.png",
+        "lowered": "brows/left_lowered.png",
+        "knit": "brows/left_knit.png",
+        "concerned": "brows/left_concerned.png",
+        "asymmetric_raise": "brows/left_asymmetric_raise.png"
+      },
+      "right": {
+        "neutral": "brows/right_neutral.png",
+        "raised": "brows/right_raised.png",
+        "lowered": "brows/right_lowered.png",
+        "knit": "brows/right_knit.png",
+        "concerned": "brows/right_concerned.png",
+        "asymmetric_raise": "brows/right_asymmetric_raise.png"
+      }
+    },
+    "mouths": {
+      "neutral": "mouths/neutral.png",
+      "pressed": "mouths/pressed.png",
+      "parted": "mouths/parted.png",
+      "small_smile": "mouths/small_smile.png",
+      "smile": "mouths/smile.png",
+      "frown": "mouths/frown.png",
+      "grimace": "mouths/grimace.png",
+      "uneasy": "mouths/uneasy.png"
+    }
+  },
+  "z_order": [
+    "hair_back",
+    "ears",
+    "head",
+    "eye_whites",
+    "irises",
+    "eyelids",
+    "nose",
+    "mouth_base",
+    "mouth",
+    "facial_hair",
+    "wrinkles",
+    "freckles",
+    "scars",
+    "hair_front",
+    "left_brow",
+    "right_brow"
+  ]
+}

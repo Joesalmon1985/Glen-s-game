@@ -77,7 +77,13 @@ def test_sleep_continues_to_day_two():
     assert s.world.ending != 'sleep'
 
 
-def test_scene_change_leads_narration():
+def test_look_around_stays_short():
+    s = _session()
+    s.submit('look around')
+    out = s.last_trace.narrator_output or ''
+    assert 'take in the cell' in out.lower()
+    assert out.count('.') <= 8
+    assert 'bed beneath you. cup beside it' not in out.lower()
     s = _session()
     while s.world.facility.phase == 'cell_idle':
         s.submit('wait')
@@ -165,6 +171,8 @@ def test_glen_orderly_is_addressable():
     s.world.facility.staff_present = True
     s.world.facility.phase = 'slit'
     s.world.facility.arc.present_ids = ['orderly_quiet']
+    from puca_dungeon.npc_knowledge import take_up_name
+    take_up_name(s.world.facility, 'orderly_quiet', 'Glen', source='asked_and_understood')
     from puca_dungeon.models import Intent
     from puca_dungeon.ground import ground_intent
     intent = Intent(

@@ -126,6 +126,22 @@ def test_template_narration_avoids_you_mean_to():
             s.submit('wait')
 
 
+def test_book_enter_during_slit_excludes_facility_wait():
+    s = _facility(seed=102)
+    for _ in range(10):
+        s.submit('wait')
+        if s.world.facility.phase in ('slit', 'door_procedure'):
+            break
+    assert s.world.facility.phase in ('slit', 'door_procedure')
+    s.submit('look at the book')
+    assert s.world.mode == 'book_dungeon'
+    out = (s.last_trace.narrator_output or '') if s.last_trace else ''
+    low = out.lower()
+    assert 'still waiting' not in low
+    assert 'printed corridor opens' in low or 'somewhere else' in low
+    assert 'casket' in low or 'alcove' in low or 'tunnel' in low
+
+
 def test_book_interrupt_strips_dungeon_bleed():
     s = _facility()
     s.submit('read the book')

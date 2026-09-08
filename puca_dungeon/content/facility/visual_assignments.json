@@ -1,0 +1,39 @@
+{
+  "_comment": "Cast id → visual assets. Renderer keys only visual_profile_id; it does not know character names.",
+    "iven": {
+    "visual_profile_id": "face_001",
+    "body_sprite_id": ""
+  },
+  "nessa": {
+    "visual_profile_id": "face_002",
+    "body_sprite_id": ""
+  },
+  "ruan": {
+    "visual_profile_id": "face_003",
+    "body_sprite_id": ""
+  },
+  "senior_researcher": {
+    "visual_profile_id": "face_004",
+    "body_sprite_id": "staff_senior"
+  },
+  "orderly_anxious": {
+    "visual_profile_id": "face_005",
+    "body_sprite_id": "staff_anxious"
+  },
+  "orderly_quiet": {
+    "visual_profile_id": "",
+    "body_sprite_id": "staff_orderly"
+  },
+  "attendant_a": {
+    "visual_profile_id": "",
+    "body_sprite_id": "staff_orderly"
+  },
+  "attendant_b": {
+    "visual_profile_id": "",
+    "body_sprite_id": "staff_orderly"
+  },
+  "sarel": {
+    "visual_profile_id": "",
+    "body_sprite_id": ""
+  }
+}

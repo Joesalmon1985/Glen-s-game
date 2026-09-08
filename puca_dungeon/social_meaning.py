@@ -163,7 +163,7 @@ def classify_social_events(world, resolution, intent=None, player_text: str = ''
                         cost='high', risk='high',
                         observed_by=list(present),
                         narrative_line=(
-                            f'{fac.character_name(victim)} hears Sarel speak to staff; '
+                            f'{_npc_ref(fac, victim)} hears Sarel speak to staff; '
                             'their trust in privacy drops.'
                         ),
                     ))
@@ -177,7 +177,7 @@ def classify_social_events(world, resolution, intent=None, player_text: str = ''
                         cost='medium',
                         observed_by=list(present),
                         narrative_line=(
-                            f'{fac.character_name(target)} takes Sarel\'s protective words seriously enough to watch for proof.'
+                            f'{_npc_ref(fac, target)} takes Sarel\'s protective words seriously enough to watch for proof.'
                         ),
                     ))
                     update_expectation(fac.arc, target, 'sarel', 'confidentiality', 0.65, salience=0.7)
@@ -219,6 +219,14 @@ def classify_social_events(world, resolution, intent=None, player_text: str = ''
     return [e.to_dict() for e in events]
 
 
+def _npc_ref(facility, cid: str) -> str:
+    try:
+        from puca_dungeon.npc_knowledge import narrator_reference
+        return narrator_reference(facility, cid)
+    except Exception:
+        return 'someone'
+
+
 def _update_discourse(facility, present: list, resolution) -> None:
     arc = getattr(facility, 'arc', None)
     if arc is None:
@@ -227,10 +235,7 @@ def _update_discourse(facility, present: list, resolution) -> None:
     ask = str(getattr(arc, 'last_ask', '') or '')
     speaker = present[0] if present else ''
     if speaker:
-        try:
-            name = facility.character_name(speaker)
-        except Exception:
-            name = speaker
+        name = _npc_ref(facility, speaker)
         nc['active_speaker'] = name
         nc['active_addressee'] = 'Sarel'
         nc['recent_referents'] = {

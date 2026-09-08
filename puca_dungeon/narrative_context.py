@@ -162,6 +162,7 @@ class NarrativeSceneContext:
     began_when: str = 'You woke alone in a locked cell.'
     immediate_situation: str = 'Alone in a small locked room.'
     principal_actors: list[str] = field(default_factory=list)
+    characters: list = field(default_factory=list)
     apparent_goals: dict[str, str] = field(default_factory=dict)
     unresolved_tension: str = 'Nothing is being asked of you yet.'
     beats: list[str] = field(default_factory=list)
@@ -176,6 +177,7 @@ class NarrativeSceneContext:
             'began_when': self.began_when,
             'immediate_situation': self.immediate_situation,
             'principal_actors': list(self.principal_actors),
+            'characters': list(self.characters),
             'apparent_goals': dict(self.apparent_goals),
             'unresolved_tension': self.unresolved_tension,
             'beats': list(self.beats),
@@ -193,6 +195,7 @@ class NarrativeSceneContext:
             began_when=str(data.get('began_when') or ''),
             immediate_situation=str(data.get('immediate_situation') or ''),
             principal_actors=list(data.get('principal_actors') or []),
+            characters=list(data.get('characters') or []),
             apparent_goals=dict(data.get('apparent_goals') or {}),
             unresolved_tension=str(data.get('unresolved_tension') or ''),
             beats=list(data.get('beats') or []),
@@ -210,6 +213,7 @@ class NarrativeSceneContext:
             'immediate_situation': self.immediate_situation,
             'where': self.room_name,
             'people_present': list(self.principal_actors),
+            'characters': list(self.characters),
             'what_each_appears_to_want': dict(self.apparent_goals),
             'unresolved_immediate_tension': self.unresolved_tension,
             'recent_beats': list(self.beats[-5:]),
@@ -220,21 +224,9 @@ class NarrativeSceneContext:
 
 
 def _actor_phrase(facility, cid: str) -> str:
-    cast = getattr(facility, 'cast', None) or {}
-    raw = cast.get(cid) or {}
-    presentation = str(raw.get('presentation') or '').strip()
-    name = str(raw.get('name') or '').strip()
-    fallback = _ROLE_PRESENTATION_FALLBACK.get(cid, 'someone present')
-    if presentation and name and cid in ('iven', 'nessa', 'ruan'):
-        return f'{name}, {presentation}'
-    if presentation:
-        # Prefer presentation over cosmetic staff names (Sarel does not know them)
-        if cid.startswith('orderly') or cid.startswith('attendant') or cid == 'senior_researcher':
-            return presentation if presentation.startswith(('a ', 'an ')) else f'a staff member who seems {presentation}'
-        return f'{name} ({presentation})' if name else presentation
-    if name and cid in ('iven', 'nessa', 'ruan'):
-        return name
-    return fallback
+    from puca_dungeon.npc_knowledge import ensure_present_encountered, narrator_reference
+    ensure_present_encountered(facility)
+    return narrator_reference(facility, cid)
 
 
 def _goals_for_present(facility, phase: str) -> dict[str, str]:
@@ -277,12 +269,14 @@ def refresh_scene_for_phase(
     )
     present_ids = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
     actors = [_actor_phrase(facility, cid) for cid in present_ids]
+    from puca_dungeon.npc_knowledge import characters_present_packet
     open_ask = ask or str(getattr(getattr(facility, 'arc', None), 'last_ask', '') or '')
     ctx = NarrativeSceneContext(
         scene_label=meta['label'],
         began_when=prev.began_when if same_scene and prev.began_when else meta['began'],
         immediate_situation=meta['situation'],
         principal_actors=actors,
+        characters=characters_present_packet(facility),
         apparent_goals=_goals_for_present(facility, phase),
         unresolved_tension=meta['tension'] if not open_ask else f'They are waiting for: {open_ask}.',
         beats=list(prev.beats) if same_scene else [],

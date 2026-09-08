@@ -98,7 +98,7 @@ class DeathtrapGui:
         self.poll_id = self.master.after(40, self._poll)
 
     def _build(self, text_only):
-        self.sprite_mode = str(os.environ.get('PUCA_IMAGE_MODE') or '').strip().lower() == 'sprites'
+        self.sprite_mode = True
         self.master.title('Puca — sprite scenes' if self.sprite_mode else 'Puca')
         self.master.tk.call('tk', 'scaling', 96 / 72)
         self.master.geometry('2560x1440')
@@ -149,15 +149,9 @@ class DeathtrapGui:
         tools = ttk.Frame(outer)
         tools.grid(row=2, column=0, sticky='ew', pady=(5, 12))
         self.images_var = tk.BooleanVar(value=not text_only)
-        self.lora_var = tk.BooleanVar(value=True)
+        self.lora_var = tk.BooleanVar(value=False)
         self.image_toggle = ttk.Checkbutton(tools, text='Illustrations', variable=self.images_var)
         self.image_toggle.pack(side='left')
-        self.lora_toggle = ttk.Checkbutton(tools, text='Pixel adapter', variable=self.lora_var)
-        if self.sprite_mode:
-            # Facility scenes use disk sprites; LoRA only matters for book-mode diffusion.
-            self.lora_toggle.pack_forget()
-        else:
-            self.lora_toggle.pack(side='left', padx=10)
         ttk.Button(tools, text='A-', width=3, command=lambda: self.font(-1)).pack(side='right')
         ttk.Button(tools, text='A+', width=3, command=lambda: self.font(1)).pack(side='right', padx=5)
         self.new_button = ttk.Button(tools, text='New run', command=self.new_run)
@@ -172,12 +166,8 @@ class DeathtrapGui:
         self.art_panel.grid_propagate(False)
         self.art_panel.pack_propagate(False)
         art_intro = (
-            'Sprite scenes compose here from the kit in assets/sprites.\n\n'
-            'Facility rooms update when objects or people change.\n'
-            'Type freely — no meters, no menus of numbers.'
-            if self.sprite_mode else
-            'The room will take shape here.\n\nIllustrations are optional.\n'
-            'Type freely — no meters, no menus of numbers.'
+            'The cell will appear here when you wake.\n\n'
+            'Type what you do. The picture updates with the room.'
         )
         self.image_label = tk.Label(
             self.art_panel,
@@ -194,9 +184,10 @@ class DeathtrapGui:
         self._append(
             'Welcome to Puca.\n\n'
             'Enter your name and wake in the cell.\n\n'
-            'Type what you intend in your own words. There are no on-screen Skill, Stamina, or Luck meters — '
-            'only what you can see, feel, and try.\n\n'
-            'Illustrations stay on unless you turn them off. Ollama interprets your words locally.'
+            'Type what you intend in your own words. Ollama reads your action and writes '
+            'the room. There are no on-screen Skill, Stamina, or Luck meters — only what '
+            'you can see, feel, and try.\n\n'
+            'Illustrations stay on unless you turn them off.'
         )
 
         examples_row = ttk.Frame(outer)
@@ -341,13 +332,8 @@ class DeathtrapGui:
             self.choice_buttons.append(btn)
 
     def _make_session(self, name: str, potion_id: str) -> GameSession:
-        lora_ok = self.lora_var.get() and (
-            resource_path('pixel_style_lora_style_only') / 'adapter_model.safetensors'
-        ).is_file()
-        self.images.use_lora = lora_ok
+        self.images.use_lora = False
 
-        interpreter = None
-        narrator = None
         try:
             interpreter = OllamaInterpreter(model=self.model)
             if not interpreter.ping():
@@ -368,7 +354,7 @@ class DeathtrapGui:
             narrator=narrator,
             allow_heuristic_fallback=self.allow_heuristic_fallback,
             ollama_model=self.model,
-            generate_images=False,  # GUI drives generation so we can cancel / toggle
+            generate_images=False,
             image_generator=self.images,
             image_cache_dir=self.cache_dir,
             start_mode='facility',
@@ -387,7 +373,10 @@ class DeathtrapGui:
         self._clear_story()
         self._append(self.session.opening_text)
         self._refresh_choices()
-        self.status_var.set('You wake in the cell.')
+        if isinstance(self.session.narrator, OllamaNarrator):
+            self.status_var.set('You wake in the cell.')
+        else:
+            self.status_var.set('You wake in the cell. Ollama was not ready — using the offline fallback.')
         self._controls(active=True)
         self.action_entry.focus_set()
         if self.images_var.get():
@@ -478,7 +467,7 @@ class DeathtrapGui:
         self.cancel_image = threading.Event()
         self._controls(active=False)
         self._reset_progress_indeterminate()
-        self.status_var.set('Resolving your action...')
+        self.status_var.set('Reading your action...')
         self.worker = threading.Thread(target=self._work, args=(action,), daemon=True)
         self.worker.start()
 
@@ -513,13 +502,14 @@ class DeathtrapGui:
                     self.messages.put(('ended', 'death'))
 
             self._autosave()
-            # Unlock input before paint — story advances first
-            self.messages.put(('turn_done', None))
-
             if self.images_var.get() and not ended and not self.cancel_image.is_set():
-                self.messages.put(('status', 'Ready — painting the scene...'))
-                self.messages.put(('image_busy', True))
-                self._generate_current_image(trace)
+                try:
+                    path = self._compose_or_generate_image(trace)
+                    self.messages.put(('image', str(path)))
+                except Exception as exc:
+                    logging.exception('Illustration failed')
+                    self.messages.put(('notice', f'Illustration failed: {exc}'))
+            self.messages.put(('turn_done', None))
             self.messages.put(('image_done', None))
         except Exception as exc:
             logging.exception('Deathtrap turn failed')
@@ -530,18 +520,20 @@ class DeathtrapGui:
         assert self.session is not None
         img_meta = (trace.image if trace is not None else None) or {}
         renderer = img_meta.get('renderer')
+        if self.sprite_mode:
+            renderer = 'sprites'
         if renderer is None:
             try:
-                from puca_dungeon.scene_compose import facility_mode_active
-                if facility_mode_active(self.session.world):
+                from puca_dungeon.scene_compose import sprite_presentation_active
+                if sprite_presentation_active(self.session.world):
                     renderer = 'sprites'
             except Exception:
                 renderer = 'diffusion'
         if renderer == 'sprites':
-            from puca_dungeon.scene_compose import compose_facility_scene
-            _spec, path = compose_facility_scene(self.session.world, self.cache_dir)
+            from puca_dungeon.portrait.present import compose_facility_presentation, presentation_fingerprint
+            _kind, path = compose_facility_presentation(self.session.world, self.cache_dir)
             self.session.last_image_path = Path(path)
-            self.session.world.last_image_prompt = f'sprite:{_spec.key}'
+            self.session.world.last_image_prompt = presentation_fingerprint(self.session.world)
             return path
         from puca_dungeon.image_prompt import build_image_prompt
         prompt = img_meta.get('full_prompt') or build_image_prompt(

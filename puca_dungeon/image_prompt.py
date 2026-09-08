@@ -124,14 +124,19 @@ def image_decision(
 ) -> dict:
     # Facility mode: compose from pre-generated sprites (no per-turn diffusion).
     try:
-        from puca_dungeon.scene_compose import build_visual_spec, facility_mode_active
+        from puca_dungeon.scene_compose import build_visual_spec, sprite_presentation_active
     except Exception:
-        facility_mode_active = None  # type: ignore
+        sprite_presentation_active = None  # type: ignore
         build_visual_spec = None  # type: ignore
 
-    if facility_mode_active is not None and facility_mode_active(world) and build_visual_spec is not None:
-        spec = build_visual_spec(world)
-        fingerprint = f'sprite:{spec.key}'
+    if sprite_presentation_active is not None and sprite_presentation_active(world) and build_visual_spec is not None:
+        try:
+            from puca_dungeon.portrait.present import presentation_fingerprint
+            fingerprint = presentation_fingerprint(world)
+            spec = build_visual_spec(world)
+        except Exception:
+            spec = build_visual_spec(world)
+            fingerprint = f'sprite:{spec.key}'
         visible_dirty = bool(resolution.image_dirty)
         reuse = bool(world.last_image_prompt) and world.last_image_prompt == fingerprint and not visible_dirty
         if not world.last_image_prompt:

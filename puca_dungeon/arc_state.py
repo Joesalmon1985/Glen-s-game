@@ -37,6 +37,10 @@ class ArcState:
     claimed_name: str = ''
     narrative_context: dict = field(default_factory=dict)
     relationship_expectations: dict = field(default_factory=dict)
+    npc_knowledge: dict = field(default_factory=dict)
+    conversation: dict = field(default_factory=dict)
+    language_memory: dict = field(default_factory=dict)
+    pending_intros: list = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return {
@@ -70,6 +74,10 @@ class ArcState:
             'claimed_name': self.claimed_name,
             'narrative_context': dict(self.narrative_context or {}),
             'relationship_expectations': dict(self.relationship_expectations or {}),
+            'npc_knowledge': dict(self.npc_knowledge or {}),
+            'conversation': dict(self.conversation or {}),
+            'language_memory': dict(self.language_memory or {}),
+            'pending_intros': list(self.pending_intros or []),
         }
 
     @classmethod
@@ -106,6 +114,10 @@ class ArcState:
             claimed_name=str(data.get('claimed_name') or ''),
             narrative_context=dict(data.get('narrative_context') or {}),
             relationship_expectations=dict(data.get('relationship_expectations') or {}),
+            npc_knowledge=dict(data.get('npc_knowledge') or {}),
+            conversation=dict(data.get('conversation') or {}),
+            language_memory=dict(data.get('language_memory') or {}),
+            pending_intros=list(data.get('pending_intros') or []),
         )
 
     def flag(self, key: str, value: Any = True) -> None:

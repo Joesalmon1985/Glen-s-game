@@ -2,58 +2,117 @@
   "senior_researcher": {
     "role": "senior_researcher",
     "presentation": "controlled, collared, professionally kind",
+    "appearance": {
+      "short_label": "the older person with the folder",
+      "distinctive": "a thin black folder and a precisely fitted collar",
+      "role_cue": "senior researcher",
+      "first_seen": "An older person carrying a thin black folder studies you before studying the room. A collar sits at their throat as naturally as clothing."
+    },
     "goals": ["gather_data", "maintain_cooperation", "protect_programme"],
     "beliefs": ["continuity_is_real", "procedures_are_necessary", "subjects_need_protection"],
+    "knowledge": [
+      "this_is_a_research_facility",
+      "sarel_is_a_subject",
+      "official_death_then_continuation",
+      "eating_is_still_required",
+      "observation_is_the_purpose",
+      "was_not_at_the_cell_slit"
+    ],
     "secrets": ["prior_sarel_iterations", "heaven_hell_are_physical"],
-    "may_reveal": ["sarel_is_a_subject", "official_continuity_model", "contract_terms"],
+    "may_reveal": [
+      "own_name",
+      "sarel_is_a_subject",
+      "official_continuity_model",
+      "contract_terms",
+      "this_is_a_research_facility",
+      "eating_is_still_required",
+      "observation_is_the_purpose"
+    ],
     "must_conceal": ["prior_iterations", "physical_transfer", "collar_meaning"]
   },
   "orderly_quiet": {
     "role": "orderly",
     "presentation": "large, silent, practical",
+    "appearance": {
+      "short_label": "the broad person",
+      "distinctive": "sleeves rolled above the elbow",
+      "role_cue": "orderly",
+      "first_seen": "A broad person is there first, sleeves rolled above the elbow, waiting as if this is ordinary work."
+    },
     "goals": ["complete_procedures", "prevent_escape", "prevent_needless_injury"],
     "beliefs": ["this_place_keeps_people_alive", "rules_matter"],
+    "knowledge": [
+      "simple_instructions",
+      "was_at_the_cell_slit",
+      "this_is_a_medical_place",
+      "eating_is_still_required"
+    ],
     "secrets": [],
-    "may_reveal": ["simple_instructions"],
+    "may_reveal": ["simple_instructions", "own_name", "was_at_the_cell_slit", "this_is_a_medical_place"],
     "must_conceal": ["programme_theory", "heaven_hell_nature"]
   },
   "orderly_anxious": {
     "role": "orderly",
     "presentation": "younger, tense, rule-bound",
+    "appearance": {
+      "short_label": "the younger tense person",
+      "distinctive": "keeps glancing toward the corridor",
+      "role_cue": "orderly",
+      "first_seen": "A younger person in the same pale uniform keeps glancing toward the corridor."
+    },
     "goals": ["follow_procedure", "avoid_blame", "control_dangerous_subjects"],
     "beliefs": ["procedure_is_safety", "seniors_must_not_be_disappointed"],
+    "knowledge": ["clipped_procedure_words", "was_not_at_the_cell_slit"],
     "secrets": ["what_she_is_afraid_of"],
-    "may_reveal": ["clipped_procedure_words"],
+    "may_reveal": ["clipped_procedure_words", "own_name"],
     "must_conceal": ["departmental_fears"]
   },
   "iven": {
     "role": "subject",
     "presentation": "gentle believer",
+    "appearance": {
+      "short_label": "the gentle-faced man",
+      "distinctive": "careful, almost hopeful posture",
+      "role_cue": "subject",
+      "first_seen": "A gentle-faced man sits as if he has been here longer than you and is trying not to alarm you."
+    },
     "goals": ["finish_contract", "avoid_hell", "save_others"],
     "beliefs": ["heaven_is_real", "they_keep_promises"],
-    "knowledge": ["woke_in_heaven", "woke_in_hell"],
+    "knowledge": ["woke_in_heaven", "woke_in_hell", "work_is_finite"],
     "secrets": [],
-    "may_reveal": ["work_is_finite", "heaven_is_real_to_him"],
+    "may_reveal": ["own_name", "work_is_finite", "heaven_is_real_to_him"],
     "must_conceal": []
   },
   "nessa": {
     "role": "subject",
     "presentation": "abrasive sceptic",
+    "appearance": {
+      "short_label": "the sharp-eyed woman",
+      "distinctive": "a shaved strip above one ear",
+      "role_cue": "subject",
+      "first_seen": "A sharp-eyed woman with a shaved strip above one ear watches you without introducing herself."
+    },
     "goals": ["learn_what_transfer_is", "avoid_disruption_label", "collect_evidence"],
     "beliefs": ["they_move_bodies"],
-    "knowledge": ["scratch_survived_transfer", "hidden_scrap_survived"],
+    "knowledge": ["scratch_survived_transfer", "hidden_scrap_survived", "staff_withhold"],
     "secrets": ["full_escape_thought"],
-    "may_reveal": ["bodily_continuity_fragments"],
+    "may_reveal": ["own_name", "bodily_continuity_fragments"],
     "must_conceal": ["open_accusation_before_staff"]
   },
   "ruan": {
     "role": "subject",
     "presentation": "lucid and fractured",
+    "appearance": {
+      "short_label": "the distracted man",
+      "distinctive": "eyes that keep losing the room",
+      "role_cue": "subject",
+      "first_seen": "A distracted man looks at you as if matching you against a memory that will not stay still."
+    },
     "goals": ["sort_memories", "avoid_certain_procedures", "preserve_identity_proofs"],
     "beliefs": ["some_memories_are_not_his"],
     "knowledge": ["conflicting_childhoods", "conflicting_deaths"],
     "secrets": [],
-    "may_reveal": ["contradictory_fragments"],
+    "may_reveal": ["own_name", "contradictory_fragments"],
     "must_conceal": []
   }
 }

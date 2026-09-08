@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from puca_dungeon.characters import CharacterState, name_of
+from puca_dungeon.characters import CharacterState
 
 
 def build_speaker_packet(
@@ -24,7 +24,6 @@ def build_speaker_packet(
     )
     return {
         'speaker_id': speaker_id,
-        'name': ch.name or name_of(cast, speaker_id),
         'role': ch.role,
         'presentation': ch.presentation,
         'objective': objective,
@@ -46,7 +45,6 @@ def packet_to_fact(packet: dict, spoken_raw: str, understood: str) -> dict:
     return {
         'type': 'npc_speech',
         'speaker': packet.get('speaker_id'),
-        'speaker_name': packet.get('name'),
         'raw': spoken_raw,
         'understood': understood,
         'objective': packet.get('objective'),

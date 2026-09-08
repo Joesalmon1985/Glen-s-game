@@ -55,17 +55,17 @@
     "cup_full": {
       "file": "props/cup_full.png",
       "size": [48, 48],
-      "prompt": "plain ceramic half-full water cup, simple drinking vessel prop, no people, pixel art, isolated on solid bright magenta background #FF00FF, centered"
+      "prompt": "canonical Puca hybrid chalice: aged pewter dull grey metal stemmed goblet no handle, carved bands, thick stem and circular foot, half-full clear grey water, pixel art prop, isolated on solid bright magenta background #FF00FF, centered, single object"
     },
     "cup_empty": {
       "file": "props/cup_empty.png",
       "size": [48, 48],
-      "prompt": "plain empty ceramic cup, drinking vessel prop, no people, pixel art, isolated on solid bright magenta background #FF00FF, centered"
+      "prompt": "canonical Puca hybrid chalice empty: same aged pewter stemmed goblet no handle as cup_full, empty dark interior, pixel art prop, isolated on solid bright magenta background #FF00FF, centered, single object"
     },
     "cup_broken": {
       "file": "props/cup_broken.png",
       "size": [48, 48],
-      "prompt": "broken plain ceramic cup shards, prop only, no people, pixel art, isolated on solid bright magenta background #FF00FF, centered"
+      "prompt": "canonical Puca hybrid chalice broken: aged pewter shards and snapped stem stump matching cup_full material, pixel art prop, isolated on solid bright magenta background #FF00FF, centered"
     },
     "book_face_down": {
       "file": "props/book_face_down.png",
@@ -173,91 +173,147 @@
       "file": "characters/staff_senior.png",
       "size": [72, 128],
       "prompt": "one senior researcher adult human, fitted collar coat, authoritative stance, visible face, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure only"
+    },
+    "body_001": {
+      "file": "characters/body_001.png",
+      "size": [72, 128],
+      "prompt": "one younger round-faced adult full body, short curly hair, pale olive skin, grey-green tunic, visible face, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure only"
+    },
+    "body_002": {
+      "file": "characters/body_002.png",
+      "size": [72, 128],
+      "prompt": "one tall narrow-faced adult full body, tight dark hair, deep brown skin, dark slate clothes, visible face, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure only"
+    },
+    "body_003": {
+      "file": "characters/body_003.png",
+      "size": [72, 128],
+      "prompt": "one older square-jawed adult full body, grey-streak hair, beard, pale skin, beige coat, visible face, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure only"
+    },
+    "body_attendant": {
+      "file": "characters/body_attendant.png",
+      "size": [72, 128],
+      "prompt": "one gentle institutional attendant full body, pale cream clothes, soft stance, visible face, readable pixel art, NOT a silhouette, solid bright magenta background #FF00FF only, centered, single figure only"
     }
   },
   "layouts": {
     "cell": {
       "background": "cell",
       "slots": {
-        "bed": [48, 300],
-        "cup": [190, 350],
-        "cup_floor": [210, 400],
-        "book": [280, 390],
-        "door": [400, 160],
-        "player": [240, 290],
-        "staff_0": [340, 250],
-        "staff_1": [310, 270]
+        "bed": [318, 318],
+        "cup": [188, 400],
+        "cup_floor": [220, 428],
+        "book": [248, 410],
+        "door": [4, 168],
+        "player": [176, 352],
+        "staff_0": [256, 348],
+        "staff_1": [336, 352],
+        "npc_0": [256, 348],
+        "npc_1": [336, 352],
+        "npc_2": [96, 356],
+        "npc_3": [416, 356]
       }
     },
     "corridor": {
       "background": "corridor",
       "slots": {
-        "player": [220, 280],
-        "staff_0": [300, 250],
-        "staff_1": [340, 250]
+        "player": [148, 360],
+        "staff_0": [236, 356],
+        "staff_1": [316, 360],
+        "npc_0": [236, 356],
+        "npc_1": [316, 360],
+        "npc_2": [68, 364],
+        "npc_3": [396, 360]
       }
     },
     "washroom": {
       "background": "washroom",
       "slots": {
-        "basin": [200, 300],
-        "player": [140, 280],
-        "staff_0": [320, 250],
-        "staff_1": [360, 250]
+        "basin": [40, 300],
+        "player": [28, 368],
+        "staff_0": [116, 364],
+        "staff_1": [280, 368],
+        "npc_0": [116, 364],
+        "npc_1": [280, 368],
+        "npc_2": [360, 364],
+        "npc_3": [436, 368]
       }
     },
     "mess": {
       "background": "mess",
       "slots": {
-        "bowl": [230, 310],
-        "player": [160, 270],
-        "staff_0": [340, 250],
-        "staff_1": [380, 250]
+        "bowl": [236, 404],
+        "player": [16, 376],
+        "staff_0": [92, 372],
+        "staff_1": [396, 372],
+        "npc_0": [92, 372],
+        "npc_1": [396, 372],
+        "npc_2": [320, 380],
+        "npc_3": [444, 376]
       }
     },
     "interview": {
       "background": "interview",
       "slots": {
-        "player": [160, 280],
-        "staff_0": [300, 250],
-        "staff_1": [360, 260]
+        "player": [20, 372],
+        "staff_0": [100, 368],
+        "staff_1": [396, 368],
+        "npc_0": [100, 368],
+        "npc_1": [396, 368],
+        "npc_2": [176, 376],
+        "npc_3": [452, 372]
       }
     },
     "prep": {
       "background": "prep",
       "slots": {
-        "player": [200, 280],
-        "staff_0": [320, 250],
-        "staff_1": [360, 250]
+        "player": [40, 368],
+        "staff_0": [120, 364],
+        "staff_1": [280, 368],
+        "npc_0": [120, 364],
+        "npc_1": [280, 368],
+        "npc_2": [360, 364],
+        "npc_3": [436, 368]
       }
     },
     "heaven": {
       "background": "heaven",
       "slots": {
-        "heaven_bed": [60, 300],
-        "fruit": [250, 340],
-        "fountain": [360, 280],
-        "player": [200, 270],
-        "staff_0": [300, 240]
+        "heaven_bed": [220, 300],
+        "fruit": [40, 360],
+        "fountain": [400, 280],
+        "player": [48, 364],
+        "staff_0": [128, 360],
+        "npc_0": [128, 360],
+        "npc_1": [300, 364],
+        "npc_2": [380, 360],
+        "npc_3": [436, 364]
       }
     },
     "hell": {
       "background": "hell",
       "slots": {
-        "hell_mat": [80, 340],
+        "hell_mat": [80, 400],
         "grate": [360, 200],
-        "fixture": [300, 320],
-        "player": [200, 280],
-        "staff_0": [280, 240]
+        "fixture": [300, 360],
+        "player": [48, 364],
+        "staff_0": [140, 360],
+        "npc_0": [140, 360],
+        "npc_1": [280, 364],
+        "npc_2": [360, 360],
+        "npc_3": [420, 364]
       }
     },
     "research_quarters": {
       "background": "research_quarters",
       "slots": {
-        "bed": [60, 300],
-        "book": [280, 340],
-        "player": [200, 270],
-        "staff_0": [340, 250]
+        "bed": [60, 318],
+        "book": [280, 360],
+        "player": [48, 364],
+        "staff_0": [140, 360],
+        "npc_0": [140, 360],
+        "npc_1": [280, 364],
+        "npc_2": [360, 360],
+        "npc_3": [436, 364]
       }
     }
   }

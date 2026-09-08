@@ -36,6 +36,8 @@ Hard rules:
   enactment, wanted_action, "despite your intention", or "you meant to".
 - Use social_context lines as observable significance only; do not invent hidden motives
   beyond what is supplied; never print trust meters, strategy names, or cooperation scores.
+- Never mention language practice counts, deltas, attempt numbers, or skill meters.
+- people_present / characters use narrator_reference only. Never invent a personal name that is not supplied as known. Never dump biographies or "NEW CHARACTER" announcements.
 - Prefer short causal prose. Scene changes may use 4-8 sentences; continuations 1-3.
 - Return ONLY the prose, no JSON."""
 
@@ -78,8 +80,9 @@ def _diegetic_from_structured(facts: list) -> list[str]:
             lines.append(f'{fact.get("enemy") or "The enemy"} falls.')
         elif ftype == 'player_died':
             lines.append('Your wounds overcome you.')
-        elif ftype == 'impossible_attempt':
-            lines.append('Nothing answers that impossible wish.')
+        elif ftype in ('character_intro', 'subject_meeting', 'slit_opens'):
+            if fact.get('text'):
+                lines.append(str(fact['text']))
         elif ftype == 'key_attempt':
             # Prefer the richer fact string from resolve when present
             continue
@@ -176,7 +179,62 @@ def build_narrator_input(
                 'attempt': payload.get('wanted_action'),
                 'actual': payload.get('actual_action'),
             }
+    # Last-resort name hygiene. Tests fail if this had to rewrite an ordinary packet.
+    if mode == 'facility' and getattr(world, 'facility', None) is not None:
+        try:
+            from puca_dungeon.npc_knowledge import find_unknown_name_leaks, scrub_unknown_names
+            leaks = find_unknown_name_leaks(world.facility, payload)
+            payload['_name_hygiene_leaks'] = leaks
+            if leaks:
+                payload, altered = scrub_unknown_names(world.facility, payload)
+                payload['_name_hygiene_scrubbed'] = bool(altered)
+                payload['_name_hygiene_leaks'] = leaks
+        except Exception:
+            pass
     return payload
+
+
+def _finish_sentence(line: str) -> str:
+    line = (line or '').strip()
+    if not line:
+        return ''
+    if line[-1] not in '.!?…"”\'':
+        line += '.'
+    return line
+
+
+def _is_noise_line(line: str, *, scene_changed: bool) -> bool:
+    low = line.strip().lower()
+    if low.startswith('you notice:'):
+        return True
+    if low.startswith('they are still waiting:'):
+        return True
+    if scene_changed and low.startswith(('bed beneath you', 'a plain corridor', 'a narrow table',
+                                         'a brighter room', 'water. a basin', 'your mouth tastes')):
+        return True
+    return False
+
+
+def _join_prose(lines: list[str]) -> str:
+    finished = []
+    seen: set[str] = set()
+    for raw in lines:
+        line = _finish_sentence(raw)
+        if not line:
+            continue
+        key = line.lower()
+        if key in seen:
+            continue
+        skip = False
+        for existing in finished:
+            if line in existing or existing in line:
+                skip = True
+                break
+        if skip:
+            continue
+        seen.add(key)
+        finished.append(line)
+    return '\n\n'.join(finished)
 
 
 def template_narrate(payload: dict, resolution: Resolution) -> str:
@@ -209,7 +267,6 @@ def template_narrate(payload: dict, resolution: Resolution) -> str:
         line = (line or '').strip()
         if not line or line in seen:
             return
-        # Skip near-duplicates already covered by usable facts
         for existing in parts:
             if line in existing or existing in line:
                 return
@@ -219,7 +276,6 @@ def template_narrate(payload: dict, resolution: Resolution) -> str:
     enactment = getattr(resolution, 'enactment', 'direct') or 'direct'
     cause = getattr(resolution, 'enactment_cause', '') or ''
     if enactment in ('compromised', 'aborted', 'inverted'):
-        # Sensory contrast — never "you meant to" meta
         if enactment == 'aborted':
             if cause == 'institutional_force':
                 _add('Your body does not finish the motion. Other hands decide the rest.')
@@ -235,25 +291,62 @@ def template_narrate(payload: dict, resolution: Resolution) -> str:
 
     scene = payload.get('scene_context') if isinstance(payload, dict) else None
     if isinstance(scene, dict) and scene.get('this_is_a_new_scene') and scene.get('immediate_situation'):
-        # Soft anchor when no scene_change lead text was emitted
         if not lead and scene.get('where'):
             _add(f'You are in the {scene["where"]}.')
 
+    scene_changed = bool(lead)
+    location_changed = False
+    for ev in list(getattr(resolution, 'world_events', None) or []) + list(
+        getattr(resolution, 'structured_facts', None) or []
+    ):
+        if not isinstance(ev, dict) or ev.get('type') != 'scene_change':
+            continue
+        frm = str(ev.get('from_room') or '')
+        to = str(ev.get('to_room') or '')
+        if frm and to and frm != to:
+            location_changed = True
+            break
+
+    keep_event_types = {
+        'character_intro', 'subject_meeting', 'washed', 'fed', 'sleep',
+        'learn_npc_name',
+    }
+    event_lines = []
+    for ev in list(getattr(resolution, 'world_events', None) or []) + list(
+        getattr(resolution, 'structured_facts', None) or []
+    ):
+        if not isinstance(ev, dict):
+            continue
+        if ev.get('type') in keep_event_types and ev.get('text'):
+            event_lines.append(str(ev['text']))
+
     for f in usable:
-        if isinstance(f, str):
+        if isinstance(f, str) and not _is_noise_line(f, scene_changed=scene_changed):
             _add(f)
     for line in structured_lines:
-        _add(line)
+        if not _is_noise_line(line, scene_changed=scene_changed):
+            _add(line)
 
     if lead:
         headed = []
         for line in lead:
             if line and line not in headed:
                 headed.append(line)
-        rest = [p for p in parts if p not in headed]
-        return ' '.join(headed + rest)
+        extras = []
+        if location_changed:
+            for line in event_lines:
+                if line not in headed:
+                    extras.append(line)
+            for line in parts:
+                if line in headed or line in extras:
+                    continue
+                if '"' in line or '“' in line or '”' in line:
+                    extras.append(line)
+        else:
+            extras = [p for p in parts if p not in headed and not _is_noise_line(p, scene_changed=True)]
+        return _join_prose(headed + extras[:4])
     if parts:
-        return ' '.join(parts)
+        return _join_prose(parts)
     if getattr(resolution, 'attempted', False) and not getattr(resolution, 'state_changed', False):
         if isinstance(scene, dict) and scene.get('unresolved_immediate_tension'):
             return str(scene['unresolved_immediate_tension'])
@@ -287,14 +380,45 @@ class OllamaNarrator:
                 'intended_effect_achieved', 'success', 'attempted', 'state_changed',
                 'classification', 'guidance_level', 'guidance_cue', 'body_qualitative',
                 'body_state',
+                '_name_hygiene_leaks', '_name_hygiene_scrubbed',
             )
         }
+        # Never expose language-practice meters / deltas to the LLM
+        sf = []
+        for f in list(llm_payload.get('structured_facts') or []):
+            if isinstance(f, dict) and f.get('type') == 'language_practice':
+                continue
+            if isinstance(f, dict):
+                clean = {
+                    k: v for k, v in f.items()
+                    if k not in ('delta', 'attempts', 'learning_rate', 'disclose_depth')
+                }
+                sf.append(clean)
+            else:
+                sf.append(f)
+        llm_payload['structured_facts'] = sf
+        # Scrub turn_spec ordered_events of the same internals
+        ts = llm_payload.get('turn_spec')
+        if isinstance(ts, dict) and ts.get('ordered_events'):
+            cleaned_ev = []
+            for e in ts['ordered_events']:
+                if not isinstance(e, dict):
+                    continue
+                if e.get('type') == 'language_practice':
+                    continue
+                cleaned_ev.append({
+                    k: v for k, v in e.items()
+                    if k not in ('delta', 'attempts', 'learning_rate', 'disclose_depth')
+                })
+            ts = dict(ts)
+            ts['ordered_events'] = cleaned_ev
+            llm_payload['turn_spec'] = ts
         body = {
             'model': self.model,
             'system': NARRATOR_SYSTEM,
             'prompt': json.dumps(llm_payload, ensure_ascii=False),
             'stream': False,
-            'keep_alive': 0,
+            'keep_alive': '10m',
             'options': {'temperature': 0.7, 'num_predict': 220, 'num_ctx': 4096},
         }
         request = urllib.request.Request(

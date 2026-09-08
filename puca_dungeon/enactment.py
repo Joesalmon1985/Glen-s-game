@@ -108,8 +108,8 @@ def salient_sensations(p: BodyPressures) -> list[str]:
         out.append('Pain pulls at your attention.')
     if p.physical_restraint >= 40:
         out.append('Hands or bindings limit what you can move.')
-    if p.language_ability < 40:
-        out.append('Words come out thin and broken.')
+    if p.language_ability < 12:
+        out.append('Words come slowly; meaning still gets through in pieces.')
     return out
 
 
@@ -213,9 +213,9 @@ def decide_enactment(
         actual['modifier'] = 'weak_voice'
         return ENACTMENT_COMPROMISED, 'fatigue', actual
 
-    if speak and pressures.language_ability < 40:
-        actual['modifier'] = 'broken_speech'
-        return ENACTMENT_COMPROMISED, 'language', actual
+    if speak and pressures.language_ability < 8:
+        actual['modifier'] = 'no_usable_speech'
+        return ENACTMENT_ABORTED, 'language', actual
 
     # Extreme hunger can compromise food refusal
     if refuse_body and 'food' in (manner_l + ac) and pressures.hunger >= 85:

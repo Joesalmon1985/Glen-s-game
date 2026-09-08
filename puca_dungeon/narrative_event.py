@@ -183,7 +183,8 @@ def finalize_resolution(
         present = list(getattr(getattr(fac, 'arc', None), 'present_ids', None) or [])
         for cid in present:
             try:
-                people.append(fac.character_name(cid))
+                from puca_dungeon.npc_knowledge import narrator_reference
+                people.append(narrator_reference(fac, cid))
             except Exception:
                 people.append(str(cid).replace('_', ' '))
         objects = [e.id for e in fac.entities_in_room()]

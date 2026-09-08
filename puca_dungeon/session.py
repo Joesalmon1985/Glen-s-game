@@ -140,6 +140,20 @@ def _intent_from_dict(data: dict, authored_actions: Optional[list] = None) -> In
     return normalize_intent(data, authored_actions=authored_actions or [])
 
 
+def _authored_offers_continue(authored_actions: Optional[list]) -> bool:
+    """True when an authored choice is the book-dungeon onward 'continue'."""
+    for action in authored_actions or []:
+        if not isinstance(action, dict):
+            continue
+        aid = str(action.get('id') or '').lower()
+        if aid == 'continue' or aid.startswith('continue'):
+            return True
+        aliases = [str(a).lower().strip() for a in (action.get('aliases') or [])]
+        if 'continue' in aliases:
+            return True
+    return False
+
+
 class GameSession:
     def __init__(
         self,
@@ -303,6 +317,34 @@ class GameSession:
                 'image_seed': ', '.join(seed_parts),
             }
         return get_passage(self.world.passage_id)
+
+    def _facts_for_book_enter(self, facts: list, book_prose: str) -> list:
+        """Keep only the mode-transition ledger for a book_enter turn."""
+        facility_noise = (
+            'still waiting', 'step away', 'observation slit', 'slit in the door',
+            'stay away from the door', 'give the door', 'they want you to',
+        )
+        cleaned: list = []
+        for f in facts:
+            if not isinstance(f, str):
+                continue
+            low = f.lower()
+            if any(n in low for n in facility_noise):
+                continue
+            if 'you turn to the book' in low:
+                continue  # folded into book_prose lead
+            cleaned.append(f)
+        lead = (
+            'You turn to the book. The printed corridor opens - '
+            'the cell and whoever waits at the door are no longer where you are.'
+        )
+        body = (book_prose or '').strip()
+        # Avoid duplicating enter_book's own "first page" lead after our boundary sentence
+        out = [lead]
+        if body:
+            out.append(body)
+        out.extend(cleaned)
+        return out
 
     def enter_book(self) -> str:
         """Diegetic transition into the nested randomised dungeon."""
@@ -506,6 +548,30 @@ class GameSession:
 
     def _compose_output(self, resolution, player_text: str, intent_dict: dict, passage) -> tuple[dict, str]:
         """Passage text is authoritative on enter; narrate combat/dismiss facts otherwise."""
+        # Book enter: Python-owned transition prose — do not LLM-mix cell asks with dungeon
+        book_enter = any(
+            isinstance(f, dict) and f.get('type') == 'book_enter'
+            for f in (getattr(resolution, 'structured_facts', None) or [])
+        )
+        if book_enter:
+            prose = getattr(resolution, '_book_enter_prose', None)
+            if not prose:
+                prose = '\n\n'.join(
+                    f for f in (resolution.facts or []) if isinstance(f, str) and f.strip()
+                )
+            else:
+                # Prefer full fact list built by _facts_for_book_enter
+                prose = '\n\n'.join(
+                    f for f in (resolution.facts or []) if isinstance(f, str) and f.strip()
+                ) or prose
+            narrator_in = {
+                'player_text_non_authoritative': player_text,
+                'facts': list(resolution.facts),
+                'structured_facts': list(getattr(resolution, 'structured_facts', []) or []),
+                'mode': 'book_enter',
+            }
+            return narrator_in, prose
+
         combat_or_dismiss_facts = [
             f for f in resolution.facts
             if not (isinstance(f, str) and f.startswith('Entered passage '))
@@ -591,9 +657,9 @@ class GameSession:
         # Facility sprite compositor (no per-turn diffusion).
         if img.get('renderer') == 'sprites':
             try:
-                from puca_dungeon.scene_compose import compose_facility_scene
+                from puca_dungeon.portrait.present import compose_facility_presentation
                 self._image_cache_dir.mkdir(parents=True, exist_ok=True)
-                _spec, path = compose_facility_scene(self.world, self._image_cache_dir)
+                _kind, path = compose_facility_presentation(self.world, self._image_cache_dir)
                 self.visual_backend_calls += 1
                 self.last_image_path = Path(path)
                 img['path'] = str(path)
@@ -658,11 +724,31 @@ class GameSession:
                     self.world.last_npc_referent = str(fact.get('referent') or 'staff')
                 if isinstance(fact, dict) and fact.get('type') == 'book_enter':
                     prose = self.enter_book()
-                    resolution.facts.append(prose)
+                    # Authoritative mode boundary: strip facility wait/ask/slit lines
+                    resolution.facts = self._facts_for_book_enter(
+                        list(resolution.facts or []), prose,
+                    )
+                    resolution.world_events = [
+                        e for e in (resolution.world_events or [])
+                        if not (
+                            isinstance(e, dict)
+                            and e.get('type') in ('restated_ask', 'slit_opens', 'door_escalate')
+                        )
+                    ]
+                    resolution.structured_facts.append({
+                        'type': 'scene_change',
+                        'text': 'The printed page takes you out of the cell.',
+                        'must_lead': True,
+                        'from_room': location_before or 'cell',
+                        'to_room': 'book_dungeon',
+                    })
                     resolution.show_passage_text = False
                     resolution.state_changed = True
                     resolution.situation_changed = True
                     resolution.image_dirty = True
+                    # Skip LLM inventing cell+dungeon connective tissue on the same beat
+                    resolution.clarification_prompt = ''
+                    setattr(resolution, '_book_enter_prose', prose)
                 elif isinstance(fact, dict) and fact.get('type') == 'book_exit':
                     prose = self.exit_book()
                     resolution.facts.append(prose)
@@ -927,10 +1013,14 @@ class GameSession:
         before = self.concise_state()
         passage, perception, authored = self._build_perception_and_authored()
 
-        # Bare "again" / "continue" replays last grounded intent when available
+        # Bare "again" replays last grounded intent. "continue" is authored
+        # navigation in the book dungeon — only replay it when no onward choice exists.
         again_intent: Optional[Intent] = None
         raw_l = text.lower().strip().rstrip('.!')
-        if raw_l in ('again', 'continue', 'same again', 'do it again') and self.world.last_grounded_intent:
+        replay_last = raw_l in ('again', 'same again', 'do it again')
+        if raw_l == 'continue' and not _authored_offers_continue(authored):
+            replay_last = True
+        if replay_last and self.world.last_grounded_intent:
             again_intent = _intent_from_dict(self.world.last_grounded_intent, authored_actions=authored)
             trace.raw_interpreter_output = {'from_again': True, 'replay': self.world.last_grounded_intent}
             trace.validated_intent = again_intent.to_dict()

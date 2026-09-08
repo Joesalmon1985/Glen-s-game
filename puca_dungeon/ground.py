@@ -158,19 +158,23 @@ def _bind_discourse_referents(world: WorldState, intent: Intent, g: Grounding) -
     current_request = ''
     if fac is not None:
         from puca_dungeon.characters import id_for_name
+        from puca_dungeon.conversation import get_conversation
+        from puca_dungeon.npc_knowledge import id_for_player_reference
         present = list(getattr(getattr(fac, 'arc', None), 'present_ids', None) or [])
         nc = getattr(getattr(fac, 'arc', None), 'narrative_context', None) or {}
+        conv = get_conversation(fac)
+        if conv.get('interlocutor_id'):
+            referent = conv.get('interlocutor_id')
         if isinstance(nc, dict):
             current_request = str(
                 nc.get('current_request') or nc.get('open_ask') or ''
             ).strip()
             refs = nc.get('recent_referents') or {}
             if not referent and isinstance(refs, dict):
-                # Prefer diegetic name → cast id
                 for key in ('him', 'her', 'them', 'they'):
                     name = str(refs.get(key) or '').strip()
                     if name:
-                        named = id_for_name(getattr(fac, 'cast', None) or {}, name.lower())
+                        named = id_for_player_reference(fac, name.lower())
                         if named:
                             referent = named
                             break
@@ -181,7 +185,8 @@ def _bind_discourse_referents(world: WorldState, intent: Intent, g: Grounding) -
         claimed = str(getattr(getattr(fac, 'arc', None), 'claimed_name', '') or '')
         sheet_name = str(getattr(getattr(world, 'sheet', None), 'name', '') or '')
         tgt_raw = (intent.target or '').strip().lower().replace('the ', '')
-        named = id_for_name(getattr(fac, 'cast', None) or {}, tgt_raw)
+        from puca_dungeon.npc_knowledge import id_for_player_reference
+        named = id_for_player_reference(fac, tgt_raw)
         if named:
             intent.target = named
             g.bindings['target'] = named

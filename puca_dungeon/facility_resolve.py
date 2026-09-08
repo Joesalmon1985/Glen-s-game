@@ -510,6 +510,17 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
     if later is not None:
         return later
 
+    from puca_dungeon.conversation import is_voiced_intent, looks_like_speech, looks_like_thought
+    someone = bool(getattr(getattr(facility, 'arc', None), 'present_ids', None)) or bool(facility.staff_present)
+    voiced = (
+        is_voiced_intent(intent, player_text, facility)
+        or looks_like_speech(player_text, someone_present=someone)
+    )
+    if looks_like_thought(player_text) and not voiced:
+        return _speak(facility, intent, res, player_text, compromised=compromised)
+    if voiced:
+        return _speak(facility, intent, res, player_text, compromised=compromised)
+
     # Perception — but bare "no" is never perception (handled upstream / discourse)
     if classification == 'PERCEPTION_QUERY' or ac in ('look', 'examine', 'inspect', 'search'):
         if text.strip() in ('no', 'n', 'nope', 'nah'):
@@ -517,8 +528,15 @@ def _perform_action(facility, intent, res, player_text, rng, *, compromised: boo
         return _perceive(facility, res, eid)
 
     # Speech / social
-    if classification == 'SOCIAL_ACTION' or ac in (
-        'talk', 'speak', 'ask', 'say', 'tell', 'shout', 'yell', 'threaten', 'apologise',
+    from puca_dungeon.conversation import is_voiced_intent, looks_like_speech
+    someone = bool(getattr(getattr(facility, 'arc', None), 'present_ids', None)) or bool(facility.staff_present)
+    if (
+        classification == 'SOCIAL_ACTION'
+        or ac in (
+            'talk', 'speak', 'ask', 'say', 'tell', 'shout', 'yell', 'threaten', 'apologise',
+        )
+        or is_voiced_intent(intent, player_text, facility)
+        or looks_like_speech(player_text, someone_present=someone)
     ):
         return _speak(facility, intent, res, player_text, compromised=compromised)
 
@@ -790,7 +808,7 @@ def _stand_firm_door(facility, res) -> Resolution:
     facility.pressures.physical_restraint = min(100, facility.pressures.physical_restraint + 15)
     facility.pressures.fear = min(100, facility.pressures.fear + 5)
     present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
-    speaker = facility.character_name(present[0]) if present else 'Someone beyond the door'
+    speaker = _ref(facility, present[0]) if present else 'Someone beyond the door'
     if facility.door_escalation <= 1:
         res.facts.append(
             f'You hold your ground. You do not give the door space. '
@@ -937,120 +955,136 @@ def _perceive(facility, res, eid) -> Resolution:
         return res
 
     room = facility.rooms.get(facility.room_id) or {}
-    visible = [e.name for e in facility.entities_in_room()]
-    res.facts.append(str(room.get('description') or 'You look around.'))
+    name = str(room.get('name') or facility.room_id or 'room')
+    res.facts.append(f'You take in the {name}.')
     present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
     if present:
-        names = [facility.character_name(cid) for cid in present]
-        res.facts.append('Here: ' + ', '.join(names) + '.')
+        _emit_intros(facility, res)
+        labels = [_ref(facility, cid) for cid in present]
+        res.facts.append('Here: ' + ', '.join(labels) + '.')
         if 'senior_researcher' in present:
             res.facts.append(
-                f'{facility.character_name("senior_researcher")} wears a precisely fitted collar. '
+                f'{_ref(facility, "senior_researcher").capitalize()} wears a precisely fitted collar. '
                 'Nobody explains it.'
             )
-    if getattr(getattr(facility, 'arc', None), 'last_ask', ''):
-        res.facts.append(f'They are still waiting: {facility.arc.last_ask}')
     res.structured_facts.append({
-        'type': 'perception', 'kind': 'visible_entities', 'entities': visible,
+        'type': 'perception', 'kind': 'visible_entities',
+        'entities': [e.name for e in facility.entities_in_room()],
         'people': present,
     })
     res.intended_effect_achieved = True
     return res
 
 
+def _ref(facility, cid: str) -> str:
+    from puca_dungeon.npc_knowledge import narrator_reference
+    return narrator_reference(facility, cid)
+
+
+def _emit_intros(facility, res) -> None:
+    from puca_dungeon.npc_knowledge import ensure_present_encountered, flush_pending_intros
+    ensure_present_encountered(facility)
+    for intro in flush_pending_intros(facility):
+        text = str(intro.get('text') or '').strip()
+        if text:
+            res.facts.append(text)
+        res.structured_facts.append(intro)
+
+
 def _speak(facility, intent, res, player_text, *, compromised: bool) -> Resolution:
-    intended = intent.utterance or player_text
-    spoken = truncate_speech(intended, facility.pressures.language_ability)
-    if compromised and facility.pressures.fatigue >= 60:
-        spoken = spoken.lower()
-    res.facts.append(f'You manage: “{spoken}”' if spoken else 'No useful sound comes out.')
+    from puca_dungeon.conversation import (
+        conversation_urgency,
+        extract_dialogue_meaning,
+        is_contract_decision,
+        is_interview_answer,
+        is_voiced_intent,
+        remember_turn,
+        reply_to,
+        set_interlocutor,
+        thought_fact,
+    )
+
+    _emit_intros(facility, res)
     present = list(getattr(getattr(facility, 'arc', None), 'present_ids', None) or [])
-    target = intent.target or (present[0] if present else ('staff' if facility.staff_present else None))
+    meaning = extract_dialogue_meaning(facility, intent, player_text)
+
+    if not meaning.voiced or not is_voiced_intent(intent, player_text, facility):
+        res.facts.append(thought_fact(player_text))
+        res.structured_facts.append({'type': 'internal_thought', 'text': player_text})
+        res.intended_effect_achieved = True
+        res.time_cost = 8
+        res.advance_time = True
+        return res
+
+    if not present and not facility.staff_present:
+        res.facts.append('No one answers. The thought stays with you.')
+        res.structured_facts.append({'type': 'social_no_uptake'})
+        res.intended_effect_achieved = False
+        res.time_cost = 10
+        return res
+
+    speaker_id = meaning.addressee or (present[0] if present else 'orderly_quiet')
+    if speaker_id not in present and present:
+        speaker_id = present[0]
+    set_interlocutor(facility, speaker_id)
+
+    # Contract decisions only — questions are dialogue
+    if facility.phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER, PHASE_EXPLANATION):
+        decision = is_contract_decision(meaning, player_text)
+        if decision is True:
+            return _handle_contract(facility, res, accept=True, player_text=player_text)
+        if decision is False:
+            return _handle_contract(facility, res, accept=False, player_text=player_text)
+
+    if is_interview_answer(facility, meaning):
+        return _advance_interview(facility, res, player_text, skipped=False)
+
+    reply = reply_to(facility, speaker_id, meaning)
+    ref = _ref(facility, speaker_id)
+    if reply.get('text'):
+        res.facts.append(reply['text'])
+    if reply.get('comprehension'):
+        res.facts.append(reply['comprehension'])
+    for ev in reply.get('events') or []:
+        if isinstance(ev, dict):
+            res.structured_facts.append(ev)
+
+    urgency = conversation_urgency(facility)
+    ask = getattr(getattr(facility, 'arc', None), 'last_ask', '') or ''
+    if urgency == 'high' and ask:
+        res.facts.append(f'The immediate work does not pause. They are still waiting: {ask}.')
+        if facility.phase in (PHASE_SLIT, PHASE_DOOR):
+            facility.last_understood = 'back / away'
+            facility.last_npc_utterance = 'back'
+
+    from puca_dungeon.social_meaning import resolve_conversational_move
+    from puca_dungeon.npc_strategy import apply_move_to_speech_facts
+    move = resolve_conversational_move(facility, speaker_id, player_text=player_text)
+    res.structured_facts.extend(apply_move_to_speech_facts(
+        facility, move,
+        raw=facility.last_npc_utterance or '',
+        understood=facility.last_understood or reply.get('kind') or '',
+    ))
+    res.structured_facts.append({'type': 'discourse_focus', 'referent': speaker_id})
     res.structured_facts.append({
         'type': 'speech',
-        'intended': intended,
-        'spoken': spoken,
-        'understood_by_npc': bool(spoken) and (facility.staff_present or bool(present)),
-        'target': target,
+        'intended': player_text,
+        'spoken': meaning.proposition,
+        'understood_by_npc': True,
+        'target': speaker_id,
     })
-    if facility.phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER, PHASE_EXPLANATION):
-        return _handle_contract(facility, res, accept=None, player_text=player_text)
-    if facility.phase in (
-        PHASE_INTERVIEW, PHASE_MEMORY_INSTABILITY, PHASE_DEATH_QUESTIONS,
-        PHASE_HEAVEN_MEMORIES, PHASE_HELL_MEMORIES,
-    ):
-        return _handle_interview_speech(facility, res, player_text)
-    if facility.staff_present and facility.phase in (PHASE_SLIT, PHASE_DOOR):
-        speaker_id = present[0] if present else 'orderly_quiet'
-        from puca_dungeon.social_meaning import resolve_conversational_move
-        from puca_dungeon.npc_strategy import apply_move_to_speech_facts
-        move = resolve_conversational_move(facility, speaker_id, player_text=player_text)
-        speaker = move.get('speaker_name') or facility.character_name(speaker_id)
-        ask = getattr(getattr(facility, 'arc', None), 'last_ask', '') or 'step away from the door'
-        if move.get('tone') == 'careful' or 'without unnecessary force' in str(move.get('objective') or ''):
-            res.facts.append(
-                f'{speaker} gestures again, clearer this time: back from the door. '
-                f'Then: please. They are still waiting: {ask}.'
-            )
-            facility.last_understood = 'back / please / away'
-        else:
-            res.facts.append(
-                f'{speaker} repeats a short sound and a gesture: back. They are still waiting: {ask}.'
-            )
-            facility.last_understood = 'back / away'
-        facility.last_npc_utterance = '… … back …'
-        res.structured_facts.extend(apply_move_to_speech_facts(
-            facility, move,
-            raw=facility.last_npc_utterance,
-            understood=facility.last_understood,
-        ))
-        res.structured_facts.append({'type': 'discourse_focus', 'referent': speaker_id})
-        res.structured_facts.append({
-            'type': 'conversational_move',
-            'speaker': speaker_id,
-            'surface': move.get('surface') or {},
-        })
-    elif present:
-        cid = present[0]
-        from puca_dungeon.social_meaning import resolve_conversational_move
-        from puca_dungeon.npc_strategy import apply_move_to_speech_facts
-        move = resolve_conversational_move(facility, cid, player_text=player_text)
-        nm = move.get('speaker_name') or facility.character_name(cid)
-        surface = move.get('surface') or {}
-        manner = surface.get('manner') or move.get('tone') or 'guarded'
-        if move.get('move') == 'TEST':
-            res.facts.append(
-                f'{nm} mentions something small and odd — water behind a wall — without explaining why. '
-                f'Their manner is {manner}.'
-            )
-            facility.last_understood = 'a low-risk detail offered as a test'
-        elif move.get('move') == 'WITHHOLD':
-            res.facts.append(f'{nm} listens. Then: “That\'s all I know.” It plainly isn\'t.')
-            facility.last_understood = 'refusal to say more'
-        elif move.get('move') == 'RECIPROCATE':
-            res.facts.append(
-                f'{nm} looks once toward the corridor, then offers a more useful fragment than before.'
-            )
-            facility.last_understood = 'a careful reciprocation'
-        else:
-            res.facts.append(
-                f'{nm} is here. They listen more than they explain. They appear to want: '
-                f'{surface.get("appears_to_want") or move.get("objective") or "information"}.'
-            )
-        res.structured_facts.extend(apply_move_to_speech_facts(
-            facility, move, raw=facility.last_npc_utterance or '…', understood=facility.last_understood or '',
-        ))
-        res.structured_facts.append({'type': 'discourse_focus', 'referent': cid})
-        res.structured_facts.append({
-            'type': 'conversational_move',
-            'speaker': cid,
-            'surface': surface,
-        })
-    elif not facility.staff_present:
-        res.facts.append('No one answers.')
-        res.structured_facts.append({'type': 'social_no_uptake'})
+    res.structured_facts.append({
+        'type': 'dialogue_meaning',
+        'speech_act': meaning.speech_act,
+        'addressee': speaker_id,
+        'proposition': meaning.proposition,
+    })
+    remember_turn(
+        facility, speaker=speaker_id, player_text=player_text,
+        reply_kind=str(reply.get('kind') or ''), summary=str(reply.get('text') or '')[:120],
+    )
     res.intended_effect_achieved = True
-    res.time_cost = 25
+    res.time_cost = 20 if urgency != 'high' else 15
     return res
 
 
@@ -1192,20 +1226,36 @@ def _eat(facility, res, *, involuntary: bool) -> Resolution:
 
 
 def _later_arc_action(facility, intent, res, player_text, ac, text):
+    from puca_dungeon.conversation import (
+        extract_dialogue_meaning,
+        is_contract_decision,
+        is_interview_answer,
+        is_voiced_intent,
+        looks_like_speech,
+    )
     phase = facility.phase
+    meaning = extract_dialogue_meaning(facility, intent, player_text)
+    voiced = is_voiced_intent(intent, player_text, facility) or looks_like_speech(
+        player_text, someone_present=bool(getattr(facility.arc, 'present_ids', None))
+    )
+
     if phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER, PHASE_EXPLANATION) or ac in (
         'accept_contract', 'refuse_contract',
     ):
         stay = bool(_STAY_HELL_RE.search(text or '')) and phase == PHASE_SECOND_OFFER
-        if stay or ac == 'refuse_contract':
+        decision = is_contract_decision(meaning, player_text)
+        if stay or ac == 'refuse_contract' or decision is False:
             return _handle_contract(facility, res, accept=False, player_text=player_text, stay_in_hell=stay)
-        if ac == 'accept_contract' or (
+        if ac == 'accept_contract' or decision is True or (
             _ACCEPT_CONTRACT_RE.search(text or '') and not _REFUSE_CONTRACT_RE.search(text or '')
+            and meaning.speech_act != 'question'
         ):
             return _handle_contract(facility, res, accept=True, player_text=player_text)
-        if _REFUSE_CONTRACT_RE.search(text or '') or ac in ('refuse',):
+        if (_REFUSE_CONTRACT_RE.search(text or '') or ac in ('refuse',)) and meaning.speech_act != 'question':
             return _handle_contract(facility, res, accept=False, player_text=player_text)
-        if phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER):
+        if voiced and meaning.speech_act in ('question', 'clarification', 'statement'):
+            return None
+        if phase in (PHASE_CONTRACT, PHASE_SECOND_OFFER) and not voiced:
             res.facts.append(f'They are still waiting: {facility.arc.last_ask or "agree to the five-year research service"}')
             res.actual_action = {'action_class': 'wait', 'performed': True}
             res.intended_effect_achieved = False
@@ -1229,6 +1279,8 @@ def _later_arc_action(facility, intent, res, player_text, ac, text):
         return res
 
     if phase in (PHASE_HEAVEN, PHASE_HEAVEN_EXPIRE):
+        if voiced:
+            return None
         return _heaven_action(facility, intent, res, text)
     if phase == PHASE_HELL and (
         ac == 'refuse_contract' or _STAY_HELL_RE.search(text or '')
@@ -1237,6 +1289,8 @@ def _later_arc_action(facility, intent, res, player_text, ac, text):
         return _handle_contract(facility, res, accept=False, player_text=player_text, stay_in_hell=True)
     if phase in (PHASE_HELL, PHASE_SECOND_OFFER) and ac not in ('accept_contract', 'refuse_contract'):
         if phase == PHASE_HELL:
+            if voiced:
+                return None
             return _hell_action(facility, intent, res, text)
 
     if phase in (
@@ -1251,16 +1305,14 @@ def _later_arc_action(facility, intent, res, player_text, ac, text):
             if facility.phase == PHASE_INTERVIEW:
                 _advance_interview(facility, res, player_text, skipped=True)
             return res
+        if voiced and not is_interview_answer(facility, meaning):
+            return None
         return _handle_interview_speech(facility, res, player_text)
 
     if phase == PHASE_RESEARCH:
         present = list(facility.arc.present_ids or [])
-        if present and (intent.classification == 'SOCIAL_ACTION' or ac in ('talk', 'ask', 'tell')):
-            cid = present[0]
-            nm = facility.character_name(cid)
-            res.facts.append(f'{nm} is in the quarters. They remember how you arrived.')
-            res.intended_effect_achieved = True
-            return res
+        if present and voiced:
+            return None
     return None
 
 
@@ -1445,7 +1497,7 @@ def _heaven_action(facility, intent, res, text) -> Resolution:
         return res
     present = list(facility.arc.present_ids or [])
     if present and any(_word(text, w) for w in ('ask', 'talk', 'who', 'what')):
-        nm = facility.character_name(present[0])
+        nm = _ref(facility, present[0])
         res.facts.append(
             f'{nm} is gentle. When you press, one kindness and one institutional word sit badly together.'
         )
@@ -1481,7 +1533,7 @@ def _hell_action(facility, intent, res, text) -> Resolution:
         return res
     present = [c for c in (facility.arc.present_ids or []) if c in ('iven', 'nessa', 'ruan')]
     if present and any(_word(text, w) for w in ('ask', 'talk', 'who')):
-        nm = facility.character_name(present[0])
+        nm = _ref(facility, present[0])
         res.facts.append(f'{nm} is among the other occupants. They have been through this.')
         res.intended_effect_achieved = True
         return res

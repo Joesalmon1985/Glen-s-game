@@ -51,12 +51,17 @@ from puca_dungeon.scene_change import emit_scene_change
 
 
 def _set_presence(facility: FacilityState, ids: list[str], window: str = '') -> None:
+    from puca_dungeon.npc_knowledge import get_knowledge, note_encounter
     extra = subjects_for_window(facility.arc.encounter_schedule, window) if window else []
     present = list(dict.fromkeys(list(ids) + extra))
+    previous = set(getattr(facility.arc, 'present_ids', None) or [])
     facility.arc.present_ids = present
     for cid in present:
         if cid in ('iven', 'nessa', 'ruan'):
             facility.arc.mark_met(cid)
+        if cid not in previous:
+            k = get_knowledge(facility, cid)
+            note_encounter(facility, cid, returning=bool(k.intro_done))
     facility.staff_present = any(
         cid in present for cid in (
             'orderly_quiet', 'orderly_anxious', 'senior_researcher',
@@ -67,6 +72,11 @@ def _set_presence(facility: FacilityState, ids: list[str], window: str = '') -> 
         1 for cid in present
         if cid in ('orderly_quiet', 'orderly_anxious', 'senior_researcher')
     )
+    conv = getattr(facility.arc, 'conversation', None) or {}
+    cur = str(conv.get('interlocutor_id') or '')
+    if cur and cur not in present:
+        from puca_dungeon.conversation import set_interlocutor
+        set_interlocutor(facility, '')
 
 
 def _lead(resolution, facility, text: str, *, room: str | None = None, ask: str = '', kind: str = 'scene_change'):
@@ -91,6 +101,15 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
     t = int(world.world_time_seconds or 0)
     phase = facility.phase
     q = qualitative_pressures(facility.pressures)
+    try:
+        from puca_dungeon.npc_knowledge import flush_pending_intros
+        for intro in flush_pending_intros(facility):
+            events.append(intro)
+            text = str(intro.get('text') or '').strip()
+            if text and text not in (getattr(resolution, 'facts', None) or []):
+                resolution.facts.append(text)
+    except Exception:
+        pass
 
     if facility.pressures.hygiene_discomfort >= 55 and not facility.washed:
         events.append({
@@ -132,8 +151,9 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             if door:
                 door.state['slit_open'] = True
                 facility.set_entity(door)
-            speaker = facility.character_name('orderly_quiet')
-            facility.last_npc_utterance = '… keth … back … varr …'
+            from puca_dungeon.npc_knowledge import narrator_reference
+            speaker_ref = narrator_reference(facility, 'orderly_quiet')
+            facility.last_npc_utterance = 'back'
             facility.last_understood = 'back / away'
             facility.arc.scene_id = 'slit'
             facility.arc.last_ask = 'step away from the door'
@@ -166,9 +186,8 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             _lead(
                 resolution, facility,
                 (
-                    f'The observation slit in the door opens. A person outside speaks. '
-                    f'Most of it is noise. Gesture and repetition push one meaning through: back. Away. '
-                    f'They want you to step away from the door.'
+                    f'The observation slit in the door opens. {speaker_ref.capitalize()} outside speaks slowly. '
+                    f'You catch enough: back. Away. They want you to step away from the door.'
                 ),
                 ask='step away from the door',
                 kind='slit_opens',
@@ -177,7 +196,6 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
                 'type': 'slit_opens',
                 'npc_raw': facility.last_npc_utterance,
                 'understood': 'something like “back” / “away”',
-                'speaker_name': speaker,
                 'text': resolution.facts[0] if resolution.facts else '',
             })
 
@@ -312,9 +330,10 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             )
             company = ''
             if facility.arc.present_ids:
-                names = [facility.character_name(cid) for cid in facility.arc.present_ids]
+                from puca_dungeon.npc_knowledge import narrator_reference
+                labels = [narrator_reference(facility, cid) for cid in facility.arc.present_ids]
                 company = (
-                    f' Another subject is already here: {", ".join(names)}. '
+                    f' Someone else is already here: {", ".join(labels)}. '
                     'They watch you without explaining anything.'
                 )
             _lead(
@@ -376,13 +395,14 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             _enter_phase(facility, PHASE_INTERVIEW, t)
             _set_presence(facility, ['senior_researcher', 'orderly_quiet'], 'interview_waiting')
             world.last_npc_referent = 'senior_researcher'
-            senior = facility.character_name('senior_researcher')
+            from puca_dungeon.npc_knowledge import narrator_reference
+            senior_ref = narrator_reference(facility, 'senior_researcher')
             facility.arc.scene_id = 'interview'
             facility.arc.last_ask = 'answer their questions'
             _lead(
                 resolution, facility,
                 (
-                    f'You are taken into an interview room. {senior} sits opposite you. '
+                    f'You are taken into an interview room. {senior_ref.capitalize()} sits opposite you. '
                     f'They wear a precisely fitted collar as naturally as clothing. '
                     f'No one explains it. They begin to ask questions with pictures and slow words.'
                 ),
@@ -501,9 +521,19 @@ def after_facility_action(world, resolution, *, book_turn: bool = False) -> list
             'You are a registered research subject. The next work has not begun.',
         )
 
-    # Restate pending asks
-    if facility.arc.last_ask and phase in (
-        PHASE_SLIT, PHASE_DOOR, PHASE_WASH, PHASE_FOOD, PHASE_CONTRACT, PHASE_SECOND_OFFER,
+    # Restate pending asks — never while the subject is inside the book
+    entered_book = any(
+        isinstance(f, dict) and f.get('type') == 'book_enter'
+        for f in (getattr(resolution, 'structured_facts', None) or [])
+    )
+    if (
+        facility.arc.last_ask
+        and not facility.book_engaged
+        and not entered_book
+        and not book_turn
+        and phase in (
+            PHASE_SLIT, PHASE_DOOR, PHASE_WASH, PHASE_FOOD, PHASE_CONTRACT, PHASE_SECOND_OFFER,
+        )
     ):
         restated = f'They are still waiting: {facility.arc.last_ask}'
         if restated not in (resolution.facts or []):
@@ -695,11 +725,13 @@ def _ensure_subjects_met(facility, resolution, events) -> None:
         facility.arc.mark_met(cid)
         if cid not in facility.arc.present_ids:
             facility.arc.present_ids.append(cid)
-        nm = name_of(facility.cast, cid)
+        from puca_dungeon.npc_knowledge import narrator_reference, note_encounter
+        note_encounter(facility, cid, returning=False)
+        ref = narrator_reference(facility, cid)
         events.append({
             'type': 'subject_meeting',
             'who': cid,
-            'text': f'{nm} is here among the other occupants. You have seen them now.',
+            'text': f'{ref.capitalize()} is here among the other occupants. You have seen them now.',
         })
 
 

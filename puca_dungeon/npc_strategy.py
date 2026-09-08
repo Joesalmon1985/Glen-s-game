@@ -173,10 +173,11 @@ def choose_move(facility, speaker_id: str, *, player_text: str = '') -> dict:
             objective = 'stop violence and restore control'
             tone = 'firm'
 
-    name = facility.character_name(speaker_id) if hasattr(facility, 'character_name') else speaker_id
+    from puca_dungeon.npc_knowledge import narrator_reference
+    ref = narrator_reference(facility, speaker_id) if hasattr(facility, 'cast') else speaker_id
     return {
         'speaker': speaker_id,
-        'speaker_name': name,
+        'speaker_name': ref,
         'move': move,
         'objective': objective,
         'may_reveal': may_reveal,
@@ -184,7 +185,7 @@ def choose_move(facility, speaker_id: str, *, player_text: str = '') -> dict:
         'tone': tone,
         # Diegetic projection for narrator — no strategy labels
         'surface': {
-            'who': name,
+            'who': ref,
             'appears_to_want': objective,
             'manner': tone,
         },
@@ -210,4 +211,9 @@ def apply_move_to_speech_facts(facility, move: dict, *, raw: str, understood: st
     fact = packet_to_fact(packet, raw, understood)
     # Keep move id off player-facing / narrator packets — internal only on resolution debug
     fact['manner'] = move.get('tone') or fact.get('emotion')
+    try:
+        from puca_dungeon.npc_knowledge import narrator_reference
+        fact['who'] = narrator_reference(facility, move['speaker'])
+    except Exception:
+        fact['who'] = move.get('surface', {}).get('who') or ''
     return [fact]

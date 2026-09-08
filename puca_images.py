@@ -19,6 +19,7 @@ class ImageGenerator:
         self.lora_folder = Path(lora_folder)
         self.use_lora = use_lora
         self.pipe = None
+        self.img2img = None
         self.torch = None
         self.adapter_loaded = False
         self._adapter_hash = None
@@ -97,6 +98,92 @@ class ImageGenerator:
             self.pipe.maybe_free_model_hooks()
         if self.torch is not None and self.torch.cuda.is_available():
             self.torch.cuda.empty_cache()
+
+    def _ensure_img2img(self):
+        if self.pipe is None:
+            self._load_pipeline()
+        if self.img2img is None:
+            from diffusers import StableDiffusionImg2ImgPipeline
+            self.img2img = StableDiffusionImg2ImgPipeline(**self.pipe.components)
+
+    def generate_img2img(
+        self,
+        location,
+        prompt,
+        init_image,
+        *,
+        strength=0.55,
+        negative_prompt=None,
+        seed=None,
+        steps=None,
+        cancel=None,
+        progress=None,
+    ):
+        """Local img2img from an existing reference image (512×512 out)."""
+        from PIL import Image
+
+        neg = negative_prompt if negative_prompt is not None else DEFAULT_NEGATIVE
+        use_steps = int(steps) if steps is not None else STEPS
+        strength = float(strength)
+        if isinstance(init_image, (str, Path)):
+            init = Image.open(init_image).convert('RGB')
+        else:
+            init = init_image.convert('RGB')
+        if init.size != (512, 512):
+            init = init.resize((512, 512), Image.Resampling.LANCZOS)
+
+        key = self.key(
+            f'{location}|i2i|{strength:.2f}|{hashlib.sha256(init.tobytes()).hexdigest()[:12]}',
+            prompt,
+            negative_prompt=neg,
+            seed=seed,
+        )
+        destination = self.cache_dir / (key + (f'_s{use_steps}' if use_steps != STEPS else '') + '.png')
+        if destination.is_file():
+            if self.valid_image(destination):
+                return key, destination
+            destination.unlink()
+        if cancel and cancel.is_set():
+            raise RuntimeError('Illustration cancelled')
+        self._ensure_img2img()
+        if cancel and cancel.is_set():
+            self.release_gpu()
+            raise RuntimeError('Illustration cancelled')
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+
+        def callback(pipe, index, timestep, kwargs):
+            if cancel and cancel.is_set():
+                raise RuntimeError('Illustration cancelled')
+            if progress:
+                progress(index + 1, use_steps)
+            return kwargs
+
+        try:
+            use_seed = int(seed) if seed is not None else int(key[:8], 16)
+            with self.torch.inference_mode():
+                result = self.img2img(
+                    prompt=f'{STYLE}, {prompt}',
+                    negative_prompt=neg,
+                    image=init,
+                    strength=strength,
+                    num_inference_steps=use_steps,
+                    guidance_scale=7.5,
+                    generator=self.torch.Generator(device='cpu').manual_seed(use_seed),
+                    callback_on_step_end=callback,
+                )
+            if cancel and cancel.is_set():
+                raise RuntimeError('Illustration cancelled')
+            if getattr(result, 'nsfw_content_detected', None) and any(result.nsfw_content_detected):
+                raise RuntimeError('Illustration was filtered. The story can continue without it.')
+            temp = destination.with_suffix('.tmp.png')
+            try:
+                result.images[0].save(temp)
+                temp.replace(destination)
+            finally:
+                temp.unlink(missing_ok=True)
+            return key, destination
+        finally:
+            self.release_gpu()
 
     def generate(self, location, prompt, cancel=None, progress=None, negative_prompt=None, seed=None, steps=None):
         neg = negative_prompt if negative_prompt is not None else DEFAULT_NEGATIVE

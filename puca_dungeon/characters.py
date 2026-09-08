@@ -102,6 +102,7 @@ class CharacterState:
     relationships: dict = field(default_factory=dict)  # other_id -> RelationshipState dict
     episodic_memories: list = field(default_factory=list)
     current_activity: str = ''
+    appearance: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -123,6 +124,7 @@ class CharacterState:
             'relationships': dict(self.relationships),
             'episodic_memories': list(self.episodic_memories),
             'current_activity': self.current_activity,
+            'appearance': dict(self.appearance or {}),
         }
 
     @classmethod
@@ -147,6 +149,7 @@ class CharacterState:
             relationships=dict(data.get('relationships') or {}),
             episodic_memories=list(data.get('episodic_memories') or []),
             current_activity=str(data.get('current_activity') or ''),
+            appearance=dict(data.get('appearance') or {}),
         )
 
     def rel(self, other_id: str) -> RelationshipState:
@@ -179,6 +182,7 @@ def _character_from_template(cid: str, name: str, template: dict) -> CharacterSt
         may_reveal=list(template.get('may_reveal') or []),
         must_conceal=list(template.get('must_conceal') or []),
         relationships={'sarel': RelationshipState().to_dict()},
+        appearance=dict(template.get('appearance') or {}),
     )
 
 
@@ -218,6 +222,12 @@ def generate_cast(rng) -> dict[str, dict]:
             tmpl.setdefault('beliefs', ['this_is_a_continuation_environment'])
             tmpl.setdefault('may_reveal', ['small_comforts'])
             tmpl.setdefault('must_conceal', ['facility_logistics'])
+            tmpl.setdefault('appearance', {
+                'short_label': 'the quiet person in pale clothes',
+                'distinctive': 'gentle, institutional manner',
+                'role_cue': 'attendant',
+                'first_seen': 'A quiet person in pale clothes waits as if comfort were a procedure.',
+            })
         if cid == 'sarel':
             tmpl.setdefault('role', 'subject')
             tmpl.setdefault('presentation', 'newly woken, language-limited')
